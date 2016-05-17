@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\libs\SMSSDK-2.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="060beb0d4a5ccd971d811a9ed7ab4e0c24c6ba83">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\SMSSDK-2.0.1-767035595c5cef6b93e1764d4ee01fcf26ead826.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\libs\fastjson-1.2.6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="b74bde9cceb2f9ec1077a9c7c3a007c251531ba6">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\fastjson-1.2.6-be6a96c7c8c46be38c4a17d24d125a26989648cf.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-9c1539871c50dbf5cebe4a32a78ffaf46b7dd081.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\libs\MobTools.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3675e064582d9617eb77150d75ce039345bea5be">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\MobTools-2fbfa57ff0f7e4ce2912e47e72aad128ffe24911.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\libs\fastjson-1.2.6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="b74bde9cceb2f9ec1077a9c7c3a007c251531ba6">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\fastjson-1.2.6-85d2a7ffc3e3307a6cffb91e24f014c3bc4979c8.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-9932b52971d9b31948f41602abcf0bbaa8fa1be6.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\libs\org.apache.http.legacy.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\org.apache.http.legacy-4f8c399bf92bd62f9efb7e8fce43f584f7a81d69.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\libs\xUtils-2.6.14.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f10c51f3e0732fdeefe6e104279a58e275879b6c">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\xUtils-2.6.14-b83ebbbdc14795275e8b6478da87e8619f73297b.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\libs\MobCommons.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5d3e4e5a84326b4a853327ce8ddabcaaa8d91b91">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\MobCommons-11e2ca56db4f78c79a28646b5e779c11381e36ce.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-cf27ef619de25e2b271cfa8014e05978eb74a93c.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\libs\android-async-http-1.4.8.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="77bbfe240e437ecb396d982afa0d3bd4f9090ba7">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.8-1ec995e4c18fdefe0ba7e3958eb9b8a596864d65.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\libs\BaiduLBS_Android.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="868c060abfa9778e598e631f93f94037edbe8996">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\BaiduLBS_Android-ca1c6867b36ac5ceea4b93673c62d9685e4eedda.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\libs\BaiduLBS_Android.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="868c060abfa9778e598e631f93f94037edbe8996">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\BaiduLBS_Android-0b9b55745e3ab30b1dcede012f848d0fd922df26.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\exploded-aar\enjoyor_bale\rulberview\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="674b1af4d715a772dbe1e1d5106a9caef49b8af5">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-a7e4a05fea450809951e9c8fb0aeb63244ba2837.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-62a95f5cb8cf3017d602e077ffe820724ce17541.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\butterknife-7.0.1-fc861cbde294a7e4a9efd57936d766cb077b60e2.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\libs\xUtils-2.6.14.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f10c51f3e0732fdeefe6e104279a58e275879b6c">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\xUtils-2.6.14-3a1d0c82a6ae745222f013cf2f24c2dbdcc5b629.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\libs\org.apache.http.legacy.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\org.apache.http.legacy-4b6249fd505b433c1eed15edc353747c3daf53f4.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-27f531557499c93416a8ced1bc9469899d27b59e.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\libs\SMSSDK-2.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="060beb0d4a5ccd971d811a9ed7ab4e0c24c6ba83">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\SMSSDK-2.0.1-3666d8ab01a1c140e9de556ab5328d18bf6ebc79.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\libs\android-async-http-1.4.8.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="77bbfe240e437ecb396d982afa0d3bd4f9090ba7">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.8-1f2bd50649fc6e0287ec470b1f6e4a228b1cf1f7.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\build\intermediates\exploded-aar\enjoyor_bale\rulberview\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="30f1d81aa6ece2dc42103112ab83f96c5445277d">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-7bd37b75761f8ac4c0964f01d8ef44366742ecec.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\libs\MobTools.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3675e064582d9617eb77150d75ce039345bea5be">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\MobTools-54ed87d282b3ddf0f6aad7d34df0a9d9d31b5679.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-android\4.47\c72f9ed54d8a8bab3fbf56da2b358308a67899a4\ormlite-android-4.47.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c72f9ed54d8a8bab3fbf56da2b358308a67899a4">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\ormlite-android-4.47-8a91397dc91f10d054b0e8959d3c5e29f8d4ceea.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\build\intermediates\exploded-aar\com.pnikosis\materialish-progress\1.7\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="41a4edf3c43fdbce6eba27da50b17ff9933987f1">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-c49ad69e4e30e9a5d5a88a3664cca1aa9d9756ed.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-core\4.47\e11abddd1e9c2053a92133fa83f78f7bedb820a9\ormlite-core-4.47.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e11abddd1e9c2053a92133fa83f78f7bedb820a9">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\ormlite-core-4.47-7bbfe109f17181c44bae573bc33482d6d51c3f17.jar" />
+    </item>
+    <item
+        jar="C:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-6ededcc9b39f46fbcdd6efbd1a4d51bb6afd2a15.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-0ae03f9298993bab1092bc373d16f8562d2429bf.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\libs\MobCommons.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5d3e4e5a84326b4a853327ce8ddabcaaa8d91b91">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\MobCommons-41d944de73a3c3237afdfb020c6aefbe3a175b7f.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-4e629e7dc00d4aae50870665b8d37aad775dac6a.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-5dee5a1bc2f6b8a8fe488eff07a461aee5ea78b5.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-6cdb18ddb26313d2a92b2677a2ce053494378308.jar" />
+    </item>
+    <item
+        jar="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\exploded-aar\com.pnikosis\materialish-progress\1.7\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="41a4edf3c43fdbce6eba27da50b17ff9933987f1">
+        <dex dex="C:\bale_healthhouse\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-01c99ef587bc5e9c0a5b5033fbcd0ab894c066f7.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.5.2\ecf534dba3a8446ce84cbb797d314763be212a68\glide-3.5.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\glide-3.5.2-ea43fa33689a18fd8d7307d472bff1ec5c77700e.jar" />
+    </item>
+    <item
+        jar="C:\enjoyor_bale\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="C:\enjoyor_bale\app\build\intermediates\pre-dexed\debug\classes-426c7bc9e2277b123f3a7814d85423eb8819381c.jar" />
+    </item>
+
+</items>

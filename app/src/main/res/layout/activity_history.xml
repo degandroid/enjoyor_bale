@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="收缩压/舒张压"
+                android:textColor="@color/textcolor_smallittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@mipmap/bl_icon_piangao"
+                android:drawablePadding="5dp"
+                android:text="偏高"
+                android:textColor="@color/textcolor_smallittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="正常范围：90-140/60-90（mmol/L）"
+                android:textColor="@color/textcolor_smallittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@mipmap/bl_icon_piandi"
+                android:drawablePadding="5dp"
+                android:text="偏低"
+                android:textColor="@color/textcolor_smallittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_history_xueya"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="日期"
+                android:textColor="@color/textcolor_largetittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="日期"
+                android:textColor="@color/textcolor_largetittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="日期"
+                android:textColor="@color/textcolor_largetittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_history_xuetang"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="日期"
+                android:textColor="@color/textcolor_largetittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="4">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="早餐"
+                        android:gravity="center"
+                        android:textColor="@color/textcolor_smallittle"
+                        android:textSize="@dimen/textsize_body"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="前"
+                            android:gravity="center"
+                            android:textColor="@color/textcolor_smallittle"
+                            android:textSize="@dimen/textsize_body"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="后"
+                            android:gravity="center"
+                            android:textColor="@color/textcolor_smallittle"
+                            android:textSize="@dimen/textsize_body"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="早餐"
+                        android:gravity="center"
+                        android:textColor="@color/textcolor_smallittle"
+                        android:textSize="@dimen/textsize_body"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="前"
+                            android:gravity="center"
+                            android:textColor="@color/textcolor_smallittle"
+                            android:textSize="@dimen/textsize_body"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="后"
+                            android:gravity="center"
+                            android:textColor="@color/textcolor_smallittle"
+                            android:textSize="@dimen/textsize_body"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="早餐"
+                        android:gravity="center"
+                        android:textColor="@color/textcolor_smallittle"
+                        android:textSize="@dimen/textsize_body"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="前"
+                            android:gravity="center"
+                            android:textColor="@color/textcolor_smallittle"
+                            android:textSize="@dimen/textsize_body"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="后"
+                            android:gravity="center"
+                            android:textColor="@color/textcolor_smallittle"
+                            android:textSize="@dimen/textsize_body"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="睡前"
+                android:textColor="@color/textcolor_largetittle"
+                android:textSize="@dimen/textsize_smalltittle" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_addchild"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorWhite"
+            android:layout_height="match_parent"></LinearLayout>
+    </LinearLayout>
+</LinearLayout>

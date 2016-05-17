@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\main\res"><file name="ruler_mid_arraw" path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\main\res\drawable-xxhdpi\ruler_mid_arraw.png" qualifiers="xxhdpi" type="drawable"/><file name="ruler_mid_arraw_down" path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\main\res\drawable-xxhdpi\ruler_mid_arraw_down.png" qualifiers="xxhdpi" type="drawable"/><file path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\main\res\values\arrays.xml" qualifiers=""><string-array name="demo_data">
+        <item>1</item>
+        <item>3</item>
+        <item>5</item>
+        <item>11</item>
+        <item>13</item>
+        <item>19</item>
+        <item>30</item>
+        <item>46</item>
+        <item>90</item>
+        <item>104</item>
+        <item>247</item>
+        <item>422</item>
+    </string-array></file><file path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\main\res\values\attrs_ruler.xml" qualifiers=""><declare-styleable name="RulerWheel">
+        <!--大号刻度线颜色-->
+        <attr format="color" name="lineColorMax"/>
+        <!--中号刻度线颜色-->
+        <attr format="color" name="lineColorMid"/>
+        <!--小号刻度线颜色-->
+        <attr format="color" name="lineColorMin"/>
+
+        <!--大号刻度线的大小,优先级高于scaleWidth-->
+        <attr format="dimension" name="MaxBarSize"/>
+        <!--中号刻度线的大小,优先级高于scaleWidth-->
+        <attr format="dimension" name="MidBarSize"/>
+        <!--大号刻度线的大小,优先级高于scaleWidth-->
+        <attr format="dimension" name="MinBarSize"/>
+
+
+        <!--是否显示刻度值-->
+        <attr format="boolean" name="showScaleValue"/>
+        <!--是否渐显显示刻度尺-->
+        <attr format="boolean" name="showGradient"/>
+        <!--刻度宽度,所有的都一样大小-->
+        <attr format="dimension" name="scaleWidth"/>
+        <!--刻度左右间距-->
+        <attr format="dimension" name="line_divider"/>
+        <attr format="integer" name="text_Size"/>
+        <attr format="color" name="text_color"/>
+        <attr format="integer" name="def_value"/>
+        <attr format="integer" name="max_value"/>
+        <attr format="integer" name="min_value"/>
+        <attr format="reference" name="mask_bg"/>
+        <!--刻度值渐现-->
+        <attr format="boolean" name="scaleValueGradient"/>
+
+
+        <attr name="mode">
+            <flag name="SCALE" value="0"/>
+            <flag name="HALF" value="1"/>
+        </attr>
+
+        <attr name="dataMode">
+            <flag name="AUTO" value="0"/>
+            <flag name="DATA" value="1"/>
+        </attr>
+
+        <attr format="reference" name="dataSource"/>
+
+
+        <attr name="alignMode">
+            <flag name="UP" value="0"/>
+            <flag name="DOWN" value="1"/>
+        </attr>
+
+    </declare-styleable></file><file path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\main\res\values\strings.xml" qualifiers=""><string name="app_name">RulberView</string></file></source><source path="C:\bale_healthhouse\enjoyor_bale\rulberview\build\generated\res\rs\release"/><source path="C:\bale_healthhouse\enjoyor_bale\rulberview\build\generated\res\generated\release"/></dataSet><dataSet config="release"><source path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\release\res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="RulerWheel"><attr format="color" name="lineColorMax"/><attr format="color" name="lineColorMid"/><attr format="color" name="lineColorMin"/><attr format="dimension" name="MaxBarSize"/><attr format="dimension" name="MidBarSize"/><attr format="dimension" name="MinBarSize"/><attr format="boolean" name="showScaleValue"/><attr format="boolean" name="showGradient"/><attr format="dimension" name="scaleWidth"/><attr format="dimension" name="line_divider"/><attr format="integer" name="text_Size"/><attr format="color" name="text_color"/><attr format="integer" name="def_value"/><attr format="integer" name="max_value"/><attr format="integer" name="min_value"/><attr format="reference" name="mask_bg"/><attr format="boolean" name="scaleValueGradient"/><attr name="mode"><flag name="SCALE" value="0"/><flag name="HALF" value="1"/></attr><attr name="dataMode"><flag name="AUTO" value="0"/><flag name="DATA" value="1"/></attr><attr format="reference" name="dataSource"/><attr name="alignMode"><flag name="UP" value="0"/><flag name="DOWN" value="1"/></attr></declare-styleable></configuration></mergedItems></merger>

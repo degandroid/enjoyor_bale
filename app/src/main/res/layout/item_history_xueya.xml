@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="50dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/colorBackgroud"
+        android:layout_height="1px" />
+    <LinearLayout
+        android:id="@+id/ll_history_xueya"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+        <TextView
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="2016/04/10"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle"
+            android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="110"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle"
+            android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="87"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

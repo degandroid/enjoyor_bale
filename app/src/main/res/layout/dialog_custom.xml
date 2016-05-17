@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20sp"
+    android:layout_marginRight="20sp"
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_body"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:text="info"
+        android:textColor="@color/textcolor_body"
+        android:textSize="@dimen/textsize_largetittle" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/textcolor_largetittle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/textsize_body"
+            android:text="info"
+            android:textColor="@color/textcolor_body"
+            android:textSize="@dimen/textsize_largetittle" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/textcolor_largetittle" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="info"
+            android:paddingTop="@dimen/textsize_body"
+            android:paddingBottom="@dimen/textsize_body"
+            android:textColor="@color/textcolor_body"
+            android:textSize="@dimen/textsize_largetittle" />
+    </LinearLayout>
+</LinearLayout>

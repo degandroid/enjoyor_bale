@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+<TextView
+    android:layout_width="match_parent"
+    android:background="@color/colorBlack"
+    android:layout_height="1px" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_infopic"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        android:paddingRight="15dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_tittle"
+        android:layout_toRightOf="@id/iv_infopic"
+        android:layout_alignTop="@id/iv_infopic"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:text="tittle"
+        android:textColor="@color/textcolor_largetittle"
+        android:textSize="@dimen/textsize_largetittle"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_toRightOf="@id/iv_infopic"
+        android:layout_alignBottom="@id/iv_infopic"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="date"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_readnumber"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="read"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="commit"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>
+</LinearLayout>
