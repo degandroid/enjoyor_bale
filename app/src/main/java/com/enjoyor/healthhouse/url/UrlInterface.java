@@ -16,7 +16,7 @@ public class UrlInterface {
     //获取体检地点接口
     public static String PhysicallAddr_URL = TEXT_URL + "base/dis/machine/list.do";
     //    所有的文件路径主路径为
-    public static String FILE_URL = "http://115.28.37.145:9008/healthstationserver/files/";
+    public static String FILE_URL = "http://115.28.37.145:9008/healthstationserver/";
     //附近监测点接口
     public static String NearAddress_URL = TEXT_URL + "base/dis/machine/list.do";
 
