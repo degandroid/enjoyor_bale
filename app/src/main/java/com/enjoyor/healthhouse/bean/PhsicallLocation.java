@@ -151,6 +151,16 @@ public class PhsicallLocation {
         private String machineLat;
         private String machineLong;
 
+        public String getLogopath() {
+            return logopath;
+        }
+
+        public void setLogopath(String logopath) {
+            this.logopath = logopath;
+        }
+
+        private String logopath;
+
         public String getAddressName() {
             return addressName;
         }
@@ -232,7 +242,6 @@ public class PhsicallLocation {
         }
     }
 }
-
 
 
 //package com.enjoyor.healthhouse.bean;

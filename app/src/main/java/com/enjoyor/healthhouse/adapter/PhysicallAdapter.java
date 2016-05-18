@@ -2,12 +2,14 @@ package com.enjoyor.healthhouse.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.bean.PhsicallLocation;
 import com.enjoyor.healthhouse.ui.MapActivity;
+import com.enjoyor.healthhouse.url.UrlInterface;
 
 import java.util.List;
 
@@ -24,7 +26,12 @@ public class PhysicallAdapter extends CommAdapter<PhsicallLocation.MachineModels
 
     @Override
     public void convert(ViewHolder holder, final PhsicallLocation.MachineModelsEntity models) {
-        holder.setText(R.id.physicall_addr, models.getCompName());
+        if (models.getLogopath() == null) {
+            holder.setImageResource(R.id.physicall_item_img, R.mipmap.bale);
+        }
+        Log.d("wyy============", models.getLogopath());
+        holder.setImageURL(R.id.physicall_item_img, UrlInterface.TEXT_URL + models.getLogopath());
+        holder.setText(R.id.physicall_addr, models.getAddressName());
         holder.setText(R.id.physicall_kilo, models.getDistance() + "");
         holder.getView(R.id.gotophysicall).setOnClickListener(new View.OnClickListener() {
             @Override

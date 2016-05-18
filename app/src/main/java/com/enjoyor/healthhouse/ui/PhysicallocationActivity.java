@@ -2,11 +2,14 @@ package com.enjoyor.healthhouse.ui;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.adapter.PhysicallAdapter;
 import com.enjoyor.healthhouse.bean.PhsicallLocation;
-import com.enjoyor.healthhouse.custom.PullToRefeshListView;
 import com.enjoyor.healthhouse.custom.XListView;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
@@ -29,9 +32,13 @@ import butterknife.ButterKnife;
  * 体检点
  */
 
-public class PhysicallocationActivity extends BaseActivity implements XListView.IXListViewListener {
+public class PhysicallocationActivity extends BaseActivity implements XListView.IXListViewListener, View.OnClickListener {
     @Bind(R.id.physicall_lv)
     XListView physicall_lv;
+    @Bind(R.id.navigation_name)
+    TextView navigation_name;
+    @Bind(R.id.re_back)
+    RelativeLayout re_back;
     private double latitude;
     private double longitude;
     private static final double LATITUDE = 50.34324;
@@ -44,10 +51,17 @@ public class PhysicallocationActivity extends BaseActivity implements XListView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.physicallocation_ac_layout);
         ButterKnife.bind(this);
+        progress();
+        navigation_name.setText("芭乐健康机在哪");
         initListView();
         initView();
         initData(pageNum);
+        initEvent();
 
+    }
+
+    private void initEvent() {
+        re_back.setOnClickListener(this);
     }
 
     private void initListView() {
@@ -77,6 +91,7 @@ public class PhysicallocationActivity extends BaseActivity implements XListView.
 //                Log.d("wwwwwwwwwwwwwwwww", json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
+                    cancel();
                     PhsicallLocation temp = JsonHelper.getJson(apiMessage.Data, PhsicallLocation.class);
                     if (temp.getMachineModels() != null && temp.getMachineModels().size() > 0) {
 //                        phsicallLocations.clear();
@@ -121,4 +136,13 @@ public class PhysicallocationActivity extends BaseActivity implements XListView.
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        int key = v.getId();
+        switch (key) {
+            case R.id.re_back:
+                finish();
+                break;
+        }
+    }
 }
