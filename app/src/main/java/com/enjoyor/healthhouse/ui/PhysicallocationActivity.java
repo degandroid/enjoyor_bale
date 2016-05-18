@@ -7,10 +7,12 @@ import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.adapter.PhysicallAdapter;
 import com.enjoyor.healthhouse.bean.PhsicallLocation;
 import com.enjoyor.healthhouse.custom.PullToRefeshListView;
+import com.enjoyor.healthhouse.custom.XListView;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.ToastUtil;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -27,29 +29,31 @@ import butterknife.ButterKnife;
  * 体检点
  */
 
-public class PhysicallocationActivity extends BaseActivity implements PullToRefeshListView.OnRefreshListener {
+public class PhysicallocationActivity extends BaseActivity implements XListView.IXListViewListener {
     @Bind(R.id.physicall_lv)
-    PullToRefeshListView physicall_lv;
+    XListView physicall_lv;
     private double latitude;
     private double longitude;
     private static final double LATITUDE = 50.34324;
     private static final double LONGITUDE = 131.12455;
-    List<PhsicallLocation.MachineModelsEntity> phsicallLocations;
+    List<PhsicallLocation.MachineModelsEntity> phsicallLocations = new ArrayList<PhsicallLocation.MachineModelsEntity>();
+    private int pageNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.physicallocation_ac_layout);
         ButterKnife.bind(this);
+        initListView();
         initView();
-        initData();
+        initData(pageNum);
 
     }
 
     private void initListView() {
-        physicall_lv.setAdapter(new PhysicallAdapter(this, phsicallLocations, R.layout.physicall_ac_item));
-        physicall_lv.setonRefreshListener(this);
-
+        physicall_lv.setPullRefreshEnable(false);
+        physicall_lv.setPullLoadEnable(true);
+        physicall_lv.setXListViewListener(this);
     }
 
     private void initView() {
@@ -59,28 +63,32 @@ public class PhysicallocationActivity extends BaseActivity implements PullToRefe
         Log.d("cccccccccc", longitude + "");
     }
 
-    private void initData() {
-        phsicallLocations = new ArrayList<PhsicallLocation.MachineModelsEntity>();
+    private void initData(final int pageNum) {
         RequestParams params = new RequestParams();
         params.add("lat", latitude + "");
         params.add("lng", longitude + "");
-        params.add("pageNum", 0 + "");
+        params.add("pageNum", pageNum + "");
         params.add("pageCount", 6 + "");
         AsyncHttpUtil.get(UrlInterface.PhysicallAddr_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                if (physicall_lv != null) {
-                    physicall_lv.onRefreshComplete();
-                }
+                stops();
                 String json = new String(bytes);
-                Log.d("wwwwwwwwwwwwwwwww", json);
+//                Log.d("wwwwwwwwwwwwwwwww", json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     PhsicallLocation temp = JsonHelper.getJson(apiMessage.Data, PhsicallLocation.class);
-                    phsicallLocations.clear();
-                    phsicallLocations.addAll(temp.getMachineModels());
-                    initListView();
-//                    Log.d("ddddddddddddddddd", temp.getMachineModels().get(0).getCompName());
+                    if (temp.getMachineModels() != null && temp.getMachineModels().size() > 0) {
+//                        phsicallLocations.clear();
+                        phsicallLocations.addAll(temp.getMachineModels());
+                        Log.d("wwwwwwwwwwwwwwwww", phsicallLocations.size() + "           " + pageNum);
+                        PhysicallAdapter adapter = new PhysicallAdapter(PhysicallocationActivity.this, phsicallLocations, R.layout.physicall_ac_item);
+                        physicall_lv.setAdapter(adapter);
+                        physicall_lv.setSelection((pageNum - 1) * 6);
+                    } else {
+                        ToastUtil.showToast("暂无新数据");
+                    }
+
                 }
             }
 
@@ -92,8 +100,25 @@ public class PhysicallocationActivity extends BaseActivity implements PullToRefe
 
     }
 
+
     @Override
     public void onRefresh() {
-        initData();
+
     }
+
+    @Override
+    public void onLoadMore() {
+        ++pageNum;
+        initData(pageNum);
+//        physicall_lv.scrollToPosition(pageNum * 6);
+//        physicall_lv.setSelection(pageNum);
+    }
+
+    public void stops() {
+        if (physicall_lv != null) {
+//            physicall_lv.stopRefresh();
+            physicall_lv.stopLoadMore();
+        }
+    }
+
 }

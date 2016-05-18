@@ -7,12 +7,12 @@
 
     <include layout="@layout/navigationbar_layout"></include>
 
-    <com.enjoyor.healthhouse.custom.PullToRefeshListView
+    <com.enjoyor.healthhouse.custom.XListView
         android:layout_marginTop="2dp"
         android:id="@+id/physicall_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.enjoyor.healthhouse.custom.PullToRefeshListView>
+    </com.enjoyor.healthhouse.custom.XListView>
 
 </LinearLayout>
