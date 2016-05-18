@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.bean.Banner;
@@ -98,7 +99,6 @@ public class SlideShowView extends FrameLayout {
         this.context = context;
 
         initImageLoader(context);
-
         initData();
         if(isAutoPlay){
             startPlay();
@@ -131,7 +131,7 @@ public class SlideShowView extends FrameLayout {
     /**
      * 初始化Views等UI
      */
-    private void initUI(Context context){
+    private void initUI(final Context context){
         if(imageUrls == null || imageUrls.size() == 0)
             return;
 
@@ -148,7 +148,12 @@ public class SlideShowView extends FrameLayout {
                 view.setBackgroundResource(R.mipmap.bl_banner1);
             view.setScaleType(ScaleType.FIT_XY);
             imageViewsList.add(view);
-
+            imageViewsList.get(i).setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "aaaaa", Toast.LENGTH_LONG).show();
+                }
+            });
             ImageView dotView =  new ImageView(context);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
             params.leftMargin = 4;

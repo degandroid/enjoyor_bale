@@ -39,9 +39,10 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     private String str_mouth;
     private String str_day;
     private String str_hour;
+    private String str_mwhat;
     private PopupWindow popupWindow;
     private String TAG = this.getClass().getSimpleName();
-    private static final String[] m = {"空腹血糖", "早餐后血糖", "午餐前血糖", "午餐后血糖", "晚餐前血糖", "晚餐后血糖", "睡前血糖"};
+    private static final String[] mWhat = {"空腹血糖", "早餐后血糖", "午餐前血糖", "午餐后血糖", "晚餐前血糖", "晚餐后血糖", "睡前血糖"};
 //    private String
 //    @Bind(R.id.tv_info)
 //    TextView tv_info;
@@ -53,6 +54,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
     @Bind(R.id.rl_choicewhat)
     RelativeLayout rl_choicewhat;
+    @Bind(R.id.tv_choicewhat)TextView tv_choicewhat;
     @Bind(R.id.tv_time)
     TextView tv_time;
     @Bind(R.id.tv_date)
@@ -158,6 +160,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         bpinput_img_up_jia.setOnClickListener(this);
         bpinput_img_low_jian.setOnClickListener(this);
         bpiinput_img_up_jia.setOnClickListener(this);
+        rl_choicewhat.setOnClickListener(this);
     }
 
     /**
@@ -293,23 +296,23 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     }
     private void initWheelViewWhat(View popupWindow_view) {
         WheelView wv_day = (WheelView) popupWindow_view.findViewById(R.id.wv_day);
-        wv_day.setData(getStartData(4));
+        wv_day.setData(getStartData(5));
         wv_day.setDefault(DEFAULT_VALUE);
         wv_day.setOnSelectListener(new WheelView.OnSelectListener() {
             @Override
             public void endSelect(int id, String text) {
-                str_hour = text;
+                str_mwhat = text;
             }
 
             @Override
             public void selecting(int id, String text) {
             }
         });
-        str_hour = wv_day.getSelectedText();
+        str_mwhat = wv_day.getSelectedText();
         popupWindow_view.findViewById(R.id.bt_commit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_time.setText(str_hour);
+                tv_choicewhat.setText(str_mwhat);
                 popupWindow.dismiss();
             }
         });
@@ -451,6 +454,11 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                         hour -= 24;
                     }
                     list.add(hour + "点");
+                }
+                break;
+            case 5:
+                for (int i = 0; i < mWhat.length; i++) {
+                    list.add(mWhat[i]);
                 }
                 break;
         }
