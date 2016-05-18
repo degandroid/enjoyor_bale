@@ -194,7 +194,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
             holder.tv_tittle.setText(article.get(position).getTitle());
             holder.tv_date.setText(article.get(position).getInterval());
-            holder.tv_readnumber.setText("" + article.get(position).getPageViews());
+            holder.tv_readnumber.setText("阅读量  " + article.get(position).getPageViews());
 //            holder.tv_comment.setText("comment");
             if(article.get(position).getImages().size()>0){
                 Glide.with(getActivity()).load(UrlInterface.TEXT_URL+article.get(position).getImages().get(0).getPath()).into(holder.iv_infopic);

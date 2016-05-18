@@ -1,13 +1,25 @@
 package com.enjoyor.healthhouse.bean;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/5/12.
  */
 public class Article {
-    String modifyTime;// 最后修改时间
-    int pageViews;// 浏览量
-    int sort;//排序
-    String title;// 标题
+    private String modifyTime;// 最后修改时间
+    private int pageViews;// 浏览量
+    private int sort;//排序
+    private String title;// 标题
+    private String interval;// 间隔
+    private List<ImagePath> images;
+
+    public List<ImagePath> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImagePath> images) {
+        this.images = images;
+    }
 
     @Override
     public String toString() {
@@ -17,6 +29,14 @@ public class Article {
                 ", sort=" + sort +
                 ", title='" + title + '\'' +
                 '}';
+    }
+
+    public String getInterval() {
+        return interval;
+    }
+
+    public void setInterval(String interval) {
+        this.interval = interval;
     }
 
     public String getModifyTime() {
