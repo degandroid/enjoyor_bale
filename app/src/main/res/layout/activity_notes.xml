@@ -1,11 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv"
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="AAAAAAAAA" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="1px">
+
+
+        <TextView
+            android:id="@+id/notes_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100px"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="60px"
+            android:background="@mipmap/tijiaokuang"
+            android:gravity="center"
+            android:text="提交" />
+
+        <RelativeLayout
+            android:id="@+id/notes_addr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/notes_commit"
+            android:layout_marginTop="1px"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:padding="30px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="所在位置" />
+
+            <TextView
+                android:id="@+id/notes_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@mipmap/weizhi"
+                android:drawablePadding="30px"
+                android:text="银江体检中心" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/notes_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/notes_addr"
+            android:layout_marginTop="1px">
+
+            <GridView
+                android:id="@+id/gridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="@android:color/transparent"
+                android:horizontalSpacing="2dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="2dip" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/notes_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/notes_middle"
+            android:layout_marginTop="1px"
+            android:background="@color/colorWhite">
+
+            <EditText
+                android:id="@+id/notes_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="记录您的健康"
+                android:padding="30px" />
+
+            <ImageView
+                android:id="@+id/notes_luyin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="30px"
+                android:layout_marginRight="30px"
+                android:src="@mipmap/luyin" />
+
+            <ImageView
+                android:id="@+id/notes_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30px"
+                android:layout_marginRight="30px"
+                android:layout_toLeftOf="@+id/notes_luyin"
+                android:src="@mipmap/xiangji" />
+
+            <ImageView
+                android:id="@+id/notes_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30px"
+                android:layout_marginRight="30px"
+                android:layout_toLeftOf="@+id/notes_camera"
+                android:src="@mipmap/tupian" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 </LinearLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="30px"
+            android:background="@color/textcolot_welcome"
+            android:text="最长60秒"
+            android:textColor="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/voice_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
+            android:gravity="center"
+            android:text="时间"
+            android:textColor="#666666"
+            android:textSize="@dimen/textsize_largetittle" />
+
+        <TextView
+            android:id="@+id/voice_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/voice_tv"
+            android:layout_marginTop="30px"
+            android:gravity="center"
+            android:text="00:01:14"
+            android:textSize="72px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/voice_time"
+            android:layout_marginBottom="150px"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/luyin_bg" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="60px"
+            android:src="@mipmap/cha" />
+
+        <ImageView
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="30px"
+            android:layout_marginRight="60px"
+            android:src="@mipmap/gou" />
+    </RelativeLayout>
+
+</LinearLayout>

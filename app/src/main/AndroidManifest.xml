@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -27,6 +26,9 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="1u4hOHqE7GcTFCtfaQpSqiH6cKIS7t5b" />
+        <activity
+            android:name=".custom.PhotoPickerActivity"
+            android:screenOrientation="portrait"></activity>
 
         <!--欢迎界面-->
         <activity
@@ -66,7 +68,8 @@
         <!--随手记-->
         <activity
             android:name=".ui.NotesActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"></activity>
         <!--地图跳转页面-->
         <activity
             android:name=".ui.MapActivity"
@@ -79,6 +82,7 @@
         <activity
             android:name=".ui.HistoryActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.VoiceActivity"></activity>
         <!--注册自定义广播-->
         <receiver android:name=".receive.MyReceiver">
             <intent-filter>
@@ -90,6 +94,11 @@
             android:enabled="true"
             android:process=":remote"></service>
         <activity android:name=".ui.PhysicallocationActivity"></activity>
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

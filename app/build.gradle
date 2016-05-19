@@ -21,7 +21,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'com.j256.ormlite:ormlite-android:4.47'
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -39,4 +39,5 @@ dependencies {
     compile files('libs/baidumapapi_search_v3_7_3.jar')
     compile files('libs/baidumapapi_util_v3_7_3.jar')
     compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

@@ -1,6 +1,7 @@
 package com.enjoyor.healthhouse.application;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.enjoyor.healthhouse.db.DBHelper;
@@ -11,12 +12,18 @@ import com.enjoyor.healthhouse.db.DBHelper;
 public class MyApplication extends Application {
     private static MyApplication instance;
     private DBHelper mDBHelper;
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
         SDKInitializer.initialize(getApplicationContext());
         instance = this;
+        context = this.getApplicationContext();
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     public DBHelper getDBHelper() {
