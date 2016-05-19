@@ -10,7 +10,7 @@
     <dimen name="textsize_smalltittle">15sp</dimen>
     <dimen name="textsize_body">12sp</dimen>
 
-    <dimen name="layout_distance">30dp</dimen>
+    <dimen name="layout_distance">10dp</dimen>
     <dimen name="layout_distance_15dp">15dp</dimen>
     <dimen name="bar_background">6dp</dimen>
 

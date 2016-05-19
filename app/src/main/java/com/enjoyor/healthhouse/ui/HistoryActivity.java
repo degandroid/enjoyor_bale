@@ -27,6 +27,7 @@ public class HistoryActivity extends BaseActivity {
     @Bind(R.id.ll_history_xueya)LinearLayout ll_history_xueya;
     @Bind(R.id.ll_history_xuetang)LinearLayout ll_history_xuetang;
 
+    @Bind(R.id.ll_null)LinearLayout ll_null;
     @Bind(R.id.ll_addchild)LinearLayout ll_addchild;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +53,32 @@ public class HistoryActivity extends BaseActivity {
                 navigation_name.setText("血压历史");
                 initView(fromWhere);
                 break;
+            case Constant.FROM_SHENGAO:
+                navigation_name.setText("身高历史");
+                initView(fromWhere);
+                break;
             case Constant.FROM_XUETANG:
                 navigation_name.setText("血糖历史");
+                initView(fromWhere);
+                break;
+            case Constant.FROM_XUEYANG:
+                navigation_name.setText("血氧历史");
+                initView(fromWhere);
+                break;
+            case Constant.FROM_YAOWEI:
+                navigation_name.setText("腰围历史");
+                initView(fromWhere);
+                break;
+            case Constant.FROM_TIZHONG:
+                navigation_name.setText("体重历史");
+                initView(fromWhere);
+                break;
+            case Constant.FROM_TIWEN:
+                navigation_name.setText("体温历史");
+                initView(fromWhere);
+                break;
+            case Constant.FROM_XINDIAN:
+                navigation_name.setText("心电历史");
                 initView(fromWhere);
                 break;
         }
@@ -68,9 +93,10 @@ public class HistoryActivity extends BaseActivity {
                     view_xueya.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,100));
                     ll_addchild.addView(view_xueya);
                 }
+                break;
+            case Constant.FROM_SHENGAO:
 
                 break;
-
             case Constant.FROM_XUETANG:
                 ll_history_xuetang.setVisibility(View.VISIBLE);
                 for(int i=0;i<5;i++) {
@@ -79,6 +105,25 @@ public class HistoryActivity extends BaseActivity {
                     ll_addchild.addView(view_xuetang);
                 }
                 break;
+
+            case Constant.FROM_XUEYANG:
+
+                break;
+            case Constant.FROM_YAOWEI:
+
+                break;
+            case Constant.FROM_TIZHONG:
+
+                break;
+            case Constant.FROM_TIWEN:
+
+                break;
+            case Constant.FROM_XINDIAN:
+
+                break;
+        }
+        if(ll_addchild.getChildCount()<1){
+            ll_null.setVisibility(View.VISIBLE);
         }
     }
 }

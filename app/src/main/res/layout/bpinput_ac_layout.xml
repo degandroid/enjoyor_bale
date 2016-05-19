@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/colorBackgroud"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -10,348 +10,370 @@
     <include layout="@layout/navigationbar_layout"></include>
 
     <LinearLayout
-        android:id="@+id/ll_first"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2dp"
-        android:background="@color/colorWhite"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/bpinput_bp_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="30px"
-                android:text="血压"
-                android:textSize="48px" />
-
-            <ImageView
-                android:id="@+id/bpinput_img_up_jian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="50px"
-                android:layout_toLeftOf="@id/bpinput_bp_tv"
-                android:src="@mipmap/jian" />
-
-            <ImageView
-                android:id="@+id/bpinput_img_up_jia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="50px"
-                android:layout_toRightOf="@id/bpinput_bp_tv"
-                android:src="@mipmap/jia" />
-        </RelativeLayout>
-
         <LinearLayout
+            android:id="@+id/ll_first"
             android:layout_width="match_parent"
-            android:layout_height="30px">
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_distance"
+            android:paddingLeft="@dimen/layout_distance"
+            android:paddingRight="@dimen/layout_distance">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/bpinput_bp_tv"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="@dimen/layout_distance_15dp"
+                    android:text="血压"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/bpinput_img_up_jian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/bpinput_bp_tv"
+                    android:src="@mipmap/jian" />
+
+                <ImageView
+                    android:id="@+id/bpinput_img_up_jia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/bpinput_bp_tv"
+                    android:src="@mipmap/jia" />
+            </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_numberinfo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="舒张压 （mmol/L）"
-                android:textSize="24px" />
+                android:textSize="@dimen/textsize_body" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <com.xk.sanjay.rulberview.RulerWheel
+                    android:id="@+id/bpinput_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/rulerselect"
+                    app:MaxBarSize="2dp"
+                    app:MidBarSize="1.5dp"
+                    app:MinBarSize="1dp"
+                    app:alignMode="UP"
+                    app:lineColorMax="#797979"
+                    app:lineColorMid="#797979"
+                    app:lineColorMin="#797979"
+                    app:line_divider="10dp"
+
+                    app:mask_bg="@mipmap/arrow"
+                    app:max_value="100"
+                    app:min_value="0"
+                    app:mode="SCALE"
+                    app:scaleWidth="1dp"
+                    app:showGradient="true"
+                    app:showScaleValue="true"
+                    app:text_Size="30"
+                    app:text_color="#666666" />
+            </LinearLayout>
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bar_background"
+
+            android:background="@color/color_line" />
+
+        <LinearLayout
+            android:id="@+id/ll_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/layout_distance"
+            android:paddingRight="@dimen/layout_distance"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/bpinput_bp_tv_low"
+                    android:layout_width="100dp"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="@dimen/layout_distance_15dp"
+                    android:text="血压"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/bpinput_img_low_jian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+
+                    android:layout_toLeftOf="@id/bpinput_bp_tv_low"
+                    android:src="@mipmap/jian" />
+
+                <ImageView
+                    android:id="@+id/bpiinput_img_up_jia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/bpinput_bp_tv_low"
+                    android:src="@mipmap/jia" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_numberinfo_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="收缩压 （mmol/L）"
+                    android:textSize="@dimen/textsize_body" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <com.xk.sanjay.rulberview.RulerWheel
+                    android:id="@+id/bpinput_low"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/rulerselect"
+                    app:MaxBarSize="2dp"
+                    app:MidBarSize="1.5dp"
+                    app:MinBarSize="1dp"
+                    app:alignMode="UP"
+                    app:lineColorMax="#797979"
+                    app:lineColorMid="#797979"
+                    app:lineColorMin="#797979"
+                    app:line_divider="10dp"
+
+                    app:mask_bg="@mipmap/arrow"
+                    app:max_value="100"
+                    app:min_value="0"
+                    app:mode="SCALE"
+                    app:scaleWidth="1dp"
+                    app:showGradient="true"
+                    app:showScaleValue="true"
+                    app:text_Size="30"
+                    app:text_color="#666666" />
+            </LinearLayout>
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_distance"
+    android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="收缩压/舒张压的正常范围：90-140/60-90 (mmol/L)"
+            android:textSize="@dimen/textsize_body" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_display_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="收缩压/舒张压的正常范围：90-140/60-90 (mmol/L)"
+            android:textSize="@dimen/textsize_body" />
+</LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30px">
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+>
 
-            <com.xk.sanjay.rulberview.RulerWheel
-                android:id="@+id/bpinput_up"
-                android:layout_marginBottom="20px"
+            <RelativeLayout
+                android:id="@+id/rl_choicedate"
+                android:paddingLeft="@dimen/layout_distance"
+                android:paddingRight="@dimen/layout_distance"
                 android:layout_width="match_parent"
-                android:layout_height="140px"
-                android:layout_marginLeft="30px"
-                android:layout_marginRight="30px"
-                android:background="@drawable/rulerselect"
-                app:MaxBarSize="2dp"
-                app:MidBarSize="1.5dp"
-                app:MinBarSize="1dp"
-                app:mask_bg="@mipmap/arrow"
-                app:alignMode="UP"
-                app:lineColorMax="#797979"
-                app:lineColorMid="#797979"
-                app:lineColorMin="#797979"
+                android:layout_height="40dp">
 
-                app:line_divider="10dp"
-                app:max_value="100"
-                app:min_value="0"
-                app:mode="SCALE"
-                app:scaleWidth="1dp"
-                app:showGradient="true"
-                app:showScaleValue="true"
-                app:text_Size="30"
-                app:text_color="#666666" />
-        </LinearLayout>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/bpinput_rili"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/rili" />
 
-    <LinearLayout
-        android:id="@+id/ll_second"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="24px"
-        android:background="@color/colorWhite"
-        android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/bpinput_rili"
+                    android:text="@string/record_date"
+                    android:textSize="@dimen/textsize_smalltittle" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/bpinput_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/xiangxia_jiantou" />
 
-            <TextView
-                android:id="@+id/bpinput_bp_tv_low"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="30px"
-                android:text="血压"
-                android:textSize="48px" />
-
-            <ImageView
-                android:id="@+id/bpinput_img_low_jian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="50px"
-                android:layout_toLeftOf="@id/bpinput_bp_tv_low"
-                android:src="@mipmap/jian" />
-
-            <ImageView
-                android:id="@+id/bpiinput_img_up_jia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="50px"
-                android:layout_toRightOf="@id/bpinput_bp_tv_low"
-                android:src="@mipmap/jia" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30px">
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/bpinput_arrow"
+                    android:gravity="center"
+                    android:text="请选择"
+                    android:textSize="30px" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="收缩压 （mmol/L）"
-                android:textSize="24px" />
+                android:layout_height="1px"
+                android:background="@color/color_line" />
+
+            <RelativeLayout
+                android:id="@+id/rl_choicetime"
+                android:layout_width="match_parent"
+                android:paddingLeft="@dimen/layout_distance"
+                android:paddingRight="@dimen/layout_distance"
+                android:layout_height="40dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/bpinput_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/zhong" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/bpinput_time"
+                    android:text="@string/reccord_time"
+                    android:textSize="@dimen/textsize_smalltittle" />
+
+                <ImageView
+                    android:id="@+id/bpinput_arrows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/xiangxia_jiantou" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/bpinput_arrows"
+                    android:text="请选择"
+                    android:textSize="@dimen/textsize_smalltittle" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_line" />
+
+            <RelativeLayout
+                android:id="@+id/rl_choicewhat"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="@dimen/layout_distance"
+                android:paddingRight="@dimen/layout_distance"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/zhong" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/iv_image"
+                    android:text="时间端"
+                    android:textSize="@dimen/textsize_smalltittle" />
+
+                <ImageView
+                    android:id="@+id/iv_image2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/xiangxia_jiantou" />
+
+                <TextView
+                    android:id="@+id/tv_choicewhat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/iv_image2"
+                    android:text="请选择"
+                    android:textSize="@dimen/textsize_smalltittle" />
+                />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/bpinput_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30px">
-
-            <com.xk.sanjay.rulberview.RulerWheel
-                android:id="@+id/bpinput_low"
-                android:layout_width="match_parent"
-                android:layout_height="140px"
-                android:layout_marginBottom="20px"
-                android:layout_marginLeft="30px"
-                android:layout_marginRight="30px"
-                android:background="@drawable/rulerselect"
-                app:MaxBarSize="2dp"
-                app:MidBarSize="1.5dp"
-                app:MinBarSize="1dp"
-                app:mask_bg="@mipmap/arrow"
-                app:alignMode="UP"
-                app:lineColorMax="#797979"
-                app:lineColorMid="#797979"
-                app:lineColorMin="#797979"
-
-                app:line_divider="10dp"
-                app:max_value="100"
-                app:min_value="0"
-                app:mode="SCALE"
-                app:scaleWidth="1dp"
-                app:showGradient="true"
-                app:showScaleValue="true"
-                app:text_Size="30"
-                app:text_color="#666666" />
-        </LinearLayout>
+            android:layout_marginLeft="@dimen/layout_distance"
+            android:layout_marginRight="@dimen/layout_distance"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/btn_solid_greedyellow_radius"
+            android:gravity="center"
+            android:padding="@dimen/layout_distance"
+            android:text="@string/save"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textsize_largetittle" />
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24px"
-        android:layout_marginLeft="30px"
-        android:layout_marginTop="24px"
-        android:text="收缩压/舒张压的正常范围：90-140/60-90 (mmol/L)"
-        android:textSize="24px" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/rl_choicedate"
-            android:layout_width="match_parent"
-            android:layout_height="90px">
-
-            <ImageView
-                android:id="@+id/bpinput_rili"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
-                android:src="@mipmap/rili" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20px"
-                android:layout_toRightOf="@id/bpinput_rili"
-                android:gravity="center"
-                android:text="@string/record_date"
-                android:textSize="30px" />
-
-            <ImageView
-                android:id="@+id/bpinput_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="30px"
-                android:src="@mipmap/xiangxia_jiantou" />
-
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="30px"
-                android:layout_toLeftOf="@id/bpinput_arrow"
-                android:gravity="center"
-                android:text="请选择"
-                android:textSize="30px" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="30px"
-        android:layout_marginRight="30px"></View>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/rl_choicetime"
-            android:layout_width="match_parent"
-            android:layout_height="90px">
-
-            <ImageView
-                android:id="@+id/bpinput_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
-                android:src="@mipmap/zhong" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20px"
-                android:layout_toRightOf="@id/bpinput_time"
-                android:gravity="center"
-                android:text="@string/reccord_time"
-                android:textSize="30px" />
-
-            <ImageView
-                android:id="@+id/bpinput_arrows"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="30px"
-                android:src="@mipmap/xiangxia_jiantou" />
-
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="30px"
-                android:layout_toLeftOf="@id/bpinput_arrows"
-                android:gravity="center"
-                android:text="请选择"
-                android:textSize="30px" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rl_choicewhat"
-            android:paddingLeft="@dimen/layout_distance_15dp"
-            android:paddingRight="@dimen/layout_distance_15dp"
-            android:layout_width="match_parent"
-            android:layout_height="90px">
-
-            <ImageView
-                android:id="@+id/iv_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/zhong" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20px"
-                android:layout_toRightOf="@id/iv_image"
-                android:gravity="center"
-                android:text="时间端"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:id="@+id/iv_image2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/xiangxia_jiantou" />
-
-            <TextView
-                android:id="@+id/tv_choicewhat"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="15dp"
-                android:layout_toLeftOf="@id/iv_image2"
-                android:gravity="center"
-                android:text="请选择"
-                android:textSize="30px" />
-             />
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <TextView
-        android:gravity="center"
-        android:id="@+id/bpinput_save"
-        android:layout_width="match_parent"
-        android:layout_height="90px"
-        android:layout_marginLeft="60px"
-        android:layout_marginRight="60px"
-        android:layout_marginTop="90px"
-        android:background="@drawable/btn_solid_greedyellow_radius"
-        android:text="@string/save"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/textsize_largetittle" />
 
 </LinearLayout>

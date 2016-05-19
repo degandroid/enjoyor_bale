@@ -245,10 +245,31 @@
                 android:textSize="@dimen/textsize_smalltittle" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_null"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="match_parent" android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/bl_bg_wushuju"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="@dimen/layout_distance"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:text="我们的工程师们已经把表格准备好了，\n还不赶紧记录您的健康！"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/ll_addchild"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:background="@color/colorWhite"
-            android:layout_height="match_parent"></LinearLayout>
+            android:layout_height="match_parent">
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

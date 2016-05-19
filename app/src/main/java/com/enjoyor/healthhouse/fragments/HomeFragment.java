@@ -235,9 +235,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent_xueya.putExtra("fromWhere", Constant.FROM_XUEYA);
                 startActivity(intent_xueya);
                 break;
-            case R.id.ll_BMI:
+            case R.id.ll_shengao:
                 Intent intent_BMI = new Intent(getActivity(), BPInputActivity.class);
-                intent_BMI.putExtra("fromWhere", Constant.FROM_BMI);
+                intent_BMI.putExtra("fromWhere", Constant.FROM_SHENGAO);
                 startActivity(intent_BMI);
                 break;
             case R.id.ll_xuetang:
@@ -255,14 +255,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent_yaowei.putExtra("fromWhere", Constant.FROM_YAOWEI);
                 startActivity(intent_yaowei);
                 break;
-            case R.id.ll_danguchun:
+            case R.id.ll_tizhong:
                 Intent intent_danguchun = new Intent(getActivity(), BPInputActivity.class);
-                intent_danguchun.putExtra("fromWhere", Constant.FROM_DANGUCHUN);
+                intent_danguchun.putExtra("fromWhere", Constant.FROM_TIZHONG);
                 startActivity(intent_danguchun);
                 break;
-            case R.id.ll_niaosuan:
+            case R.id.ll_tiwen:
                 Intent intent_niaosuan = new Intent(getActivity(), BPInputActivity.class);
-                intent_niaosuan.putExtra("fromWhere", Constant.FROM_NIAOSUAN);
+                intent_niaosuan.putExtra("fromWhere", Constant.FROM_TIWEN);
                 startActivity(intent_niaosuan);
                 break;
             case R.id.ll_xindian:

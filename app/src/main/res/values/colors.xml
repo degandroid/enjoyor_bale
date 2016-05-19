@@ -22,6 +22,8 @@
     <color name="transparent">#00000000</color>
     <color name="gray_text_77">#777777</color>
     <color name="color_black_333333">#333333</color>
+    <color name="color_tabbar">#ebebeb</color>
+    <color name="color_line">#e0e0e0</color>
 
 
 

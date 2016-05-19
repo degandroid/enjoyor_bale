@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="@dimen/layout_distance">
 
         <LinearLayout
             android:id="@+id/ll_roundicon1"
@@ -50,7 +50,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_BMI"
+                android:id="@+id/ll_shengao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -60,12 +60,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/bl_icon_bmi" />
+                    android:src="@mipmap/bl_icon_shengao" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BMI" />
+                    android:text="身高" />
             </LinearLayout>
 
             <LinearLayout
@@ -134,7 +134,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_danguchun"
+                android:id="@+id/ll_tizhong"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -144,16 +144,16 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/bl_icon_zongdanguchun" />
+                    android:src="@mipmap/bl_icon_tizhong" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="总胆固醇" />
+                    android:text="体重" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_niaosuan"
+                android:id="@+id/ll_tiwen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -163,12 +163,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/bl_icon_niaosuan" />
+                    android:src="@mipmap/bl_icon_tiwen" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="尿酸" />
+                    android:text="体温" />
             </LinearLayout>
 
             <LinearLayout

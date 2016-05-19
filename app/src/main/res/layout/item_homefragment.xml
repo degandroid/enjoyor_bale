@@ -12,6 +12,8 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:gravity="center_vertical"
+    android:paddingLeft="@dimen/layout_distance"
+    android:paddingRight="@dimen/layout_distance"
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/iv_infopic"
@@ -19,7 +21,9 @@
         android:layout_width="50dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
-        android:layout_margin="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
         android:layout_height="50dp" />
     <TextView
         android:id="@+id/tv_tittle"
@@ -28,7 +32,7 @@
         android:layout_width="wrap_content"
         android:text="tittle"
         android:textColor="@color/textcolor_largetittle"
-        android:textSize="@dimen/textsize_largetittle"
+        android:textSize="@dimen/textsize_smalltittle"
         android:layout_height="wrap_content" />
 
     <LinearLayout
@@ -43,16 +47,16 @@
             android:layout_width="0dp"
             android:text="date"
             android:textColor="@color/textcolor_largetittle"
-            android:textSize="@dimen/textsize_smalltittle"
+            android:textSize="@dimen/textsize_body"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_readnumber"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:text="read"
-            android:gravity="center"
+            android:gravity="right"
             android:textColor="@color/textcolor_largetittle"
-            android:textSize="@dimen/textsize_smalltittle"
+            android:textSize="@dimen/textsize_body"
             android:layout_height="wrap_content" />
         <!--<TextView-->
             <!--android:id="@+id/tv_comment"-->
