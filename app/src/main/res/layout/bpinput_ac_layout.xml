@@ -38,6 +38,7 @@
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="@dimen/layout_distance_15dp"
                     android:text="血压"
+                    android:textColor="@color/color_normal"
                     android:textSize="25sp" />
 
                 <ImageView
@@ -127,6 +128,7 @@
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="@dimen/layout_distance_15dp"
                     android:text="血压"
+                    android:textColor="@color/color_normal_second"
                     android:textSize="25sp" />
 
                 <ImageView

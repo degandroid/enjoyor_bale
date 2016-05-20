@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/color_line"
+        android:layout_height="1px" />
+    <LinearLayout
+
+        android:id="@+id/ll_history_shengao"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_two_one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="日期"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle" />
+        <TextView
+            android:layout_width="1px"
+            android:background="@color/color_line"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_two_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="日期"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle" />
+    </LinearLayout>
+</LinearLayout>
