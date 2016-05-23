@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="debug"><source path="C:\bale_healthhouse\enjoyor_bale\rulberview\build\intermediates\bundles\debug\assets"/></dataSet><dataSet config="main"><source path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\androidTest\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="debug"><source path="C:\DegProject\BaleHealthHouse\enjoyor_bale\rulberview\build\intermediates\bundles\debug\assets"/></dataSet><dataSet config="main"><source path="C:\DegProject\BaleHealthHouse\enjoyor_bale\rulberview\src\androidTest\assets"/></dataSet></merger>

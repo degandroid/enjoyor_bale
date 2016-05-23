@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\main\assets"/></dataSet><dataSet config="debug"><source path="C:\bale_healthhouse\enjoyor_bale\rulberview\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\DegProject\BaleHealthHouse\enjoyor_bale\rulberview\src\main\assets"/></dataSet><dataSet config="debug"><source path="C:\DegProject\BaleHealthHouse\enjoyor_bale\rulberview\src\debug\assets"/></dataSet></merger>

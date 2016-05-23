@@ -73,6 +73,8 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.pnikosis/materialish-progress/1.7/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
@@ -92,27 +94,30 @@
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="butterknife-7.0.1" level="project" />
-    <orderEntry type="library" exported="" name="baidumapapi_util_v3_7_3" level="project" />
-    <orderEntry type="library" exported="" name="baidumapapi_cloud_v3_7_3" level="project" />
-    <orderEntry type="library" exported="" name="baidumapapi_base_v3_7_3" level="project" />
-    <orderEntry type="library" exported="" name="baidumapapi_search_v3_7_3" level="project" />
+    <orderEntry type="library" exported="" name="play-services-appindexing-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="MobTools" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_radar_v3_7_3" level="project" />
     <orderEntry type="library" exported="" name="fastjson-1.2.6" level="project" />
-    <orderEntry type="library" exported="" name="SMSSDK-2.0.1" level="project" />
-    <orderEntry type="library" exported="" name="design-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="ormlite-android-4.47" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="xUtils-2.6.14" level="project" />
-    <orderEntry type="library" exported="" name="ormlite-core-4.47" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.1.1" level="project" />
-    <orderEntry type="library" exported="" name="materialish-progress-1.7" level="project" />
-    <orderEntry type="library" exported="" name="org.apache.http.legacy" level="project" />
-    <orderEntry type="library" exported="" name="android-async-http-1.4.8" level="project" />
     <orderEntry type="library" exported="" name="BaiduLBS_Android" level="project" />
     <orderEntry type="library" exported="" name="glide-3.5.2" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.1.1" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_util_v3_7_3" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_cloud_v3_7_3" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_base_v3_7_3" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_search_v3_7_3" level="project" />
+    <orderEntry type="library" exported="" name="SMSSDK-2.0.1" level="project" />
+    <orderEntry type="library" exported="" name="universal-image-loader-1.8.6-with-sources" level="project" />
+    <orderEntry type="library" exported="" name="design-23.1.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-basement-8.1.0" level="project" />
+    <orderEntry type="library" exported="" name="ormlite-core-4.47" level="project" />
+    <orderEntry type="library" exported="" name="materialish-progress-1.7" level="project" />
+    <orderEntry type="library" exported="" name="org.apache.http.legacy" level="project" />
+    <orderEntry type="library" exported="" name="android-async-http-1.4.8" level="project" />
     <orderEntry type="library" exported="" name="MobCommons" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_map_v3_7_3" level="project" />
     <orderEntry type="module" module-name="rulberview" exported="" />
