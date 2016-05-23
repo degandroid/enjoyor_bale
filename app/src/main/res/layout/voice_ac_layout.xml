@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/voice_long"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -38,40 +39,40 @@
             android:layout_below="@+id/voice_tv"
             android:layout_marginTop="30px"
             android:gravity="center"
-            android:text="00:01:14"
+            android:text="00:00:00"
             android:textSize="72px" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/voice_time"
-            android:layout_marginBottom="150px"
-            android:gravity="center">
+
 
             <ImageView
+                android:layout_centerInParent="true"
+                android:id="@+id/voice_luyin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/luyin_bg" />
 
-        </LinearLayout>
 
 
         <ImageView
-            android:layout_width="80px"
-            android:layout_height="80px"
+            android:id="@+id/voice_cha"
+            android:layout_width="60px"
+            android:layout_height="60px"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30px"
             android:layout_marginLeft="60px"
-            android:src="@mipmap/cha" />
+            android:src="@mipmap/cha"
+            android:visibility="gone" />
 
         <ImageView
-            android:layout_width="80px"
-            android:layout_height="80px"
+            android:id="@+id/voice_dui"
+            android:layout_width="60px"
+            android:layout_height="60px"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="30px"
             android:layout_marginRight="60px"
-            android:src="@mipmap/gou" />
+            android:src="@mipmap/gou"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>

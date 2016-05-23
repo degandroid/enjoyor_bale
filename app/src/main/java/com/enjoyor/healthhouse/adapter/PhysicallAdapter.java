@@ -37,8 +37,10 @@ public class PhysicallAdapter extends CommAdapter<PhsicallLocation.MachineModels
             @Override
             public void onClick(View v) {
                 Intent intent_map = new Intent(context, MapActivity.class);
-                intent_map.putExtra("latitude", models.getMachineLat());
-                intent_map.putExtra("longitude", models.getMachineLong());
+                intent_map.putExtra("latitude", models.getMachineLat()+"");
+                intent_map.putExtra("longitude", models.getMachineLong()+"");
+                Log.d("wyy---", models.getMachineLat());
+                Log.d("wyy===",models.getMachineLong());
                 context.startActivity(intent_map);
             }
         });

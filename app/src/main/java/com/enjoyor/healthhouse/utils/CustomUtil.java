@@ -6,7 +6,6 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.net.ApiMessage;
@@ -31,32 +30,30 @@ public class CustomUtil {
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     Log.i("zxw","------------onSuccess--------");
-                    Toast.makeText(context,"数据保存成功",Toast.LENGTH_LONG).show();
-//                    dialog(context, "数据保存成功", "取消", "确定", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            disappear();
-//                        }
-//                    }, new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            disappear();
-//                        }
-//                    });
+                    dialog(context, "数据保存成功", "取消", "确定", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            disappear();
+                        }
+                    }, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            disappear();
+                        }
+                    });
                 } else {
                     Log.i("zxw", "-----------------else----");
-                    Toast.makeText(context,"数据保存失败",Toast.LENGTH_LONG).show();
-//                    dialog(context, "数据保存失败，请确定是否有遗漏的选项", "取消", "确定", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            disappear();
-//                        }
-//                    }, new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            disappear();
-//                        }
-//                    });
+                    dialog(context, "数据保存失败，请确定是否有遗漏的选项", "取消", "确定", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            disappear();
+                        }
+                    }, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            disappear();
+                        }
+                    });
                 }
             }
 

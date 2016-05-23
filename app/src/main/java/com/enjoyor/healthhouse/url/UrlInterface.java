@@ -7,6 +7,7 @@ public class UrlInterface {
     public static String RELEASE_URL = "http://www.cnbale.com:9008/healthstationserver/";
 
     public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
+    //    public static String TEXT_URL = "http://192.168.66.37:8080/bale/";
     //    用户注册接口
     public static String Regist_URL = TEXT_URL + "account/appregister.action";
     //发送验证码接口
@@ -19,6 +20,10 @@ public class UrlInterface {
     public static String FILE_URL = "http://115.28.37.145:9008/healthstationserver/";
     //附近监测点接口
     public static String NearAddress_URL = TEXT_URL + "base/dis/machine/list.do";
-
+    //上传文件接口
+    public static String UpDateFile_URL = TEXT_URL + "/doupload/save.do";
+    //    public static String UpDateFile_URL =  "http://192.168.66.33/doupload/save.do";
+    //随手记提交接口
+    public static String Notes_URL = TEXT_URL + "/record/notes.do";
 
 }

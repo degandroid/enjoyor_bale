@@ -16,6 +16,7 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.enjoyor.healthhouse.R;
+import com.enjoyor.healthhouse.utils.StringUtils;
 
 /**
  * Created by YuanYuan on 2016/5/17.
@@ -41,35 +42,34 @@ public class MapActivity extends BaseActivity {
 
     private void initEvent() {
 
-        if (positionLong == null || positionLat == null) {
-            Toast.makeText(this, "地图定位失败", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
+        if (!StringUtils.isBlank(positionLong) && !StringUtils.isBlank(positionLat)) {
             jindu = Double.parseDouble(positionLong);
             weidu = Double.parseDouble(positionLat);
-        }
-        Log.i("----", jindu + "===========" + weidu);
-        LatLng point = new LatLng(weidu, jindu);
-        //构建Marker图标
-        BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.mipmap.icon_markg);
-        //构建MarkerOption，用于在地图上添加Marker
-        OverlayOptions option = new MarkerOptions()
-                .position(point)
-                .icon(bitmap);
-        //在地图上添加Marker，并显示
-        mBaiduMap.addOverlay(option);
-        LatLng cenpt = new LatLng(weidu, jindu);
-        //定义地图状态
-        MapStatus mMapStatus = new MapStatus.Builder()
-                .target(cenpt)
-                .zoom(12)
-                .build();
-        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+            Log.i("----", jindu + "===========" + weidu);
+            LatLng point = new LatLng(weidu, jindu);
+            //构建Marker图标
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.mipmap.icon_markg);
+            //构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions()
+                    .position(point)
+                    .icon(bitmap);
+            //在地图上添加Marker，并显示
+            mBaiduMap.addOverlay(option);
+            LatLng cenpt = new LatLng(weidu, jindu);
+            //定义地图状态
+            MapStatus mMapStatus = new MapStatus.Builder()
+                    .target(cenpt)
+                    .zoom(12)
+                    .build();
+            //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
 
-        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
-        //改变地图状态
-        mBaiduMap.setMapStatus(mMapStatusUpdate);
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            //改变地图状态
+            mBaiduMap.setMapStatus(mMapStatusUpdate);
+        } else {
+            Toast.makeText(this, "体检点地理位置不存在", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initView() {
@@ -82,8 +82,10 @@ public class MapActivity extends BaseActivity {
     }
 
     private void initData() {
-        positionLong = getIntent().getStringExtra("latitude");
+        positionLat = getIntent().getStringExtra("latitude");
         positionLong = getIntent().getStringExtra("longitude");
+        Log.d("wyy---", positionLong);
+        Log.d("wyy===", positionLat);
 //        Log.d("aaaaaaaaaaa", positionLat);
 //        Log.d("sssssssssssssssss", positionLong);
     }

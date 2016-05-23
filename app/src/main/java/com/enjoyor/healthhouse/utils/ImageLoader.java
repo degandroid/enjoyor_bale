@@ -320,8 +320,11 @@ public class ImageLoader {
     }
 
     private boolean cacheBitmap2Disk(Bitmap bitmap, OutputStream outputStream) {
-        bitmap.compress(DEFAULT_COMPRESS_FORMAT, DEFAULT_COMPRESS_QUALITY, outputStream);
-        return true;
+        if (bitmap!=null){
+            bitmap.compress(DEFAULT_COMPRESS_FORMAT, DEFAULT_COMPRESS_QUALITY, outputStream);
+            return true;
+        }
+        return false;
     }
 
 

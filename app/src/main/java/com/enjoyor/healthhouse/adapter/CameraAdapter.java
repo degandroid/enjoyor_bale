@@ -26,12 +26,15 @@ public class CameraAdapter extends CommAdapter<String> {
 
     @Override
     public void convert(ViewHolder holder, String s) {
-        Log.d("wyy+++++++",s);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
-        ImageView img = holder.getView(R.id.imageView);
+        if (s!=null){
+            Log.d("wyy+++++++",s);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+            ImageView img = holder.getView(R.id.imageView);
 //        ImageView img = (ImageView) holder.getmConvertView().getId();
-        img.setLayoutParams(params);
-        ImageLoader.getInstance().display(s, img, width, height);
+            img.setLayoutParams(params);
+            ImageLoader.getInstance().display(s, img, width, height);
 //        holder.setImageURL(R.id.)
+        }
+
     }
 }
