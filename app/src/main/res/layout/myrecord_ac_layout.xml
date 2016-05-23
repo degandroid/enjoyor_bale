@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30px"
+        android:paddingLeft="50px"
+        android:paddingRight="50px"
+        android:paddingTop="30px">
+
+        <LinearLayout
+            android:background="@mipmap/xuanzekuang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/xuanzhong"
+                android:gravity="center"
+                android:text="健康数据" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+
+                android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="异常项目" />
+            <ImageView
+                android:layout_marginRight="90px"
+                android:layout_marginTop="15px"
+                android:layout_width="wrap_content"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/yichang"/>
+            </FrameLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

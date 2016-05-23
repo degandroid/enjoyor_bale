@@ -1,9 +1,11 @@
 
 package com.enjoyor.healthhouse.utils;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Window;
@@ -73,6 +75,7 @@ public class ScreenUtil {
      *                 android:normalScreens="true" android:largeScreens="true"
      *                 android:resizeable="true" android:anyDensity="true" />
      */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     public static int[] getScreenSize(Activity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
         Point point = new Point();

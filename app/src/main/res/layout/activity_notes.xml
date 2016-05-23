@@ -5,7 +5,7 @@
     android:background="@color/colorBackgroud"
     android:orientation="vertical">
 
-    <include layout="@layout/navigationbar_layout"></include>
+    <include layout="@layout/navigation_img"></include>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/notes_commit"
             android:layout_marginTop="1px"
+            android:gravity="center"
             android:background="@color/colorWhite"
             android:orientation="horizontal"
             android:padding="30px">
@@ -44,10 +45,11 @@
             <TextView
                 android:id="@+id/notes_address"
                 android:layout_width="wrap_content"
+                android:gravity="end"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:drawableLeft="@mipmap/weizhi"
-                android:drawablePadding="30px"
+                android:drawableLeft="@mipmap/dingwei"
+                android:drawablePadding="20px"
                 android:text="银江体检中心" />
         </RelativeLayout>
 
@@ -56,18 +58,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/notes_addr"
-            android:layout_marginTop="1px">
+            android:layout_marginBottom="1px"
+            android:layout_marginTop="1px"
+            android:background="@color/colorWhite">
 
             <GridView
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="20px"
                 android:cacheColorHint="@android:color/transparent"
-                android:horizontalSpacing="2dip"
+                android:horizontalSpacing="6dip"
                 android:listSelector="@android:color/transparent"
-                android:numColumns="3"
+                android:numColumns="4"
+                android:paddingBottom="30px"
+                android:paddingTop="30px"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="2dip" />
+                android:verticalSpacing="3dip" />
 
         </RelativeLayout>
 
@@ -76,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/notes_middle"
+            android:layout_marginBottom="1px"
             android:layout_marginTop="1px"
             android:background="@color/colorWhite">
 
@@ -89,32 +98,32 @@
 
             <ImageView
                 android:id="@+id/notes_luyin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60px"
+                android:layout_height="60px"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="30px"
                 android:layout_marginRight="30px"
                 android:src="@mipmap/luyin" />
 
-            <ImageView
-                android:id="@+id/notes_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30px"
-                android:layout_marginRight="30px"
-                android:layout_toLeftOf="@+id/notes_luyin"
-                android:src="@mipmap/xiangji" />
+            <!--<ImageView-->
+            <!--android:id="@+id/notes_camera"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginBottom="30px"-->
+            <!--android:layout_marginRight="30px"-->
+            <!--android:layout_toLeftOf="@+id/notes_luyin"-->
+            <!--android:src="@mipmap/xiangji" />-->
 
             <ImageView
                 android:id="@+id/notes_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60px"
+                android:layout_height="60px"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="30px"
                 android:layout_marginRight="30px"
-                android:layout_toLeftOf="@+id/notes_camera"
+                android:layout_toLeftOf="@id/notes_luyin"
                 android:src="@mipmap/tupian" />
 
 
