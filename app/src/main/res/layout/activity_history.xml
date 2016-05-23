@@ -35,8 +35,31 @@
             android:textColor="@color/textcolor_body" />
 
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_background"
+
+        android:background="@color/color_line" />
 
     <LinearLayout
+        android:id="@+id/ll_nocircle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/tv_nocircle_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="收缩压/舒张压"
+            android:textColor="@color/textcolor_smallittle"
+            android:textSize="@dimen/textsize_smalltittle" />
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_hascircle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -104,6 +127,7 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/tv_twotittle_one"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -118,6 +142,7 @@
                 android:background="@color/color_line" />
 
             <TextView
+                android:id="@+id/tv_twotittle_two"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -135,6 +160,7 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/tv_threetittle_one"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -149,6 +175,7 @@
                 android:background="@color/color_line" />
 
             <TextView
+                android:id="@+id/tv_threetittle_two"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -163,6 +190,7 @@
                 android:background="@color/color_line" />
 
             <TextView
+                android:id="@+id/tv_threetittle_three"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -406,18 +434,17 @@
                 android:gravity="center"
                 android:text="我们的工程师们已经把表格准备好了，\n还不赶紧记录您的健康！" />
         </LinearLayout>
-
         <com.enjoyor.healthhouse.custom.BottomScrollView
-            android:id="@+id/sv_refresh"
+            android:id="@+id/bsv_bottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
         <LinearLayout
             android:id="@+id/ll_addchild"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"
+            android:paddingBottom="50dp"
             android:orientation="vertical">
-
         </LinearLayout>
         </com.enjoyor.healthhouse.custom.BottomScrollView>
         <LinearLayout

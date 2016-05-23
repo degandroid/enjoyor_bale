@@ -208,7 +208,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="附近监测点"
+            android:text="附近检测点"
             android:textColor="@color/textcolor_smallittle"
             android:textSize="@dimen/textsize_largetittle" />
 

@@ -33,6 +33,7 @@ public class MainActivity extends BaseActivity {
         public void run() {
             Intent intent = new Intent(MainActivity.this, MainTabActivity.class);
             startActivity(intent);
+            finish();
 //            initData();
         }
     }

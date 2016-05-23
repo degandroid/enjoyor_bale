@@ -19,6 +19,7 @@ import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.MatcherUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -102,18 +103,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 Intent intent_quick = new Intent(LoginActivity.this, RegistActivity.class);
                 startActivity(intent_quick);
-
-//                dialog(LoginActivity.this, "该用户已注册","取消","登陆", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        disappear();
-//                    }
-//                }, new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        disappear();
-//                    }
-//                });
                 break;
         }
     }
@@ -124,6 +113,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         Log.i("zxw", phoneNumber + "\n" + password);
         if (StringUtils.isBlank(phoneNumber)) {
             Toast.makeText(LoginActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
+            et_phonenumber.requestFocus();
+            return false;
+        }else if(!MatcherUtil.isMobileNumber(phoneNumber)){
+            Toast.makeText(LoginActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
             et_phonenumber.requestFocus();
             return false;
         } else if (StringUtils.isBlank(password)) {

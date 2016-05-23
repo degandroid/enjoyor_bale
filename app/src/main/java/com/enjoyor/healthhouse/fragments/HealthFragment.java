@@ -32,7 +32,7 @@ public class HealthFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mine,null);
+        View view = inflater.inflate(R.layout.fragment_health,null);
         ButterKnife.bind(this, view);
         Bundle bundle = getArguments();
         tv_info.setText(bundle.getString("info"));

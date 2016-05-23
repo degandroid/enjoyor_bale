@@ -15,6 +15,7 @@ import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.MatcherUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -50,6 +51,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     private String phoneNumber;
     private String password;
     private String MSG_CODE = "msg/send.action";
+    private String VERIFY_CODE = "msg/verify.action";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,15 +95,15 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.bt_commit:
                 if (isCorrect()) {
-                    Intent intent = new Intent(ForgetPasswordActivity.this, NewPasswordActivity.class);
-                    intent.putExtra("YanZheng", et_password.getText().toString().trim());
-                    intent.putExtra("phone", et_phonenumber.getText().toString().trim());
-                    startActivity(intent);
+                    verify(et_phonenumber.getText().toString().trim(), et_password.getText().toString().trim());
                 }
                 break;
             case R.id.tv_code:
                 if (StringUtils.isBlank(et_phonenumber.getText().toString())) {
                     Toast.makeText(ForgetPasswordActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
+                    et_phonenumber.requestFocus();
+                }else if(!MatcherUtil.isMobileNumber(et_phonenumber.getText().toString())){
+                    Toast.makeText(ForgetPasswordActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
                     et_phonenumber.requestFocus();
                 } else {
                     sendingAutoCode();
@@ -134,12 +136,42 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
             }
         });
     }
+    private void verify(String phone,String code) {
+        RequestParams params = new RequestParams();
+        params.add("service", String.valueOf("mob"));
+        params.add("phone", phone);
+        params.add("code", code);
+        AsyncHttpUtil.post(UrlInterface.TEXT_URL + VERIFY_CODE, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                String json = new String(bytes);
+                ApiMessage apiMessage = ApiMessage.FromJson(json);
+                if (apiMessage.Code == 1001) {
+                    Intent intent = new Intent(ForgetPasswordActivity.this, NewPasswordActivity.class);
+                    intent.putExtra("YanZheng", et_password.getText().toString().trim());
+                    intent.putExtra("phone", et_phonenumber.getText().toString().trim());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ForgetPasswordActivity.this, "验证码输入错误错误", Toast.LENGTH_LONG).show();
+                    et_password.requestFocus();
+                }
+            }
 
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+            }
+        });
+    }
     private boolean isCorrect() {
         phoneNumber = et_phonenumber.getText().toString().trim();
         password = et_password.getText().toString().trim();
         if (StringUtils.isBlank(phoneNumber)) {
             Toast.makeText(ForgetPasswordActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
+            et_phonenumber.requestFocus();
+            return false;
+        }else if(!MatcherUtil.isMobileNumber(phoneNumber)){
+            Toast.makeText(ForgetPasswordActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
             et_phonenumber.requestFocus();
             return false;
         } else if (StringUtils.isBlank(password)) {

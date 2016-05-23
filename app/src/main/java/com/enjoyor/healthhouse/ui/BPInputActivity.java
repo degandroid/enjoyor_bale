@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
@@ -51,6 +52,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     TextView tv_time;
     @Bind(R.id.ll_second)
     LinearLayout ll_second;//第二个刻度尺
+    @Bind(R.id.tv_second_bar)TextView tv_second_bar;
     @Bind(R.id.tv_date)
     TextView tv_date;
     @Bind(R.id.rl_choicedate)
@@ -94,7 +96,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     private int CHOICE_DATE = 1;
     private int CHOICE_TIME = 2;
     private int CHOICE_WHAT = 3;
-    private int DEFAULT_VALUE = 0;
+    private int DEFAULT_VALUE = 5;
     private String str_year;
     private String str_mouth;
     private String str_day;
@@ -127,6 +129,8 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     private static String TP_URL = "app/savetmper.action";//体温
     private static String ECG_URL = "app/saveecg.action";//心率
 
+    private int FIRST_RULE = 1;
+    private int SECOND_RULE = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,8 +146,8 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
     @OnClick(R.id.bpinput_save)
     public void onSaveClick() {
-        if(isLogin(context)){
-            if(getDate()){
+        if (isLogin(context)) {
+            if (getDate()) {
                 switch (fromWhere) {
                     case Constant.FROM_XUEYA:
                         RequestParams params_xueya = new RequestParams();
@@ -205,7 +209,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                         CustomUtil.saveHealthInfo(context, ECG_URL, params_xindian);
                         break;
                 }
-            }else{
+            } else {
                 dialog(context, "时间或日期未选择", "取消", "确定", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -228,14 +232,14 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         long _userId = MyApplication.getInstance().getDBHelper().getUser().getUserId();
         if (!StringUtils.isBlank(_userId + "")) {
             userId = MyApplication.getInstance().getDBHelper().getUser().getUserId() + "";
-        }else{
+        } else {
             return false;
         }
         /*判断日期是否为空*/
         String _date = tv_date.getText().toString();
-        if (!StringUtils.isBlank(_date)&&!_date.equals("请选择")) {
+        if (!StringUtils.isBlank(_date) && !_date.equals("请选择")) {
             times = _date;
-        }else{
+        } else {
             return false;
         }
         /*获取第一个刻度尺的值（默认）*/
@@ -251,32 +255,32 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             ecg = up;
         }
         /*判断时间端的类型*/
-        if(_type ==0){
+        if (_type == 3) {
             type = "1";
-        }else if(_type ==-1){
-            type ="4";
-        }else{
-            type = (_type+4)+"";
+        } else if (_type == -1) {
+            type = "4";
+        } else {
+            type = (_type + 4) + "";
         }
         /*如果为血压时，添加第二个刻度尺以及判断时间是否为空*/
         if (fromWhere == Constant.FROM_XUEYA) {
             /*判断时间是否为空或者未选择*/
             String _times = tv_time.getText().toString();
-            if (!StringUtils.isBlank(_times)&&!_times.equals("请选择")) {
+            if (!StringUtils.isBlank(_times) && !_times.equals("请选择")) {
                 hours = _times;
-            }else{
+            } else {
                 return false;
             }
             String down = bpinput_bp_tv_low.getText().toString();
-            if(!StringUtils.isBlank(down)){
+            if (!StringUtils.isBlank(down)) {
                 systolicPressure = down;
             }
         }
-        Log.i("zxw", "userId："+userId + "\n" + "times："+times + "\n" + "hours："+hours
-                        + "\n" + "systolicPressure："+systolicPressure + "\n" +"diastolicPressure："+diastolicPressure
-                        + "\n" + "height："+height + "\n" + "weight："+weight + "\n" + "bloodSugar："+bloodSugar
-                        + "\n" + "type："+type + "\n" + "bo："+bo + "\n" + "waistLine："+waistLine
-                        + "\n" + "temperature："+temperature + "\n" + "ecg："+ecg
+        Log.i("zxw", "userId：" + userId + "\n" + "times：" + times + "\n" + "hours：" + hours
+                        + "\n" + "systolicPressure：" + systolicPressure + "\n" + "diastolicPressure：" + diastolicPressure
+                        + "\n" + "height：" + height + "\n" + "weight：" + weight + "\n" + "bloodSugar：" + bloodSugar
+                        + "\n" + "type：" + type + "\n" + "bo：" + bo + "\n" + "waistLine：" + waistLine
+                        + "\n" + "temperature：" + temperature + "\n" + "ecg：" + ecg
         );
         return true;
     }
@@ -294,10 +298,11 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             case Constant.FROM_XUEYA:
                 ll_second.setVisibility(View.VISIBLE);
                 rl_choicetime.setVisibility(View.VISIBLE);
+                tv_second_bar.setVisibility(View.VISIBLE);
                 navigation_name.setText("血压录入");
                 tv_numberinfo.setText("舒张压（mmol/L）");
                 tv_numberinfo_second.setText("收缩压（mmol/L）");
-                tv_display.setText("收缩压/舒张压  正常范围：90-140/60-190mmHg");
+                tv_display.setText("收缩压/舒张压  正常范围：90-140/60-90mmHg");
                 initFirstView(0, 100, 10, "70");
                 initSecondView(0, 200, 10, 120);
                 break;
@@ -305,7 +310,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 navigation_name.setText("身高录入");
                 tv_numberinfo.setText("身高（cm）");
                 tv_display.setVisibility(View.GONE);
-                initFirstView(100, 250, 10, "160");
+                initFirstView(100, 240, 10, "160");
                 break;
             case Constant.FROM_XUETANG:
                 rl_choicewhat.setVisibility(View.VISIBLE);
@@ -319,12 +324,12 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 tv_display.getPaint().setAntiAlias(true);//抗锯齿
                 tv_display_more.setVisibility(View.VISIBLE);
                 tv_display_more.setText("空腹血糖标准范围（4.4-7.0mmol/L）" + "\n非空腹血糖标准范围（4.4-10.0mmol/L）");
-                initFirstView(2, 15, 1, "6.0");
+                    initFirstView(2, 14, 1, "6.0");
                 break;
             case Constant.FROM_XUEYANG:
                 navigation_name.setText("血氧录入");
                 tv_numberinfo.setText("血氧（%）");
-                tv_display.setText("血氧的正常范围：>95&");
+                tv_display.setText("血氧的正常范围：>95%");
                 initFirstView(50, 99, 1, "98.0");
                 break;
             case Constant.FROM_YAOWEI:
@@ -332,7 +337,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 tv_numberinfo.setText("腰围（cm）");
                 tv_display.setText("标准腰围计算方法" + "\n" + "男性：身高（cm）/2-11（cm），" + "\n" +
                         "女性：身高（cm）/2-14（cm），" + "\n" + "±5%为正常范围");
-                initFirstView(50, 250, 10, "70");
+                initFirstView(50, 100, 10, "70");
                 break;
             case Constant.FROM_TIZHONG:
                 navigation_name.setText("体重录入");
@@ -344,10 +349,10 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 navigation_name.setText("体温录入");
                 tv_numberinfo.setText("体温（℃）");
                 tv_display.setText("人体正常体温平均在36-37℃之间（腋窝）");
-                initFirstView(35, 42, 1, "36.7");
+                initFirstView(35, 41, 1, "36.7");
                 break;
             case Constant.FROM_XINDIAN:
-                navigation_name.setText("心电录入");
+                navigation_name.setText("心率录入");
                 tv_numberinfo.setText("心率（bpm）");
                 tv_display.setText("安静时心率标准范围（60-100bpm）" + "\n" + "安静时心率>100为窦性心动过速" + "\n" +
                         "安静时心率<60为窦性心动过缓");
@@ -419,7 +424,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
      * @param span//数字跨度
      * @param value//默认值
      */
-    private void initFirstView(int from, int to, int span, String value) {
+    private void initFirstView(final int from, final int to, int span, String value) {
         List<String> list = new ArrayList<>();
         if (10 == span) {
             for (int i = from; i <= to; i += span) {
@@ -432,33 +437,37 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             for (float i = from; i <= to; i += span) {
                 list.add(i + "");
                 for (float j = 0.1f; j < 1.0f; j += 0.1) {
-                    list.add((i + j) + "");
+                    DecimalFormat fnum = new DecimalFormat("##0.0");
+                    String s = fnum.format(i + j);
+                    list.add(s);
                 }
             }
         } else {
-
         }
-
         bpinput_bp_tv.setText(value);
         bpinput_up.setData(list);
-//        bpinput_up.setSelectedValue(value + "");
         bpinput_up.setSelectedValue(value);
         bpinput_up.setScrollingListener(new RulerWheel.OnWheelScrollListener<String>() {
 
             @Override
             public void onChanged(RulerWheel wheel, String oldValue, String newValue) {
-                bpinput_bp_tv.setText(newValue);
-                float a = Float.parseFloat(newValue);
+
+                int a = (int)Float.parseFloat(newValue);
+                if(a<=to&&a>=from){
+                    bpinput_bp_tv.setText(newValue);
+                }
+                if (a > to) {
+                    bpinput_bp_tv.setText(to+"");
+                    bpinput_up.setSelectedValue(to + "");
+                }
+                if (a < from) {
+                    bpinput_bp_tv.setText(from+"");
+                    bpinput_up.setSelectedValue(from + "");
+
+                }
+                Log.i("ddd",a+"\n"+to+"\n"+from);
                 Log.i("zxw", a + "");
                 changeColor(a);
-//                diastolicPressure = newValue;
-//                height = newValue;
-//                bloodSugar = newValue;
-//                bo = newValue;
-//                waistLine = newValue;
-//                weight = newValue;
-//                temperature = newValue;
-//                ecg = newValue;
 
             }
 
@@ -477,16 +486,21 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     private void changeColor(float a) {
         switch (fromWhere) {
             case Constant.FROM_XUEYA:
-                changeColorFunction(a,60,90);
+                changeColorFunction(a, 60, 90);
                 break;
             case Constant.FROM_SHENGAO:
 
                 break;
             case Constant.FROM_XUETANG:
-                changeColorFunction(a,4.4f,7.0f);
+                if(_type==3){
+                    changeColorFunction(a, 4.4f, 7.0f);
+                }else{
+                    changeColorFunction(a, 4.4f, 10.0f);
+                }
+                Log.i("bbb",_type+"");
                 break;
             case Constant.FROM_XUEYANG:
-                changeColorFunction(a,95,100);
+                changeColorFunction(a, 95, 100);
                 break;
             case Constant.FROM_YAOWEI:
 
@@ -495,24 +509,24 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
                 break;
             case Constant.FROM_TIWEN:
-                changeColorFunction(a,36,37);
+                changeColorFunction(a, 36, 37);
                 break;
             case Constant.FROM_XINDIAN:
-                changeColorFunction(a,60,100);
+                changeColorFunction(a, 60, 100);
                 break;
         }
 
     }
 
-    private void changeColorFunction(float a,float min,float max) {
-        if(a>min&&a<max){
+    private void changeColorFunction(float a, float min, float max) {
+        if (a > min && a < max) {
             bpinput_bp_tv.setTextColor(getResources().getColor(R.color.color_normal));
-        }else{
+        } else {
             bpinput_bp_tv.setTextColor(getResources().getColor(R.color.color_abnormal));
         }
     }
 
-    private void initSecondView(int from, int to, int span, int value) {
+    private void initSecondView(final int from,final int to, int span, int value) {
         List<String> list = new ArrayList<>();
         for (int i = from; i <= to; i += span) {
             list.add(i + "");
@@ -527,13 +541,22 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onChanged(RulerWheel wheel, String oldValue, String newValue) {
-                bpinput_bp_tv_low.setText(newValue + "");
 //                systolicPressure = newValue;
                 float a = Float.parseFloat(newValue);
-                if(a>90&&a<140){
+                if (a > 90 && a < 140) {
+                    bpinput_bp_tv_low.setText(newValue + "");
                     bpinput_bp_tv_low.setTextColor(getResources().getColor(R.color.color_normal_second));
-                }else{
+                } else {
+                    bpinput_bp_tv_low.setText(newValue + "");
                     bpinput_bp_tv_low.setTextColor(getResources().getColor(R.color.color_abnormal));
+                }
+                if (a > to){
+                    bpinput_bp_tv_low.setText(to + "");
+                    bpinput_low.setSelectedValue(to+"");
+                }
+                if(a<from){
+                    bpinput_bp_tv_low.setText(from + "");
+                    bpinput_low.setSelectedValue(from + "");
                 }
             }
 
@@ -557,17 +580,17 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
         switch (key) {
             case R.id.bpinput_img_up_jian:
-                updateData(1, _strng, bpinput_bp_tv, bpinput_up);
+                updateData(FIRST_RULE,1, _strng, bpinput_bp_tv, bpinput_up);
                 break;
             case R.id.bpinput_img_up_jia:
-                updateData(2, _strng, bpinput_bp_tv, bpinput_up);
+                updateData(FIRST_RULE,2, _strng, bpinput_bp_tv, bpinput_up);
                 break;
             case R.id.bpinput_img_low_jian:
-                updateData(1, _strng_second, bpinput_bp_tv_low, bpinput_low);
+                updateData(SECOND_RULE,1, _strng_second, bpinput_bp_tv_low, bpinput_low);
                 break;
             case R.id.bpiinput_img_up_jia:
 
-                updateData(2, _strng_second, bpinput_bp_tv_low, bpinput_low);
+                updateData(SECOND_RULE,2, _strng_second, bpinput_bp_tv_low, bpinput_low);
                 break;
             case R.id.rl_choicedate:
                 initPopuptWindow(v, CHOICE_DATE);
@@ -581,33 +604,98 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void updateData(int i, String str, TextView id, RulerWheel view) {
+    private void updateData(int which,int i, String str, TextView id, RulerWheel view) {
         if (fromWhere == Constant.FROM_XUETANG || fromWhere == Constant.FROM_TIWEN || fromWhere == Constant.FROM_XUEYANG) {
-            float value_float = Float.parseFloat(str);
-            if (i == 1) {
-                value_float -= 0.1;
-            } else {
-                value_float += 0.1;
+                float value_float = Float.parseFloat(str);
+                if (i == 1) {
+                    value_float -= 0.1;
+                } else {
+                    value_float += 0.1;
+                }
+                DecimalFormat fnum = new DecimalFormat("##0.0");
+                String value = fnum.format(value_float);
+            if(isFloatRight(value_float,which)){
+                id.setText(value + "");
+                view.setSelectedValue(value + "");
+                Log.i("zxw", "value========" + value);
+                view.invalidate();
             }
-            DecimalFormat fnum = new DecimalFormat("##0.0");
-            String value = fnum.format(value_float);
-            id.setText(value + "");
-            view.setSelectedValue(value + "");
-            Log.i("zxw","value========"+value);
-            view.invalidate();
+        else{
+                Toast.makeText(context, "超出范围", Toast.LENGTH_LONG).show();
+                return;
+            }
         } else {
-            int value_int = Integer.parseInt(str);
-            if (i == 1) {
-                value_int--;
-            } else {
-                value_int++;
+                int value_int = Integer.parseInt(str);
+                if (i == 1) {
+                    value_int--;
+                } else {
+                    value_int++;
+                }
+            if (isFloatRight(value_int,which)) {
+                id.setText(value_int + "");
+                view.setSelectedValue(value_int + "");
+                view.invalidate();
             }
-            id.setText(value_int + "");
-            view.setSelectedValue(value_int + "");
-            view.invalidate();
+        else{
+                Toast.makeText(context,"超出范围",Toast.LENGTH_LONG).show();
+            }
         }
 
+    }
 
+    private boolean isFloatRight(float str,int which) {
+
+        float a = str;
+        switch (fromWhere){
+            case Constant.FROM_XUEYA:
+                if(which == FIRST_RULE){
+                    if(a<0||a>100){
+                        return false;
+                    }
+                }
+                if(which == SECOND_RULE){
+                    if(a<0||a>200){
+                        return false;
+                    }
+                }
+                break;
+            case Constant.FROM_SHENGAO:
+                if(a<100||a>240){
+                    return false;
+                }
+                break;
+            case Constant.FROM_XUETANG:
+                if(a<2||a>14.9){
+                    return false;
+                }
+                break;
+            case Constant.FROM_XUEYANG:
+                if(a<50||a>99.9){
+                    return false;
+                }
+                break;
+            case Constant.FROM_YAOWEI:
+                if(a<50||a>100){
+                    return false;
+                }
+                break;
+            case Constant.FROM_TIZHONG:
+                if(a<30||a>150){
+                    return false;
+                }
+                break;
+            case Constant.FROM_TIWEN:
+                if(a<35||a>41.9){
+                    return false;
+                }
+                break;
+            case Constant.FROM_XINDIAN:
+                if(a<40||a>110){
+                    return false;
+                }
+                break;
+        }
+        return true;
     }
 
     protected void initPopuptWindow(View view, int which) {
@@ -646,7 +734,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             public void endSelect(int id, String text) {
                 str_mwhat = text;
                 Log.i("zxw", "id-----------" + id);
-                _type = 3+id;
+                _type = 3 + id;
             }
 
             @Override
@@ -658,6 +746,10 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View v) {
                 tv_choicewhat.setText(str_mwhat);
+                if(fromWhere == Constant.FROM_XUETANG){
+                    bpinput_bp_tv.setTextColor(getResources().getColor(R.color.color_normal));
+                    initFirstView(2, 14, 1, "6.0");
+                }
                 popupWindow.dismiss();
             }
         });
@@ -667,6 +759,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 popupWindow.dismiss();
             }
         });
+
     }
 
     private void initWheelViewTime(View popupWindow_view) {
@@ -676,7 +769,11 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         wv_year.setVisibility(View.GONE);
         wv_mouth.setVisibility(View.GONE);
         wv_day.setData(getStartData(4));
-        wv_day.setDefault(DEFAULT_VALUE);
+
+        long date = DateUtil.getDaysAfter(0);
+        String string_hour = DateUtil.longToDateString(date, "HH");
+        int hour = Integer.parseInt(string_hour);
+        wv_day.setDefault(hour-1);
         wv_day.setOnSelectListener(new WheelView.OnSelectListener() {
             @Override
             public void endSelect(int id, String text) {
@@ -710,15 +807,20 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         wv_year.setData(getStartData(1));
         wv_mouth.setData(getStartData(2));
         wv_day.setData(getStartData(3));
-        wv_year.setDefault(DEFAULT_VALUE);
-        wv_mouth.setDefault(DEFAULT_VALUE);
-        wv_day.setDefault(DEFAULT_VALUE);
+
+        long date = DateUtil.getDaysAfter(0);
+        String string_mouth = DateUtil.longToDateString(date, "MM");
+        int mouth = Integer.parseInt(string_mouth);
+        String string_day = DateUtil.longToDateString(date, "dd");
+        int day = Integer.parseInt(string_day);
+        wv_year.setDefault(2);
+        wv_mouth.setDefault(mouth-1);
+        wv_day.setDefault(day-1);
         wv_year.setOnSelectListener(new WheelView.OnSelectListener() {
             @Override
             public void endSelect(int id, String text) {
                 str_year = text;
             }
-
             @Override
             public void selecting(int id, String text) {
             }
@@ -766,41 +868,71 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         long date;
         switch (start) {
             case 1:
+                date = DateUtil.getDaysAfter(0);
+                String str_year = DateUtil.longToDateString(date, "yyyy");
+                int year = Integer.parseInt(str_year) - 2;
                 for (int i = 0; i < 10; i++) {
-                    date = DateUtil.getDaysAfter(i);
-                    String str_year = DateUtil.longToDateString(date, "yyyy");
-                    int year = Integer.parseInt(str_year) + i;
-                    list.add(year + "");
+                    list.add((year + i) + "");
                 }
+//                for (int i = 0; i < 10; i++) {
+//                    date = DateUtil.getDaysAfter(i);
+//                    String str_year = DateUtil.longToDateString(date, "yyyy");
+//                    int year = Integer.parseInt(str_year) + i;
+//                    list.add(year + "");
+//                }
                 break;
             case 2:
-                for (int i = 0; i < 12; i++) {
-                    date = DateUtil.getDaysAfter(i);
-                    String str_mouth = DateUtil.longToDateString(date, "MM");
-                    int mouth = Integer.parseInt(str_mouth) + i;
-                    if (mouth > 12) {
-                        mouth -= 12;
-                    }
-                    list.add(mouth + "");
+                for (int i = 1; i < 13; i++) {
+//                    date = DateUtil.getDaysAfter(i);
+//                    String str_mouth = DateUtil.longToDateString(date, "MM");
+//                    int mouth = Integer.parseInt(str_mouth) + i;
+//                    if (mouth > 12) {
+//                        mouth -= 12;
+//                    }
+                    list.add(i + "");
                 }
+//                for (int i = 0; i < 12; i++) {
+//                    date = DateUtil.getDaysAfter(i);
+//                    String str_mouth = DateUtil.longToDateString(date, "MM");
+//                    int mouth = Integer.parseInt(str_mouth) + i;
+//                    if (mouth > 12) {
+//                        mouth -= 12;
+//                    }
+//                    list.add(mouth + "");
+//                }
                 break;
             case 3:
-                for (int i = 0; i < 30; i++) {
-                    date = DateUtil.getDaysAfter(i);
-                    String str_day = DateUtil.longToDateString(date, "dd");
-                    list.add(str_day + "");
+                for (int i = 1; i < 32; i++) {
+//                    date = DateUtil.getDaysAfter(i);
+//                    String str_day = DateUtil.longToDateString(date, "dd");
+                    list.add(i + "");
                 }
+//                for (int i = 0; i < 30; i++) {
+//                    date = DateUtil.getDaysAfter(i);
+//                    String str_day = DateUtil.longToDateString(date, "dd");
+//                    list.add(str_day + "");
+//                }
                 break;
             case 4:
-                for (int i = 0; i < 24; i++) {
-                    date = DateUtil.getDaysAfter(i);
-                    String str_mouth = DateUtil.longToDateString(date, "HH");
-                    int hour = Integer.parseInt(str_mouth) + i;
-                    if (hour > 24) {
-                        hour -= 24;
-                    }
-                    list.add(hour + "");
+                for (int i = 1; i < 25; i++) {
+//                    date = DateUtil.getDaysAfter(i);
+//                    String str_mouth = DateUtil.longToDateString(date, "HH");
+//                    int hour = Integer.parseInt(str_mouth) + i;
+//                    if (hour > 24) {
+//                        hour -= 24;
+//                    }
+                    list.add(i + "");
                 }
+
+//                for (int i = 0; i < 24; i++) {
+//                    date = DateUtil.getDaysAfter(i);
+//                    String str_mouth = DateUtil.longToDateString(date, "HH");
+//                    int hour = Integer.parseInt(str_mouth) + i;
+//                    if (hour > 24) {
+//                        hour -= 24;
+//                    }
+//                    list.add(hour + "");
+//                }
                 break;
             case 5:
                 for (int i = 0; i < mWhat.length; i++) {

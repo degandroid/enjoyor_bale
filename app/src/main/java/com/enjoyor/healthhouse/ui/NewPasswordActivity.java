@@ -68,8 +68,6 @@ public class NewPasswordActivity extends BaseActivity implements View.OnClickLis
             case R.id.bt_commit:
                 if (isCorrect()) {
                     modify();
-//                    Intent intent = new Intent(NewPasswordActivity.this, MainTabActivity.class);
-//                    startActivity(intent);
                 }
                 break;
         }

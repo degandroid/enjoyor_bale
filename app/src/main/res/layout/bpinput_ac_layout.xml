@@ -110,9 +110,10 @@
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:orientation="vertical"
+            android:visibility="gone"
             android:paddingLeft="@dimen/layout_distance"
-            android:paddingRight="@dimen/layout_distance"
-            android:visibility="gone">
+            android:paddingBottom="@dimen/layout_distance"
+            android:paddingRight="@dimen/layout_distance">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -192,6 +193,12 @@
                     app:text_color="#666666" />
             </LinearLayout>
         </LinearLayout>
+        <TextView
+            android:id="@+id/tv_second_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bar_background"
+android:visibility="gone"
+            android:background="@color/color_line" />
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"

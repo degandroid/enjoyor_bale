@@ -18,6 +18,7 @@ import com.enjoyor.healthhouse.custom.Watcher;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.MatcherUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -114,7 +115,10 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 if (StringUtils.isBlank(registphonenumber.getText().toString())) {
                     Toast.makeText(RegistActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
                     registphonenumber.requestFocus();
-                } else {
+                } else if(!MatcherUtil.isMobileNumber(registphonenumber.getText().toString())){
+                    Toast.makeText(RegistActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
+                    registphonenumber.requestFocus();
+                }else {
                     sendMsg();
                     sendMsgtoPhone();
                 }
