@@ -86,7 +86,7 @@
                     app:lineColorMin="#797979"
                     app:line_divider="10dp"
 
-                    app:mask_bg="@mipmap/arrow"
+                    app:mask_bg="@mipmap/bl_icon_kedu"
                     app:max_value="100"
                     app:min_value="0"
                     app:mode="SCALE"
@@ -182,7 +182,7 @@
                     app:lineColorMin="#797979"
                     app:line_divider="10dp"
 
-                    app:mask_bg="@mipmap/arrow"
+                    app:mask_bg="@mipmap/bl_icon_kedu"
                     app:max_value="100"
                     app:min_value="0"
                     app:mode="SCALE"

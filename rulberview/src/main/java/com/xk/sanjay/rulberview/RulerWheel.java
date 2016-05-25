@@ -25,7 +25,7 @@ public class RulerWheel extends View {
     // 默认刻度模式
     public static final int MOD_TYPE_SCALE = 5;
     // 1/2模式
-    public static final int MOD_TYPE_HALF = 2;
+    public static final int MOD_TYPE_HALF = 1;
     //刻度的上对齐方式
     public static final int ALIGN_MOD_UP = 0;
     //刻度的下对齐方式
@@ -155,9 +155,9 @@ public class RulerWheel extends View {
         int maskResId;
         if (alignMode == ALIGN_MOD_UP) {
             // mask，我们的箭头
-            maskResId = mTypedArray.getResourceId(R.styleable.RulerWheel_mask_bg, R.drawable.ruler_mid_arraw);
+            maskResId = mTypedArray.getResourceId(R.styleable.RulerWheel_mask_bg, R.drawable.bl_icon_kedu);
         } else {
-            maskResId = mTypedArray.getResourceId(R.styleable.RulerWheel_mask_bg, R.drawable.ruler_mid_arraw_down);
+            maskResId = mTypedArray.getResourceId(R.styleable.RulerWheel_mask_bg, R.drawable.bl_icon_kedu);
         }
         midBitmap = BitmapFactory.decodeResource(getResources(), maskResId);
 
@@ -379,9 +379,9 @@ public class RulerWheel extends View {
         if (w == 0 || h == 0)
             return;
         int rHeight = h - getPaddingTop() - getPaddingBottom();
-        mLineHeighMax = 2 * rHeight / 3;
-        mLineHeighMid = rHeight / 2;
-        mLineHeighMin = rHeight / 3;
+        mLineHeighMax = 2 * rHeight / 4;
+        mLineHeighMid = rHeight / 3;
+        mLineHeighMin = rHeight / 5;
     }
 
     @Override

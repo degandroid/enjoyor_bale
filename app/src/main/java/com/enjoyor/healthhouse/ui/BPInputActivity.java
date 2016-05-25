@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
+import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.custom.WheelView;
 import com.enjoyor.healthhouse.utils.CustomUtil;
@@ -114,8 +115,8 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     private String height = "160";//身高
     private String weight = "80";//体重
     private String bloodSugar = "6.0";//血糖
-    private String type = "4";//类型：1:空腹，4：随机血糖，5早餐后，6午餐前，7午餐后，8晚餐前，9晚餐后，10睡前
-    private int _type = -1;
+    private String type = "1";//类型：1:空腹，4：随机血糖，5早餐后，6午餐前，7午餐后，8晚餐前，9晚餐后，10睡前
+    private int _type = 0;
     private String bo = "98.0";//血氧
     private String waistLine = "70";//腰围
     private String temperature = "36.7";//体温
@@ -146,7 +147,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
     @OnClick(R.id.bpinput_save)
     public void onSaveClick() {
-        if (isLogin(context)) {
+        if (BaseDate.getSessionId(this)!=null) {
             if (getDate()) {
                 switch (fromWhere) {
                     case Constant.FROM_XUEYA:
@@ -223,6 +224,21 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 });
             }
 
+        }else{
+            dialog(context, "亲,您还未登录，是否立即登录", "取消", "确定", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    disappear();
+                }
+            }, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(BPInputActivity.this, LoginActivity.class);
+                    intent.putExtra(LoginActivity.FROM_BPINPUTACTIVITY, true);
+                    startActivity(intent);
+                    disappear();
+                }
+            });
         }
 
     }
@@ -255,12 +271,10 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             ecg = up;
         }
         /*判断时间端的类型*/
-        if (_type == 3) {
+        if (_type == 4) {
             type = "1";
-        } else if (_type == -1) {
-            type = "4";
-        } else {
-            type = (_type + 4) + "";
+        }else {
+            type = _type + "";
         }
         /*如果为血压时，添加第二个刻度尺以及判断时间是否为空*/
         if (fromWhere == Constant.FROM_XUEYA) {
@@ -359,53 +373,73 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 initFirstView(40, 120, 10, "80");
                 break;
         }
-        tv_right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (fromWhere) {
-                    case Constant.FROM_XUEYA:
-                        Intent intent_xueya = new Intent(context, HistoryActivity.class);
-                        intent_xueya.putExtra("fromWhere", Constant.FROM_XUEYA);
-                        startActivity(intent_xueya);
-                        break;
-                    case Constant.FROM_SHENGAO:
-                        Intent intent_shengao = new Intent(context, HistoryActivity.class);
-                        intent_shengao.putExtra("fromWhere", Constant.FROM_SHENGAO);
-                        startActivity(intent_shengao);
-                        break;
-                    case Constant.FROM_XUETANG:
-                        Intent intent_xuetang = new Intent(context, HistoryActivity.class);
-                        intent_xuetang.putExtra("fromWhere", Constant.FROM_XUETANG);
-                        startActivity(intent_xuetang);
-                        break;
-                    case Constant.FROM_XUEYANG:
-                        Intent intent_xueyang = new Intent(context, HistoryActivity.class);
-                        intent_xueyang.putExtra("fromWhere", Constant.FROM_XUEYANG);
-                        startActivity(intent_xueyang);
-                        break;
-                    case Constant.FROM_YAOWEI:
-                        Intent intent_yaowei = new Intent(context, HistoryActivity.class);
-                        intent_yaowei.putExtra("fromWhere", Constant.FROM_YAOWEI);
-                        startActivity(intent_yaowei);
-                        break;
-                    case Constant.FROM_TIZHONG:
-                        Intent intent_tizhong = new Intent(context, HistoryActivity.class);
-                        intent_tizhong.putExtra("fromWhere", Constant.FROM_TIZHONG);
-                        startActivity(intent_tizhong);
-                        break;
-                    case Constant.FROM_TIWEN:
-                        Intent intent_tiwen = new Intent(context, HistoryActivity.class);
-                        intent_tiwen.putExtra("fromWhere", Constant.FROM_TIWEN);
-                        startActivity(intent_tiwen);
-                        break;
-                    case Constant.FROM_XINDIAN:
-                        Intent intent_xindian = new Intent(context, HistoryActivity.class);
-                        intent_xindian.putExtra("fromWhere", Constant.FROM_XINDIAN);
-                        startActivity(intent_xindian);
-                        break;
+
+            tv_right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(BaseDate.getSessionId(BPInputActivity.this)!=null){
+                    switch (fromWhere) {
+                        case Constant.FROM_XUEYA:
+                            Intent intent_xueya = new Intent(context, HistoryActivity.class);
+                            intent_xueya.putExtra("fromWhere", Constant.FROM_XUEYA);
+                            startActivity(intent_xueya);
+                            break;
+                        case Constant.FROM_SHENGAO:
+                            Intent intent_shengao = new Intent(context, HistoryActivity.class);
+                            intent_shengao.putExtra("fromWhere", Constant.FROM_SHENGAO);
+                            startActivity(intent_shengao);
+                            break;
+                        case Constant.FROM_XUETANG:
+                            Intent intent_xuetang = new Intent(context, HistoryActivity.class);
+                            intent_xuetang.putExtra("fromWhere", Constant.FROM_XUETANG);
+                            startActivity(intent_xuetang);
+                            break;
+                        case Constant.FROM_XUEYANG:
+                            Intent intent_xueyang = new Intent(context, HistoryActivity.class);
+                            intent_xueyang.putExtra("fromWhere", Constant.FROM_XUEYANG);
+                            startActivity(intent_xueyang);
+                            break;
+                        case Constant.FROM_YAOWEI:
+                            Intent intent_yaowei = new Intent(context, HistoryActivity.class);
+                            intent_yaowei.putExtra("fromWhere", Constant.FROM_YAOWEI);
+                            startActivity(intent_yaowei);
+                            break;
+                        case Constant.FROM_TIZHONG:
+                            Intent intent_tizhong = new Intent(context, HistoryActivity.class);
+                            intent_tizhong.putExtra("fromWhere", Constant.FROM_TIZHONG);
+                            startActivity(intent_tizhong);
+                            break;
+                        case Constant.FROM_TIWEN:
+                            Intent intent_tiwen = new Intent(context, HistoryActivity.class);
+                            intent_tiwen.putExtra("fromWhere", Constant.FROM_TIWEN);
+                            startActivity(intent_tiwen);
+                            break;
+                        case Constant.FROM_XINDIAN:
+                            Intent intent_xindian = new Intent(context, HistoryActivity.class);
+                            intent_xindian.putExtra("fromWhere", Constant.FROM_XINDIAN);
+                            startActivity(intent_xindian);
+                            break;
+                    }
+                    }else{
+                        dialog(context, "亲,您还未登录，是否立即登录", "取消", "确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                disappear();
+                            }
+                        }, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(BPInputActivity.this, LoginActivity.class);
+                                intent.putExtra(LoginActivity.FROM_BPINPU_HISTORY, true);
+                                startActivity(intent);
+                                disappear();
+                            }
+                        });
+                    }
                 }
-            }
-        });
+            });
+
+
     }
 
     private void initEvent() {
@@ -492,7 +526,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
                 break;
             case Constant.FROM_XUETANG:
-                if(_type==3){
+                if(_type==4||_type==6||_type==8){
                     changeColorFunction(a, 4.4f, 7.0f);
                 }else{
                     changeColorFunction(a, 4.4f, 10.0f);
@@ -704,13 +738,19 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         View popupWindow_view = getLayoutInflater().inflate(R.layout.popwindow_wheelview, null, false);
         popupWindow = new PopupWindow(popupWindow_view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setAnimationStyle(R.style.Animation_AppCompat_DropDownUp);
+        TextView tv_company = (TextView) popupWindow_view.findViewById(R.id.tv_company);
         if (CHOICE_DATE == which) {
+            tv_company.setVisibility(View.VISIBLE);
+            tv_company.setText("单位（年-月-日）");
             initWheelViewDate(popupWindow_view);
             popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         } else if (CHOICE_TIME == which) {
+            tv_company.setVisibility(View.VISIBLE);
+            tv_company.setText("单位（点）");
             initWheelViewTime(popupWindow_view);
             popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         } else if (CHOICE_WHAT == which) {
+            tv_company.setVisibility(View.GONE);
             initWheelViewWhat(popupWindow_view);
             popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         } else {
@@ -734,7 +774,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             public void endSelect(int id, String text) {
                 str_mwhat = text;
                 Log.i("zxw", "id-----------" + id);
-                _type = 3 + id;
+                _type = 4 + id;
             }
 
             @Override
@@ -874,65 +914,21 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 for (int i = 0; i < 10; i++) {
                     list.add((year + i) + "");
                 }
-//                for (int i = 0; i < 10; i++) {
-//                    date = DateUtil.getDaysAfter(i);
-//                    String str_year = DateUtil.longToDateString(date, "yyyy");
-//                    int year = Integer.parseInt(str_year) + i;
-//                    list.add(year + "");
-//                }
                 break;
             case 2:
                 for (int i = 1; i < 13; i++) {
-//                    date = DateUtil.getDaysAfter(i);
-//                    String str_mouth = DateUtil.longToDateString(date, "MM");
-//                    int mouth = Integer.parseInt(str_mouth) + i;
-//                    if (mouth > 12) {
-//                        mouth -= 12;
-//                    }
-                    list.add(i + "");
+                    list.add(String.format("%02d", i));
                 }
-//                for (int i = 0; i < 12; i++) {
-//                    date = DateUtil.getDaysAfter(i);
-//                    String str_mouth = DateUtil.longToDateString(date, "MM");
-//                    int mouth = Integer.parseInt(str_mouth) + i;
-//                    if (mouth > 12) {
-//                        mouth -= 12;
-//                    }
-//                    list.add(mouth + "");
-//                }
                 break;
             case 3:
                 for (int i = 1; i < 32; i++) {
-//                    date = DateUtil.getDaysAfter(i);
-//                    String str_day = DateUtil.longToDateString(date, "dd");
                     list.add(i + "");
                 }
-//                for (int i = 0; i < 30; i++) {
-//                    date = DateUtil.getDaysAfter(i);
-//                    String str_day = DateUtil.longToDateString(date, "dd");
-//                    list.add(str_day + "");
-//                }
                 break;
             case 4:
-                for (int i = 0; i < 23; i++) {
-//                    date = DateUtil.getDaysAfter(i);
-//                    String str_mouth = DateUtil.longToDateString(date, "HH");
-//                    int hour = Integer.parseInt(str_mouth) + i;
-//                    if (hour > 24) {
-//                        hour -= 24;
-//                    }
+                for (int i = 0; i < 24; i++) {
                     list.add(i + "");
                 }
-
-//                for (int i = 0; i < 24; i++) {
-//                    date = DateUtil.getDaysAfter(i);
-//                    String str_mouth = DateUtil.longToDateString(date, "HH");
-//                    int hour = Integer.parseInt(str_mouth) + i;
-//                    if (hour > 24) {
-//                        hour -= 24;
-//                    }
-//                    list.add(hour + "");
-//                }
                 break;
             case 5:
                 for (int i = 0; i < mWhat.length; i++) {

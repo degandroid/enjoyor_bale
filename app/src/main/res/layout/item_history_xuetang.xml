@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:minHeight="50dp"
     android:background="@color/colorWhite"
-    android:layout_width="match_parent" android:layout_height="50dp">
+    android:layout_width="match_parent" android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
         android:background="@color/color_line"
@@ -10,7 +11,7 @@
     <LinearLayout
         android:id="@+id/ll_history_xuetang"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <TextView
@@ -19,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="04/10"
+            android:text=""
             android:textColor="@color/textcolor_largetittle"
             android:textSize="@dimen/textsize_smalltittle" />
         <TextView
@@ -43,7 +44,7 @@
                         android:id="@+id/tv_eight_two"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:text="10.4"
+                        android:text=""
                         android:gravity="center"
                         android:background="@color/colorBackgroud"
                         android:textColor="@color/textcolor_smallittle"
@@ -57,7 +58,7 @@
                         android:id="@+id/tv_eight_three"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:text="10.4"
+                        android:text=""
                         android:gravity="center"
                         android:textColor="@color/textcolor_smallittle"
                         android:textSize="@dimen/textsize_smalltittle"
@@ -79,7 +80,7 @@
                     android:id="@+id/tv_eight_four"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="10.4"
+                    android:text=""
                     android:background="@color/colorBackgroud"
                     android:gravity="center"
                     android:textColor="@color/textcolor_smallittle"
@@ -93,7 +94,7 @@
                     android:id="@+id/tv_eight_five"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="10.4"
+                    android:text=""
                     android:gravity="center"
                     android:textColor="@color/textcolor_smallittle"
                     android:textSize="@dimen/textsize_smalltittle"
@@ -115,7 +116,7 @@
                     android:id="@+id/tv_eight_six"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="10.4"
+                    android:text=""
                     android:background="@color/colorBackgroud"
                     android:gravity="center"
                     android:textColor="@color/textcolor_smallittle"
@@ -129,7 +130,7 @@
                     android:id="@+id/tv_eight_seven"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="10.4"
+                    android:text=""
                     android:gravity="center"
                     android:textColor="@color/textcolor_smallittle"
                     android:textSize="@dimen/textsize_smalltittle"
@@ -149,7 +150,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="10.4"
+            android:text=""
             android:background="@color/colorBackgroud"
             android:textColor="@color/textcolor_largetittle"
             android:textSize="@dimen/textsize_smalltittle" />

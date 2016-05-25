@@ -1,5 +1,8 @@
 package com.enjoyor.healthhouse.bean;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/5/22.
  */
@@ -8,9 +11,9 @@ public class HistoryInfoList {
 
     Long id;
     Long recordId; //记录编号
-    String recordTime;//记录时间
+    Date recordTime;//记录时间
     String result;//结论，
-    String createTime;//数据创建时间
+    Date createTime;//数据创建时间
     /*血压*/
     Integer systolicPressure;//收缩压，高压，单位(mmHg)
     Integer diastolicPressure;//舒张压，低压，单位(mmHg)
@@ -22,6 +25,8 @@ public class HistoryInfoList {
     Double bmi;//bmi
     Double idealWeight;//理想体重
     /*血糖*/
+
+    List<HealthBsInfoList> beanList;
     String bloodSugar;//血糖
     Integer bloodSugarType;//血糖类型，1:空腹，2：餐后血糖，3：尿酸，4：随机血糖，5早餐后，6午餐前，7午餐后，8晚餐前，9晚餐后，10睡前
     String us;//尿酸
@@ -42,6 +47,13 @@ public class HistoryInfoList {
     Double ecg;// 心率
     Integer ngain;// 增益
     String ecgData;// 心电图数据,因数据量庞大，暂不反回
+    public List<HealthBsInfoList> getBeanList() {
+        return beanList;
+    }
+
+    public void setBeanList(List<HealthBsInfoList> beanList) {
+        this.beanList = beanList;
+    }
 
     public Long getId() {
         return id;
@@ -59,11 +71,11 @@ public class HistoryInfoList {
         this.recordId = recordId;
     }
 
-    public String getRecordTime() {
+    public Date getRecordTime() {
         return recordTime;
     }
 
-    public void setRecordTime(String recordTime) {
+    public void setRecordTime(Date recordTime) {
         this.recordTime = recordTime;
     }
 
@@ -75,11 +87,11 @@ public class HistoryInfoList {
         this.result = result;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

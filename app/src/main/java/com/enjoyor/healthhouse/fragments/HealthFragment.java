@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
-import com.enjoyor.healthhouse.application.MyApplication;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

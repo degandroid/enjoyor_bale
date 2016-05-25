@@ -16,4 +16,5 @@ public class Constant {
     public static final int FROM_TIZHONG = 22;
     public static final int FROM_TIWEN = 23;
     public static final int FROM_XINDIAN = 24;
+
 }

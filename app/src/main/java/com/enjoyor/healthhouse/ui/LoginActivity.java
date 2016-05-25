@@ -19,6 +19,7 @@ import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.AppManagerUtil;
 import com.enjoyor.healthhouse.utils.MatcherUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -56,6 +57,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String password;
 
     private String LOGIN_URL = "account/applogin.action";
+    public static final String FROM_BPINPUTACTIVITY = "FROM_BPINPUTACTIVITY";
+    public static final String FROM_BPINPU_HISTORY = "FROM_BPINPU_HISTORY";
+    private boolean isFromBpInputActivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_login);
         setImmerseLayout(findViewById(R.id.navigation));
         ButterKnife.bind(this);
-
+        if(getIntent().hasExtra(FROM_BPINPUTACTIVITY)){
+            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPUTACTIVITY,false);
+        }
+        if(getIntent().hasExtra(FROM_BPINPU_HISTORY)){
+            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPU_HISTORY,false);
+        }
         navigation_name.setText("登陆");
         navigation_back.setVisibility(View.INVISIBLE);
         initOnClick();
@@ -146,8 +155,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         Log.i("zxw", "用户信息已保存");
                         Log.i("zxw", MyApplication.getInstance().getDBHelper().getUser().getLoginName());
                     }
-                    Intent intent = new Intent(LoginActivity.this, MainTabActivity.class);
-                    startActivity(intent);
+                    if(isFromBpInputActivity){
+                        finish();
+                    }else{
+                        AppManagerUtil.getAppManager().finishAllActivity();
+                        Intent intent = new Intent(LoginActivity.this, MainTabActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
                     dialog(LoginActivity.this, "用户名或者密码错误", "取消", "重新输入", new View.OnClickListener() {
                         @Override

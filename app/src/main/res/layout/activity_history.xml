@@ -153,11 +153,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_history_xueya"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_threetittle_one"
@@ -202,11 +202,11 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_history_xuetang"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
@@ -298,7 +298,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="早餐"
+                        android:text="午餐"
                         android:textColor="@color/textcolor_smallittle"
                         android:textSize="@dimen/textsize_body" />
 
@@ -356,7 +356,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="早餐"
+                        android:text="晚餐"
                         android:textColor="@color/textcolor_smallittle"
                         android:textSize="@dimen/textsize_body" />
 
@@ -434,19 +434,12 @@
                 android:gravity="center"
                 android:text="我们的工程师们已经把表格准备好了，\n还不赶紧记录您的健康！" />
         </LinearLayout>
-        <com.enjoyor.healthhouse.custom.BottomScrollView
-            android:id="@+id/bsv_bottom"
+
+        <com.enjoyor.healthhouse.custom.XListView
+            android:id="@+id/physicall_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/ll_addchild"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite"
-            android:paddingBottom="50dp"
-            android:orientation="vertical">
-        </LinearLayout>
-        </com.enjoyor.healthhouse.custom.BottomScrollView>
+        </com.enjoyor.healthhouse.custom.XListView>
         <LinearLayout
 
             android:id="@+id/ll_addweb"
@@ -454,7 +447,10 @@
             android:layout_height="match_parent"
             android:background="@color/colorWhite"
             android:orientation="vertical">
-
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
