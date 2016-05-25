@@ -96,6 +96,26 @@
             android:name=".ui.HistoryActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.VoiceActivity"></activity>
+        <!--我的消息页面-->
+        <activity
+            android:name=".ui.InfoActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--我的资料页面-->
+        <activity
+            android:name=".ui.DataActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--我的手机页面-->
+        <activity
+            android:name=".ui.MyPhoneActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--个人中心设置页面-->
+        <activity
+            android:name=".ui.SettingActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--个人中心意见反馈页面-->
+        <activity
+            android:name=".ui.SuggestActivity"
+            android:screenOrientation="portrait"></activity>
         <!--注册自定义广播-->
         <receiver android:name=".receive.MyReceiver">
             <intent-filter>

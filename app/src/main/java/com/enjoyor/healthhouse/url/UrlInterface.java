@@ -25,5 +25,7 @@ public class UrlInterface {
     //    public static String UpDateFile_URL =  "http://192.168.66.33/doupload/save.do";
     //随手记提交接口
     public static String Notes_URL = TEXT_URL + "/record/notes.do";
+    //获取健康评估信息的接口
+    public static String AccessHealInfo_URL = TEXT_URL + "/app/evaluate.do";
 
 }

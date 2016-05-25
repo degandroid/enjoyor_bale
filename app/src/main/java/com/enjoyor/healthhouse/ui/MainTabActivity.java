@@ -149,7 +149,7 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
 
             case R.id.main_tab5:
                 selectTab(5);
-                transaction.replace(R.id.ll_content, MineFragment.getInstance(5));
+                transaction.replace(R.id.ll_content,new MineFragment());
                 break;
         }
         transaction.commit();

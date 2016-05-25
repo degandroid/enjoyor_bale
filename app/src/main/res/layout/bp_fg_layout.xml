@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_line"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/bp_fg_befour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/bp_fg_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="36px"
+            android:layout_marginTop="30px"
+            android:src="@mipmap/bp_report" />
+
+        <TextView
+            android:id="@+id/bp_fg_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="36px"
+            android:layout_toRightOf="@id/bp_fg_img"
+            android:text="当前血压值" />
+
+        <TextView
+            android:id="@+id/bp_fg_ecg_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="36px"
+            android:text="查看心电图"
+            android:textColor="@color/colorGreenYellow"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/bp_fg_ecg_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20px"
+            android:layout_toLeftOf="@id/bp_fg_ecg_tv"
+            android:src="@mipmap/go_record"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/bp_fg_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/bp_fg_befour"
+        android:layout_marginLeft="36px"
+        android:layout_marginRight="36px"
+        android:background="@color/color_line"></View>
+
+    <WebView
+        android:id="@+id/bp_fg_web"
+        android:layout_width="match_parent"
+        android:layout_height="300px"
+        android:layout_below="@id/bp_fg_line"></WebView>
+
+    <RelativeLayout
+        android:id="@+id/bp_fg_re"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bp_fg_web"
+        android:layout_marginTop="20px"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/bp_fg_img_sug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="36px"
+            android:layout_marginTop="30px"
+            android:src="@mipmap/assess_report" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="36px"
+            android:layout_toRightOf="@+id/bp_fg_img_sug"
+            android:text="健康建议" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/bp_fg_lin"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/bp_fg_re"
+        android:layout_marginLeft="36px"
+        android:layout_marginRight="36px"
+        android:background="@color/color_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/bp_fg_lin"
+        android:background="@color/colorWhite"
+        android:padding="36px">
+
+        <TextView
+            android:id="@+id/bp_fg_suggest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="你是我的小啊小苹果，怎么爱你都不嫌多，红红的，小脸开门鲜花" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:id="@+id/bp_fg_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorGreenYellow"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/bp_fg_his"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="历史"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="36px"
+                android:layout_toLeftOf="@+id/bp_fg_his"
+                android:src="@mipmap/history" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bp_fg_tend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1px"
+            android:layout_weight="1"
+            android:background="@color/colorGreenYellow"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/bp_fg_trend"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="1px"
+                android:gravity="center"
+                android:text="趋势"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="36px"
+                android:layout_toLeftOf="@+id/bp_fg_trend"
+                android:src="@mipmap/history" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

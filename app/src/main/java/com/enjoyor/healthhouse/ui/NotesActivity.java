@@ -3,7 +3,6 @@ package com.enjoyor.healthhouse.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -76,7 +75,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     private List<String> mResults;
     ArrayList<String> result = new ArrayList<>();
     List<String> _result;
-    List<String> notes;
+    List<String> notes = new ArrayList<>();
 
     int count = 0;
     int id;
@@ -135,13 +134,6 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             if (bdLocation == null) {
                 return;
             }
-//            Log.d("000000000===getAddrStr()====000000", bdLocation.getAddrStr());
-//            Log.d("000000000===getCity()====000000", bdLocation.getCity());
-//            Log.d("000000000==getCityCode()=====000000", bdLocation.getCityCode());
-//            Log.d("000000000====getProvince()===000000", bdLocation.getProvince());
-//            Log.d("000000000===getStreet()====000000", bdLocation.getStreet());
-//            Log.d("000000000====getStreetNumber===000000", bdLocation.getStreetNumber());
-
             notes_address.setText(bdLocation.getStreet() + bdLocation.getStreetNumber());
             lng = bdLocation.getLongitude();
             lat = bdLocation.getLatitude();
@@ -163,37 +155,44 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                 startActivityForResult(intent_voice, 110);
                 break;
             case R.id.notes_commit://点击提交按钮事件事件
-                RequestParams params = new RequestParams();
-                params.add("user", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
-                params.add("content", notes_et.getText().toString().trim());
-                params.add("lng", lng + "");
-                params.add("lat", lat + "");
-                params.add("voice", id + "");
+                if (isLogin(this)) {
+                    RequestParams params = new RequestParams();
+                    params.add("user", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
+                    params.add("content", notes_et.getText().toString().trim());
+                    params.add("lng", lng + "");
+                    params.add("lat", lat + "");
+                    params.add("voice", id + "");
 //                params.add("images",n.get(0));
-                if (notes.size() != 0) {
-                    for (String s : notes) {
-                        params.add("images", s);
-                    }
-                }
-                AsyncHttpUtil.post(UrlInterface.Notes_URL, params, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                        String json = new String(bytes);
-//                        Log.d("wyy----888888----", json);
-                        ApiMessage api = ApiMessage.FromJson(json);
-                        if (api.Data.equals(true + "")) {
-                            Toast.makeText(NotesActivity.this, "文件上传成功", Toast.LENGTH_LONG).show();
-                            finish();
-                        } else {
-                            Toast.makeText(NotesActivity.this, "文件上传失败", Toast.LENGTH_LONG).show();
+                    if (notes.size() != 0) {
+                        for (String s : notes) {
+                            params.add("images", s);
                         }
                     }
+                    AsyncHttpUtil.post(UrlInterface.Notes_URL, params, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            if (bytes != null) {
+                                String json = new String(bytes);
+//                        Log.d("wyy----888888----", json);
+                                ApiMessage api = ApiMessage.FromJson(json);
+                                if (api.Data.equals(true + "")) {
+                                    Toast.makeText(NotesActivity.this, "文件上传成功", Toast.LENGTH_LONG).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(NotesActivity.this, "文件上传失败", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
 
-                    @Override
-                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                            }
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+                        }
+                    });
+                }
+
                 break;
         }
     }
@@ -211,63 +210,67 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         startActivityForResult(intent, PICK_PHOTO);
     }
 
+    /**
+     * 接受回传过来的数据
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
-        }
-        if (requestCode == PICK_PHOTO) {
+            if (requestCode == PICK_PHOTO) {
 //            List<String> _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
-            result.addAll(_result);
-            if (resultCode == RESULT_OK) {
-                File mFile = null;
-                notes = new ArrayList<>();
-                for (String s : result) {
-                    mFile = new File(s);
-                    RequestParams param = new RequestParams();
-                    try {
-                        param.put("file", mFile);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    param.add("type", 0 + "");
-                    param.add("origin", "ANDROIDAPP");
-                    AsyncHttpUtil.post(UrlInterface.UpDateFile_URL, param, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                            String json = new String(bytes);
+                result.addAll(_result);
+                if (resultCode == RESULT_OK) {
+                    File mFile = null;
+//                    notes = new ArrayList<>();
+                    for (String s : result) {
+                        mFile = new File(s);
+                        RequestParams param = new RequestParams();
+                        try {
+                            param.put("file", mFile);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        param.add("type", 0 + "");
+                        param.add("origin", "ANDROIDAPP");
+                        AsyncHttpUtil.post(UrlInterface.UpDateFile_URL, param, new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                                String json = new String(bytes);
 //                            Log.d("wyy==============", json);
-                            ApiMessage apimessage = ApiMessage.FromJson(json);
-                            if (apimessage.Code == 1001) {
-                                List<PhotoId> photoid = JsonHelper.getArrayJson(apimessage.Data, PhotoId.class);
-                                notes.add(photoid.get(0).getId() + "");
+                                ApiMessage apimessage = ApiMessage.FromJson(json);
+                                if (apimessage.Code == 1001) {
+                                    List<PhotoId> photoid = JsonHelper.getArrayJson(apimessage.Data, PhotoId.class);
+                                    notes.add(photoid.get(0).getId() + "");
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
-                        }
-                    });
+                            @Override
+                            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                            }
+                        });
 //                    Log.d("wyy-----------", s);
-                }
+                    }
 
 //                showResult(result);
-            }
-        } else if (requestCode == 110) {
-
-            if (count == 0) {
-                if (data != null) {
-                    id = data.getIntExtra("id", 1);
-                    result.add("/storage/sdcard0/5683100481.jpg");
-                    ++count;
                 }
-            } else {
+            } else if (requestCode == 110) {
+                if (count == 0) {
+                    if (data != null) {
+                        id = data.getIntExtra("id", 1);
+                        result.add("/storage/sdcard0/5683100481.jpg");
+                        ++count;
+                    }
+                } else {
+                }
             }
+            showResult(result);
         }
-        showResult(result);
-
     }
 
     private void showResult(ArrayList<String> result) {

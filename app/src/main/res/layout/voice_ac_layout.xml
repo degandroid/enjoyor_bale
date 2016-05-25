@@ -44,12 +44,12 @@
 
 
 
-            <ImageView
-                android:layout_centerInParent="true"
-                android:id="@+id/voice_luyin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/luyin_bg" />
+        <ImageView
+            android:layout_centerInParent="true"
+            android:id="@+id/voice_luyin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/luyin_bg" />
 
 
 

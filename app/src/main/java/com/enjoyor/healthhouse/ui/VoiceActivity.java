@@ -72,7 +72,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
     private static boolean playState = false;  //播放状态
     private int count = 0;
     private Handler handler;
-     Timer timer;
+    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -338,7 +338,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
 
     private void sendMsg() {
         //倒记时
-         timer = new Timer();
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {

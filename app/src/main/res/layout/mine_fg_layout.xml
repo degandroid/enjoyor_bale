@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_line"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400px"
+        android:background="@mipmap/bl_banner2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px"
+            android:text="个人中心"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_largetittle" />
+
+        <ImageView
+            android:id="@+id/mine_fg_logo"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mine_fg_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px">
+
+            <TextView
+                android:id="@+id/mine_fg_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="26px"
+                android:paddingRight="26px"
+                android:text="登录"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_largetittle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_largetittle" />
+
+            <TextView
+                android:id="@+id/mine_fg_regist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="26px"
+                android:paddingRight="26px"
+                android:text="注册"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_largetittle" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_xx_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20px"
+                        android:paddingLeft="36px"
+                        android:paddingRight="36px"
+                        android:paddingTop="20px"
+                        android:src="@mipmap/xiaoxi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mine_fg_xx_img"
+                        android:text="我的消息" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="36px"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="36px"
+                    android:background="@color/color_line"></View>
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_book"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_zl_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20px"
+                        android:paddingLeft="36px"
+                        android:paddingRight="36px"
+                        android:paddingTop="20px"
+                        android:src="@mipmap/ziliao" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mine_fg_zl_img"
+                        android:text="我的资料" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="36px"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="36px"
+                    android:background="@color/color_line"></View>
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_sj_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20px"
+                        android:paddingLeft="36px"
+                        android:paddingRight="36px"
+                        android:paddingTop="20px"
+                        android:src="@mipmap/shouji" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mine_fg_sj_img"
+                        android:text="我的手机" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="36px"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="36px"
+                    android:background="@color/color_line"></View>
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_mm_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20px"
+                        android:paddingLeft="36px"
+                        android:paddingRight="36px"
+                        android:paddingTop="20px"
+                        android:src="@mipmap/suo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mine_fg_mm_img"
+                        android:text="修改密码" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="36px"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_sz_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20px"
+                        android:paddingLeft="36px"
+                        android:paddingRight="36px"
+                        android:paddingTop="20px"
+                        android:src="@mipmap/shezhi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mine_fg_sz_img"
+                        android:text="设置" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="36px"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_introduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_tj_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20px"
+                        android:paddingLeft="36px"
+                        android:paddingRight="36px"
+                        android:paddingTop="20px"
+                        android:src="@mipmap/tuijian" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mine_fg_tj_img"
+                        android:text="推荐给好友" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="36px"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="36px"
+                    android:background="@color/color_line"></View>
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_suggest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_yj_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20px"
+                        android:paddingLeft="36px"
+                        android:paddingRight="36px"
+                        android:paddingTop="20px"
+                        android:src="@mipmap/yijian" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mine_fg_yj_img"
+                        android:text="意见反馈" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="36px"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>
