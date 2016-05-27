@@ -20,14 +20,13 @@ import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.adapter.CameraAdapter;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.PhotoId;
+import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.custom.PhotoPickerActivity;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.enjoyor.healthhouse.utils.OtherUtils;
-import com.enjoyor.healthhouse.utils.StringUtils;
-import com.enjoyor.healthhouse.utils.ToastUtil;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -37,7 +36,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -110,6 +108,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         navigation_name.setText("随手记");
         img_right.setImageResource(R.mipmap.dangan);
         img_right.setVisibility(View.VISIBLE);
+        img_right.setOnClickListener(this);
         int screenWidth = OtherUtils.getWidthInPx(getApplicationContext());
         mColumnWidth = (screenWidth - OtherUtils.dip2px(getApplicationContext(), 3)) / 5;
         mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;// 设置定位模式为普通
@@ -144,6 +143,16 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         int key = v.getId();
         switch (key) {
+            case R.id.img_right:
+                if (BaseDate.getSessionId(this) != null) {
+                    Intent intent = new Intent(NotesActivity.this,HealthFileActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(NotesActivity.this, LoginActivity.class);
+                    intent.putExtra(LoginActivity.FROM_SUISHOUJI, true);
+                    startActivity(intent);
+                }
+                break;
             case R.id.re_back://导航栏返回事件
                 finish();
                 break;

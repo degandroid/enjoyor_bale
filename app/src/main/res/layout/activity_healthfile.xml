@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/layout_distance"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/layout_distance"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:layout_height="50dp">
+        <LinearLayout
+            android:id="@+id/ll_back"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/back_normal"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="健康档案"
+            android:textSize="@dimen/textsize_largetittle"
+            android:textColor="@color/textcolor_largetittle"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_select"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            android:text="筛选"
+            android:drawableRight="@mipmap/bl_icon_shaixuan"
+            android:drawablePadding="5dp"
+            android:gravity="right|center_vertical"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/color_line"
+        android:layout_height="1px" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="40dp"
+        android:background="@mipmap/bl_banner1"
+        android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:hint="搜索"
+            android:background="@mipmap/bl_bg_sousuokuang"
+            android:gravity="center"
+            android:layout_margin="@dimen/layout_distance"
+            android:drawableLeft="@mipmap/bl_icon_sousuo"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_gravity="bottom|left"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/layout_distance"
+            android:layout_height="80dp">
+        <ImageView
+            android:id="@+id/iv_userhead"
+            android:layout_width="80dp"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/touxiang"
+            android:layout_height="80dp" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_toRightOf="@id/iv_userhead"
+                android:layout_width="wrap_content"
+                android:text="喜洋洋"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp"
+                android:paddingLeft="@dimen/layout_distance"
+                android:gravity="center_vertical"
+                android:layout_height="40dp" />
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <com.enjoyor.healthhouse.custom.XListView
+        android:id="@+id/xlv_healthfile"
+        android:layout_width="match_parent"
+        android:dividerHeight="0dp"
+        android:divider="@null"
+        android:layout_height="match_parent">
+
+    </com.enjoyor.healthhouse.custom.XListView>
+</LinearLayout>

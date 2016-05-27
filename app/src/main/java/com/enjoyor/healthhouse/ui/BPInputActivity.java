@@ -499,8 +499,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                     bpinput_up.setSelectedValue(from + "");
 
                 }
-                Log.i("ddd",a+"\n"+to+"\n"+from);
-                Log.i("zxw", a + "");
+
                 changeColor(a);
 
             }
@@ -531,7 +530,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 }else{
                     changeColorFunction(a, 4.4f, 10.0f);
                 }
-                Log.i("bbb",_type+"");
+
                 break;
             case Constant.FROM_XUEYANG:
                 changeColorFunction(a, 95, 100);
@@ -651,7 +650,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             if(isFloatRight(value_float,which)){
                 id.setText(value + "");
                 view.setSelectedValue(value + "");
-                Log.i("zxw", "value========" + value);
+
                 view.invalidate();
             }
             else{
@@ -773,7 +772,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void endSelect(int id, String text) {
                 str_mwhat = text;
-                Log.i("zxw", "id-----------" + id);
+
                 _type = 4 + id;
             }
 
@@ -922,7 +921,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 break;
             case 3:
                 for (int i = 1; i < 32; i++) {
-                    list.add(i + "");
+                    list.add(String.format("%02d", i));
                 }
                 break;
             case 4:
@@ -932,7 +931,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 break;
             case 5:
                 for (int i = 0; i < mWhat.length; i++) {
-                    Log.i("zxw", mWhat[i]);
+
                     list.add(mWhat[i]);
                 }
                 break;

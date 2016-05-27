@@ -1,6 +1,5 @@
 package com.enjoyor.healthhouse.bean;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,12 +7,47 @@ import java.util.List;
  */
 public class HistoryInfoList {
 
+    @Override
+    public String toString() {
+        return "HistoryInfoList{" +
+                "id=" + id +
+                ", recordId='" + recordId + '\'' +
+                ", recordTime='" + recordTime + '\'' +
+                ", result='" + result + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", systolicPressure=" + systolicPressure +
+                ", diastolicPressure=" + diastolicPressure +
+                ", pulse=" + pulse +
+                ", checkTime='" + checkTime + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", bmi=" + bmi +
+                ", idealWeight=" + idealWeight +
+                ", beanList=" + beanList +
+                ", bloodSugar='" + bloodSugar + '\'' +
+                ", bloodSugarType=" + bloodSugarType +
+                ", us='" + us + '\'' +
+                ", chol='" + chol + '\'' +
+                ", bo=" + bo +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", refOfBO='" + refOfBO + '\'' +
+                ", refOfPulse='" + refOfPulse + '\'' +
+                ", waistLine='" + waistLine + '\'' +
+                ", hipLine='" + hipLine + '\'' +
+                ", wHR='" + wHR + '\'' +
+                ", temperature='" + temperature + '\'' +
+                ", ecg=" + ecg +
+                ", ngain=" + ngain +
+                ", ecgData='" + ecgData + '\'' +
+                '}';
+    }
 
     Long id;
-    Long recordId; //记录编号
-    Date recordTime;//记录时间
+    String recordId; //记录编号
+    String recordTime;//记录时间
     String result;//结论，
-    Date createTime;//数据创建时间
+    String createTime;//数据创建时间
     /*血压*/
     Integer systolicPressure;//收缩压，高压，单位(mmHg)
     Integer diastolicPressure;//舒张压，低压，单位(mmHg)
@@ -63,19 +97,19 @@ public class HistoryInfoList {
         this.id = id;
     }
 
-    public Long getRecordId() {
+    public String getRecordId() {
         return recordId;
     }
 
-    public void setRecordId(Long recordId) {
+    public void setRecordId(String recordId) {
         this.recordId = recordId;
     }
 
-    public Date getRecordTime() {
+    public String getRecordTime() {
         return recordTime;
     }
 
-    public void setRecordTime(Date recordTime) {
+    public void setRecordTime(String recordTime) {
         this.recordTime = recordTime;
     }
 
@@ -87,11 +121,11 @@ public class HistoryInfoList {
         this.result = result;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 

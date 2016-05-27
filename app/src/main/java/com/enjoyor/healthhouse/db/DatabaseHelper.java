@@ -3,7 +3,6 @@ package com.enjoyor.healthhouse.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.util.Log;
 
 import com.enjoyor.healthhouse.bean.UserInfo;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -48,7 +47,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 						  int arg3) {
 		// TODO Auto-generated method stub
 		try {
-			Log.i("zxw", "---->onUpgrade>>");
+
 			TableUtils.dropTable(cs, UserInfo.class, true);
 			onCreate(sd, cs);
 

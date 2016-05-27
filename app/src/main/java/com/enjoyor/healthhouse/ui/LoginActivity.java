@@ -59,6 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String LOGIN_URL = "account/applogin.action";
     public static final String FROM_BPINPUTACTIVITY = "FROM_BPINPUTACTIVITY";
     public static final String FROM_BPINPU_HISTORY = "FROM_BPINPU_HISTORY";
+    public static final String FROM_SUISHOUJI = "FROM_SUISHOUJI";
     private boolean isFromBpInputActivity = false;
 
     @Override
@@ -72,6 +73,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
         if(getIntent().hasExtra(FROM_BPINPU_HISTORY)){
             isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPU_HISTORY,false);
+        }
+        if(getIntent().hasExtra(FROM_SUISHOUJI)){
+            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_SUISHOUJI,false);
         }
         navigation_name.setText("登陆");
         navigation_back.setVisibility(View.INVISIBLE);
@@ -119,7 +123,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private boolean isCorrect() {
         phoneNumber = et_phonenumber.getText().toString().trim();
         password = et_password.getText().toString().trim();
-        Log.i("zxw", phoneNumber + "\n" + password);
+
         if (StringUtils.isBlank(phoneNumber)) {
             Toast.makeText(LoginActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
             et_phonenumber.requestFocus();
@@ -138,7 +142,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     private void initData() {
-        Log.i("zxw", phoneNumber + "\n" + password);
+
         RequestParams params = new RequestParams();
         params.add("origin", String.valueOf("AndroidApp"));
         params.add("userLoginName", phoneNumber);
@@ -153,7 +157,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     UserInfo user = JsonHelper.getJson(apiMessage.Data, UserInfo.class);
                     if (saveUser(user)) {
                         Log.i("zxw", "用户信息已保存");
-                        Log.i("zxw", MyApplication.getInstance().getDBHelper().getUser().getLoginName());
+
                     }
                     if(isFromBpInputActivity){
                         finish();
@@ -192,7 +196,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //            UserInfo user2 = new UserInfo();
             user.setId(1);
 //            user2.setLoginName("ABCD");
-            Log.i("zxw", "user.getLoginName()==" + user.getLoginName());
+
             user.setUserLoginPwd(password);
             BaseDate.setSessionId(LoginActivity.this,user.getAccountId());
             return MyApplication.getInstance().getDBHelper().saveUser(user);

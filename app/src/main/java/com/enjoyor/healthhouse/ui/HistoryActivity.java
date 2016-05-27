@@ -39,6 +39,8 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +126,8 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
     private Page page;
     private int count = 1;
     private String url;
-
+    String date;
+    String date2;
     @TargetApi(23)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,25 +156,25 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                 url = "http://115.28.37.145/Content/statichtml/bloodpressure.html";
                 break;
             case Constant.FROM_SHENGAO:
-                url = "http://115.28.37.145/Content/statichtml/blood.html";
+                url = "http://115.28.37.145/Content/statichtml/t-vChart.html";
                 break;
             case Constant.FROM_XUETANG:
-                url = "http://115.28.37.145/Content/statichtml/blood.html";
+                url = "http://115.28.37.145/Content/statichtml/bloodSugar.html";
                 break;
             case Constant.FROM_XUEYANG:
-                url = "http://115.28.37.145/Content/statichtml/oxygen.html";
+                url = "http://115.28.37.145/Content/statichtml/t-vChart.html";
                 break;
             case Constant.FROM_YAOWEI:
-                url = "http://115.28.37.145/Content/statichtml/blood.html";
+                url = "http://115.28.37.145/Content/statichtml/t-vChart.html";
                 break;
             case Constant.FROM_TIZHONG:
-                url = "http://115.28.37.145/Content/statichtml/blood.html";
+                url = "http://115.28.37.145/Content/statichtml/t-vChart.html";
                 break;
             case Constant.FROM_TIWEN:
-                url = "http://115.28.37.145/Content/statichtml/blood.html";
+                url = "http://115.28.37.145/Content/statichtml/t-vChart.html";
                 break;
             case Constant.FROM_XINDIAN:
-                url = "http://115.28.37.145/Content/statichtml/ecg.html";
+                url = "http://115.28.37.145/Content/statichtml/t-vChart.html";
                 break;
         }
         webView.loadUrl(url);
@@ -286,7 +289,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         params_xueya.add("userId", userId);
         params_xueya.add("pageMethod", "2");
         params_xueya.add("pageNum", _count + "");
-        params_xueya.add("pageCount", "7");
+        params_xueya.add("pageCount", (6*_count)+"");
         switch (fromWhere) {
             case Constant.FROM_XUEYA:
                 selectHealthInfo(BP_URL, params_xueya);
@@ -357,11 +360,11 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
             bt_curve.setBackgroundResource(R.drawable.white_null);
             physicall_lv.setVisibility(View.VISIBLE);
             ll_addweb.setVisibility(View.GONE);
-            if(fromWhere == Constant.FROM_XUEYA){
+            if (fromWhere == Constant.FROM_XUEYA) {
                 ll_history_xueya.setVisibility(View.VISIBLE);
-            }else if(fromWhere == Constant.FROM_XUETANG){
+            } else if (fromWhere == Constant.FROM_XUETANG) {
                 ll_history_xuetang.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 ll_history_shengao.setVisibility(View.VISIBLE);
             }
         } else {
@@ -381,12 +384,14 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         AsyncHttpUtil.get(UrlInterface.TEXT_URL + url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
-//                stops();
+                stops();
                 String json = new String(bytes);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     HistoryInfoModel historyInfoModel = JsonHelper.getJson(apiMessage.Data, HistoryInfoModel.class);
+                    historyInfoLists.clear();
                     switch (fromWhere) {
+
                         case Constant.FROM_XUEYA:
                             List<HistoryInfoList> _list_xueya = historyInfoModel.getBplist();
                             _json_xueya = JSON.toJSONString(_list_xueya);
@@ -396,36 +401,44 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                         case Constant.FROM_SHENGAO:
                             List<HistoryInfoList> _list_shengao = historyInfoModel.getBmilist();
                             _json_shengao = JSON.toJSONString(_list_shengao);
+                            Log.i("_json_shengao",_json_shengao);
                             historyInfoLists.addAll(_list_shengao);
+                            Log.i("_json_shengao", historyInfoLists.toString());
                             break;
                         case Constant.FROM_XUETANG:
                             List<HistoryInfoList> _list_xuetang = historyInfoModel.getBslist();
                             _json_xuetang = JSON.toJSONString(_list_xuetang);
+                            Log.i("_json_shengao",_json_xuetang);
                             historyInfoLists.addAll(_list_xuetang);
                             break;
                         case Constant.FROM_XUEYANG:
                             List<HistoryInfoList> _list_xueyang = historyInfoModel.getBolist();
                             _json_xueyang = JSON.toJSONString(_list_xueyang);
+                            Log.i("_json_shengao",_json_xueyang);
                             historyInfoLists.addAll(_list_xueyang);
                             break;
                         case Constant.FROM_YAOWEI:
                             List<HistoryInfoList> _list_yaowei = historyInfoModel.getWhrlist();
                             _json_yaowei = JSON.toJSONString(_list_yaowei);
+                            Log.i("_json_shengao",_json_yaowei);
                             historyInfoLists.addAll(_list_yaowei);
                             break;
                         case Constant.FROM_TIZHONG:
                             List<HistoryInfoList> _list_tizhong = historyInfoModel.getBmilist();
                             _json_tizhong = JSON.toJSONString(_list_tizhong);
+                            Log.i("_json_shengao",_json_tizhong);
                             historyInfoLists.addAll(_list_tizhong);
                             break;
                         case Constant.FROM_TIWEN:
                             List<HistoryInfoList> _list_tiwen = historyInfoModel.getTemperlist();
                             _json_tiwen = JSON.toJSONString(_list_tiwen);
+                            Log.i("_json_shengao",_json_tiwen);
                             historyInfoLists.addAll(_list_tiwen);
                             break;
                         case Constant.FROM_XINDIAN:
                             List<HistoryInfoList> _list_xindian = historyInfoModel.getEcglist();
                             _json_xindian = JSON.toJSONString(_list_xindian);
+                            Log.i("_json_shengao",_json_xindian);
                             historyInfoLists.addAll(_list_xindian);
                             break;
                     }
@@ -452,14 +465,19 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         physicall_lv.setXListViewListener(this);
         PhysicallAdapter adapter = new PhysicallAdapter();
         physicall_lv.setAdapter(adapter);
-        physicall_lv.setSelection((count - 1) * 6);
+        stops();
+        physicall_lv.setSelection((count-1) * 6);
     }
 
     @Override
     public void onRefresh() {
 
     }
-
+    public void stops() {
+        if (physicall_lv != null) {
+            physicall_lv.stopLoadMore();
+        }
+    }
     @Override
     public void onLoadMore() {
         getDate(++count);
@@ -536,10 +554,15 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
             }
 
             if (historyInfoLists.get(position).getRecordTime() != null) {
-                String date = DateUtil.dateToString(historyInfoLists.get(position).getRecordTime(), "MM/dd");
-                String date2 = DateUtil.dateToString(historyInfoLists.get(position).getRecordTime(), "yyyy/MM/dd");
-//                String date = historyInfoLists.get(position).getRecordTime();
-//                String date2 = historyInfoLists.get(position).getRecordTime();
+                String str = historyInfoLists.get(position).getRecordTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    java.util.Date dt = sdf.parse(str);
+                    date = DateUtil.dateToString(dt,"MM/dd");
+                    date2 = DateUtil.dateToString(dt,"yyyy/MM/dd");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 switch (fromWhere) {
                     case Constant.FROM_XUEYA:
                         holderThree.tv_three_one.setText(date2 + "");
@@ -565,7 +588,6 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                         break;
                     case Constant.FROM_XUETANG:
                         List<HealthBsInfoList> healthBsInfoListlist = historyInfoLists.get(position).getBeanList();
-
                         holderEight.tv_eight_one.setText(date + "");
                         for (HealthBsInfoList hb : healthBsInfoListlist) {
                             switch (hb.getBloodSugarType()) {
@@ -713,25 +735,25 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                 webView.loadUrl("javascript:show_szy('" + _json_xueya + "')");
                 break;
             case Constant.FROM_SHENGAO:
-                webView.loadUrl("javascript:show('" + _json_shengao + "')");
+                webView.loadUrl("javascript:show_height('" + _json_shengao + "')");
                 break;
             case Constant.FROM_XUETANG:
-                webView.loadUrl("javascript:show('" + _json_xuetang + "')");
+                webView.loadUrl("javascript:show_sugar('" + _json_xuetang + "')");
                 break;
             case Constant.FROM_XUEYANG:
-                webView.loadUrl("javascript:show('" + _json_xueyang + "')");
+                webView.loadUrl("javascript:show_oxygen('" + _json_xueyang + "')");
                 break;
             case Constant.FROM_YAOWEI:
-                webView.loadUrl("javascript:show('" + _json_yaowei + "')");
+                webView.loadUrl("javascript:show_waistline('" + _json_yaowei + "')");
                 break;
             case Constant.FROM_TIZHONG:
-                webView.loadUrl("javascript:show('" + _json_tizhong + "')");
+                webView.loadUrl("javascript:show_weight('" + _json_tizhong + "')");
                 break;
             case Constant.FROM_TIWEN:
-                webView.loadUrl("javascript:show('" + _json_tiwen + "')");
+                webView.loadUrl("javascript:show_temperature('" + _json_tiwen + "')");
                 break;
             case Constant.FROM_XINDIAN:
-                webView.loadUrl("javascript:show('" + _json_xindian + "')");
+                webView.loadUrl("javascript:show_ecg('" + _json_xindian + "')");
                 break;
         }
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@mipmap/bl_bg_shaixuankuang"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tv_zice"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:drawablePadding="5dp"
+            android:layout_height="wrap_content"
+            android:text="自测"
+            android:drawableLeft="@mipmap/bl_icon_zijian"
+            android:padding="15dp"
+            />
+       <TextView
+           android:layout_width="match_parent"
+           android:background="@color/color_line"
+           android:layout_height="1px" />
+        <TextView
+            android:id="@+id/tv_tijian"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="体检"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@mipmap/bl_icon_gray_dingwei"
+            android:padding="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:background="@color/color_line"
+            android:layout_height="1px" />
+        <TextView
+            android:id="@+id/tv_suishouji"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="随手记"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@mipmap/bl_icon_xiangji"
+            android:padding="15dp"
+            />
+
+    </LinearLayout>
+</LinearLayout>
