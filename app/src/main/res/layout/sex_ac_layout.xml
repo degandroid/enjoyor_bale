@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_line"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/sex_rl_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/sex_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:padding="36px"
+                android:text="男" />
+
+            <ImageView
+                android:id="@+id/sex_male_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="36px"
+                android:src="@mipmap/gou" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/sex_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/sex_rl_mail"
+            android:layout_marginLeft="36px"
+            android:background="@color/color_line">
+
+        </View>
+
+        <RelativeLayout
+            android:id="@+id/sex_female_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sex_line">
+
+            <RadioButton
+                android:id="@+id/sex_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:padding="36px"
+                android:text="女" />
+
+            <ImageView
+                android:id="@+id/sex_female_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="36px"
+                android:src="@mipmap/gou" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -161,7 +161,7 @@
             android:id="@+id/health_full_cord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22px"
+            android:layout_marginTop="11dp"
             android:background="@color/colorWhite"
             android:gravity="center_vertical">
 
@@ -169,16 +169,16 @@
                 android:id="@+id/health_full_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="28px"
-                android:layout_marginLeft="36px"
-                android:layout_marginTop="28px"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="14dp"
                 android:src="@mipmap/abnormal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
+                android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/health_full_img"
                 android:text="异常项目" />
 
@@ -186,8 +186,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_below="@+id/health_full_img"
-                android:layout_marginLeft="36px"
-                android:layout_marginRight="36px"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:background="@color/color_line">
 
             </View>
@@ -205,7 +205,7 @@
                 android:id="@+id/health_full_record"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="36px"
+                android:padding="18dp"
                 android:text="当前体检正常" />
 
             <HorizontalScrollView
@@ -218,27 +218,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="36px"
+                    android:padding="18dp"
                     android:visibility="gone">
 
                     <TextView
                         android:id="@+id/health_full_ununsual_bp"
                         android:layout_width="wrap_content"
-                        android:layout_height="52px"
+                        android:layout_height="26dp"
                         android:background="@drawable/healthrecord_bg"
                         android:drawableLeft="@mipmap/bp_ab"
                         android:gravity="center"
-                        android:paddingLeft="5px"
-                        android:paddingRight="5px"
+                        android:paddingLeft="2.5dp"
+                        android:paddingRight="2.5dp"
                         android:text="血压异常"
                         android:textColor="@color/healthrecord_bg"
                         android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/health_full_ununsual_bt"
-                        android:layout_width="172px"
-                        android:layout_height="52px"
-                        android:layout_marginLeft="20px"
+                        android:layout_width="86dp"
+                        android:layout_height="26dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/healthrecord_bg"
                         android:drawableLeft="@mipmap/bs_ab"
                         android:gravity="center"
@@ -248,9 +248,9 @@
 
                     <TextView
                         android:id="@+id/health_full_ununsual_bo"
-                        android:layout_width="172px"
-                        android:layout_height="52px"
-                        android:layout_marginLeft="20px"
+                        android:layout_width="86dp"
+                        android:layout_height="26dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/healthrecord_bg"
                         android:drawableLeft="@mipmap/bi_ab"
                         android:gravity="center"
@@ -260,9 +260,9 @@
 
                     <TextView
                         android:id="@+id/health_full_ununsual_ecg"
-                        android:layout_width="172px"
-                        android:layout_height="52px"
-                        android:layout_marginLeft="20px"
+                        android:layout_width="86dp"
+                        android:layout_height="26dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/healthrecord_bg"
                         android:drawableLeft="@mipmap/ecg_ab"
                         android:gravity="center"
@@ -273,8 +273,8 @@
                     <TextView
                         android:id="@+id/health_full_ununsual_bi"
                         android:layout_width="wrap_content"
-                        android:layout_height="52px"
-                        android:layout_marginLeft="20px"
+                        android:layout_height="26dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/healthrecord_bg"
                         android:drawableLeft="@mipmap/bc_ab"
                         android:gravity="center"
@@ -293,7 +293,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/health_full1"
-            android:layout_marginTop="22px"
+            android:layout_marginTop="11dp"
             android:background="@color/colorWhite"
             android:gravity="center_vertical">
 
@@ -301,16 +301,16 @@
                 android:id="@+id/health_full2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="28px"
-                android:layout_marginLeft="36px"
-                android:layout_marginTop="28px"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="14dp"
                 android:src="@mipmap/proposal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
+                android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/health_full2"
                 android:text="健康评估" />
 
@@ -318,8 +318,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_below="@+id/health_full2"
-                android:layout_marginLeft="36px"
-                android:layout_marginRight="36px"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:background="@color/color_line">
 
             </View>
@@ -336,8 +336,8 @@
                 android:id="@+id/health_full_evalute"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="36px"
-                android:text="本次体检显示身体状况良好" />
+                android:padding="18dp"
+                android:text="" />
         </LinearLayout>
 
         <!-- -->
@@ -346,7 +346,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/health_full_1"
-            android:layout_marginTop="22px"
+            android:layout_marginTop="11dp"
             android:background="@color/colorWhite"
             android:gravity="center_vertical">
 
@@ -354,16 +354,16 @@
                 android:id="@+id/health_full9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="28px"
-                android:layout_marginLeft="36px"
-                android:layout_marginTop="28px"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="14dp"
                 android:src="@mipmap/assess" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
+                android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/health_full9"
                 android:text="健康建议" />
 
@@ -371,8 +371,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_below="@+id/health_full9"
-                android:layout_marginLeft="36px"
-                android:layout_marginRight="36px"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:background="@color/color_line">
 
             </View>
@@ -394,16 +394,16 @@
                     android:id="@+id/health_full11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="32px"
-                    android:layout_marginTop="27px"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
                     android:src="@mipmap/eat" />
 
                 <TextView
                     android:id="@+id/health_full_eat_sug"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="27px"
-                    android:text="ertyuiopasdfguytgasuhdjklfwieuyudshjkshbjnkgflfusijkl" />
+                    android:padding="14dp"
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
@@ -417,16 +417,16 @@
                     android:id="@+id/health_full14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="32px"
-                    android:layout_marginTop="27px"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
                     android:src="@mipmap/sports" />
 
                 <TextView
                     android:id="@+id/health_full_sport_sug"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="27px"
-                    android:text="ertyuiopasdfguytgasuhdjklfwieuyudshjkshbjnkgflfusijkl" />
+                    android:padding="14dp"
+                    android:text="" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -444,7 +444,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60px"
+            android:layout_marginTop="30dp"
             android:src="@mipmap/error" />
 
         <RelativeLayout
@@ -453,7 +453,7 @@
             android:layout_alignLeft="@id/health_empty_error"
             android:layout_alignRight="@id/health_empty_error"
             android:layout_below="@id/health_empty_error"
-            android:layout_marginTop="30px">
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/health_empty"
@@ -461,14 +461,14 @@
                 android:layout_height="wrap_content"
                 android:text="您还没有体检报告\n无法进行健康评估"
                 android:textColor="@color/colorPrimary"
-                android:textSize="38px" />
+                android:textSize="19dp" />
 
             <ImageView
                 android:id="@+id/health_empty_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/health_empty"
-                android:layout_marginTop="40px"
+                android:layout_marginTop="20dp"
                 android:src="@mipmap/line" />
 
             <TextView
@@ -476,25 +476,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/health_empty_img"
-                android:layout_marginTop="40px"
+                android:layout_marginTop="20dp"
                 android:text="前往健康体检一体机体检"
                 android:textColor="@color/colorPrimary"
-                android:textSize="38px" />
+                android:textSize="19dp" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/health_empty_go"
-                android:layout_marginTop="40px"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/health_btn"
-                android:drawablePadding="30px"
+                android:drawablePadding="15dp"
                 android:drawableRight="@mipmap/arrow_health"
-                android:paddingLeft="30px"
-                android:paddingRight="30px"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:text="查看体检机监测点"
                 android:textColor="@color/colorGreenYellow"
-                android:textSize="38px" />
+                android:textSize="19dp" />
 
             <ImageView
                 android:layout_width="wrap_content"

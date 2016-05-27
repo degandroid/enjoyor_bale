@@ -197,8 +197,9 @@ containing a value of this type.
         public static final int text_color=0x7f01000b;
     }
     public static final class drawable {
-        public static final int ruler_mid_arraw=0x7f020000;
-        public static final int ruler_mid_arraw_down=0x7f020001;
+        public static final int bl_icon_kedu=0x7f020000;
+        public static final int ruler_mid_arraw=0x7f020001;
+        public static final int ruler_mid_arraw_down=0x7f020002;
     }
     public static final class id {
         public static final int AUTO=0x7f050002;

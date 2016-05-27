@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/DegProject/BaleHealthHouse/enjoyor_bale/rulberview/src/main/res/values/arrays.xml -->
+    <!-- From: file:/E:/jkb_enjoyor/HealthHouse/rulberview/src/main/res/values/arrays.xml -->
     <eat-comment/>
     <string-array name="demo_data">
         <item>1</item>
@@ -17,7 +17,7 @@
         <item>422</item>
     </string-array>
     <declare-styleable name="RulerWheel"><attr format="color" name="lineColorMax"/><attr format="color" name="lineColorMid"/><attr format="color" name="lineColorMin"/><attr format="dimension" name="MaxBarSize"/><attr format="dimension" name="MidBarSize"/><attr format="dimension" name="MinBarSize"/><attr format="boolean" name="showScaleValue"/><attr format="boolean" name="showGradient"/><attr format="dimension" name="scaleWidth"/><attr format="dimension" name="line_divider"/><attr format="integer" name="text_Size"/><attr format="color" name="text_color"/><attr format="integer" name="def_value"/><attr format="integer" name="max_value"/><attr format="integer" name="min_value"/><attr format="reference" name="mask_bg"/><attr format="boolean" name="scaleValueGradient"/><attr name="mode"><flag name="SCALE" value="0"/><flag name="HALF" value="1"/></attr><attr name="dataMode"><flag name="AUTO" value="0"/><flag name="DATA" value="1"/></attr><attr format="reference" name="dataSource"/><attr name="alignMode"><flag name="UP" value="0"/><flag name="DOWN" value="1"/></attr></declare-styleable>
-    <!-- From: file:/C:/DegProject/BaleHealthHouse/enjoyor_bale/rulberview/src/main/res/values/strings.xml -->
+    <!-- From: file:/E:/jkb_enjoyor/HealthHouse/rulberview/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">RulberView</string>
 </resources>

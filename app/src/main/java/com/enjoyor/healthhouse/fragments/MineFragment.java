@@ -13,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
+import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.ui.DataActivity;
 import com.enjoyor.healthhouse.ui.InfoActivity;
 import com.enjoyor.healthhouse.ui.LoginActivity;
+import com.enjoyor.healthhouse.ui.ModifyPwdActivity;
 import com.enjoyor.healthhouse.ui.MyPhoneActivity;
 import com.enjoyor.healthhouse.ui.NewPasswordActivity;
 import com.enjoyor.healthhouse.ui.RegistActivity;
@@ -27,6 +29,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/5/3.
+ * 个人中心
  */
 public class MineFragment extends BaseFragment implements View.OnClickListener {
     View view;
@@ -80,37 +83,44 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mine_fg_logo:
                 Toast.makeText(getActivity(), "您点击了上传头像按钮", Toast.LENGTH_LONG).show();
                 break;
-            case R.id.mine_fg_login:
-                Intent intent_login = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent_login);
+            case R.id.mine_fg_login://登录
+                if (BaseDate.getSessionId(getActivity()) != null) {
+                    Toast.makeText(getActivity(), "您已经成功登陆", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent_login = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent_login);
+                }
                 break;
-            case R.id.mine_fg_regist:
+            case R.id.mine_fg_regist://注册
                 Intent intent_regist = new Intent(getActivity(), RegistActivity.class);
                 startActivity(intent_regist);
                 break;
-            case R.id.mine_fg_info:
+            case R.id.mine_fg_info://我的消息
                 Intent intent_info = new Intent(getActivity(), InfoActivity.class);
                 startActivity(intent_info);
                 break;
-            case R.id.mine_fg_book:
-                Intent intent_data = new Intent(getActivity(), DataActivity.class);
-                startActivity(intent_data);
+            case R.id.mine_fg_book://我的资料
+                if (isLogin(getActivity())){
+                    Intent intent_data = new Intent(getActivity(), DataActivity.class);
+                    startActivity(intent_data);
+                }
+                isLogin(getActivity());
                 break;
-            case R.id.mine_fg_phone:
+            case R.id.mine_fg_phone://我的手机
                 Intent intent_phone = new Intent(getActivity(), MyPhoneActivity.class);
                 startActivity(intent_phone);
                 break;
-            case R.id.mine_fg_pwd:
-                Intent intent_ped = new Intent(getActivity(), NewPasswordActivity.class);
+            case R.id.mine_fg_pwd://修改密码
+                Intent intent_ped = new Intent(getActivity(), ModifyPwdActivity.class);
                 startActivity(intent_ped);
                 break;
-            case R.id.mine_fg_setting:
+            case R.id.mine_fg_setting://设置
                 Intent intent_setting = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent_setting);
                 break;
-            case R.id.mine_fg_introduct:
+            case R.id.mine_fg_introduct://推荐给好友
                 break;
-            case R.id.mine_fg_suggest:
+            case R.id.mine_fg_suggest://意见反馈
                 Intent intent_suggest = new Intent(getActivity(), SuggestActivity.class);
                 startActivity(intent_suggest);
                 break;

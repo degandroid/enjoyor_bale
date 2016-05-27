@@ -124,7 +124,6 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 }
                 break;
             case R.id.regist:
-
                 regist();
                 break;
             case R.id.regist_phone_delete:

@@ -27,5 +27,15 @@ public class UrlInterface {
     public static String Notes_URL = TEXT_URL + "/record/notes.do";
     //获取健康评估信息的接口
     public static String AccessHealInfo_URL = TEXT_URL + "/app/evaluate.do";
+    //个人中心我的资料接口
+    public static String Data_URL = TEXT_URL + "account/getaccountinfo.action";
+    //验证码验证接口
+    public static String Verify_URL = TEXT_URL + "msg/verify.action";
+    //变更绑定手机接口
+    public static String Modify_Bind_Phone_URL = TEXT_URL + "account/app/resetphone.action";
+    //个人中心意见反馈接口
+    public static String Suggest_URL = TEXT_URL + "feedback/app.do";
+    //修改用户信息接口
+    public static String ModifyInfo_URL = TEXT_URL + "account/app/updateUserInfo.action";
 
 }

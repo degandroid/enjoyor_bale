@@ -115,8 +115,9 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.health_fg_layout, null);
         ButterKnife.bind(this, view);
         main_tab = (FrameLayout) getActivity().findViewById(R.id.main_tab);
-        re_back.setVisibility(View.GONE);
+        re_back.setVisibility(View.INVISIBLE);
         navigation_name.setText("健康评估");
+        img_right.setVisibility(View.VISIBLE);
         if (isLogin(getActivity())) {
             isData();
             initView();
@@ -339,6 +340,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                 isData();
                 initImageTab();
                 initText();
+                re_back.setVisibility(View.GONE);
                 navigation_name.setText("健康评估");
                 break;
         }

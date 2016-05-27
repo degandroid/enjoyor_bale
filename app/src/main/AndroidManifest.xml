@@ -119,6 +119,25 @@
         <activity
             android:name=".ui.HealthFileActivity"
             android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|stateUnchanged"></activity>
+        <!--个人中心资料添加地址页面-->
+        <activity
+            android:name=".ui.AddrActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--个人中心我的资料身份证页面-->
+        <activity
+            android:name=".ui.NumCardActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--个人中心资料选择性别页面-->
+        <activity
+            android:name=".ui.SexActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--个人中心资料修改姓名页面-->
+        <activity
+            android:name=".ui.NameActivity"
+            android:screenOrientation="portrait"></activity>
+        <!--个人中心修改密码页面-->
+        <activity android:name=".ui.ModifyPwdActivity"
+            android:screenOrientation="portrait"></activity>
         <!--注册自定义广播-->
         <receiver android:name=".receive.MyReceiver">
             <intent-filter>

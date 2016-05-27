@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_line"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/addr_top"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:text="所在地区"
+                android:textColor="@color/textcolor_smallittle"
+                android:textSize="@dimen/layout_distance_15dp" />
+
+            <ImageView
+                android:id="@+id/addr_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="18dp"
+                android:src="@mipmap/xiangyou" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/addr_top"
+            android:layout_marginTop="1px"
+            android:background="@color/white">
+
+            <EditText
+                android:id="@+id/addr_et"
+                android:maxLength="50"
+                android:padding="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="start"
+                android:hint="请输入您的详细地址"
+                android:textColor="@color/textcolor_smallittle"
+                android:textColorHint="@color/color_line"
+                android:textSize="@dimen/layout_distance_15dp" />
+
+            <TextView
+                android:id="@+id/addr_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp"
+                android:text="0/50"
+                android:textColor="@color/color_line"
+                android:textSize="@dimen/layout_distance_15dp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

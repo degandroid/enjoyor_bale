@@ -113,7 +113,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.tv_login_quick:
-
                 Intent intent_quick = new Intent(LoginActivity.this, RegistActivity.class);
                 startActivity(intent_quick);
                 break;
