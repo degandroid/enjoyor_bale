@@ -28,10 +28,9 @@
                     android:id="@+id/data_name_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
                     android:paddingLeft="18dp"
                     android:paddingRight="18dp"
-                    android:paddingTop="10dp"
+                    android:layout_centerVertical="true"
                     android:src="@mipmap/xingming" />
 
                 <TextView
@@ -76,10 +75,9 @@
                     android:id="@+id/data_sex_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
                     android:paddingLeft="18dp"
                     android:paddingRight="18dp"
-                    android:paddingTop="10dp"
+                    android:layout_centerVertical="true"
                     android:src="@mipmap/xingbie" />
 
                 <TextView
@@ -123,10 +121,9 @@
                     android:id="@+id/data_phone_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
                     android:paddingLeft="18dp"
                     android:paddingRight="18dp"
-                    android:paddingTop="10dp"
+                    android:layout_centerVertical="true"
                     android:src="@mipmap/shouji" />
 
                 <TextView
@@ -161,10 +158,9 @@
                     android:id="@+id/data_num_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
                     android:paddingLeft="18dp"
                     android:paddingRight="18dp"
-                    android:paddingTop="10dp"
+                    android:layout_centerVertical="true"
                     android:src="@mipmap/shenfenzheng" />
 
                 <TextView
@@ -208,10 +204,9 @@
                     android:id="@+id/data_addr_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
                     android:paddingLeft="18dp"
                     android:paddingRight="18dp"
-                    android:paddingTop="10dp"
+                    android:layout_centerVertical="true"
                     android:src="@mipmap/dingwei" />
 
                 <TextView

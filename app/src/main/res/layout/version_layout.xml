@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/version_bale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150dp"
+            android:src="@mipmap/bale" />
+
+        <TextView
+            android:id="@+id/version_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/version_bale"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="芭乐健康"
+            android:textColor="@color/textcolor_smallittle"
+            android:textSize="@dimen/textsize_largetittle" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/version_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="v1.0.1"
+            android:textColor="@color/textcolor_smallittle" />
+
+        <TextView
+            android:id="@+id/version_deline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/layout_distance_15dp"
+            android:text="@string/welcome_bottom"
+            android:textColor="@color/textcolor_body" />
+
+        <TextView
+            android:id="@+id/version_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/version_deline"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:text="@string/welcome_lable"
+            android:textColor="@color/textcolor_body" />
+
+        <TextView
+            android:id="@+id/version_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/version_lable"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/layout_distance_15dp"
+            android:text="检查更新"
+            android:textColor="@color/textcolot_welcome" />
+    </RelativeLayout>
+
+</LinearLayout>

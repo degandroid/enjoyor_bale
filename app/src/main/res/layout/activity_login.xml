@@ -64,7 +64,7 @@
                     android:inputType="number"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
-                    android:text="17767094470"
+                    android:text="13520036163"
                     android:textColor="@color/textcolor_smallittle"
                     android:textSize="@dimen/textsize_largetittle" />
             </LinearLayout>
@@ -97,7 +97,7 @@
                     android:inputType="textPassword"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
-                    android:text="12345678"
+                    android:text="111111"
                     android:textColor="@color/textcolor_smallittle"
                     android:textSize="@dimen/textsize_largetittle" />
             </LinearLayout>

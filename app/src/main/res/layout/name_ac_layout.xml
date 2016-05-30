@@ -15,9 +15,9 @@
 
         <EditText
             android:id="@+id/name_et"
-            android:text=""
             android:padding="16dp"
             android:background="@null"
+            android:textColorHint="@color/textcolor_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView

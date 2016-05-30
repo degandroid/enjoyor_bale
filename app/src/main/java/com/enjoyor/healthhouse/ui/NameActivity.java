@@ -59,6 +59,7 @@ public class NameActivity extends BaseActivity implements View.OnClickListener {
     private void initView() {
         navigation_name.setText("姓名");
         tv_right.setText("保存");
+        name_et.setHint("请输入姓名");
         tv_right.setVisibility(View.VISIBLE);
         name_et.addTextChangedListener(new TextWatcher() {
             @Override
@@ -99,6 +100,7 @@ public class NameActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void saveName() {
+//        name_et.setInputType();
         if (!StringUtils.isBlank(name_et.getText().toString().trim())) {
             RequestParams params = new RequestParams();
             params.add("userId", "" + MyApplication.getInstance().getDBHelper().getUser().getUserId());

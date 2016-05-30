@@ -95,7 +95,7 @@ public class NumCardActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void saveId() {
-        if (name_et.getText().toString().trim() != null) {
+        if (name_et.getText().toString().trim() != null&&name_et.getText().toString().trim().length()==18) {
             RequestParams params = new RequestParams();
             params.add("userId", "" + MyApplication.getInstance().getDBHelper().getUser().getUserId());
             params.add("idCard", "" + name_et.getText().toString().trim());
@@ -120,7 +120,7 @@ public class NumCardActivity extends BaseActivity implements View.OnClickListene
             });
 
         } else {
-            Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "身份证号码不正确", Toast.LENGTH_LONG).show();
         }
     }
 }

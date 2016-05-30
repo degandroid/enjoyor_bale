@@ -134,7 +134,7 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
 
             case R.id.main_tab2:
                 selectTab(2);
-                transaction.replace(R.id.ll_content, CommunityFragment.getInstance(2));
+                transaction.replace(R.id.ll_content, new CommunityFragment());
                 break;
 
             case R.id.main_tab3:

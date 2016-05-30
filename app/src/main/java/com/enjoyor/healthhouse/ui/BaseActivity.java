@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.receive.JudgeNetIsConnectedReceiver;
+import com.enjoyor.healthhouse.utils.AppManagerUtil;
 import com.enjoyor.healthhouse.utils.ScreenUtil;
 import com.enjoyor.healthhouse.utils.ToastUtil;
 
@@ -46,6 +47,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManagerUtil.addActivity(BaseActivity.this);
         this.judgeNetIsConnectedReceiver = new JudgeNetIsConnectedReceiver();
     }
 

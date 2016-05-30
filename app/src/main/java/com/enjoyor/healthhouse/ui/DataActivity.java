@@ -71,7 +71,7 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
-                Log.d("wyy-onSuccess-",json);
+                Log.d("wyy-onSuccess-", json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     cancel();
@@ -90,8 +90,16 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
     private void initInfo(MineData mineData) {
         data_name_tv.setText(mineData.getUserName());
         name_sex_tv.setText(mineData.getSex());
-        name_phone_tv.setText(mineData.getPhoneNumber());
-        name_card_tv.setText(mineData.getIdCard());
+        if (mineData.getPhoneNumber() != null) {
+            String cellphone = mineData.getPhoneNumber();
+            String maskNumber = cellphone.substring(0, 3) + "****" + cellphone.substring(7, cellphone.length());
+            name_phone_tv.setText(maskNumber);
+        }
+        if (mineData.getIdCard() != null) {
+            String cardnumber = mineData.getIdCard();
+            String maskcard = cardnumber.substring(0, 6) + "********" + cardnumber.substring(14, cardnumber.length());
+            name_card_tv.setText(maskcard);
+        }
         name_addr_tv.setText(mineData.getAddress());
     }
 
@@ -144,8 +152,12 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
                 name_sex_tv.setText(data.getStringExtra("sex"));
                 break;
             case 300:
-                name_card_tv.setText(data.getStringExtra("idcard"));
-                break;
+                if (data.getStringExtra("idcard") != null) {
+                    String cardnumber = data.getStringExtra("idcard");
+                    String maskcard = cardnumber.substring(0, 6) + "********" + cardnumber.substring(14, cardnumber.length());
+                    name_card_tv.setText(maskcard);
+                    break;
+                }
             case 400:
                 name_addr_tv.setText(data.getStringExtra("addr"));
                 break;

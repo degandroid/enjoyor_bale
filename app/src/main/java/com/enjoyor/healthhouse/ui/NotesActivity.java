@@ -133,7 +133,11 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             if (bdLocation == null) {
                 return;
             }
-            notes_address.setText(bdLocation.getStreet() + bdLocation.getStreetNumber());
+            if (bdLocation.getStreetNumber()!=null){
+                notes_address.setText(bdLocation.getStreet() + bdLocation.getStreetNumber()+"号");
+            }else {
+                notes_address.setText(bdLocation.getStreet() + bdLocation.getStreetNumber());
+            }
             lng = bdLocation.getLongitude();
             lat = bdLocation.getLatitude();
         }

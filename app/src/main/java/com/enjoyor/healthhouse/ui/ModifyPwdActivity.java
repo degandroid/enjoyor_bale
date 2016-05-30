@@ -1,8 +1,10 @@
 package com.enjoyor.healthhouse.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,8 +41,6 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
     TextView navigation_name;
     @Bind(R.id.modifypwd_et_access)
     EditText modifypwd_et_access;
-    @Bind(R.id.modifypwd_accesnum)
-    TextView modifypwd_accesnum;
     @Bind(R.id.modify_pwd)
     EditText modify_pwd;
     @Bind(R.id.modify_again_pwd)
@@ -56,27 +56,12 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.modify_pwd_ac_layout);
         ButterKnife.bind(this);
         initView();
-        initCode();
         initEvent();
     }
 
     private void initEvent() {
-        modifypwd_accesnum.setOnClickListener(this);
         modify_save.setOnClickListener(this);
         re_back.setOnClickListener(this);
-    }
-
-    private void initCode() {
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                // TODO Auto-generated method stub
-                super.handleMessage(msg);
-                if (msg.what > 0) {
-                    modifypwd_accesnum.setText("剩余" + msg.what + "秒");
-                }
-            }
-        };
     }
 
     private void initView() {
@@ -87,10 +72,6 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         int key = v.getId();
         switch (key) {
-            case R.id.modifypwd_accesnum:
-                sendMsg();
-                sendMsgtoPhone();
-                break;
             case R.id.modify_save:
                 modifycommit();
                 break;
@@ -102,103 +83,40 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
 
     //保存修改密码的方法
     private void modifycommit() {
-        final RequestParams param = new RequestParams();
         if (!StringUtils.isBlank(modifypwd_et_access.getText().toString().trim())) {
-            RequestParams params = new RequestParams();
-            param.add("service", "mob");
-            param.add("phone", ""+MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
-            param.add("code", "" + modifypwd_et_access.getText().toString().trim());
-            AsyncHttpUtil.post(UrlInterface.Verify_URL, params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                    if (modify_pwd.getText().toString().trim().equals(modify_again_pwd.getText().toString().trim())) {
-//            Toast.makeText(this, "请输入验证码", Toast.LENGTH_LONG).show();
-                        param.add("newpwd", modify_pwd.getText().toString().trim());
-                        param.add("phone", MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
-                        AsyncHttpUtil.post(UrlInterface.ModifyPwd_URL, param, new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                                String json = new String(bytes);
-                                ApiMessage apimessage = ApiMessage.FromJson(json);
-                                if (apimessage.Code == 1001) {
-                                    finish();
-                                    Toast.makeText(ModifyPwdActivity.this, "密码修改成功", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(ModifyPwdActivity.this, "该电话号码未注册，请先注册！", Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
-                            }
-                        });
-                    } else {
-                        Toast.makeText(ModifyPwdActivity.this, "两次输入密码不一致，请重新输入", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
-                }
-            });
-//            param.add("mcode", modifypwd_et_access.getText().toString().trim());
-        } else {
-            Toast.makeText(this, "请输入验证码", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void sendMsgtoPhone() {
-        RequestParams params = new RequestParams();
-        params.add("service", "mob");
-        params.add("phone", "13520036163");
-        AsyncHttpUtil.post(UrlInterface.SendMsg_URL, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                String json = new String(bytes);
-                ApiMessage apimessage = ApiMessage.FromJson(json);
-                if (apimessage.Code == 1001) {
-                    Toast.makeText(ModifyPwdActivity.this, "验证码发送成功", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(ModifyPwdActivity.this, "数据解析错误", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-            }
-        });
-    }
-
-    private void sendMsg() {
-        modifypwd_accesnum.setEnabled(false);
-        modifypwd_accesnum.setText("获取验证码");
-        //倒记时
-        final Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() { // UI thread
+            if (!StringUtils.isBlank(modify_pwd.getText().toString().trim()) && !StringUtils.isBlank(modify_again_pwd.getText().toString().trim())) {
+                RequestParams params = new RequestParams();
+                params.add("id", "" + MyApplication.getInstance().getDBHelper().getUser().getAccountId());
+                params.add("name", "" + MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
+                params.add("oldpwd", "" + modifypwd_et_access.getText().toString().trim());
+                params.add("newpwd", "" + modify_pwd.getText().toString().trim());
+                AsyncHttpUtil.post(UrlInterface.ModifyPwd_URL, params, new AsyncHttpResponseHandler() {
                     @Override
-                    public void run() {
-                        count--;
-                        handler.sendEmptyMessage(count);
-                        if (count == 0) {
-                            timer.cancel();
-                            reSet();
+                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                        String json = new String(bytes);
+                        Log.d("wyy----",json);
+                        ApiMessage apiMessage = ApiMessage.FromJson(json);
+                        if (apiMessage.Code == 1001) {
+                            Toast.makeText(ModifyPwdActivity.this, "密码修改成功", Toast.LENGTH_LONG).show();
+                            Intent intent_login = new Intent(ModifyPwdActivity.this, LoginActivity.class);
+                            startActivity(intent_login);
+                            finish();
+                        } else {
+                            Toast.makeText(ModifyPwdActivity.this, "" + apiMessage.Msg, Toast.LENGTH_LONG).show();
                         }
                     }
+
+                    @Override
+                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+                    }
                 });
+
+            } else {
+                Toast.makeText(ModifyPwdActivity.this, "请输入新密码", Toast.LENGTH_LONG).show();
             }
-        };
-
-        timer.schedule(task, 1000, 1000);
-    }
-
-    private void reSet() {
-        modifypwd_accesnum.setText("获取验证码");
-        modifypwd_accesnum.setEnabled(true);
-        count = 30;
+        } else {
+            Toast.makeText(ModifyPwdActivity.this, "原密码不能为空", Toast.LENGTH_LONG).show();
+        }
     }
 }

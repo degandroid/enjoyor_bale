@@ -39,7 +39,7 @@ public class SexActivity extends BaseActivity implements View.OnClickListener {
     RelativeLayout sex_female_;
     @Bind(R.id.sex_female_delete)
     ImageView sex_female_delete;
-    boolean TAG = false;
+    boolean TAG = true;
     String sex;
 
     @Override
@@ -90,10 +90,10 @@ public class SexActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void saveSex() {
-        if (TAG = true) {
+        if (TAG) {
             sex = "男";
         } else {
-            sex = "nv";
+            sex = "女";
         }
         RequestParams params = new RequestParams();
         params.add("userId", "" + MyApplication.getInstance().getDBHelper().getUser().getUserId());

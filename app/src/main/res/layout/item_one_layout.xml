@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/button_stroke_blue"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_healthyname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_solid_blue"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="体重脂肪"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/healthvalue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_stroke_blue"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tv_healthyinfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.enjoyor.healthhouse.db.DBHelper;
+import com.enjoyor.healthhouse.utils.AppManagerUtil;
 
 /**
  * Created by YuanYuan on 2016/4/25.
@@ -20,6 +21,7 @@ public class MyApplication extends Application {
         SDKInitializer.initialize(getApplicationContext());
         instance = this;
         context = this.getApplicationContext();
+        AppManagerUtil.getAppManager();
     }
 
     public static Context getContext() {

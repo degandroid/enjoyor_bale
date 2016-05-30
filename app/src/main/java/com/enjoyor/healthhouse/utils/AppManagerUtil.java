@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class AppManagerUtil
 {
 
-    private static Stack<Activity> activityStack;
+    private static Stack<BaseActivity> activityStack;
     private static AppManagerUtil instance;
 
     private AppManagerUtil()
@@ -31,7 +31,7 @@ public class AppManagerUtil
         }
         if (activityStack == null)
         {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<BaseActivity>();
         }
         return instance;
     }
@@ -39,7 +39,7 @@ public class AppManagerUtil
     /**
      * 添加Activity到堆栈
      */
-    public void addActivity (Activity activity)
+    public static void addActivity (BaseActivity activity)
     {
         activityStack.add (activity);
     }
@@ -47,24 +47,24 @@ public class AppManagerUtil
     /**
      * 获取当前Activity（堆栈中最后一个压入的）
      */
-    public Activity currentActivity ()
+    public BaseActivity currentActivity ()
     {
         if (activityStack.size () == 0)
         {
             return null;
         }
-        Activity activity = activityStack.lastElement ();
+        BaseActivity activity = activityStack.lastElement ();
         return activity;
     }
 
 
-    public Activity getActivityAtPosition ()
+    public BaseActivity getActivityAtPosition ()
     {
         if (activityStack.size () == 0)
         {
             return null;
         }
-        Activity activity = activityStack.get (activityStack.size () - 1);
+        BaseActivity activity = activityStack.get(activityStack.size() - 1);
         return activity;
     }
 
@@ -77,14 +77,14 @@ public class AppManagerUtil
         {
             return;
         }
-        Activity activity = activityStack.lastElement ();
+        BaseActivity activity = activityStack.lastElement();
         finishActivity (activity);
     }
 
     /**
      * 结束指定的Activity
      */
-    public void finishActivity (Activity activity)
+    public void finishActivity (BaseActivity activity)
     {
         if (activity != null)
         {
@@ -97,7 +97,7 @@ public class AppManagerUtil
     /**
      * 延迟结束指定的Activity
      */
-    public void delayFinishActivity (final Activity activity, int milisec)
+    public void delayFinishActivity (final BaseActivity activity, int milisec)
     {
         if (activity != null)
         {
@@ -119,11 +119,11 @@ public class AppManagerUtil
     /**
      * 移除指定的Activity
      */
-    public void removeActivity (Activity activity)
+    public void removeActivity (BaseActivity activity)
     {
         if (activity != null)
         {
-            activityStack.remove (activity);
+            activityStack.remove(activity);
         }
     }
 
@@ -133,10 +133,10 @@ public class AppManagerUtil
     public void finishActivity (Class<?> cls)
     {
 
-        Iterator<Activity> it = activityStack.iterator ();
+        Iterator<BaseActivity> it = activityStack.iterator ();
         while (it.hasNext ())
         {
-            Activity activity = it.next ();
+            BaseActivity activity = it.next ();
             if (activity.getClass ().equals (cls))
             {
                 finishActivity (activity);
@@ -151,24 +151,28 @@ public class AppManagerUtil
      */
     public void finishAllActivity ()
     {
-        Iterator<Activity> it = activityStack.iterator ();
+        Iterator<BaseActivity> it = activityStack.iterator ();
         while (it.hasNext ())
         {
-            Activity activity = it.next ();
+            BaseActivity activity = it.next ();
             activity.finish ();
+            activity=null;
         }
         activityStack.clear ();
+
     }
+
+
 
     /**
      *  排除指定的activity以外，结束所有Activity
      */
     public void finishAllActivityExcept (Class<?> cls)
     {
-        Iterator<Activity> it = activityStack.iterator ();
+        Iterator<BaseActivity> it = activityStack.iterator ();
         while (it.hasNext ())
         {
-            Activity activity = it.next ();
+            BaseActivity activity = it.next ();
             if (!activity.getClass ().equals (cls)) {
                 activity.finish();
             }
@@ -234,5 +238,36 @@ public class AppManagerUtil
             }
         }
     }
-
+//    public static void finish(BaseActivity activity)
+//    {
+//        if (activity != null)
+//        {
+//            activity.finish();
+//            activityStack.remove(activity);
+//            activity = null;
+//        }
+//    }
+//    public static void finishAll()
+//    {
+//        while (!activityStack.isEmpty())
+//        {
+//            finish( );
+//        }
+//        activityStack.clear();
+//    }
+//    public static BaseActivity getTopActivity()
+//    {
+//        if (!activityStack.isEmpty())
+//        {
+//            return activityStack.pop();
+//        }
+//        return null;
+//    }
+//    public static void pop(BaseActivity activity)
+//    {
+//        if (activity != null)
+//        {
+//            activityStack.remove(activity);
+//        }
+//    }
 }

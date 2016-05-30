@@ -17,7 +17,12 @@
 
     <color name="textcolor_smallittle">#666666</color>
     <color name="textcolor_body">#999999</color>
-
+<color name="form">#aed35c</color>
+    <color name="form_xiaoshou">#7fd8ef</color>
+    <color name="form_standard">#7bd9b2</color>
+    <color name="form_chaozhong">#f2c86d</color>
+    <color name="form_feipang">#ff928a</color>
+    <color name="form_blue">#a3c8e8</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="gray">#aaaaaa</color>

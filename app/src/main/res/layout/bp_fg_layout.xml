@@ -1,117 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_line"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/bp_fg_befour"
-        android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:background="@color/colorWhite">
-
-        <ImageView
-            android:id="@+id/bp_fg_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
-            android:src="@mipmap/bp_report" />
-
-        <TextView
-            android:id="@+id/bp_fg_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
-            android:layout_toRightOf="@id/bp_fg_img"
-            android:text="当前血压值" />
-
-        <TextView
-            android:id="@+id/bp_fg_ecg_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dp"
-            android:text="查看心电图"
-            android:textColor="@color/colorGreenYellow"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/bp_fg_ecg_go"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/bp_fg_ecg_tv"
-            android:src="@mipmap/go_record"
-            android:visibility="gone" />
-    </RelativeLayout>
-
-    <View
-        android:id="@+id/bp_fg_line"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_below="@id/bp_fg_befour"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:background="@color/color_line"></View>
-
-    <WebView
-        android:id="@+id/bp_fg_web"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@id/bp_fg_line"></WebView>
-
-    <RelativeLayout
-        android:id="@+id/bp_fg_re"
-        android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_below="@id/bp_fg_web"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorWhite">
-
-        <ImageView
-            android:id="@+id/bp_fg_img_sug"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
-            android:src="@mipmap/assess_report" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
-            android:layout_toRightOf="@+id/bp_fg_img_sug"
-            android:text="健康建议" />
-    </RelativeLayout>
-
-    <View
-        android:id="@+id/bp_fg_lin"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_below="@+id/bp_fg_re"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:background="@color/color_line" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/bp_fg_lin"
-        android:background="@color/colorWhite"
-        android:padding="18dp">
+        android:layout_marginBottom="55dp">
 
-        <TextView
-            android:id="@+id/bp_fg_suggest"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </LinearLayout>
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/bp_fg_top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/bp_fg_befour"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:background="@color/colorWhite">
+
+                    <ImageView
+                        android:id="@+id/bp_fg_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:src="@mipmap/bp_report" />
+
+                    <TextView
+                        android:id="@+id/bp_fg_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:layout_toRightOf="@id/bp_fg_img"
+                        android:text="当前血压值" />
+
+                    <TextView
+                        android:id="@+id/bp_fg_ecg_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:text="查看心电图"
+                        android:textColor="@color/colorGreenYellow"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/bp_fg_ecg_go"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@id/bp_fg_ecg_tv"
+                        android:src="@mipmap/go_record"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/bp_fg_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@id/bp_fg_befour"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@color/color_line"></View>
+
+                <WebView
+                    android:id="@+id/bp_fg_web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/bp_fg_line"></WebView>
+
+                <RelativeLayout
+                    android:id="@+id/bp_fg_re"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:layout_below="@id/bp_fg_web"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorWhite">
+
+                    <ImageView
+                        android:id="@+id/bp_fg_img_sug"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:src="@mipmap/assess_report" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:layout_toRightOf="@+id/bp_fg_img_sug"
+                        android:text="健康建议" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/bp_fg_lin"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/bp_fg_re"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@color/color_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/bp_fg_lin"
+                    android:background="@color/colorWhite"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:id="@+id/bp_fg_suggest"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="" />
+                </LinearLayout>
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="55dp"-->
+                <!--android:layout_alignParentBottom="true">-->
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/bp_fg_history"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@color/colorGreenYellow"-->
+                <!--android:gravity="center">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/bp_fg_his"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:gravity="center"-->
+                <!--android:text="历史"-->
+                <!--android:textColor="@color/white" />-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="18dp"-->
+                <!--android:layout_toLeftOf="@+id/bp_fg_his"-->
+                <!--android:src="@mipmap/history" />-->
+                <!--</RelativeLayout>-->
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/bp_fg_tend"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="1px"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@color/colorGreenYellow"-->
+                <!--android:gravity="center">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/bp_fg_trend"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_marginLeft="1px"-->
+                <!--android:gravity="center"-->
+                <!--android:text="趋势"-->
+                <!--android:textColor="@color/white" />-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="18dp"-->
+                <!--android:layout_toLeftOf="@+id/bp_fg_trend"-->
+                <!--android:src="@mipmap/history" />-->
+                <!--</RelativeLayout>-->
+                <!--</LinearLayout>-->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/health_ry_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/health_empty_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:src="@mipmap/error" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@id/health_empty_error"
+                    android:layout_alignRight="@id/health_empty_error"
+                    android:layout_below="@id/health_empty_error"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/health_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="您还没有体检报告\n无法进行健康评估"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="19dp" />
+
+                    <ImageView
+                        android:id="@+id/health_empty_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/health_empty"
+                        android:layout_marginTop="20dp"
+                        android:src="@mipmap/line" />
+
+                    <TextView
+                        android:id="@+id/health_empty_go"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/health_empty_img"
+                        android:layout_marginTop="20dp"
+                        android:text="前往健康体检一体机体检"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="19dp" />
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/health_empty_go"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/health_btn"
+                        android:drawablePadding="15dp"
+                        android:drawableRight="@mipmap/arrow_health"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="查看体检机监测点"
+                        android:textColor="@color/colorGreenYellow"
+                        android:textSize="19dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignTop="@+id/button"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginRight="18dp"
+                        android:layout_marginTop="28dp"
+                        android:src="@mipmap/person" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

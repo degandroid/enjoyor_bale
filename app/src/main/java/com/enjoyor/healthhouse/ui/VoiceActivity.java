@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,10 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
     ImageView voice_cha;
     @Bind(R.id.voice_dui)
     ImageView voice_dui;
+    @Bind(R.id.re_back)
+    RelativeLayout re_back;
+    @Bind(R.id.navigation_name)
+    TextView navigation_name;
     private static int MAX_TIME = 60;    //最长录制时间，单位秒，0为无时间限制
     private static int MIX_TIME = 1;     //最短录制时间，单位秒，0为无时间限制，建议设为1
     private static int RECORD_NO = 0;  //不在录音
@@ -79,6 +84,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.voice_ac_layout);
         ButterKnife.bind(this);
+        navigation_name.setText("录音");
         initVoice();
         initTime();
         initEvent();
@@ -87,6 +93,8 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
 
     private void initEvent() {
         voice_dui.setOnClickListener(this);
+        voice_cha.setOnClickListener(this);
+        re_back.setOnClickListener(this);
     }
 
     /**
@@ -289,13 +297,16 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
         int key = v.getId();
         switch (key) {
             case R.id.voice_cha:
-
+                finish();
                 break;
             case R.id.voice_dui:
                 String url = "/storage/sdcard0/my/voice.amr";
 //                Intent intent = new Intent();
 //                this.setResult(110,intent);
                 saveVoice(url);
+                break;
+            case R.id.re_back:
+                finish();
                 break;
         }
 
@@ -315,8 +326,8 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
-                Log.d("wyy+++++", json);
-                Toast.makeText(VoiceActivity.this, "录音上传成功", Toast.LENGTH_LONG).show();
+//                Log.d("wyy+++++", json);
+//                Toast.makeText(VoiceActivity.this, "录音上传成功", Toast.LENGTH_LONG).show();
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     List<Voice> voice = JsonHelper.getArrayJson(apiMessage.Data, Voice.class);

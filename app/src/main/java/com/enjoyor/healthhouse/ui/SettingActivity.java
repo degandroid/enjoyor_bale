@@ -2,6 +2,7 @@ package com.enjoyor.healthhouse.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -23,10 +24,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
     TextView navigation_name;
-    @Bind(R.id.setting_ac_help)
-    RelativeLayout setting_ac_help;
-    @Bind(R.id.setting_ac_secret)
-    RelativeLayout setting_ac_secret;
+//    @Bind(R.id.setting_ac_help)
+//    RelativeLayout setting_ac_help;
+//    @Bind(R.id.setting_ac_secret)
+//    RelativeLayout setting_ac_secret;
     @Bind(R.id.setting_ac_cach)
     RelativeLayout setting_ac_cach;
     @Bind(R.id.setting_ac_about)
@@ -50,6 +51,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private void initEvent() {
         re_back.setOnClickListener(this);
         setting_exit.setOnClickListener(this);
+        setting_ac_version.setOnClickListener(this);
     }
 
     private void initView() {
@@ -64,12 +66,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.setting_exit:
-                AppManagerUtil.getAppManager().finishAllActivity();
-//                exiting();
                 if (MyApplication.getInstance().getDBHelper().clearUser()) {
                     Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 }
+                AppManagerUtil.getAppManager().finishAllActivity();
+                break;
+            case R.id.setting_ac_version:
+                Intent intent_version = new Intent(SettingActivity.this, VersionActivity.class);
+                startActivity(intent_version);
                 break;
         }
     }

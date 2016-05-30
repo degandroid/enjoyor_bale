@@ -21,9 +21,11 @@ import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.HealthRecord;
 import com.enjoyor.healthhouse.bean.HealthSuggest;
+import com.enjoyor.healthhouse.bean.UserInfo;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
+import com.enjoyor.healthhouse.ui.HealthFileActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -168,6 +170,9 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                     health_ry_empty.setVisibility(View.GONE);
                     health_ry_full.setVisibility(View.VISIBLE);
                     healthRecord = JsonHelper.getJson(apiMessage.Data, HealthRecord.class);
+                    if (saveHealthReport(healthRecord)) {
+                        Log.d("wyy---", "baocun");
+                    }
                     initInfo(healthRecord);
                     initHealthSug(healthRecord);
                 } else if (apiMessage.Code == -204) {
@@ -279,6 +284,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
         health_full_tab3.setOnClickListener(this);
         health_full_tab4.setOnClickListener(this);
         health_full_tab5.setOnClickListener(this);
+        img_right.setOnClickListener(this);
     }
 
     private void initView() {
@@ -307,7 +313,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                 navigation_name.setText("血糖评估");
                 health_full_bs_img.setImageResource(R.mipmap.bs_ab);
                 health_full_bs_tv.setTextColor(getResources().getColor(R.color.tab_red));
-                transaction.replace(R.id.health_lin, new BPFragment());
+                transaction.replace(R.id.health_lin, new BiFragment());
                 transaction.commit();
                 break;
             case R.id.health_full_tab3:
@@ -315,7 +321,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                 navigation_name.setText("人体成分评估");
                 health_full_bi_img.setImageResource(R.mipmap.bc_ab);
                 health_full_bi_tv.setTextColor(getResources().getColor(R.color.tab_red));
-                transaction.replace(R.id.health_lin, new BPFragment());
+                transaction.replace(R.id.health_lin, new BodyFragment());
                 transaction.commit();
                 break;
             case R.id.health_full_tab4:
@@ -340,8 +346,12 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                 isData();
                 initImageTab();
                 initText();
-                re_back.setVisibility(View.GONE);
+                re_back.setVisibility(View.INVISIBLE);
                 navigation_name.setText("健康评估");
+                break;
+            case R.id.img_right:
+                Intent intent_health = new Intent(getActivity(), HealthFileActivity.class);
+                startActivity(intent_health);
                 break;
         }
     }
@@ -359,5 +369,12 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
         health_ry_empty.setVisibility(View.GONE);
     }
 
+    private boolean saveHealthReport(HealthRecord healthRecord) {
+        if (healthRecord != null) {
+            healthRecord.setId(1);
+            return MyApplication.getInstance().getDBHelper().saveHealthReport(healthRecord);
+        }
+        return false;
+    }
 }
 
