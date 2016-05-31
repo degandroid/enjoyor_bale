@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_max_height"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:id="@+id/mark"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:id="@+id/text"
+        android:textColor="#fff"
+        android:layout_gravity="center_horizontal"
+        android:text=""
+        android:shadowColor="#ee000000"
+        android:shadowRadius="2"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/sencond_text"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"
+            android:text=""
+            android:shadowColor="#ee000000"
+            android:shadowRadius="2"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

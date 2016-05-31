@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <LinearLayout
+        android:id="@+id/ll_bmi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/layout_distance">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="BMI标准" />
+
+            <TextView
+                android:id="@+id/tv_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawablePadding="5dp"
+                android:drawableRight="@mipmap/xiangxia_jiantou"
+                android:gravity="right|center_vertical"
+                android:text="中国标准" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_line" />
+
+        <LinearLayout
+            android:id="@+id/ll_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_distance"
+            android:paddingLeft="@dimen/layout_distance"
+            android:paddingRight="@dimen/layout_distance">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/bpinput_bp_tv"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="@dimen/layout_distance_15dp"
+                    android:gravity="center"
+                    android:text="血压"
+                    android:textColor="@color/color_normal"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/bpinput_img_up_jian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/bpinput_bp_tv"
+                    android:src="@mipmap/jian" />
+
+                <ImageView
+                    android:id="@+id/bpinput_img_up_jia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/bpinput_bp_tv"
+                    android:src="@mipmap/jia" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_numberinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="身高（cm）"
+                android:textSize="@dimen/textsize_body" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <com.xk.sanjay.rulberview.RulerWheel
+                    android:id="@+id/bpinput_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/rulerselect"
+                    app:MaxBarSize="2dp"
+                    app:MidBarSize="1.5dp"
+                    app:MinBarSize="1dp"
+                    app:alignMode="UP"
+                    app:lineColorMax="#797979"
+                    app:lineColorMid="#797979"
+                    app:lineColorMin="#797979"
+                    app:line_divider="10dp"
+
+                    app:mask_bg="@mipmap/bl_icon_kedu"
+                    app:max_value="100"
+                    app:min_value="0"
+                    app:mode="SCALE"
+                    app:scaleWidth="1dp"
+                    app:showGradient="true"
+                    app:showScaleValue="true"
+                    app:text_Size="30"
+                    app:text_color="#666666" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bar_background"
+
+            android:background="@color/color_line" />
+
+        <LinearLayout
+            android:id="@+id/ll_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_distance"
+            android:paddingLeft="@dimen/layout_distance"
+            android:paddingRight="@dimen/layout_distance">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/bpinput_bp_tv_low"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="@dimen/layout_distance_15dp"
+                    android:gravity="center"
+                    android:text="血压"
+                    android:textColor="@color/color_normal_second"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/bpinput_img_low_jian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+
+                    android:layout_toLeftOf="@id/bpinput_bp_tv_low"
+                    android:src="@mipmap/jian" />
+
+                <ImageView
+                    android:id="@+id/bpiinput_img_up_jia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/bpinput_bp_tv_low"
+                    android:src="@mipmap/jia" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_numberinfo_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="体重 （cm）"
+                    android:textSize="@dimen/textsize_body" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <com.xk.sanjay.rulberview.RulerWheel
+                    android:id="@+id/bpinput_low"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/rulerselect"
+                    app:MaxBarSize="2dp"
+                    app:MidBarSize="1.5dp"
+                    app:MinBarSize="1dp"
+                    app:alignMode="UP"
+                    app:lineColorMax="#797979"
+                    app:lineColorMid="#797979"
+                    app:lineColorMin="#797979"
+                    app:line_divider="10dp"
+
+                    app:mask_bg="@mipmap/bl_icon_kedu"
+                    app:max_value="100"
+                    app:min_value="0"
+                    app:mode="SCALE"
+                    app:scaleWidth="1dp"
+                    app:showGradient="true"
+                    app:showScaleValue="true"
+                    app:text_Size="30"
+                    app:text_color="#666666" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_calculation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="45dp"
+            android:background="@drawable/btn_solid_greedyellow_radius"
+            android:text="计算"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textsize_largetittle"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_background"
+                android:background="@color/color_line" />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/layout_distance"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="您的BMI指数为"
+                    android:textSize="@dimen/textsize_largetittle" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_infonumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20.6"
+                        android:textColor="@color/colorGreenYellow"
+                        android:textSize="@dimen/textsize_largetittle"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_infotext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(正常)"
+                        android:textColor="@color/colorGreenYellow"
+                        android:textSize="@dimen/textsize_smalltittle" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="国际标准" />
+
+                <TextView
+                    android:id="@+id/tv_recalculation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_distance"
+                    android:gravity="center"
+                    android:padding="@dimen/layout_distance"
+                    android:text="重新计算"
+                    android:textSize="@dimen/textsize_smalltittle" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_kaluli"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_head"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/layout_distance">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/layout_distance"
+                        android:text="卡（cal）" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@mipmap/bl_bg_shuru"
+                        android:hint="输入" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/layout_distance"
+                        android:text="卡（cal）"
+                        android:visibility="invisible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/bl_icon_zhuanhuan" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/layout_distance"
+                        android:text="焦耳（J）" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@mipmap/bl_bg_shuru"
+                        android:hint="输入" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBackgroud"
+                android:orientation="vertical"
+                android:padding="@dimen/layout_distance">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="1大卡=1000卡" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="45dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/btn_solid_greedyellow_radius"
+                    android:text="计算"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textsize_largetittle" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_listinfo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/layout_distance">
+                    <RelativeLayout
+                        android:id="@+id/re_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="center_vertical"
+                        android:text="日常数据" />
+
+                    <ImageView
+                        android:id="@+id/iv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/bl_icon_sousuo"/>
+                </RelativeLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_rightsearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_toRightOf="@id/re_search"
+                        >
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorBackgroud"
+                            android:drawableLeft="@mipmap/bl_icon_sousuo"
+                            android:hint="搜索" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_gravity="right|center_vertical"
+                                android:src="@mipmap/bl_icon_sousuo"
+                                android:layout_height="wrap_content" />
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:paddingLeft="@dimen/layout_distance"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="取消" />
+                    </LinearLayout>
+                </FrameLayout>
+            <com.enjoyor.healthhouse.custom.XListView
+                android:id="@+id/xlv_food"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp">
+
+            </com.enjoyor.healthhouse.custom.XListView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
