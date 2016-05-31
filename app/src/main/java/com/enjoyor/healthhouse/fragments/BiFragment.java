@@ -21,10 +21,13 @@ import com.alibaba.fastjson.JSON;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.BiReport;
+import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
+import com.enjoyor.healthhouse.ui.HistoryActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
+import com.enjoyor.healthhouse.ui.TendActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -82,6 +85,8 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
 
     private void initEvent() {
         button.setOnClickListener(this);
+        bp_fg_history.setOnClickListener(this);
+        bp_fg_tend.setOnClickListener(this);
     }
 
     private void initView() {
@@ -120,6 +125,15 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
             case R.id.button:
                 Intent intent_go = new Intent(getActivity(), PhysicallocationActivity.class);
                 startActivity(intent_go);
+                break;
+            case R.id.bp_fg_history:
+                Intent intent_xuetang = new Intent(getActivity(), HistoryActivity.class);
+                intent_xuetang.putExtra("fromWhere", Constant.FROM_XUETANG);
+                startActivity(intent_xuetang);
+                break;
+            case R.id.bp_fg_tend:
+                Intent intent_tend = new Intent(getActivity(), TendActivity.class);
+                startActivity(intent_tend);
                 break;
         }
     }

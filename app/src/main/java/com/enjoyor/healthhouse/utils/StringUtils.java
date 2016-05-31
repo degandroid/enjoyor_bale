@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 /**
  * String Utils
- * 
+ *
  * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2011-7-22
  */
 public class StringUtils {
@@ -24,7 +24,7 @@ public class StringUtils {
 
     /**
      * is null or its length is 0 or it is made by space
-     * 
+     * <p/>
      * <pre>
      * isBlank(null) = true;
      * isBlank(&quot;&quot;) = true;
@@ -34,7 +34,7 @@ public class StringUtils {
      * isBlank(&quot; a&quot;) = false;
      * isBlank(&quot;a b&quot;) = false;
      * </pre>
-     * 
+     *
      * @param str
      * @return if string is null or its size is 0 or it is made by space, return true, else return false.
      */
@@ -44,13 +44,13 @@ public class StringUtils {
 
     /**
      * is null or its length is 0
-     * 
+     * <p/>
      * <pre>
      * isEmpty(null) = true;
      * isEmpty(&quot;&quot;) = true;
      * isEmpty(&quot;  &quot;) = false;
      * </pre>
-     * 
+     *
      * @param str
      * @return if string is null or its size is 0, return true, else return false.
      */
@@ -60,7 +60,7 @@ public class StringUtils {
 
     /**
      * compare two string
-     * 
+     *
      * @param actual
      * @param expected
      * @return
@@ -72,23 +72,23 @@ public class StringUtils {
 
     /**
      * null Object to empty string
-     * 
+     * <p/>
      * <pre>
      * nullStrToEmpty(null) = &quot;&quot;;
      * nullStrToEmpty(&quot;&quot;) = &quot;&quot;;
      * nullStrToEmpty(&quot;aa&quot;) = &quot;aa&quot;;
      * </pre>
-     * 
+     *
      * @param str
      * @return
      */
     public static String nullStrToEmpty(Object str) {
-        return (str == null ? "" : (str instanceof String ? (String)str : str.toString()));
+        return (str == null ? "" : (str instanceof String ? (String) str : str.toString()));
     }
 
     /**
      * capitalize first letter
-     * 
+     * <p/>
      * <pre>
      * capitalizeFirstLetter(null)     =   null;
      * capitalizeFirstLetter("")       =   "";
@@ -97,7 +97,7 @@ public class StringUtils {
      * capitalizeFirstLetter("ab")     =   "Ab"
      * capitalizeFirstLetter("Abc")    =   "Abc"
      * </pre>
-     * 
+     *
      * @param str
      * @return
      */
@@ -113,14 +113,14 @@ public class StringUtils {
 
     /**
      * encoded in utf-8
-     * 
+     * <p/>
      * <pre>
      * utf8Encode(null)        =   null
      * utf8Encode("")          =   "";
      * utf8Encode("aa")        =   "aa";
      * utf8Encode("啊啊啊啊")   = "%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A";
      * </pre>
-     * 
+     *
      * @param str
      * @return
      * @throws UnsupportedEncodingException if an error occurs
@@ -138,7 +138,7 @@ public class StringUtils {
 
     /**
      * encoded in utf-8, if exception, return defultReturn
-     * 
+     *
      * @param str
      * @param defultReturn
      * @return
@@ -156,7 +156,7 @@ public class StringUtils {
 
     /**
      * get innerHtml from href
-     * 
+     * <p/>
      * <pre>
      * getHrefInnerHtml(null)                                  = ""
      * getHrefInnerHtml("")                                    = ""
@@ -171,13 +171,13 @@ public class StringUtils {
      * getHrefInnerHtml("jack&lt;a&gt;innerHtml&lt;/a&gt;&lt;/a&gt;")                  = "innerHtml";
      * getHrefInnerHtml("&lt;a&gt;innerHtml1&lt;/a&gt;&lt;a&gt;innerHtml2&lt;/a&gt;")        = "innerHtml2";
      * </pre>
-     * 
+     *
      * @param href
      * @return <ul>
-     *         <li>if href is null, return ""</li>
-     *         <li>if not match regx, return source</li>
-     *         <li>return the last string that match regx</li>
-     *         </ul>
+     * <li>if href is null, return ""</li>
+     * <li>if not match regx, return source</li>
+     * <li>return the last string that match regx</li>
+     * </ul>
      */
     public static String getHrefInnerHtml(String href) {
         if (isEmpty(href)) {
@@ -193,9 +193,9 @@ public class StringUtils {
         return href;
     }
 
-/**
+    /**
      * process special char in html
-     * 
+     * <p/>
      * <pre>
      * htmlEscapeCharsToString(null) = null;
      * htmlEscapeCharsToString("") = "";
@@ -206,7 +206,7 @@ public class StringUtils {
      * htmlEscapeCharsToString("mp3&quot;mp4") = "mp3\"mp4";
      * htmlEscapeCharsToString("mp3&lt;&gt;&amp;&quot;mp4") = "mp3\<\>&\"mp4";
      * </pre>
-     * 
+     *
      * @param source
      * @return
      */
@@ -217,14 +217,14 @@ public class StringUtils {
 
     /**
      * transform half width char to full width char
-     * 
+     * <p/>
      * <pre>
      * fullWidthToHalfWidth(null) = null;
      * fullWidthToHalfWidth("") = "";
      * fullWidthToHalfWidth(new String(new char[] {12288})) = " ";
      * fullWidthToHalfWidth("！＂＃＄％＆) = "!\"#$%&";
      * </pre>
-     * 
+     *
      * @param s
      * @return
      */
@@ -240,7 +240,7 @@ public class StringUtils {
                 // } else if (source[i] == 12290) {
                 // source[i] = '.';
             } else if (source[i] >= 65281 && source[i] <= 65374) {
-                source[i] = (char)(source[i] - 65248);
+                source[i] = (char) (source[i] - 65248);
             } else {
                 source[i] = source[i];
             }
@@ -250,14 +250,14 @@ public class StringUtils {
 
     /**
      * transform full width char to half width char
-     * 
+     * <p/>
      * <pre>
      * halfWidthToFullWidth(null) = null;
      * halfWidthToFullWidth("") = "";
      * halfWidthToFullWidth(" ") = new String(new char[] {12288});
      * halfWidthToFullWidth("!\"#$%&) = "！＂＃＄％＆";
      * </pre>
-     * 
+     *
      * @param s
      * @return
      */
@@ -269,53 +269,54 @@ public class StringUtils {
         char[] source = s.toCharArray();
         for (int i = 0; i < source.length; i++) {
             if (source[i] == ' ') {
-                source[i] = (char)12288;
+                source[i] = (char) 12288;
                 // } else if (source[i] == '.') {
                 // source[i] = (char)12290;
             } else if (source[i] >= 33 && source[i] <= 126) {
-                source[i] = (char)(source[i] + 65248);
+                source[i] = (char) (source[i] + 65248);
             } else {
                 source[i] = source[i];
             }
         }
         return new String(source);
     }
-    
+
     /**
      * 设置EditText的hint字体大小
-     * @Title: getHintOfSize
+     *
      * @param size
-     * @return
      * @return CharSequence
-     * @throws 
+     * @throws
+     * @Title: getHintOfSize
      * @date 2015-3-23 下午5:27:19
      * @author xiezuoyuan
      */
-	public static CharSequence getHintOfSize(int size,CharSequence text) {
-		// 新建一个可以添加属性的文本对象
-		SpannableString ss = new SpannableString(text);
+    public static CharSequence getHintOfSize(int size, CharSequence text) {
+        // 新建一个可以添加属性的文本对象
+        SpannableString ss = new SpannableString(text);
 
-		// 新建一个属性对象,设置文字的大小
-		AbsoluteSizeSpan ass = new AbsoluteSizeSpan(size, true);
+        // 新建一个属性对象,设置文字的大小
+        AbsoluteSizeSpan ass = new AbsoluteSizeSpan(size, true);
 
-		// 附加属性到文本
-		ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		
-		return new SpannedString(ss);
-	}
+        // 附加属性到文本
+        ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-    public static String encodeString(String str){
-        if(isBlank(str))
+        return new SpannedString(ss);
+    }
+
+    public static String encodeString(String str) {
+        if (isBlank(str))
             return "";
         try {
-           return URLEncoder.encode(str,"utf-8");
+            return URLEncoder.encode(str, "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return "";
     }
-    public static String decodeString(String str){
-        if(isBlank(str))
+
+    public static String decodeString(String str) {
+        if (isBlank(str))
             return "";
         try {
             return URLDecoder.decode(str, "utf-8");
@@ -323,5 +324,29 @@ public class StringUtils {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static String centerString(String all, String cut) {
+        if (all != null && cut != null && all != "") {
+            int a = all.indexOf(cut);
+            int b = all.indexOf("]", a);
+            if (b > a) {
+                String result = all.substring(a, b);
+                int c = result.indexOf("[");
+                String result_two = result.substring(c) + "]";
+                return result_two;
+            }
+
+        }
+        return null;
+    }
+
+    //根据传入的字符串信息，截取除最后一个字符之前的字符串
+    public static String exceptendString(StringBuilder builder) {
+        if (builder.length() != 0) {
+            String str = builder.substring(1, builder.length() - 1).toString();
+            return str;
+        }
+        return builder.toString();
     }
 }

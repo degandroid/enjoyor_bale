@@ -6,7 +6,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="55dp">
+        android:layout_marginBottom="55dp"
+        android:background="@color/white">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -76,6 +77,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/bp_fg_line"></WebView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/bp_fg_web"
+                    android:background="@color/color_line"></View>
 
                 <RelativeLayout
                     android:id="@+id/bp_fg_re"

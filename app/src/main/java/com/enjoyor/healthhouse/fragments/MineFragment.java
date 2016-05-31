@@ -1,13 +1,16 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,13 +22,13 @@ import com.enjoyor.healthhouse.ui.InfoActivity;
 import com.enjoyor.healthhouse.ui.LoginActivity;
 import com.enjoyor.healthhouse.ui.ModifyPwdActivity;
 import com.enjoyor.healthhouse.ui.MyPhoneActivity;
-import com.enjoyor.healthhouse.ui.NewPasswordActivity;
 import com.enjoyor.healthhouse.ui.RegistActivity;
 import com.enjoyor.healthhouse.ui.SettingActivity;
 import com.enjoyor.healthhouse.ui.SuggestActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 
 /**
  * Created by Administrator on 2016/5/3.
@@ -100,7 +103,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent_info);
                 break;
             case R.id.mine_fg_book://我的资料
-                if (isLogin(getActivity())){
+                if (isLogin(getActivity())) {
                     Intent intent_data = new Intent(getActivity(), DataActivity.class);
                     startActivity(intent_data);
                 }
@@ -126,5 +129,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
         }
     }
+
 }
 

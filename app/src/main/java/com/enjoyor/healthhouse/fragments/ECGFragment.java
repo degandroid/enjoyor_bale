@@ -19,10 +19,13 @@ import android.widget.TextView;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.EcgReport;
+import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
+import com.enjoyor.healthhouse.ui.HistoryActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
+import com.enjoyor.healthhouse.ui.TendActivity;
 import com.enjoyor.healthhouse.url.JavaScriptInterface;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -66,6 +69,7 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        progress();
         view = inflater.inflate(R.layout.bp_fg_layout, null);
         ButterKnife.bind(this, view);
         initView();
@@ -111,6 +115,8 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
 
     private void initEvent() {
         button.setOnClickListener(this);
+        bp_fg_history.setOnClickListener(this);
+        bp_fg_tend.setOnClickListener(this);
     }
 
     private void initView() {
@@ -126,12 +132,12 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
                 String json = new String(bytes);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
-                    bp_fg_top.setVisibility(View.VISIBLE);
+//                    bp_fg_top.setVisibility(View.VISIBLE);
                     ecgReport = JsonHelper.getJson(apiMessage.Data, EcgReport.class);
                     saveInfo(ecgReport);
                 } else {
 //                    health_ry_empty.setVisibility(View.VISIBLE);
-                    bp_fg_top.setVisibility(View.VISIBLE);
+//                    bp_fg_top.setVisibility(View.VISIBLE);
                     drawpicture(json);
                 }
             }
@@ -157,6 +163,8 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
             String info ="103";
             Log.i("==================+++", info);
             bp_fg_web.loadUrl("javascript:show(" + info + ")");   //web网页中已添加了function show(json)方法
+            bp_fg_top.setVisibility(View.VISIBLE);
+            cancel();
         }
     }
 
@@ -171,6 +179,15 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
             case R.id.button:
                 Intent intent_go = new Intent(getActivity(), PhysicallocationActivity.class);
                 startActivity(intent_go);
+                break;
+            case R.id.bp_fg_history:
+                Intent intent_xindian = new Intent(getActivity(), HistoryActivity.class);
+                intent_xindian.putExtra("fromWhere", Constant.FROM_XINDIAN);
+                startActivity(intent_xindian);
+                break;
+            case R.id.bp_fg_tend:
+                Intent intent_tend = new Intent(getActivity(), TendActivity.class);
+                startActivity(intent_tend);
                 break;
         }
     }

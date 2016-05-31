@@ -47,4 +47,8 @@ public class UrlInterface {
     public static String EcgReport_URL = TEXT_URL + "app/ecg/evaluate.do";
     //获取人体成分评估接口
     public static String BodyReport_URL = TEXT_URL + "app/body/evaluate.do";
+    //获取资讯分类文章接口
+    public static String InfoClass_URL = TEXT_URL + "articles/classifys.do";
+    //资讯文章查询
+    public static String InfoClassSelect_URL = TEXT_URL + "articles/.do";
 }

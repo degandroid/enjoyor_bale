@@ -68,14 +68,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_login);
         setImmerseLayout(findViewById(R.id.navigation));
         ButterKnife.bind(this);
-        if(getIntent().hasExtra(FROM_BPINPUTACTIVITY)){
-            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPUTACTIVITY,false);
+        if (getIntent().hasExtra(FROM_BPINPUTACTIVITY)) {
+            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPUTACTIVITY, false);
         }
-        if(getIntent().hasExtra(FROM_BPINPU_HISTORY)){
-            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPU_HISTORY,false);
+        if (getIntent().hasExtra(FROM_BPINPU_HISTORY)) {
+            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPU_HISTORY, false);
         }
-        if(getIntent().hasExtra(FROM_SUISHOUJI)){
-            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_SUISHOUJI,false);
+        if (getIntent().hasExtra(FROM_SUISHOUJI)) {
+            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_SUISHOUJI, false);
         }
         navigation_name.setText("登陆");
         navigation_back.setVisibility(View.INVISIBLE);
@@ -127,7 +127,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             Toast.makeText(LoginActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
             et_phonenumber.requestFocus();
             return false;
-        }else if(!MatcherUtil.isMobileNumber(phoneNumber)){
+        } else if (!MatcherUtil.isMobileNumber(phoneNumber)) {
             Toast.makeText(LoginActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
             et_phonenumber.requestFocus();
             return false;
@@ -147,7 +147,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         params.add("userLoginName", phoneNumber);
         params.add("userLoginPwd", password);
         params.add("userLoginType", String.valueOf("2"));
-        AsyncHttpUtil.post(UrlInterface.TEXT_URL+LOGIN_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.post(UrlInterface.TEXT_URL + LOGIN_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
@@ -158,9 +158,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         Log.i("zxw", "用户信息已保存");
 
                     }
-                    if(isFromBpInputActivity){
+                    if (isFromBpInputActivity) {
                         finish();
-                    }else{
+                    } else {
                         AppManagerUtil.getAppManager().finishAllActivity();
                         Intent intent = new Intent(LoginActivity.this, MainTabActivity.class);
                         startActivity(intent);
@@ -195,9 +195,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //            UserInfo user2 = new UserInfo();
             user.setId(1);
 //            user2.setLoginName("ABCD");
-
+            user.setPhoneNumber(phoneNumber);
             user.setUserLoginPwd(password);
-            BaseDate.setSessionId(LoginActivity.this,user.getAccountId());
+            BaseDate.setSessionId(LoginActivity.this, user.getAccountId());
             return MyApplication.getInstance().getDBHelper().saveUser(user);
         }
         return false;

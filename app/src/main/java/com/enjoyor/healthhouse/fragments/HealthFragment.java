@@ -114,6 +114,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        progress();
         View view = inflater.inflate(R.layout.health_fg_layout, null);
         ButterKnife.bind(this, view);
         main_tab = (FrameLayout) getActivity().findViewById(R.id.main_tab);
@@ -167,6 +168,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                 Log.d("wyy---", json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
+                    cancel();
                     health_ry_empty.setVisibility(View.GONE);
                     health_ry_full.setVisibility(View.VISIBLE);
                     healthRecord = JsonHelper.getJson(apiMessage.Data, HealthRecord.class);

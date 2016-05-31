@@ -122,78 +122,38 @@ public class MyPhoneActivity extends BaseActivity implements View.OnClickListene
 
     private void savePhone() {
         if (!StringUtils.isBlank(myphone_et_num.getText().toString().trim())) {
-            final RequestParams params = new RequestParams();
-            params.add("service", "mob");
-            params.add("phone", "" + MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
-            params.add("code", "" + myphone_et_num.getText().toString().trim());
-            AsyncHttpUtil.post(UrlInterface.Verify_URL, params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                    String json1 = new String(bytes);
-                    Log.d("wyy------", json1);
-                    ApiMessage apiMessage1 = ApiMessage.FromJson(json1);
-                    if (apiMessage1.Code == 1001) {
-                        if (!StringUtils.isBlank(myphone_et_newphone.getText().toString().trim()) && MatcherUtil.isMobileNumber(myphone_et_newphone.getText().toString().trim())) {
-                            if (!StringUtils.isBlank(myphone_et_againnum.getText().toString().trim())) {
-                                RequestParams params1 = new RequestParams();
-                                params1.add("service", "mob");
-                                params1.add("phone", "" + myphone_et_newphone.getText().toString().trim());
-                                params1.add("code", "" + myphone_et_againnum.getText().toString().trim());
-                                AsyncHttpUtil.post(UrlInterface.Verify_URL, params1, new AsyncHttpResponseHandler() {
-                                    @Override
-                                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                                        String json = new String(bytes);
-                                        ApiMessage apiMessage = ApiMessage.FromJson(json);
-                                        if (apiMessage.Code == 1001) {
-                                            RequestParams params2 = new RequestParams();
-                                            params2.add("oldphone", "" + MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
-                                            params2.add("newphone", "" + myphone_et_newphone.getText().toString().trim());
-                                            params2.add("oldcode", "" + myphone_et_num.getText().toString().trim());
-                                            params2.add("newcode", "" + myphone_et_againnum.getText().toString().trim());
-                                            AsyncHttpUtil.post(UrlInterface.Modify_Bind_Phone_URL, params2, new AsyncHttpResponseHandler() {
-                                                @Override
-                                                public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                                                    String json3 = new String(bytes);
-                                                    ApiMessage apiMessage3 = ApiMessage.FromJson(json3);
-                                                    if (apiMessage3.Code == 1001) {
-                                                        Toast.makeText(MyPhoneActivity.this, "手机变更成功", Toast.LENGTH_LONG).show();
-                                                        finish();
-                                                    } else {
-                                                        Toast.makeText(MyPhoneActivity.this, "新手机号已经被使用，请使用密码直接登录！", Toast.LENGTH_LONG).show();
-                                                    }
-                                                }
+            if (!StringUtils.isBlank(myphone_et_newphone.getText().toString().trim()) && MatcherUtil.isMobileNumber(myphone_et_newphone.getText().toString().trim())) {
+                if (!StringUtils.isBlank(myphone_et_againnum.getText().toString().trim())) {
+                    RequestParams params2 = new RequestParams();
+                    params2.add("oldphone", "" + MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
+                    params2.add("newphone", "" + myphone_et_newphone.getText().toString().trim());
+                    params2.add("oldcode", "" + myphone_et_num.getText().toString().trim());
+                    params2.add("newcode", "" + myphone_et_againnum.getText().toString().trim());
+                    AsyncHttpUtil.post(UrlInterface.Modify_Bind_Phone_URL, params2, new AsyncHttpResponseHandler() {
 
-                                                @Override
-                                                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
-                                                }
-                                            });
-                                        } else {
-                                            Toast.makeText(MyPhoneActivity.this, "新手机验证码输入错误，请重新输入", Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
-                                    }
-                                });
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            String json3 = new String(bytes);
+                            ApiMessage apiMessage3 = ApiMessage.FromJson(json3);
+                            if (apiMessage3.Code == 1001) {
+                                Toast.makeText(MyPhoneActivity.this, "手机变更成功", Toast.LENGTH_LONG).show();
+                                finish();
                             } else {
-                                Toast.makeText(MyPhoneActivity.this, "新手机验证码不能为空，请重新输入", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MyPhoneActivity.this, "" + apiMessage3.Msg, Toast.LENGTH_LONG).show();
                             }
-                        } else {
-                            Toast.makeText(MyPhoneActivity.this, "您说的手机号码不正确。请重新输入", Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        Toast.makeText(MyPhoneActivity.this, "原手机验证码输入错误，请重新输入", Toast.LENGTH_LONG).show();
-                    }
-                }
 
-                @Override
-                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
 
+                        }
+                    });
+                } else {
+                    Toast.makeText(MyPhoneActivity.this, "新手机验证码不能为空，请重新输入", Toast.LENGTH_LONG).show();
                 }
-            });
+            } else {
+                Toast.makeText(MyPhoneActivity.this, "您说的手机号码不正确。请重新输入", Toast.LENGTH_LONG).show();
+            }
 
         } else {
             Toast.makeText(MyPhoneActivity.this, "请输入原手机验证码", Toast.LENGTH_LONG).show();

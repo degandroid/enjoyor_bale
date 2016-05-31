@@ -1,12 +1,15 @@
 package com.enjoyor.healthhouse.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +25,9 @@ import com.enjoyor.healthhouse.bean.RecordFat;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
+import com.enjoyor.healthhouse.url.JavaScriptInterface;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -68,8 +73,6 @@ public class BodyFragment extends BaseFragment {
     TextView qugan_zhifang;
     @Bind(R.id.healthvalue1)
     TextView healthvalue1;
-    @Bind(R.id.bp_fg_suggest)
-    TextView bp_fg_suggest;
     @Bind(R.id.left_zuobi_jirou)
     TextView left_zuobi_jirou;
     BodyReport bodyReport;
@@ -84,15 +87,57 @@ public class BodyFragment extends BaseFragment {
     TextView bca_pinggu_result;
     @Bind(R.id.bca_tizhong_result)
     TextView bca_tizhong_result;
+    @Bind(R.id.bp_fg_suggest)
+    TextView bp_fg_suggest;
+    @Bind(R.id.body_bo__web)
+    WebView body_bo__web;
+    private String url = "http://115.29.15.59/Content/statichtml/oxygen.html";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        progress();
         view = inflater.inflate(R.layout.body_fg_layout, null);
         ButterKnife.bind(this, view);
+        initWebview();
         initView();
         return view;
     }
+
+    private void initWebview() {
+        body_bo__web.getSettings().setDefaultTextEncodingName("utf-8");
+        body_bo__web.getSettings().setJavaScriptEnabled(true);
+        synCookies();//格式化写入cookie，需写在setJavaScriptEnabled之后
+        body_bo__web.setWebChromeClient(chromeClient);
+        body_bo__web.setWebViewClient(new WebViewClient() {// 让webView内的链接在当前页打开，不调用系统浏览器
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        JavaScriptInterface javaScriptInterface = new JavaScriptInterface();
+        body_bo__web.addJavascriptInterface(javaScriptInterface, "wyy");
+        body_bo__web.loadUrl(url);
+    }
+
+    private void synCookies() {
+        body_bo__web.setWebChromeClient(chromeClient);
+        body_bo__web.setWebViewClient(new WebViewClient() {// 让webView内的链接在当前页打开，不调用系统浏览器
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+    }
+
+    protected WebChromeClient chromeClient = new WebChromeClient() {
+        // js交互提示
+        public boolean onJsAlert(WebView view, String url, String message, android.webkit.JsResult result) {
+            return super.onJsAlert(view, url, message, result);
+        }
+    };
 
     private void initView() {
         RequestParams params = new RequestParams();
@@ -101,9 +146,11 @@ public class BodyFragment extends BaseFragment {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
+                drawpicture(json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     BCAFragmentbean bcaFragmentbean = JsonHelper.getJson(apiMessage.Data, BCAFragmentbean.class);
+                    cancel();
                     initView(bcaFragmentbean);
                     getInfo(bcaFragmentbean);
                 }
@@ -114,6 +161,23 @@ public class BodyFragment extends BaseFragment {
 
             }
         });
+    }
+
+    private void drawpicture(final String json) {
+        new Handler().postDelayed(new Runnable() {//异步传本地数据给网页
+            @Override
+            public void run() {
+                transferDataToWeb(json);
+            }
+        }, 1000);
+    }
+
+    private void transferDataToWeb(String json) {
+        if (body_bo__web != null) {
+            String info = StringUtils.centerString(json, "fatyear");
+            Log.i("==================+++", info);
+            body_bo__web.loadUrl("javascript:show_fate('" + info + "')");   //web网页中已添加了function show(json)方法
+        }
     }
 
     private void getInfo(BCAFragmentbean bcaFragmentbean) {
@@ -168,8 +232,6 @@ public class BodyFragment extends BaseFragment {
         if (rm != null) {
             bca_tizhong_result.setText(rm.getIdealWeight() + "");
         }
-
-
     }
 
 
@@ -213,6 +275,7 @@ public class BodyFragment extends BaseFragment {
             }
             layout2.addView(view);
         }
+        bp_fg_suggest.setText(bcaFragmentbean.getHealthSuggest());
 
     }
 
