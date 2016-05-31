@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <include layout="@layout/navigationbar_layout"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_distance"
+        android:background="@mipmap/bl_bg_unselected"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@mipmap/bl_bg_selected"
+            android:gravity="center"
+            android:text="列表"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/bt_curve"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/white_null"
+            android:gravity="center"
+            android:text="曲线"
+            android:textColor="@color/textcolor_body" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_background"
+
+        android:background="@color/color_line" />
+    <LinearLayout
+        android:id="@+id/ll_history_shengao"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_twotittle_one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="日期"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/color_line" />
+
+        <TextView
+            android:id="@+id/tv_twotittle_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="日期"
+            android:textColor="@color/textcolor_largetittle"
+            android:textSize="@dimen/textsize_smalltittle" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/bl_bg_wushuju" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_distance"
+            android:gravity="center"
+            android:text="我们的工程师们已经把表格准备好了，\n还不赶紧记录您的健康！" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/lv_bmi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+    <LinearLayout
+
+        android:id="@+id/ll_addweb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

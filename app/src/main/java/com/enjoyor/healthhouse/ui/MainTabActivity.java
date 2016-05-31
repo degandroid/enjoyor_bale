@@ -11,11 +11,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
+import com.enjoyor.healthhouse.application.MyApplication;
+import com.enjoyor.healthhouse.bean.UserInfo;
+import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.fragments.CommunityFragment;
 import com.enjoyor.healthhouse.fragments.HealthFragment;
 import com.enjoyor.healthhouse.fragments.HomeFragment;
 import com.enjoyor.healthhouse.fragments.MineFragment;
 import com.enjoyor.healthhouse.fragments.ServiceFragment;
+import com.enjoyor.healthhouse.net.ApiMessage;
+import com.enjoyor.healthhouse.net.AsyncHttpUtil;
+import com.enjoyor.healthhouse.net.JsonHelper;
+import com.enjoyor.healthhouse.url.UrlInterface;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,6 +55,8 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.tv_tab5)TextView tv_tab5;
 
     @Bind(R.id.ll_content)LinearLayout ll_content;
+
+    private String LOGIN_URL = "account/applogin.action";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +72,33 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
         initDefault();
         selectTab(1);
 
+        UserInfo userInfo = MyApplication.getInstance().getDBHelper().getUser();
+        if(userInfo!=null){
+            initData(userInfo);
+        }
+    }
+
+    private void initData(UserInfo userInfo){
+        RequestParams params = new RequestParams();
+        params.add("origin", String.valueOf("AndroidApp"));
+        params.add("userLoginName", userInfo.getLoginName());
+        params.add("userLoginPwd", userInfo.getUserLoginPwd());
+        params.add("userLoginType", String.valueOf("2"));
+        AsyncHttpUtil.post(UrlInterface.TEXT_URL + LOGIN_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                String json = new String(bytes);
+                ApiMessage apiMessage = ApiMessage.FromJson(json);
+                if (apiMessage.Code == 1001) {
+                    UserInfo user = JsonHelper.getJson(apiMessage.Data, UserInfo.class);
+                    BaseDate.setSessionId(MainTabActivity.this,user.getAccountId());
+                }
+            }
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+            }
+        });
     }
     private void selectTab(int key) {
         initImageTab();

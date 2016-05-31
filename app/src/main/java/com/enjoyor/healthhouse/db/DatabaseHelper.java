@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
+import com.enjoyor.healthhouse.bean.BMI;
 import com.enjoyor.healthhouse.bean.HealthRecord;
 import com.enjoyor.healthhouse.bean.UserInfo;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -39,6 +40,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTableIfNotExists(cs, UserInfo.class);
             TableUtils.createTableIfNotExists(cs, HealthRecord.class);
+            TableUtils.createTableIfNotExists(cs, BMI.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,6 +54,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
             TableUtils.dropTable(cs, UserInfo.class, true);
             TableUtils.dropTable(cs, HealthRecord.class, true);
+            TableUtils.dropTable(cs, BMI.class, true);
             onCreate(sd, cs);
 
         } catch (Exception e) {

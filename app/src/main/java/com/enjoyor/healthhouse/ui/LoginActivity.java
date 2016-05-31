@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPU_HISTORY, false);
         }
         if (getIntent().hasExtra(FROM_SUISHOUJI)) {
-            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_SUISHOUJI, false);
+            isFromBpInputActivity = getIntent().getBooleanExtra(FROM_SUISHOUJI, true);
         }
         navigation_name.setText("登陆");
         navigation_back.setVisibility(View.INVISIBLE);
