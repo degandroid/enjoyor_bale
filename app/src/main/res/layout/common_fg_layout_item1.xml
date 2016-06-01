@@ -1,48 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/common_fg_item_title"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/layout_distance_15dp"
-            android:text="为什么食物诱人却不健康,为什么食物诱人却不健康" />
+            android:layout_weight="2">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/common_fg_item_title"
-            android:padding="@dimen/layout_distance_15dp"
-            android:text="一天前" />
+            <TextView
+                android:id="@+id/common_fg_item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_distance_15dp"
+                android:text=""
+                android:textColor="@color/textcolor_smallittle"
+                android:textSize="@dimen/layout_distance_15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/common_fg_item_title"
-            android:padding="@dimen/layout_distance_15dp"
-            android:text="阅读量：1000" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/common_fg_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/common_fg_item_title"
+                android:padding="@dimen/layout_distance_15dp"
+                android:text="一天前"
+                android:textColor="@color/textcolor_body" />
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+            <TextView
+                android:id="@+id/common_fg_item_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/common_fg_item_title"
+                android:padding="@dimen/layout_distance_15dp"
+                android:text="阅读量：1000"
+                android:textColor="@color/textcolor_body" />
+        </RelativeLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:padding="@dimen/layout_distance_15dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_weight="1">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/common_fg_item_img1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/layout_distance_15dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginLeft="@dimen/layout_distance_15dp"
+    android:layout_marginRight="@dimen/layout_distance_15dp"
+    android:background="@color/color_line">
+
+    </View>
 </LinearLayout>

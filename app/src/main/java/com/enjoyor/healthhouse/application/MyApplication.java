@@ -6,6 +6,8 @@ import android.content.Context;
 import com.baidu.mapapi.SDKInitializer;
 import com.enjoyor.healthhouse.db.DBHelper;
 import com.enjoyor.healthhouse.utils.AppManagerUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * Created by YuanYuan on 2016/4/25.
@@ -22,6 +24,14 @@ public class MyApplication extends Application {
         instance = this;
         context = this.getApplicationContext();
         AppManagerUtil.getAppManager();
+        //imageloader配置参数
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration
+                .createDefault(this);
+        //创建默认的ImageLoader配置参数
+//        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(this)
+////                .writeDebugLogs() //打印log信息
+//                .build();
+        ImageLoader.getInstance().init(configuration);
     }
 
     public static Context getContext() {

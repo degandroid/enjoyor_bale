@@ -5,10 +5,13 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/communtity_fg_item3_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:text="为什么食物有人却不健康" />
+        android:text="为什么食物有人却不健康"
+        android:textColor="@color/textcolor_smallittle"
+        android:textSize="@dimen/layout_distance_15dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,6 +19,17 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/communtity_fg_item3_img1"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="18dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:layout_marginLeft="18dp"
+            android:id="@+id/communtity_fg_item3_img2"
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_weight="1"
@@ -23,14 +37,10 @@
             android:src="@mipmap/ic_launcher" />
 
         <ImageView
+            android:layout_marginLeft="18dp"
+            android:id="@+id/communtity_fg_item3_img3"
             android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher" />
-
-        <ImageView
-            android:layout_width="0dp"
+            android:layout_marginRight="18dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
@@ -43,18 +53,31 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/communtity_fg_item3_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="一天前" />
+            android:text="一天前"
+            android:textColor="@color/textcolor_body" />
 
         <TextView
+            android:id="@+id/communtity_fg_item3_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:padding="15dp"
-            android:text="阅读量：1000" />
+            android:text="阅读量：1000"
+            android:textColor="@color/textcolor_body" />
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/layout_distance_15dp"
+        android:layout_marginRight="@dimen/layout_distance_15dp"
+        android:background="@color/color_line">
+
+    </View>
 
 </LinearLayout>

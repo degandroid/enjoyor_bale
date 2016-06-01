@@ -1,11 +1,13 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.enjoyor.healthhouse.R;
@@ -14,6 +16,7 @@ import com.enjoyor.healthhouse.bean.InfoClassSelect;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
+import com.enjoyor.healthhouse.ui.CommunitityCommonActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -50,6 +53,7 @@ public class CommonFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.common_fg_layout, null);
         ButterKnife.bind(this, view);
+        progress();
         initData();
         return view;
     }
@@ -69,15 +73,10 @@ public class CommonFragment extends BaseFragment {
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     list = JsonHelper.getArrayJson(apiMessage.Data, InfoClassSelect.class);
-                    CommonFragmentAdapter commonFragmentAdapter1 = new CommonFragmentAdapter(getActivity(),list,R.layout.common_fg_layout_item1);
-                    CommonFragmentAdapter commonFragmentAdapter2 = new CommonFragmentAdapter(getActivity(),list,R.layout.common_fg_layout_item3);
-                    for (int i1 = 0; i1 < list.size(); i1++) {
-                        if (list.get(i1).getImages().size() == 1) {
-                            common_fg_lv.setAdapter(commonFragmentAdapter1);
-                        } else {
-                            common_fg_lv.setAdapter(commonFragmentAdapter2);
-                        }
-                    }
+                    CommonFragmentAdapter adapter = new CommonFragmentAdapter(getActivity(), list);
+                    common_fg_lv.setAdapter(adapter);
+                    cancel();
+                    onClick();
                 }
             }
 
@@ -86,12 +85,18 @@ public class CommonFragment extends BaseFragment {
 
             }
         });
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).getImages().size() == 1) {
-//                common_fg_lv.setAdapter(new CommonFragmentAdapter(getActivity(), list, R.layout.common_fg_layout_item1));
-//            } else {
-//                common_fg_lv.setAdapter(new CommonFragmentAdapter(getActivity(), list, R.layout.common_fg_layout_item3));
-//            }
-//        }
+    }
+
+    private void onClick() {
+        common_fg_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent_com = new Intent(getActivity(), CommunitityCommonActivity.class);
+                int i = list.get(position).getId();
+                Log.d("wyy====", i + "");
+                intent_com.putExtra("id", i);
+                CommonFragment.this.startActivity(intent_com);
+            }
+        });
     }
 }

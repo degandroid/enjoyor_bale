@@ -46,10 +46,19 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        progress();
         View view = inflater.inflate(R.layout.communtity_fg_layout, null);
         ButterKnife.bind(this, view);
         initData();//获取资讯文章分类
         return view;
+    }
+
+    private void initDefaultFragment() {
+        TextView textView = (TextView) communtity_group.getChildAt(0).findViewById(R.id.text);
+        ImageView imageView = (ImageView) communtity_group.getChildAt(0).findViewById(R.id.img);
+        textView.setTextColor(getResources().getColor(R.color.colorGreenYellow));
+        imageView.setVisibility(View.VISIBLE);
+        communtity_viewpager.setCurrentItem(0);
     }
 
     private void defaultGroup() {
@@ -74,6 +83,7 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
         final int count = communtity_group.getChildCount();
         for (int j = 0; j < count; j++) {
             final int finalJ = j;
+            communtity_group.getChildAt(j).setClickable(true);
             communtity_group.getChildAt(j).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -119,7 +129,9 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
                     initTab();
                     addFragment();
                     defaultGroup();
+                    initDefaultFragment();
                     initViewPager();
+                    cancel();
                 }
             }
 

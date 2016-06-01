@@ -10,12 +10,12 @@ public class InfoClassSelect {
 
     /**
      * classify : null
-     * id : 18
-     * images : []
-     * interval : 2016-05-18 09:56
-     * modifyTime : 2016-05-18 09:56:01
+     * id : 14
+     * images : [{"article":null,"createTime":null,"id":null,"path":"files/res/app/start/9e401363f556961bace7ac6cd6d108e9.jpg"}]
+     * interval : 2016-05-19 08:56
+     * modifyTime : 2016-05-19 08:56:37
      * pageViews : null
-     * title : 原发性高血压有哪些病因
+     * title : 瘦腰瘦肚子 瑜珈让您更有魅力
      */
 
     private Object classify;
@@ -24,7 +24,14 @@ public class InfoClassSelect {
     private String modifyTime;
     private Object pageViews;
     private String title;
-    private List<?> images;
+    /**
+     * article : null
+     * createTime : null
+     * id : null
+     * path : files/res/app/start/9e401363f556961bace7ac6cd6d108e9.jpg
+     */
+
+    private List<ImagesEntity> images;
 
     public Object getClassify() {
         return classify;
@@ -74,11 +81,50 @@ public class InfoClassSelect {
         this.title = title;
     }
 
-    public List<?> getImages() {
+    public List<ImagesEntity> getImages() {
         return images;
     }
 
-    public void setImages(List<?> images) {
+    public void setImages(List<ImagesEntity> images) {
         this.images = images;
+    }
+
+    public static class ImagesEntity {
+        private Object article;
+        private Object createTime;
+        private Object id;
+        private String path;
+
+        public Object getArticle() {
+            return article;
+        }
+
+        public void setArticle(Object article) {
+            this.article = article;
+        }
+
+        public Object getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(Object createTime) {
+            this.createTime = createTime;
+        }
+
+        public Object getId() {
+            return id;
+        }
+
+        public void setId(Object id) {
+            this.id = id;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
     }
 }

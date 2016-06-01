@@ -5,6 +5,8 @@
     android:orientation="vertical">
 
     <TextView
+        android:textSize="@dimen/layout_distance_15dp"
+        android:textColor="@color/textcolor_body"
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="50dp"
