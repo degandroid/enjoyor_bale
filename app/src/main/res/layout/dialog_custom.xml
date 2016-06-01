@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="20sp"
-    android:layout_marginRight="20sp"
     android:background="@drawable/bg_dialog"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_body"
         android:layout_width="match_parent"
@@ -16,6 +18,11 @@
         android:textColor="@color/textcolor_body"
         android:textSize="@dimen/textsize_largetittle" />
 
+    <LinearLayout
+        android:id="@+id/ll_button"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -53,5 +60,7 @@
             android:paddingBottom="@dimen/textsize_body"
             android:textColor="@color/textcolor_body"
             android:textSize="@dimen/textsize_largetittle" />
+    </LinearLayout>
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

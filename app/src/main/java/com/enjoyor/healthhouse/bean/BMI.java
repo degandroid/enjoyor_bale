@@ -14,7 +14,7 @@ public class BMI implements Parcelable {
     @DatabaseField(generatedId = true)
     Long id;
     @DatabaseField
-    Double height;
+    Double bmi;
     @DatabaseField
     String recordTime;
     @DatabaseField
@@ -28,12 +28,12 @@ public class BMI implements Parcelable {
         this.id = id;
     }
 
-    public Double getHeight() {
-        return height;
+    public Double getBmi() {
+        return bmi;
     }
 
-    public void setHeight(Double height) {
-        this.height = height;
+    public void setBmi(Double bmi) {
+        this.bmi = bmi;
     }
 
     public String getRecordTime() {
@@ -60,7 +60,7 @@ public class BMI implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.id);
-        dest.writeValue(this.height);
+        dest.writeValue(this.bmi);
         dest.writeString(this.recordTime);
         dest.writeString(this.createTime);
     }
@@ -70,7 +70,7 @@ public class BMI implements Parcelable {
 
     protected BMI(Parcel in) {
         this.id = (Long) in.readValue(Long.class.getClassLoader());
-        this.height = (Double) in.readValue(Double.class.getClassLoader());
+        this.bmi = (Double) in.readValue(Double.class.getClassLoader());
         this.recordTime = in.readString();
         this.createTime = in.readString();
     }

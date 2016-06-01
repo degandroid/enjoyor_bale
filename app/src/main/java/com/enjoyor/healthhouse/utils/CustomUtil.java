@@ -3,9 +3,10 @@ package com.enjoyor.healthhouse.utils;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.net.ApiMessage;
@@ -22,16 +23,18 @@ import org.apache.http.Header;
 public class CustomUtil {
     public static Dialog dialog;
 
-    public static boolean saveHealthInfo(final Context context,String url,RequestParams params) {
+    public static boolean saveHealthInfo(final Context context,String url,RequestParams params,final CoordinatorLayout container) {
         AsyncHttpUtil.post(UrlInterface.TEXT_URL + url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
-                    Toast.makeText(context,"数据保存成功",Toast.LENGTH_LONG).show();
+                    Snackbar.make(container, "数据保存成功", Snackbar.LENGTH_SHORT).show();
+//                    Toast.makeText(context,"数据保存成功",Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(context,"数据保存失败",Toast.LENGTH_LONG).show();
+                    Snackbar.make(container,"数据保存失败",Snackbar.LENGTH_SHORT).show();
+//                    Toast.makeText(context,"数据保存失败",Toast.LENGTH_LONG).show();
                 }
             }
 

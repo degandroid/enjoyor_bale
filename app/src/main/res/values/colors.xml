@@ -40,4 +40,12 @@
     <color name="tab_red">#FD6962</color>
     <color name="healthrecord_bg">#fd6962</color>
 
+    <color name="color_pianshou_one">#69dcfc</color>
+    <color name="color_pianshou_two">#55d6fa</color>
+    <color name="color_zhenchang_three">#b4d658</color>
+    <color name="color_chaozhong_four">#f6f84a</color>
+    <color name="color_feipang_five">#fb7c55</color>
+    <color name="color_feipang_six">#fd6a3e</color>
+    <color name="color_feipang_seven">#fe4f1a</color>
+
 </resources>

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
@@ -93,6 +94,8 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.bpinput_save)
     TextView bpinput_save;
 
+    @Bind(R.id.container)CoordinatorLayout container;
+
     private int fromWhere;
     private int CHOICE_DATE = 1;
     private int CHOICE_TIME = 2;
@@ -157,14 +160,14 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                         params_xueya.add("hours", hours);
                         params_xueya.add("systolicPressure", systolicPressure);
                         params_xueya.add("diastolicPressure", diastolicPressure);
-                        CustomUtil.saveHealthInfo(context, BP_URL, params_xueya);
+                        CustomUtil.saveHealthInfo(context, BP_URL, params_xueya,container);
                         break;
                     case Constant.FROM_SHENGAO:
                         RequestParams params_shengao = new RequestParams();
                         params_shengao.add("userId", userId);
                         params_shengao.add("times", times);
                         params_shengao.add("height", height);
-                        CustomUtil.saveHealthInfo(context, BMI_URL, params_shengao);
+                        CustomUtil.saveHealthInfo(context, BMI_URL, params_shengao,container);
                         break;
                     case Constant.FROM_XUETANG:
                         RequestParams params = new RequestParams();
@@ -172,56 +175,46 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                         params.add("times", times);
                         params.add("bloodSugar", bloodSugar);
                         params.add("type", type);
-                        CustomUtil.saveHealthInfo(context, BS_URL, params);
+                        CustomUtil.saveHealthInfo(context, BS_URL, params,container);
                         break;
                     case Constant.FROM_XUEYANG:
                         RequestParams params_xueyang = new RequestParams();
                         params_xueyang.add("userId", userId);
                         params_xueyang.add("times", times);
                         params_xueyang.add("bo", bo);
-                        CustomUtil.saveHealthInfo(context, BO_URL, params_xueyang);
+                        CustomUtil.saveHealthInfo(context, BO_URL, params_xueyang,container);
                         break;
                     case Constant.FROM_YAOWEI:
                         RequestParams params_yaowei = new RequestParams();
                         params_yaowei.add("userId", userId);
                         params_yaowei.add("times", times);
                         params_yaowei.add("waistLine", waistLine);
-                        CustomUtil.saveHealthInfo(context, WL_URL, params_yaowei);
+                        CustomUtil.saveHealthInfo(context, WL_URL, params_yaowei,container);
                         break;
                     case Constant.FROM_TIZHONG:
                         RequestParams params_tizhong = new RequestParams();
                         params_tizhong.add("userId", userId);
                         params_tizhong.add("times", times);
                         params_tizhong.add("weight", weight);
-                        CustomUtil.saveHealthInfo(context, BMI_URL, params_tizhong);
+                        CustomUtil.saveHealthInfo(context, BMI_URL, params_tizhong,container);
                         break;
                     case Constant.FROM_TIWEN:
                         RequestParams params_tiwen = new RequestParams();
                         params_tiwen.add("userId", userId);
                         params_tiwen.add("times", times);
                         params_tiwen.add("temperature", temperature);
-                        CustomUtil.saveHealthInfo(context, TP_URL, params_tiwen);
+                        CustomUtil.saveHealthInfo(context, TP_URL, params_tiwen,container);
                         break;
                     case Constant.FROM_XINDIAN:
                         RequestParams params_xindian = new RequestParams();
                         params_xindian.add("userId", userId);
                         params_xindian.add("times", times);
                         params_xindian.add("ecg", ecg);
-                        CustomUtil.saveHealthInfo(context, ECG_URL, params_xindian);
+                        CustomUtil.saveHealthInfo(context, ECG_URL, params_xindian,container);
                         break;
                 }
             } else {
-                dialog(context, "时间或日期未选择", "取消", "确定", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        disappear();
-                    }
-                }, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        disappear();
-                    }
-                });
+                dialog(context, "时间或日期未选择");
             }
 
         }else{
@@ -654,7 +647,8 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 view.invalidate();
             }
             else{
-                Toast.makeText(context, "超出范围", Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "超出范围", Toast.LENGTH_LONG).show();
+                Snackbar.make(container, "超出范围", Snackbar.LENGTH_LONG).show();
                 return;
             }
         } else {
@@ -670,7 +664,8 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 view.invalidate();
             }
             else{
-                Toast.makeText(context,"超出范围",Toast.LENGTH_LONG).show();
+//                Toast.makeText(context,"超出范围",Toast.LENGTH_LONG).show();
+                Snackbar.make(container, "超出范围", Snackbar.LENGTH_LONG).show();
             }
         }
 

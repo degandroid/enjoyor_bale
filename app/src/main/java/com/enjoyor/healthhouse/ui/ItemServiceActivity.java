@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
@@ -84,6 +86,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
     LinearLayout ll_info;
     @Bind(R.id.tv_infonumber)
     TextView tv_infonumber;
+    @Bind(R.id.tv_infotext)TextView tv_infotext;
     @Bind(R.id.tv_recalculation)
     TextView tv_recalculation;
 
@@ -123,6 +126,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
     TextView tv_cancel;//取消
     @Bind(R.id.bt_jisuan)
     Button bt_jisuan;
+    @Bind(R.id.container)CoordinatorLayout container;
 
     private PopupWindow pw;
     ObjectAnimator objectAnimator;
@@ -134,6 +138,14 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
     private int TO_KALULI = 1;
     private String FOOD_URL = "app/food/search.do";
 
+    private int standard = 1;
+    private final int CHINA_STANDARD = 1;
+    private final int INTERNATIONAL_STANDARD = 2;
+    private final int JAPAN_STANDARD = 3;
+    private final int SINJAPORE_STANDARD = 4;
+
+    private int from;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +154,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         ButterKnife.bind(this);
         initHead();
         if (getIntent().hasExtra("from")) {
-            int from = getIntent().getIntExtra("from", 0);
+            from = getIntent().getIntExtra("from", 0);
             if (from == TO_BMI) {
                 ll_bmi.setVisibility(View.VISIBLE);
                 ll_kaluli.setVisibility(View.GONE);
@@ -151,6 +163,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 ll_bmi.setVisibility(View.GONE);
                 ll_kaluli.setVisibility(View.VISIBLE);
                 re_tosearch.setVisibility(View.VISIBLE);
+                tv_right.setVisibility(View.INVISIBLE);
                 initKaLuLi();
             }
         }
@@ -168,6 +181,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
@@ -407,7 +421,8 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
             view.setSelectedValue(value_int + "");
             view.invalidate();
         } else {
-            Toast.makeText(context, "超出范围", Toast.LENGTH_LONG).show();
+            Snackbar.make(container, "超出范围", Snackbar.LENGTH_SHORT).show();
+//            Toast.makeText(context, "超出范围", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -441,7 +456,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.tv_right:
-                Intent intent = new Intent(ItemServiceActivity.this,BMIActivity.class);
+                Intent intent = new Intent(ItemServiceActivity.this, BMIActivity.class);
                 startActivity(intent);
                 /*历史*/
                 break;
@@ -449,6 +464,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 selectType();
                 break;
             case R.id.tv_zhongguo:
+                standard = CHINA_STANDARD;
                 if (pw != null && pw.isShowing()) {
                     pw.dismiss();
                 }
@@ -456,6 +472,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 tv_select.setText(tv.getText());
                 break;
             case R.id.tv_guoji:
+                standard = INTERNATIONAL_STANDARD;
                 if (pw != null && pw.isShowing()) {
                     pw.dismiss();
                 }
@@ -463,6 +480,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 tv_select.setText(tv1.getText());
                 break;
             case R.id.tv_riben:
+                standard = JAPAN_STANDARD;
                 if (pw != null && pw.isShowing()) {
                     pw.dismiss();
                 }
@@ -470,6 +488,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 tv_select.setText(tv2.getText());
                 break;
             case R.id.tv_xinjiapo:
+                standard = SINJAPORE_STANDARD;
                 if (pw != null && pw.isShowing()) {
                     pw.dismiss();
                 }
@@ -500,22 +519,22 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 if (getNumber() == 1) {
                     float a = Float.parseFloat(kaluli);
                     DecimalFormat df = new DecimalFormat("###.000");
-                    et_jiaoer.setText(df.format(a/4.184));
-                }else if(getNumber() == 2){
+                    et_jiaoer.setText(df.format(a / 4.184));
+                } else if (getNumber() == 2) {
                     float a = Float.parseFloat(jiaoer);
                     DecimalFormat df = new DecimalFormat("###.000");
-                    et_kaluli.setText(df.format(a*4.184));
+                    et_kaluli.setText(df.format(a * 4.184));
                 }
                 break;
         }
     }
 
     private int getNumber() {
-        if (!StringUtils.isBlank(et_kaluli.getText().toString().toString())&&et_kaluli.isFocused()) {
+        if (!StringUtils.isBlank(et_kaluli.getText().toString().toString()) && et_kaluli.isFocused()) {
             kaluli = et_kaluli.getText().toString().toString();
 
             return 1;
-        } else if (!StringUtils.isBlank(et_jiaoer.getText().toString().toString())&&et_jiaoer.isFocused()) {
+        } else if (!StringUtils.isBlank(et_jiaoer.getText().toString().toString()) && et_jiaoer.isFocused()) {
             jiaoer = et_jiaoer.getText().toString().toString();
             return 2;
         }
@@ -529,23 +548,110 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         DecimalFormat fnum = new DecimalFormat("##0.0");
         String value = fnum.format(a);
         tv_infonumber.setText(value);
+        switch (standard) {
+            case CHINA_STANDARD:
+                if (a <= 18.4) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+                    tv_infotext.setText("（偏瘦）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+                } else if (a <= 23.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+                    tv_infotext.setText("（正常）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+                } else if (a <= 27.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+                    tv_infotext.setText("（过重）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+                } else {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_five));
+                    tv_infotext.setText("（肥胖）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_five));
+                }
+                break;
+            case INTERNATIONAL_STANDARD:
+                if (a <= 16.4) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_one));
+                    tv_infotext.setText("（极瘦）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_one));
+                } else if (a <= 18.4) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+                    tv_infotext.setText("（偏瘦）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+                } else if (a <= 24.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+                    tv_infotext.setText("（正常）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+                } else if (a <= 29.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+                    tv_infotext.setText("（过重）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+                } else if (a <= 34.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_five));
+                    tv_infotext.setText("（1类肥胖）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_five));
+                } else if (a <= 39.0) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_six));
+                    tv_infotext.setText("（2类肥胖）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_six));
+                } else {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_seven));
+                    tv_infotext.setText("（3类肥胖）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_seven));
+                }
+                break;
+            case JAPAN_STANDARD:
+                if (a <= 18.4) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+                    tv_infotext.setText("（偏瘦）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+                } else if (a <= 22.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+                    tv_infotext.setText("（正常）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+                } else if (a <= 24.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+                    tv_infotext.setText("（过重）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+                } else {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_five));
+                    tv_infotext.setText("（肥胖）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_five));
+                }
+                break;
+            case SINJAPORE_STANDARD:
+                if (a <= 14.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_one));
+                    tv_infotext.setText("（极瘦）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_one));
+                } else if (a <= 18.4) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+                    tv_infotext.setText("（偏瘦）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+                } else if (a <= 22.9) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+                    tv_infotext.setText("（正常）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+                } else if (a <= 27.5) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+                    tv_infotext.setText("（过重）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+                } else if (a <= 40.0) {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_five));
+                    tv_infotext.setText("（肥胖）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_five));
+                } else {
+                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_six));
+                    tv_infotext.setText("（非常肥胖）");
+                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_six));
+                }
+                break;
+        }
         String time = DateUtil.longToDateString(DateUtil.getCurrentTime(), "yyyy-MM-dd hh:mm:ss");
-//        if(MyApplication.getInstance().getDBHelper().getBMI()==null){
-            BMI _bmi = new BMI();
-            _bmi.setRecordTime(time);
-            _bmi.setCreateTime(time);
-            _bmi.setHeight(Double.parseDouble(value));
-            MyApplication.getInstance().getDBHelper().saveBMI(_bmi);
-//        }
-//        else{
-////            List<BMI> _bmi = MyApplication.getInstance().getDBHelper().getBMI();
-//            BMI _bmi = new BMI();
-//
-//            _bmi.setRecordTime(time);
-//            _bmi.setCreateTime(time);
-//            _bmi.setHeight(Double.parseDouble(value));
-//            MyApplication.getInstance().getDBHelper().saveBMI(_bmi);
-//        }
+        BMI _bmi = new BMI();
+        _bmi.setRecordTime(time);
+        _bmi.setCreateTime(time);
+        _bmi.setBmi(Double.parseDouble(value));
+        MyApplication.getInstance().getDBHelper().saveBMI(_bmi);
 
     }
 
@@ -557,7 +663,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         params.add("pageNum", count);
         params.add("pageCount", "10");
 
-        Log.i("searchName", name+count);
+        Log.i("searchName", name + count);
         AsyncHttpUtil.get(UrlInterface.TEXT_URL + FOOD_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -571,8 +677,12 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                         initListView();
                     } else {
                         xlv_food.setVisibility(View.GONE);
-                        if(name!=null){
-                            Toast.makeText(ItemServiceActivity.this,"该食物暂时未录入！！",Toast.LENGTH_LONG).show();
+                        if (name != null) {
+                            /*软件盘显示则隐藏，隐藏则显示*/
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                            Snackbar.make(container, "该食物暂时未录入", Snackbar.LENGTH_SHORT).show();
+//                            Toast.makeText(ItemServiceActivity.this, "该食物暂时未录入！！", Toast.LENGTH_LONG).show();
                         }
                     }
 

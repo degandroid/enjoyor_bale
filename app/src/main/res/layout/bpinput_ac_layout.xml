@@ -8,6 +8,11 @@
     android:orientation="vertical">
 
     <include layout="@layout/navigationbar_layout"></include>
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -266,7 +271,7 @@ android:visibility="gone"
                     android:layout_toLeftOf="@id/bpinput_arrow"
                     android:gravity="center"
                     android:text="请选择"
-                    android:textSize="30px" />
+                    android:textSize="@dimen/textsize_smalltittle" />
             </RelativeLayout>
 
             <TextView
@@ -384,5 +389,5 @@ android:visibility="gone"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/textsize_largetittle" />
     </LinearLayout>
-
+</android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

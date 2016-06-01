@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Administrator on 2016/5/31.
  */
-public class BMIActivity extends BaseActivity implements View.OnClickListener{
+public class BMIActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.navigation_name)
     TextView navigation_name;
     @Bind(R.id.tv_right)
@@ -68,9 +68,16 @@ public class BMIActivity extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.activity_bmi);
         ButterKnife.bind(this);
         initHead();
-        if(MyApplication.getInstance().getDBHelper().getBMI()!=null){
-            List<BMI> _list =MyApplication.getInstance().getDBHelper().getBMI();
-            bmi_list.addAll(_list);
+        if (MyApplication.getInstance().getDBHelper().getBMI() != null) {
+            List<BMI> _list = MyApplication.getInstance().getDBHelper().getBMI();
+            if(_list.size()>10){
+                for(int i=0;i<10;i++){
+                    bmi_list.add(_list.get(_list.size()-11+i));
+                }
+            }else{
+                bmi_list.addAll(_list);
+            }
+
             lv_bmi.setAdapter(new BMIAdapter());
             initWeb();
         }
@@ -92,6 +99,7 @@ public class BMIActivity extends BaseActivity implements View.OnClickListener{
         ll_history_shengao.setVisibility(View.VISIBLE);
 
     }
+
     private void initWeb() {
         WebSettings webSettings = webView.getSettings();
         webSettings.setSavePassword(false);
@@ -118,6 +126,7 @@ public class BMIActivity extends BaseActivity implements View.OnClickListener{
             Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
         }
     }
+
     private void selectDisplay(int which) {
         if (1 == which) {
             bt_list.setBackgroundResource(R.mipmap.bl_bg_selected);
@@ -171,7 +180,7 @@ public class BMIActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    class BMIAdapter extends BaseAdapter{
+    class BMIAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -191,35 +200,51 @@ public class BMIActivity extends BaseActivity implements View.OnClickListener{
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
-            if(convertView == null){
-                convertView = LayoutInflater.from(BMIActivity.this).inflate(R.layout.item_history_shengao,null);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(BMIActivity.this).inflate(R.layout.item_history_shengao, null);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
-            }else{
+            } else {
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.tv_two_one.setText(bmi_list.get(position).getCreateTime() + "");
-            holder.tv_two_two.setText(bmi_list.get(position).getHeight() + "");
+            holder.tv_two_two.setText(bmi_list.get(position).getBmi() + "");
+            Double a = bmi_list.get(position).getBmi();
+            if (a <= 16.4) {
+                holder.tv_two_two.setTextColor(getResources().getColor(R.color.color_pianshou_one));
+            } else if (a <= 18.4) {
+                holder.tv_two_two.setTextColor(getResources().getColor(R.color.color_pianshou_two));
+            } else if (a <= 24.9) {
+                holder.tv_two_two.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
+            } else if (a <= 29.9) {
+                holder.tv_two_two.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
+            } else if (a <= 34.9) {
+                holder.tv_two_two.setTextColor(getResources().getColor(R.color.color_feipang_five));
+            } else if (a <= 39.0) {
+                holder.tv_two_two.setTextColor(getResources().getColor(R.color.color_feipang_six));
+            } else {
+                holder.tv_two_two.setTextColor(getResources().getColor(R.color.color_feipang_seven));
+            }
             return convertView;
         }
-        class ViewHolder{
+
+        class ViewHolder {
             @Bind(R.id.tv_two_one)
             TextView tv_two_one;
             @Bind(R.id.tv_two_two)
             TextView tv_two_two;
-            ViewHolder(View view){
-                ButterKnife.bind(this,view);
+
+            ViewHolder(View view) {
+                ButterKnife.bind(this, view);
             }
         }
     }
 
 
-
     public void sendInfoToJs() {
         String date = JSON.toJSONString(bmi_list);
-        webView.loadUrl("javascript:show_height('" + date + "')");
+        webView.loadUrl("javascript:show_BMI('" + date + "')");
     }
-
 
 
 }

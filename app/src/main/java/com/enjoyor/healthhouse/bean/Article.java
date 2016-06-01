@@ -6,6 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/5/12.
  */
 public class Article {
+    private int id;
     private String modifyTime;// 最后修改时间
     private int pageViews;// 浏览量
     private int sort;//排序
@@ -29,6 +30,14 @@ public class Article {
                 ", sort=" + sort +
                 ", title='" + title + '\'' +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getInterval() {

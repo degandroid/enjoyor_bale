@@ -53,6 +53,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
     TextView tv_username;
     @Bind(R.id.xlv_healthfile)
     XListView xlv_healthfile;
+    @Bind(R.id.ll_display)LinearLayout ll_display;
 
     private List<HealthFileInfo.HealthFileList> healthFileList = new ArrayList<>();
 
@@ -99,18 +100,18 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
 
             @Override
             public void afterTextChanged(Editable s) {
-                healthFileList.clear();
-                select_edit = s.toString();
-                getDate(1, select_edit, select_type);
+                if(StringUtils.isBlank(s.toString())){
+                    ll_display.setVisibility(View.VISIBLE);
+                }else{
+                    ll_display.setVisibility(View.GONE);
+                    healthFileList.clear();
+                    select_edit = s.toString();
+                    getDate(1, select_edit, select_type);
+                }
+
             }
         });
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        getDate(1, select_edit, select_type);
-//    }
 
     private void getDate(int i, String compName, String type) {
         long _userId = MyApplication.getInstance().getDBHelper().getUser().getUserId();
@@ -132,21 +133,23 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 String json = new String(bytes);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
+                    xlv_healthfile.setVisibility(View.VISIBLE);
                     HealthFileInfo healthFileInfo = JsonHelper.getJson(apiMessage.Data, HealthFileInfo.class);
                     List<HealthFileInfo.HealthFileList> _list = healthFileInfo.getRecordList();
                     healthFileList.addAll(_list);
-                    if (healthFileList!=null) {
+                    if (healthFileList!=null&&healthFileList.size()>0) {
                         initListView();
                     }else{
                         xlv_healthfile.setVisibility(View.GONE);
                     }
                 } else {
+                    xlv_healthfile.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
+                xlv_healthfile.setVisibility(View.GONE);
             }
         });
     }

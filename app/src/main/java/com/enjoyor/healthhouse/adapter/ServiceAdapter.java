@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.bean.ServiceInfo;
@@ -80,7 +79,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 if(position == 2){
-                    Toast.makeText(mContext, "暂未开放。。。", Toast.LENGTH_LONG).show();
+//                    Snackbar.make(container,"敬请期待。。。",Snackbar.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "敬请期待。。。", Toast.LENGTH_LONG).show();
                 }else {
                     Intent intent = new Intent(mContext, ItemServiceActivity.class);
                     intent.putExtra("from", position);
