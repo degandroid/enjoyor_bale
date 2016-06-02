@@ -7,7 +7,7 @@
     <include layout="@layout/navigationbar_layout"></include>
 
     <ListView
-        android:id="@+id/mynotes_lv"
+        android:id="@+id/lv_mynote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

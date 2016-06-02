@@ -1,9 +1,11 @@
 package com.enjoyor.healthhouse.ui;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +55,8 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
     TextView tv_username;
     @Bind(R.id.xlv_healthfile)
     XListView xlv_healthfile;
-    @Bind(R.id.ll_display)LinearLayout ll_display;
+    @Bind(R.id.ll_display)
+    LinearLayout ll_display;
 
     private List<HealthFileInfo.HealthFileList> healthFileList = new ArrayList<>();
 
@@ -78,10 +81,12 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
         setContentView(R.layout.activity_healthfile);
         ButterKnife.bind(this);
         initHead();
-        if (MyApplication.getInstance().getDBHelper().getUser().getLoginName() != null) {
+        if (MyApplication.getInstance().getDBHelper().getUser().getUserName() != null) {
+            tv_username.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
+        } else {
             tv_username.setText(MyApplication.getInstance().getDBHelper().getUser().getLoginName());
         }
-        getDate(1, select_edit, select_type);
+        getDate(count, select_edit, select_type);
     }
 
     private void initHead() {
@@ -100,32 +105,33 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(StringUtils.isBlank(s.toString())){
+                if (StringUtils.isBlank(s.toString())) {
                     ll_display.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     ll_display.setVisibility(View.GONE);
-                    healthFileList.clear();
-                    select_edit = s.toString();
-                    getDate(1, select_edit, select_type);
                 }
+                healthFileList.clear();
+                select_edit = s.toString();
+                count = 1;
+                getDate(count, select_edit, select_type);
 
             }
         });
     }
 
-    private void getDate(int i, String compName, String type) {
+    private void getDate(int count, String compName, String type) {
         long _userId = MyApplication.getInstance().getDBHelper().getUser().getUserId();
         if (!StringUtils.isBlank(_userId + "")) {
             userId = MyApplication.getInstance().getDBHelper().getUser().getUserId() + "";
         }
         RequestParams params = new RequestParams();
         params.add("userId", userId);
-        params.add("paging", "true");
         params.add("pageMethod", "2");
-        params.add("pageNum", i + "");
-        params.add("pageCount", "10");
+        params.add("pageNum", count + "");
+        params.add("pageCount", 6 + "");
         params.add("compName", compName);
         params.add("type", type);
+        Log.i("count", userId + "-----" + count + "-----" + select_edit + "-----" + select_type);
         AsyncHttpUtil.get(UrlInterface.TEXT_URL + HEALTHFILE_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -136,20 +142,31 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                     xlv_healthfile.setVisibility(View.VISIBLE);
                     HealthFileInfo healthFileInfo = JsonHelper.getJson(apiMessage.Data, HealthFileInfo.class);
                     List<HealthFileInfo.HealthFileList> _list = healthFileInfo.getRecordList();
-                    healthFileList.addAll(_list);
-                    if (healthFileList!=null&&healthFileList.size()>0) {
-                        initListView();
+//                    healthFileList.clear();
+                    if (_list != null&&_list.size()>0) {
+                        healthFileList.addAll(_list);
+                        if (healthFileList.size() > 0) {
+                            initListView();
+                        } else {
+                            xlv_healthfile.setVisibility(View.GONE);
+                        }
+                    }
+                } else {
+                    if(healthFileList.size()>0){
+                        xlv_healthfile.setVisibility(View.VISIBLE);
                     }else{
                         xlv_healthfile.setVisibility(View.GONE);
                     }
-                } else {
-                    xlv_healthfile.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                xlv_healthfile.setVisibility(View.GONE);
+                if(healthFileList.size()>0){
+                    xlv_healthfile.setVisibility(View.VISIBLE);
+                }else{
+                    xlv_healthfile.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -159,8 +176,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
         xlv_healthfile.setPullLoadEnable(true);
         xlv_healthfile.setXListViewListener(this);
         xlv_healthfile.setAdapter(new HealthFileAdapter());
-
-        xlv_healthfile.setSelection((count - 1) * 10);
+        xlv_healthfile.setSelection((count - 1) * 6);
     }
 
     @Override
@@ -170,8 +186,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
 
     @Override
     public void onLoadMore() {
-        ++count;
-        getDate(count, select_edit, select_type);
+        getDate(++count, select_edit, select_type);
     }
 
     public void stops() {
@@ -215,7 +230,8 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 select_type = TYPE_ZICE;
                 TextView tv = (TextView) v;
                 tv_select.setText(tv.getText());
-                getDate(1, select_edit, select_type);
+                count = 1;
+                getDate(count, select_edit, select_type);
                 break;
             case R.id.tv_tijian:
                 healthFileList.clear();
@@ -224,8 +240,8 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 }
                 select_type = TYPE_TIJIAN;
                 TextView tv1 = (TextView) v;
-                tv_select.setText(tv1.getText());
-                getDate(1, select_edit, select_type);
+                count = 1;
+                getDate(count, select_edit, select_type);
                 break;
             case R.id.tv_suishouji:
                 healthFileList.clear();
@@ -235,7 +251,8 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 select_type = TYPE_SUISHOUJI;
                 TextView tv2 = (TextView) v;
                 tv_select.setText(tv2.getText());
-                getDate(1, select_edit, select_type);
+                count = 1;
+                getDate(count, select_edit, select_type);
                 break;
         }
     }
@@ -258,7 +275,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(HealthFileActivity.this).inflate(R.layout.item_historyfile, null);
@@ -268,20 +285,6 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            int type = healthFileList.get(position).getType();
-            if (type == Constant.TYPE_TIJIAN) {
-                holder.iv_circle.setImageResource(R.mipmap.bl_icon_hongyuan);
-                holder.ll_bg.setBackgroundResource(R.mipmap.bl_bg_tijian);
-                holder.iv_display.setImageResource(R.mipmap.bl_icon_sel_dingwei);
-            } else if (type == Constant.TYPE_ZICE) {
-                holder.iv_circle.setImageResource(R.mipmap.bl_icon_lvyuan);
-                holder.ll_bg.setBackgroundResource(R.mipmap.bl_bg_zice);
-                holder.iv_display.setImageResource(R.mipmap.bl_icon_sel_zijian);
-            } else if (type == Constant.TYPE_SUISHOUJI) {
-                holder.iv_circle.setImageResource(R.mipmap.bl_icon_lanyuan);
-                holder.ll_bg.setBackgroundResource(R.mipmap.bl_bg_suishouji);
-                holder.iv_display.setImageResource(R.mipmap.bl_icon_sel_xiangji);
-            }
             String str = healthFileList.get(position).getRecordTime();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             try {
@@ -291,7 +294,48 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            holder.tv_info.setText(healthFileList.get(position).getAddressName());
+            int type = healthFileList.get(position).getType();
+            if (type == Constant.TYPE_TIJIAN) {
+                holder.iv_circle.setImageResource(R.mipmap.bl_icon_hongyuan);
+                holder.ll_bg.setBackgroundResource(R.mipmap.bl_bg_tijian);
+                holder.iv_display.setImageResource(R.mipmap.bl_icon_sel_dingwei);
+                holder.tv_info.setText(healthFileList.get(position).getAddressName());
+                holder.ll_bg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HealthFileActivity.this,MyRecordActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+            } else if (type == Constant.TYPE_ZICE) {
+                holder.iv_circle.setImageResource(R.mipmap.bl_icon_lvyuan);
+                holder.ll_bg.setBackgroundResource(R.mipmap.bl_bg_zice);
+                holder.iv_display.setImageResource(R.mipmap.bl_icon_sel_zijian);
+                holder.tv_info.setText("个人自测");
+                holder.ll_bg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HealthFileActivity.this, MyNotesActivity.class);
+                        intent.putExtra("recordId",healthFileList.get(position).getRecordId());
+                        startActivity(intent);
+                    }
+                });
+            } else if (type == Constant.TYPE_SUISHOUJI) {
+                holder.iv_circle.setImageResource(R.mipmap.bl_icon_lanyuan);
+                holder.ll_bg.setBackgroundResource(R.mipmap.bl_bg_suishouji);
+                holder.iv_display.setImageResource(R.mipmap.bl_icon_sel_xiangji);
+                holder.tv_info.setText(healthFileList.get(position).getAddressName());
+                holder.ll_bg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HealthFileActivity.this, MySelfCheckActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+
             return convertView;
         }
 

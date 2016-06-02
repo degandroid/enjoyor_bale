@@ -27,6 +27,7 @@ import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.ui.BPInputActivity;
+import com.enjoyor.healthhouse.ui.CommunitityCommonActivity;
 import com.enjoyor.healthhouse.ui.NotesActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
@@ -127,8 +128,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         lv_information.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
+                Intent intent = new Intent(getActivity(), CommunitityCommonActivity.class);
+                intent.putExtra("id",article.get(position-1).getId());
+                startActivity(intent);
             }
         });
     }

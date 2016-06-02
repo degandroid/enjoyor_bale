@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
@@ -84,11 +89,15 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
 
     @Bind(R.id.ll_info)
     LinearLayout ll_info;
-    @Bind(R.id.tv_infonumber)
-    TextView tv_infonumber;
-    @Bind(R.id.tv_infotext)TextView tv_infotext;
+    //    @Bind(R.id.tv_infonumber)
+//    TextView tv_infonumber;
+//    @Bind(R.id.tv_infotext)TextView tv_infotext;
     @Bind(R.id.tv_recalculation)
     TextView tv_recalculation;
+
+    @Bind(R.id.webView)
+    WebView webView;
+
 
     private int FIRST_RULE = 1;
     private int SECOND_RULE = 2;
@@ -126,7 +135,8 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
     TextView tv_cancel;//取消
     @Bind(R.id.bt_jisuan)
     Button bt_jisuan;
-    @Bind(R.id.container)CoordinatorLayout container;
+    @Bind(R.id.container)
+    CoordinatorLayout container;
 
     private PopupWindow pw;
     ObjectAnimator objectAnimator;
@@ -138,13 +148,16 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
     private int TO_KALULI = 1;
     private String FOOD_URL = "app/food/search.do";
 
-    private int standard = 1;
-    private final int CHINA_STANDARD = 1;
-    private final int INTERNATIONAL_STANDARD = 2;
-    private final int JAPAN_STANDARD = 3;
-    private final int SINJAPORE_STANDARD = 4;
+    private float value;
+    private String normal = "";
+    private String CHINA_STANDARD = "";
+    private String INTERNATIONAL_STANDARD = "INT";
+    private String JAPAN_STANDARD = "JP";
+    private String SINJAPORE_STANDARD = "SGP";
 
     private int from;
+
+    private String url = "http://115.28.37.145/Content/statichtml/bmiIndex.html";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +172,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 ll_bmi.setVisibility(View.VISIBLE);
                 ll_kaluli.setVisibility(View.GONE);
                 initBMI();
+                initWebView();
             } else if (from == TO_KALULI) {
                 ll_bmi.setVisibility(View.GONE);
                 ll_kaluli.setVisibility(View.VISIBLE);
@@ -464,36 +478,41 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 selectType();
                 break;
             case R.id.tv_zhongguo:
-                standard = CHINA_STANDARD;
                 if (pw != null && pw.isShowing()) {
                     pw.dismiss();
                 }
                 TextView tv = (TextView) v;
                 tv_select.setText(tv.getText());
+                normal = CHINA_STANDARD;
+                calculation(_strng, _strng_second);
                 break;
             case R.id.tv_guoji:
-                standard = INTERNATIONAL_STANDARD;
+
                 if (pw != null && pw.isShowing()) {
                     pw.dismiss();
                 }
                 TextView tv1 = (TextView) v;
                 tv_select.setText(tv1.getText());
+                normal = INTERNATIONAL_STANDARD;
+                calculation(_strng, _strng_second);
                 break;
             case R.id.tv_riben:
-                standard = JAPAN_STANDARD;
                 if (pw != null && pw.isShowing()) {
                     pw.dismiss();
                 }
                 TextView tv2 = (TextView) v;
                 tv_select.setText(tv2.getText());
+                normal = JAPAN_STANDARD;
+                calculation(_strng, _strng_second);
                 break;
             case R.id.tv_xinjiapo:
-                standard = SINJAPORE_STANDARD;
                 if (pw != null && pw.isShowing()) {
                     pw.dismiss();
                 }
                 TextView tv3 = (TextView) v;
                 tv_select.setText(tv3.getText());
+                normal = SINJAPORE_STANDARD;
+                calculation(_strng, _strng_second);
                 break;
             case R.id.re_tosearch:
                 WindowManager wm = this.getWindowManager();
@@ -546,113 +565,54 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         float weight = Float.parseFloat(string_second);
         float a = weight / (height * height / 10000);
         DecimalFormat fnum = new DecimalFormat("##0.0");
-        String value = fnum.format(a);
-        tv_infonumber.setText(value);
-        switch (standard) {
-            case CHINA_STANDARD:
-                if (a <= 18.4) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_two));
-                    tv_infotext.setText("（偏瘦）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_two));
-                } else if (a <= 23.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
-                    tv_infotext.setText("（正常）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
-                } else if (a <= 27.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
-                    tv_infotext.setText("（过重）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
-                } else {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_five));
-                    tv_infotext.setText("（肥胖）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_five));
-                }
-                break;
-            case INTERNATIONAL_STANDARD:
-                if (a <= 16.4) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_one));
-                    tv_infotext.setText("（极瘦）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_one));
-                } else if (a <= 18.4) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_two));
-                    tv_infotext.setText("（偏瘦）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_two));
-                } else if (a <= 24.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
-                    tv_infotext.setText("（正常）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
-                } else if (a <= 29.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
-                    tv_infotext.setText("（过重）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
-                } else if (a <= 34.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_five));
-                    tv_infotext.setText("（1类肥胖）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_five));
-                } else if (a <= 39.0) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_six));
-                    tv_infotext.setText("（2类肥胖）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_six));
-                } else {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_seven));
-                    tv_infotext.setText("（3类肥胖）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_seven));
-                }
-                break;
-            case JAPAN_STANDARD:
-                if (a <= 18.4) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_two));
-                    tv_infotext.setText("（偏瘦）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_two));
-                } else if (a <= 22.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
-                    tv_infotext.setText("（正常）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
-                } else if (a <= 24.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
-                    tv_infotext.setText("（过重）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
-                } else {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_five));
-                    tv_infotext.setText("（肥胖）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_five));
-                }
-                break;
-            case SINJAPORE_STANDARD:
-                if (a <= 14.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_one));
-                    tv_infotext.setText("（极瘦）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_one));
-                } else if (a <= 18.4) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_pianshou_two));
-                    tv_infotext.setText("（偏瘦）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_pianshou_two));
-                } else if (a <= 22.9) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
-                    tv_infotext.setText("（正常）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_zhenchang_three));
-                } else if (a <= 27.5) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
-                    tv_infotext.setText("（过重）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_chaozhong_four));
-                } else if (a <= 40.0) {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_five));
-                    tv_infotext.setText("（肥胖）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_five));
-                } else {
-                    tv_infonumber.setTextColor(getResources().getColor(R.color.color_feipang_six));
-                    tv_infotext.setText("（非常肥胖）");
-                    tv_infotext.setTextColor(getResources().getColor(R.color.color_feipang_six));
-                }
-                break;
-        }
+        String _value = fnum.format(a);
+        value = Float.parseFloat(_value);
+
+        getWebView();
         String time = DateUtil.longToDateString(DateUtil.getCurrentTime(), "yyyy-MM-dd hh:mm:ss");
         BMI _bmi = new BMI();
         _bmi.setRecordTime(time);
         _bmi.setCreateTime(time);
-        _bmi.setBmi(Double.parseDouble(value));
+        _bmi.setBmi(Double.parseDouble(_value));
         MyApplication.getInstance().getDBHelper().saveBMI(_bmi);
 
+    }
+
+    private void initWebView() {
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setSavePassword(false);
+        webSettings.setSaveFormData(false);
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setSupportZoom(false);
+        webView.loadUrl(url);
+        webView.addJavascriptInterface(new JsInterface(this), "AndroidWebView");
+        webView.setWebChromeClient(new WebChromeClient());
+
+    }
+    private void getWebView(){
+        webView.clearCache(true);
+        Log.i("date",value+"------------"+normal);
+        if(StringUtils.isBlank(normal)){
+            webView.loadUrl("javascript:show('" + value + "')");
+        }else{
+//            String info = value + ",‘" + normal+"'";
+            webView.loadUrl("javascript:show(" + value+",'" +normal+ "')");
+        }
+
+    }
+
+    private class JsInterface {
+        private Context mContext;
+
+        public JsInterface(Context context) {
+            this.mContext = context;
+        }
+
+        //在js中调用window.AndroidWebView.showInfoFromJs(name)，便会触发此方法。
+        @JavascriptInterface
+        public void showInfoFromJs(String name) {
+            Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
+        }
     }
 
 

@@ -72,7 +72,7 @@ public class BMIActivity extends BaseActivity implements View.OnClickListener {
             List<BMI> _list = MyApplication.getInstance().getDBHelper().getBMI();
             if(_list.size()>10){
                 for(int i=0;i<10;i++){
-                    bmi_list.add(_list.get(_list.size()-11+i));
+                    bmi_list.add(_list.get(_list.size()-(i+1)));
                 }
             }else{
                 bmi_list.addAll(_list);

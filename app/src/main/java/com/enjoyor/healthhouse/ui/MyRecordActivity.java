@@ -9,6 +9,8 @@ import butterknife.ButterKnife;
 /**
  * Created by YuanYuan on 2016/5/23.
  */
+
+/*我的报告*/
 public class MyRecordActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

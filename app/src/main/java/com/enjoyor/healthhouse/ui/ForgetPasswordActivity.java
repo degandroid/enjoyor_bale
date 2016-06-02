@@ -136,11 +136,11 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
             }
         });
     }
-    private void verify(String phone,String newpwd) {
+    private void verify(String phone,String code) {
         RequestParams params = new RequestParams();
         params.add("service", String.valueOf("mob"));
         params.add("phone", phone);
-        params.add("newpwd", newpwd);
+        params.add("code", code);
         AsyncHttpUtil.post(UrlInterface.TEXT_URL + VERIFY_CODE, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
