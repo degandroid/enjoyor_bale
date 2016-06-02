@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/transparent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/navigationbar_layout"></include>
 
     <ScrollView
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/transparent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_line">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/com_ac_layout_title"
@@ -45,16 +47,17 @@
                 android:textColor="#999999"
                 android:textSize="12dp" />
 
-            <TextView
+            <WebView
                 android:id="@+id/com_ac_layout_webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/com_ac_layout_num"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:layout_marginTop="10dp"
-                android:padding="18dp"
-                android:textColor="#666666">
+                android:background="@color/color_line">
 
-            </TextView>
+            </WebView>
 
         </RelativeLayout>
     </ScrollView>

@@ -3,6 +3,7 @@ package com.enjoyor.healthhouse.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -242,6 +243,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                     File mFile = null;
 //                    notes = new ArrayList<>();
                     for (String s : result) {
+                        Log.d("wyy==============", s);
                         mFile = new File(s);
                         RequestParams param = new RequestParams();
                         try {

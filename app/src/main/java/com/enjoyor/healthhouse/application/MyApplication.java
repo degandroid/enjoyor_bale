@@ -16,6 +16,7 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     private DBHelper mDBHelper;
     private static Context context;
+    public static boolean refrash = false;
 
     @Override
     public void onCreate() {

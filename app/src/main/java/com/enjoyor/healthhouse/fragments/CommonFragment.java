@@ -34,7 +34,6 @@ import butterknife.ButterKnife;
  */
 public class CommonFragment extends BaseFragment {
     private static CommonFragment commonFragment;
-
     public static CommonFragment getInstance(int a) {
         commonFragment = new CommonFragment();
         Bundle bundle = new Bundle();
@@ -53,7 +52,7 @@ public class CommonFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.common_fg_layout, null);
         ButterKnife.bind(this, view);
-        progress();
+//        progress();
         initData();
         return view;
     }
@@ -75,7 +74,7 @@ public class CommonFragment extends BaseFragment {
                     list = JsonHelper.getArrayJson(apiMessage.Data, InfoClassSelect.class);
                     CommonFragmentAdapter adapter = new CommonFragmentAdapter(getActivity(), list);
                     common_fg_lv.setAdapter(adapter);
-                    cancel();
+//                    cancel();
                     onClick();
                 }
             }
@@ -93,8 +92,10 @@ public class CommonFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent_com = new Intent(getActivity(), CommunitityCommonActivity.class);
                 int i = list.get(position).getId();
+                String title = list.get(position).getTitle();
                 Log.d("wyy====", i + "");
                 intent_com.putExtra("id", i);
+                intent_com.putExtra("title",title);
                 CommonFragment.this.startActivity(intent_com);
             }
         });

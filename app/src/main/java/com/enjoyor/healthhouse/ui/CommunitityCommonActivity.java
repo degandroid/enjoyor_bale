@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,12 +40,13 @@ public class CommunitityCommonActivity extends BaseActivity {
     @Bind(R.id.com_ac_layout_num)
     TextView com_ac_layout_num;
     @Bind(R.id.com_ac_layout_webview)
-    TextView com_ac_layout_webview;
+    WebView com_ac_layout_webview;
     int id;
     @Bind(R.id.re_back)
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
     TextView navigation_name;
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +54,13 @@ public class CommunitityCommonActivity extends BaseActivity {
         setContentView(R.layout.communtity_com_ac_layout);
         ButterKnife.bind(this);
         progress();
-        navigation_name.setVisibility(View.INVISIBLE);
+        WebSettings settings = com_ac_layout_webview.getSettings();
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+//        navigation_name.setVisibility(View.INVISIBLE);
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 11);
+        title = intent.getStringExtra("title");
+        navigation_name.setText(title);
 //        articles/{id}.do
         initData();
         re_back.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +95,25 @@ public class CommunitityCommonActivity extends BaseActivity {
         com_ac_layout_title.setText(artitleDetail.getTitle());
         com_ac_layout_time.setText(artitleDetail.getModifyTime());
         com_ac_layout_num.setText("阅读量   " + artitleDetail.getPageViews() + "");
-        com_ac_layout_webview.setText(artitleDetail.getContent());
+        setWebView(artitleDetail.getContent());
+//        com_ac_layout_webview.setText(artitleDetail.getContent());
+    }
+
+    private void setWebView(String content) {
+        com_ac_layout_webview.getSettings().setBlockNetworkImage(true);
+        com_ac_layout_webview.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                view.setVisibility(View.VISIBLE);
+                com_ac_layout_webview.getSettings().setBlockNetworkImage(false);
+                if (!com_ac_layout_webview.getSettings().getLoadsImagesAutomatically()) {
+
+                    com_ac_layout_webview.getSettings().setLoadsImagesAutomatically(true);
+                }
+            }
+        });
+        com_ac_layout_webview.loadDataWithBaseURL(null, content, "text/html", "utf-8", null);
         cancel();
     }
 }

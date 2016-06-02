@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.bean.InfoClassSelect;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -89,7 +90,11 @@ public class CommonFragmentAdapter extends BaseAdapter {
                 }
                 holder.common_fg_item_title.setText(list.get(position).getTitle());
                 holder.common_fg_item_time.setText(list.get(position).getInterval());
-                holder.common_fg_item_num.setText(list.get(position).getPageViews() + "");
+                if ((list.get(position).getPageViews() + "").equals(null)) {
+                    holder.common_fg_item_num.setText("阅读量：0");
+                } else {
+                    holder.common_fg_item_num.setText("阅读量:" + list.get(position).getPageViews());
+                }
                 if (list.get(position).getImages().size() == 0) {
                     holder.common_fg_item_img1.setImageResource(R.mipmap.bale);
                 } else {
@@ -112,11 +117,18 @@ public class CommonFragmentAdapter extends BaseAdapter {
                 }
                 holder.communtity_fg_item3_title.setText(list.get(position).getTitle());
                 holder.communtity_fg_item3_time.setText(list.get(position).getInterval());
+                if ((list.get(position).getPageViews() + "").equals(null)) {
+                    holder.communtity_fg_item3_num.setText("阅读量：0");
+                } else {
+                    holder.communtity_fg_item3_num.setText("阅读量:" + list.get(position).getPageViews());
+                }
                 holder.communtity_fg_item3_num.setText(list.get(position).getPageViews() + "");
                 if (list.get(position).getImages().size() == 2) {
                     ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL + list.get(position).getImages().get(0).getPath(), holder.communtity_fg_item3_img1, options);
                     ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL + list.get(position).getImages().get(1).getPath(), holder.communtity_fg_item3_img2, options);
-                    holder.communtity_fg_item3_img3.setVisibility(View.INVISIBLE);
+                    holder.communtity_fg_item3_img3
+                            .setVisibility(View.INVISIBLE);
+//                    holder.communtity_fg_item3_img3.setMaxHeight(180);
                 } else if (list.get(position).getImages().size() == 3) {
                     ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL + list.get(position).getImages().get(0).getPath(), holder.communtity_fg_item3_img1, options);
                     ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL + list.get(position).getImages().get(1).getPath(), holder.communtity_fg_item3_img2, options);

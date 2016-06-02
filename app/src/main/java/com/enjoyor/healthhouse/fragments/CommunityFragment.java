@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.adapter.CommuntityAdapter;
+import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.InfoClass;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
@@ -40,7 +42,7 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
     ViewPager communtity_viewpager;
     @Bind(R.id.communtity_group)
     LinearLayout communtity_group;
-    List<InfoClass> listInfo = null;
+    List<InfoClass> listInfo = new ArrayList<>();
     private ArrayList<Fragment> fragmentList;
 
     @Nullable
@@ -51,6 +53,16 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
         ButterKnife.bind(this, view);
         initData();//获取资讯文章分类
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (MyApplication.refrash) {
+            initData();
+            MyApplication.refrash = false;
+        }
+        cancel();
     }
 
     private void initDefaultFragment() {
@@ -93,6 +105,7 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
                     textView.setTextColor(getResources().getColor(R.color.colorGreenYellow));
                     imageView.setVisibility(View.VISIBLE);
                     communtity_viewpager.setCurrentItem(finalJ);
+                    communtity_viewpager.invalidate();
                 }
             });
         }
@@ -100,6 +113,7 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
     }
 
     private void initTab() {
+        communtity_group.removeAllViews();
         communtity_group.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, 110));
         for (int i = 0; i < listInfo.size(); i++) {
             Log.d("wyy-------", listInfo.size() + "");
@@ -114,10 +128,11 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
             imageView.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, 10));
             communtity_group.addView(view);
         }
-        initClick();
+        cancel();
     }
 
     private void initData() {
+//        progress();
         RequestParams pararm = new RequestParams();
         AsyncHttpUtil.get(UrlInterface.InfoClass_URL, pararm, new AsyncHttpResponseHandler() {
             @Override
@@ -125,18 +140,28 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
                 String json = new String(bytes);
                 ApiMessage apimessage = ApiMessage.FromJson(json);
                 if (apimessage.Code == 1001) {
-                    listInfo = JsonHelper.getArrayJson(apimessage.Data, InfoClass.class);
-                    initTab();
-                    addFragment();
-                    defaultGroup();
-                    initDefaultFragment();
-                    initViewPager();
                     cancel();
+                    listInfo.clear();
+                    List<InfoClass> _list = JsonHelper.getArrayJson(apimessage.Data, InfoClass.class);
+                    listInfo.addAll(_list);
+                    if (listInfo.size() > 0) {
+                        initTab();
+                        defaultGroup();
+                        addFragment();
+                        initViewPager();
+                        initDefaultFragment();
+                        initClick();
+                        cancel();
+                    } else {
+                        Toast.makeText(getActivity(), "暂无更多数据", Toast.LENGTH_LONG).show();
+                        cancel();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
             }
         });
 
@@ -145,6 +170,7 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
     private void initViewPager() {
         communtity_viewpager.setAdapter(new CommuntityAdapter(getActivity().getSupportFragmentManager(), fragmentList));
         communtity_viewpager.setOnPageChangeListener(this);
+        communtity_viewpager.invalidate();
     }
 
     @Override

@@ -51,4 +51,6 @@ public class UrlInterface {
     public static String InfoClass_URL = TEXT_URL + "articles/classifys.do";
     //资讯文章查询
     public static String InfoClassSelect_URL = TEXT_URL + "articles/.do";
+    //用户上传头像接口
+    public static String UpLogo_URL = TEXT_URL + "doupload/saveheadimg.do";
 }
