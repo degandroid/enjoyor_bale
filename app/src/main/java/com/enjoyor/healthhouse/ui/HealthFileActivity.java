@@ -81,7 +81,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
         setContentView(R.layout.activity_healthfile);
         ButterKnife.bind(this);
         initHead();
-        if (MyApplication.getInstance().getDBHelper().getUser().getUserName() != null) {
+        if (StringUtils.isBlank(MyApplication.getInstance().getDBHelper().getUser().getUserName())) {
             tv_username.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
         } else {
             tv_username.setText(MyApplication.getInstance().getDBHelper().getUser().getLoginName());
@@ -304,6 +304,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(HealthFileActivity.this,MyRecordActivity.class);
+                        intent.putExtra("recordId",healthFileList.get(position).getRecordId());
                         startActivity(intent);
                     }
                 });
@@ -316,8 +317,9 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 holder.ll_bg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(HealthFileActivity.this, MyNotesActivity.class);
+                        Intent intent = new Intent(HealthFileActivity.this, MySelfCheckActivity.class);
                         intent.putExtra("recordId",healthFileList.get(position).getRecordId());
+                        intent.putExtra("recordTime",healthFileList.get(position).getRecordTime());
                         startActivity(intent);
                     }
                 });
@@ -329,7 +331,8 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 holder.ll_bg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(HealthFileActivity.this, MySelfCheckActivity.class);
+                        Intent intent = new Intent(HealthFileActivity.this, MyNotesActivity.class);
+                        intent.putExtra("recordId",healthFileList.get(position).getRecordId());
                         startActivity(intent);
                     }
                 });

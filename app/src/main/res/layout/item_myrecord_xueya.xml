@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/colorWhite"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:text="时间"
+            android:padding="@dimen/layout_distance"
+            android:gravity="center"
+            android:layout_height="fill_parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+                <TextView
+                    android:id="@+id/tv_up_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="name"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/layout_distance"
+                    android:layout_height="fill_parent" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+
+                    android:padding="@dimen/layout_distance"
+
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_up_result"
+                        android:layout_width="wrap_content"
+                        android:text="name"
+                        android:layout_centerInParent="true"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/iv_up_info"
+                        android:layout_width="wrap_content"
+                        android:src="@mipmap/bl_icon_lan"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_up_range"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="name"
+                    android:gravity="right|center_vertical"
+                    android:padding="@dimen/layout_distance"
+                    android:layout_height="fill_parent" />
+        </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:background="@color/color_line"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:id="@+id/tv_down_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="name"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/layout_distance"
+                    android:layout_height="fill_parent" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+
+                    android:padding="@dimen/layout_distance"
+
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_down_result"
+                        android:layout_width="wrap_content"
+                        android:text="name"
+                        android:layout_centerInParent="true"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/iv_down_info"
+                        android:layout_width="wrap_content"
+                        android:src="@mipmap/bl_icon_lan"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_down_range"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="name"
+                    android:gravity="right|center_vertical"
+                    android:padding="@dimen/layout_distance"
+                    android:layout_height="fill_parent" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

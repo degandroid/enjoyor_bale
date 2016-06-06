@@ -1,42 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="@dimen/layout_distance"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-<LinearLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    tools:context="com.enjoyor.healthhouse.ui.MyNotesActivity"
+    tools:ignore="MergeRootFrame">
 
-    <TextView
-        android:id="@+id/tv_createtime"
-        android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
-        android:text="createtime"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/tv_where"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:text="where"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
     <LinearLayout
-        android:id="@+id/ll_parent"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_content"
         android:layout_width="match_parent"
-        android:text="content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_createtime"
+                android:padding="@dimen/layout_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:id="@+id/tv_where"
+                android:padding="@dimen/layout_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+        <com.enjoyor.healthhouse.ui.NoScrollGridView
+            android:id="@+id/ngv_oneline_onepic"
+            android:padding="@dimen/layout_distance"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:horizontalSpacing="3dp"
+            android:listSelector="#00000000"
+            android:numColumns="1"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="3dp"></com.enjoyor.healthhouse.ui.NoScrollGridView>
+
+        <com.enjoyor.healthhouse.ui.NoScrollGridView
+            android:id="@+id/ngv_oneline_twopic"
+            android:padding="@dimen/layout_distance"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:horizontalSpacing="3dp"
+            android:listSelector="#00000000"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="3dp"></com.enjoyor.healthhouse.ui.NoScrollGridView>
+
+        <com.enjoyor.healthhouse.ui.NoScrollGridView
+            android:id="@+id/ngv_moreline"
+            android:padding="@dimen/layout_distance"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:horizontalSpacing="3dp"
+            android:listSelector="#00000000"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="3dp"></com.enjoyor.healthhouse.ui.NoScrollGridView>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:padding="@dimen/layout_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</FrameLayout>

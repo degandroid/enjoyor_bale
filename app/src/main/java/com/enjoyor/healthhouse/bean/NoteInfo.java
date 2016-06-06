@@ -12,7 +12,7 @@ public class NoteInfo {
     private List<String> imgs;
     private String lat;
     private String lng;
-    private Long voice;
+    private int voice;
 
     public String getContent() {
         return content;
@@ -62,11 +62,11 @@ public class NoteInfo {
         this.lng = lng;
     }
 
-    public Long getVoice() {
+    public int getVoice() {
         return voice;
     }
 
-    public void setVoice(Long voice) {
+    public void setVoice(int voice) {
         this.voice = voice;
     }
 }
