@@ -95,8 +95,9 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
             String maskNumber = cellphone.substring(0, 3) + "****" + cellphone.substring(7, cellphone.length());
             name_phone_tv.setText(maskNumber);
         }
-        if (mineData.getIdCard() != null) {
+        if (mineData.getIdCard() != null&&mineData.getIdCard().length()==18) {
             String cardnumber = mineData.getIdCard();
+            Log.d("wyy -----",cardnumber);
             String maskcard = cardnumber.substring(0, 6) + "********" + cardnumber.substring(14, cardnumber.length());
             name_card_tv.setText(maskcard);
         }

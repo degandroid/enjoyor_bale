@@ -28,9 +28,12 @@ import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
+import com.enjoyor.healthhouse.bean.BasePath;
+import com.enjoyor.healthhouse.bean.UserInfo;
 import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
+import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.ui.DataActivity;
 import com.enjoyor.healthhouse.ui.InfoActivity;
 import com.enjoyor.healthhouse.ui.LoginActivity;
@@ -49,9 +52,12 @@ import org.apache.http.Header;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 
 /**
@@ -80,6 +86,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     RelativeLayout mine_fg_introduct;
     @Bind(R.id.mine_fg_suggest)
     RelativeLayout mine_fg_suggest;
+    @Bind(R.id.mine_fg_name)
+    TextView mine_fg_name;
     Button picture;
     Button camera;
     Button cancle;
@@ -94,12 +102,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.bale)
-                .showImageOnFail(R.mipmap.bale)
-                .cacheInMemory(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
         view = inflater.inflate(R.layout.mine_fg_layout, null);
         ButterKnife.bind(this, view);
         LayoutInflater inflater1 = getActivity().getLayoutInflater();
@@ -107,12 +109,25 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         picture = (Button) view1.findViewById(R.id.picture);
         camera = (Button) view1.findViewById(R.id.camera);
         cancle = (Button) view1.findViewById(R.id.cancle);
-
-        ImageLoader.getInstance().displayImage(UrlInterface.TEXT_URL
-                + MyApplication.getInstance().getDBHelper().getUser().getHeadImg(), mine_fg_logo, options);
-        Log.d("wyy---path---====",MyApplication.getInstance().getDBHelper().getUser().getHeadImg());
+        if (BaseDate.getSessionId(getActivity()) != null) {
+            Log.d("wyy====logo===", MyApplication.getInstance().getDBHelper().getUser().getHeadImg());
+            ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL
+                    + MyApplication.getInstance().getDBHelper().getUser().getHeadImg(), mine_fg_logo, MyApplication.options);
+            Log.d("wyy---path---====", MyApplication.getInstance().getDBHelper().getUser().getHeadImg());
+            mine_fg_login.setVisibility(View.GONE);
+            mine_fg_regist.setVisibility(View.GONE);
+            mine_fg_name.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
+        }
         initEvent();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL
+                + MyApplication.getInstance().getDBHelper().getUser().getHeadImg(), mine_fg_logo, MyApplication.options);
+        mine_fg_name.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
+        super.onResume();
     }
 
     private void initEvent() {
@@ -181,12 +196,42 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent_setting);
                 break;
             case R.id.mine_fg_introduct://推荐给好友
+                oneKeyShare();
                 break;
             case R.id.mine_fg_suggest://意见反馈
                 Intent intent_suggest = new Intent(getActivity(), SuggestActivity.class);
                 startActivity(intent_suggest);
                 break;
         }
+    }
+
+    private void oneKeyShare() {
+        ShareSDK.initSDK(getActivity());
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+        oks.setTitle(getString(R.string.share));
+        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl("http://sharesdk.cn");
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("我是测试评论文本");
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl("http://sharesdk.cn");
+
+// 启动分享GUI
+        oks.show(getActivity());
     }
 
     private void showDialog() {
@@ -262,8 +307,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 cursor.moveToFirst();
                 path = cursor.getString(column_index);
                 File file = new File(path);
+//                Log.d("wyy---path", path);
                 savePicture(file, 1);
-                Log.d("wyy---path-", path);
+                Log.d("wyy---file-", file.toString());
                 crop(uri);
             }
 
@@ -271,6 +317,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             // 从相机返回的数据
             if (hasSdcard()) {
                 crop(Uri.fromFile(tempFile));
+                Log.d("wyy------tempfile", tempFile.toString());
                 savePicture(tempFile, 2);
 //                Log.d("wyy---crop(Uri.fromFile(tempFile));-", Uri.fromFile(tempFile).toString());
             } else {
@@ -307,16 +354,19 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         param.add("accountId", MyApplication.getInstance().getDBHelper().getUser().getAccountId() + "");
         param.add("origin", "ANDROIDAPP");
         try {
-            param.put("picture", file);
-            AsyncHttpUtil.get(UrlInterface.UpLogo_URL, param, new AsyncHttpResponseHandler() {
+            param.put("file", file);
+            AsyncHttpUtil.post(UrlInterface.UpLogo_URL, param, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
                     String json = new String(bytes);
                     ApiMessage apimessage = ApiMessage.FromJson(json);
                     if (apimessage.Code == 1001) {
-//                        Toast.makeText(getActivity(), "头像修改成功", Toast.LENGTH_LONG).show();
+                        List<BasePath> basePathList = JsonHelper.getArrayJson(apimessage.Data, BasePath.class);
+                        String path = basePathList.get(0).getBasePath() + "/" + basePathList.get(0).getFileName();
+                        UserInfo userInfo = MyApplication.getInstance().getDBHelper().getUser();
+                        userInfo.setHeadImg(path);
+                        MyApplication.getInstance().getDBHelper().saveUser(userInfo);
                     } else {
-//                        Toast.makeText(getActivity(), "" + apimessage.Msg, Toast.LENGTH_LONG).show();
                     }
                 }
 

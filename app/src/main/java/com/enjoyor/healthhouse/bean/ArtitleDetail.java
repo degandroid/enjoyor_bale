@@ -22,12 +22,12 @@ public class ArtitleDetail {
 
     private String classify;
     private String content;
-    private Object createTime;
-    private Object createUser;
+    private String createTime;
+    private String createUser;
     private int id;
     private int likeCount;
     private String modifyTime;
-    private Object pageViews;
+    private String pageViews;
     private int sort;
     private String status;
     private String title;
@@ -48,19 +48,19 @@ public class ArtitleDetail {
         this.content = content;
     }
 
-    public Object getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Object createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Object getCreateUser() {
+    public String getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(Object createUser) {
+    public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
 
@@ -88,11 +88,11 @@ public class ArtitleDetail {
         this.modifyTime = modifyTime;
     }
 
-    public Object getPageViews() {
+    public String getPageViews() {
         return pageViews;
     }
 
-    public void setPageViews(Object pageViews) {
+    public void setPageViews(String pageViews) {
         this.pageViews = pageViews;
     }
 

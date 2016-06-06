@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@mipmap/get6">
+        android:background="@mipmap/gerenbeijing">
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,6 +20,7 @@
             android:textSize="@dimen/textsize_largetittle" />
 
         <ImageView
+            android:background="@drawable/redious"
             android:id="@+id/mine_fg_logo"
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -38,13 +39,14 @@
                 android:id="@+id/mine_fg_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="26px"
-                android:paddingRight="26px"
+                android:paddingLeft="13dp"
+                android:paddingRight="10dp"
                 android:text="登录"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize_largetittle" />
 
             <TextView
+                android:id="@+id/mine_fg_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/"
@@ -55,8 +57,8 @@
                 android:id="@+id/mine_fg_regist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="26px"
-                android:paddingRight="26px"
+                android:paddingLeft="13dp"
+                android:paddingRight="10dp"
                 android:text="注册"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize_largetittle" />

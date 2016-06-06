@@ -42,14 +42,14 @@ public class BaseActivity extends AppCompatActivity {
 
     private Dialog dialog = null;
 
-    //声明判断网络是否连接成功的接受者对象
-    private JudgeNetIsConnectedReceiver judgeNetIsConnectedReceiver;
+//    //声明判断网络是否连接成功的接受者对象
+//    private JudgeNetIsConnectedReceiver judgeNetIsConnectedReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppManagerUtil.addActivity(BaseActivity.this);
-        this.judgeNetIsConnectedReceiver = new JudgeNetIsConnectedReceiver();
+//        this.judgeNetIsConnectedReceiver = new JudgeNetIsConnectedReceiver();
     }
 
     @Override
@@ -57,16 +57,16 @@ public class BaseActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onResume();
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        this.registerReceiver(judgeNetIsConnectedReceiver, intentFilter);
+//        this.registerReceiver(judgeNetIsConnectedReceiver, intentFilter);
     }
 
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
-        if (this.judgeNetIsConnectedReceiver != null) {
-            this.unregisterReceiver(judgeNetIsConnectedReceiver);
-        }
+//        if (this.judgeNetIsConnectedReceiver != null) {
+//            this.unregisterReceiver(judgeNetIsConnectedReceiver);
+//        }
     }
 
     /**

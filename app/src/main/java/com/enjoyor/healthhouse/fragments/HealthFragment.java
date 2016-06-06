@@ -121,13 +121,11 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
         re_back.setVisibility(View.INVISIBLE);
         navigation_name.setText("健康评估");
         img_right.setVisibility(View.VISIBLE);
+        initText();
+        initImageTab();
+        initEvent();
         if (isLogin(getActivity())) {
             isData();
-            initView();
-            initEvent();
-            initData();
-            initImageTab();
-            initText();
         }
         return view;
     }
@@ -148,11 +146,11 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
      * 初始化tab页图片
      */
     private void initImageTab() {
-        health_full_bp_img.setImageResource(R.mipmap.bp);
-        health_full_bs_img.setImageResource(R.mipmap.bs);
-        health_full_bi_img.setImageResource(R.mipmap.bc);
-        health_full_bo_img.setImageResource(R.mipmap.bi);
-        health_full_ecg_img.setImageResource(R.mipmap.ecg);
+        health_full_tab1.setBackgroundColor(getResources().getColor(R.color.colorGreenYellow));
+        health_full_tab2.setBackgroundColor(getResources().getColor(R.color.colorGreenYellow));
+        health_full_tab3.setBackgroundColor(getResources().getColor(R.color.colorGreenYellow));
+        health_full_tab4.setBackgroundColor(getResources().getColor(R.color.colorGreenYellow));
+        health_full_tab5.setBackgroundColor(getResources().getColor(R.color.colorGreenYellow));
     }
 
     /**
@@ -225,6 +223,16 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                             }
                         }
                     }
+                    if (stringcom == null) {
+                        health_full_eat_sug.setText("暂无饮食建议");
+                    } else {
+                        health_full_eat_sug.setText(stringcom.toString());
+                    }
+                    if (stringrec == null) {
+                        health_full_sport_sug.setText("暂无运动建议");
+                    } else {
+                        health_full_sport_sug.setText(stringrec.toString());
+                    }
                 }
             }
 
@@ -233,16 +241,16 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                 Log.d("wyy-----json----", throwable.toString());
             }
         });
-        if (stringcom == null) {
-            health_full_eat_sug.setText("暂无饮食建议");
-        } else {
-            health_full_eat_sug.setText(stringcom.toString());
-        }
-        if (stringrec == null) {
-            health_full_sport_sug.setText("暂无运动建议");
-        } else {
-            health_full_sport_sug.setText(stringrec.toString());
-        }
+//        if (stringcom == null) {
+//            health_full_eat_sug.setText("暂无饮食建议");
+//        } else {
+//            health_full_eat_sug.setText(stringcom.toString());
+//        }
+//        if (stringrec == null) {
+//            health_full_sport_sug.setText("暂无运动建议");
+//        } else {
+//            health_full_sport_sug.setText(stringrec.toString());
+//        }
     }
 
     /**
@@ -255,6 +263,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
             health_full_record.setText("当前体检数据正常，无异常项目，身体状况良好！");
             health_full_evalute.setText("本次体检显示身体状况良好");
         } else {
+            health_full_record.setVisibility(View.GONE);
             health_full_scr.setVisibility(View.VISIBLE);
             StringBuffer stringhuilder = new StringBuffer();
             List<HealthRecord.UnusualsEntity> unusualList = healthRecord.getUnusuals();
@@ -270,13 +279,12 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                 }
                 stringhuilder.append(unusual.getAdvice() + "\n");
             }
-            health_full_record.setText(stringhuilder.toString());
+            health_full_evalute.setText(stringhuilder.toString());
+            health_full_evalute.invalidate();
         }
 
     }
 
-    private void initData() {
-    }
 
     private void initEvent() {
         re_back.setOnClickListener(this);
@@ -289,8 +297,6 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
         img_right.setOnClickListener(this);
     }
 
-    private void initView() {
-    }
 
     @Override
     public void onClick(View v) {
@@ -305,40 +311,35 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
             case R.id.health_full_tab1:
                 hideView();
                 navigation_name.setText("血压评估");
-                health_full_bp_img.setImageResource(R.mipmap.bp_ab);
-                health_full_bp_tv.setTextColor(getResources().getColor(R.color.tab_red));
+                health_full_tab1.setBackgroundColor(getResources().getColor(R.color.green));
                 transaction.replace(R.id.health_lin, new BPFragment());
                 transaction.commit();
                 break;
             case R.id.health_full_tab2:
                 hideView();
+                health_full_tab2.setBackgroundColor(getResources().getColor(R.color.green));
                 navigation_name.setText("血糖评估");
-                health_full_bs_img.setImageResource(R.mipmap.bs_ab);
-                health_full_bs_tv.setTextColor(getResources().getColor(R.color.tab_red));
                 transaction.replace(R.id.health_lin, new BiFragment());
                 transaction.commit();
                 break;
             case R.id.health_full_tab3:
                 hideView();
+                health_full_tab3.setBackgroundColor(getResources().getColor(R.color.green));
                 navigation_name.setText("人体成分评估");
-                health_full_bi_img.setImageResource(R.mipmap.bc_ab);
-                health_full_bi_tv.setTextColor(getResources().getColor(R.color.tab_red));
                 transaction.replace(R.id.health_lin, new BodyFragment());
                 transaction.commit();
                 break;
             case R.id.health_full_tab4:
                 hideView();
+                health_full_tab4.setBackgroundColor(getResources().getColor(R.color.green));
                 navigation_name.setText("血氧评估");
-                health_full_bo_img.setImageResource(R.mipmap.bi_ab);
-                health_full_bo_tv.setTextColor(getResources().getColor(R.color.tab_red));
                 transaction.replace(R.id.health_lin, new BOFragment());
                 transaction.commit();
                 break;
             case R.id.health_full_tab5:
                 hideView();
+                health_full_tab5.setBackgroundColor(getResources().getColor(R.color.green));
                 navigation_name.setText("心电评估");
-                health_full_ecg_img.setImageResource(R.mipmap.ecg_ab);
-                health_full_ecg_tv.setTextColor(getResources().getColor(R.color.tab_red));
                 transaction.replace(R.id.health_lin, new ECGFragment());
                 transaction.commit();
                 break;

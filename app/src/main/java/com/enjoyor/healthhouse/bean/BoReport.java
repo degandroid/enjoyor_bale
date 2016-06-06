@@ -12,15 +12,15 @@ public class BoReport {
      * recodId : 389
      */
 
-    private int bo;
+    private Integer bo;
     private String healthSuggest;
     private int recodId;
 
-    public int getBo() {
+    public Integer getBo() {
         return bo;
     }
 
-    public void setBo(int bo) {
+    public void setBo(Integer bo) {
         this.bo = bo;
     }
 

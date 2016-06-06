@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -65,6 +66,8 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.button)
     Button button;
     EcgReport ecgReport;
+    @Bind(R.id.bp_fg_bottom)
+    LinearLayout bp_fg_bottom;
 
     @Nullable
     @Override
@@ -106,6 +109,7 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
+
     protected WebChromeClient chromeClient = new WebChromeClient() {
         // js交互提示
         public boolean onJsAlert(WebView view, String url, String message, android.webkit.JsResult result) {
@@ -132,14 +136,17 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
                 String json = new String(bytes);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
-//                    bp_fg_top.setVisibility(View.VISIBLE);
+                    bp_fg_top.setVisibility(View.VISIBLE);
                     ecgReport = JsonHelper.getJson(apiMessage.Data, EcgReport.class);
                     saveInfo(ecgReport);
-                } else {
-//                    health_ry_empty.setVisibility(View.VISIBLE);
-//                    bp_fg_top.setVisibility(View.VISIBLE);
                     drawpicture(json);
+                } else {
+                    health_ry_empty.setVisibility(View.VISIBLE);
+//                    bp_fg_top.setVisibility(View.VISIBLE);
+                    bp_fg_bottom.setVisibility(View.GONE);
+                    cancel();
                 }
+                cancel();
             }
 
             @Override
@@ -160,11 +167,11 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
 
     private void transferDataToWeb(String json) {
         if (bp_fg_web != null) {
-            String info ="103";
-            Log.i("==================+++", info);
-            bp_fg_web.loadUrl("javascript:show(" + info + ")");   //web网页中已添加了function show(json)方法
-            bp_fg_top.setVisibility(View.VISIBLE);
-            cancel();
+            if (ecgReport.getRecordEcg().getEcg() != null) {
+                String info = ecgReport.getRecordEcg().getEcg().toString();
+                bp_fg_web.loadUrl("javascript:show(" + info + ")");   //web网页中已添加了function show(json)方法
+                bp_fg_top.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -187,6 +194,7 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.bp_fg_tend:
                 Intent intent_tend = new Intent(getActivity(), TendActivity.class);
+                intent_tend.putExtra("type",5);
                 startActivity(intent_tend);
                 break;
         }

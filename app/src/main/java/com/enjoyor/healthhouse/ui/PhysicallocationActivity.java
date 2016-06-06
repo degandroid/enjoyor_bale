@@ -1,8 +1,10 @@
 package com.enjoyor.healthhouse.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -82,24 +84,31 @@ public class PhysicallocationActivity extends BaseActivity implements XListView.
         params.add("lat", latitude + "");
         params.add("lng", longitude + "");
         params.add("pageNum", pageNum + "");
-        params.add("pageCount", 6 + "");
+        params.add("pageCount", 8 + "");
         AsyncHttpUtil.get(UrlInterface.PhysicallAddr_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 stops();
                 String json = new String(bytes);
-//                Log.d("wwwwwwwwwwwwwwwww", json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     cancel();
                     PhsicallLocation temp = JsonHelper.getJson(apiMessage.Data, PhsicallLocation.class);
                     if (temp.getMachineModels() != null && temp.getMachineModels().size() > 0) {
-//                        phsicallLocations.clear();
                         phsicallLocations.addAll(temp.getMachineModels());
-                        Log.d("wwwwwwwwwwwwwwwww", phsicallLocations.size() + "           " + pageNum);
                         PhysicallAdapter adapter = new PhysicallAdapter(PhysicallocationActivity.this, phsicallLocations, R.layout.physicall_ac_item);
                         physicall_lv.setAdapter(adapter);
                         physicall_lv.setSelection((pageNum - 1) * 6);
+                        physicall_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent_map = new Intent(PhysicallocationActivity.this, MapActivity.class);
+                                intent_map.putExtra("addr",phsicallLocations.get(position-1).getAddressName());
+                                intent_map.putExtra("latitude", "" + phsicallLocations.get(position-1).getMachineLat());
+                                intent_map.putExtra("longitude", "" + phsicallLocations.get(position-1).getMachineLong());
+                                startActivity(intent_map);
+                            }
+                        });
                     } else {
                         ToastUtil.showToast("暂无新数据");
                     }

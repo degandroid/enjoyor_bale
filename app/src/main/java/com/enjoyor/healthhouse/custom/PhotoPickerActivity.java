@@ -64,7 +64,7 @@ public class PhotoPickerActivity extends Activity implements PhotoAdapter.PhotoC
     /** 多选 */
     public final static int MODE_MULTI = 1;
     /** 默认最大选择数量 */
-    public final static int DEFAULT_NUM = 9;
+    public final static int DEFAULT_NUM = 5;
 
     private final static String ALL_PHOTO = "所有图片";
     /** 是否显示相机，默认不显示 */

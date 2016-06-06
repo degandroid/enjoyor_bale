@@ -1,15 +1,12 @@
 package com.enjoyor.healthhouse.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.bean.PhsicallLocation;
-import com.enjoyor.healthhouse.ui.MapActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 
 import java.util.List;
 
@@ -17,11 +14,9 @@ import java.util.List;
  * Created by YuanYuan on 2016/5/13.
  */
 public class PhysicallAdapter extends CommAdapter<PhsicallLocation.MachineModelsEntity> {
-    Context context;
 
     public PhysicallAdapter(Context context, List<PhsicallLocation.MachineModelsEntity> datas, int layoutId) {
         super(context, datas, layoutId);
-        this.context = context;
     }
 
     @Override
@@ -32,17 +27,31 @@ public class PhysicallAdapter extends CommAdapter<PhsicallLocation.MachineModels
         Log.d("wyy============", models.getLogopath());
         holder.setImageURL(R.id.physicall_item_img, UrlInterface.TEXT_URL + models.getLogopath());
         holder.setText(R.id.physicall_addr, models.getAddressName());
-        holder.setText(R.id.physicall_kilo, models.getDistance() + "");
-        holder.getView(R.id.gotophysicall).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_map = new Intent(context, MapActivity.class);
-                intent_map.putExtra("latitude", models.getMachineLat()+"");
-                intent_map.putExtra("longitude", models.getMachineLong()+"");
-                Log.d("wyy---", models.getMachineLat());
-                Log.d("wyy===",models.getMachineLong());
-                context.startActivity(intent_map);
+        if (models.getDistance()!=null){
+            if (models.getDistance() > 1000) {
+                int kilo = models.getDistance() / 1000;
+                int meter = models.getDistance() % 1000;
+                if (meter > 100) {
+                    int meters = (models.getDistance() - kilo * 1000) / 100;
+                    holder.setText(R.id.physicall_kilo, kilo + "." + meters + "KM");
+                } else {
+                    holder.setText(R.id.physicall_kilo, kilo + "KM");
+                }
+
+            } else {
+                holder.setText(R.id.physicall_kilo, models.getDistance() + "米");
             }
-        });
+        }
+//        holder.getView(R.id.gotophysicall).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_map = new Intent(context, MapActivity.class);
+//                intent_map.putExtra("latitude", models.getMachineLat()+"");
+//                intent_map.putExtra("longitude", models.getMachineLong()+"");
+//                Log.d("wyy---", models.getMachineLat());
+//                Log.d("wyy===",models.getMachineLong());
+//                context.startActivity(intent_map);
+//            }
+//        });
     }
 }

@@ -90,7 +90,7 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
                 params.add("name", "" + MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
                 params.add("oldpwd", "" + modifypwd_et_access.getText().toString().trim());
                 params.add("newpwd", "" + modify_pwd.getText().toString().trim());
-                AsyncHttpUtil.post(UrlInterface.ModifyPwd_URL, params, new AsyncHttpResponseHandler() {
+                AsyncHttpUtil.post(UrlInterface.InfoModifyPwd_URL, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
                         String json = new String(bytes);

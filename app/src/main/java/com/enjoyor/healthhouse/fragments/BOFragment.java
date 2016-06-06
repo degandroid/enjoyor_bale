@@ -16,6 +16,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,10 +55,10 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
     RelativeLayout bp_fg_tend;
     @Bind(R.id.bp_fg_web)
     WebView bp_fg_web;
-//    @Bind(R.id.bp_fg_img)
+    //    @Bind(R.id.bp_fg_img)
 //    ImageView bp_fg_img;
-//    @Bind(R.id.bp_fg_title)
-//    TextView bp_fg_title;
+    @Bind(R.id.bp_fg_title)
+    TextView bp_fg_title;
     @Bind(R.id.bp_fg_top)
     RelativeLayout bp_fg_top;
     @Bind(R.id.health_ry_empty)
@@ -65,6 +66,8 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.button)
     Button button;
     BoReport boReport;
+    @Bind(R.id.bp_fg_bottom)
+    LinearLayout bp_fg_bottom;
 
     @Nullable
     @Override
@@ -72,6 +75,7 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
         progress();
         view = inflater.inflate(R.layout.bp_fg_layout, null);
         ButterKnife.bind(this, view);
+        bp_fg_title.setText("当前血氧值");
         initView();
         initWebview();
         initEvent();
@@ -93,19 +97,18 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
-
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
-//                    bp_fg_top.setVisibility(View.VISIBLE);
+                    bp_fg_top.setVisibility(View.VISIBLE);
                     boReport = JsonHelper.getJson(apiMessage.Data, BoReport.class);
                     saveInfo(boReport);
                     drawpicture(json);
                 } else {
-//                    health_ry_empty.setVisibility(View.VISIBLE);
-//                    bp_fg_top.setVisibility(View.VISIBLE);
-//                    initWebview();
-                    drawpicture(json);
+                    health_ry_empty.setVisibility(View.VISIBLE);
+                    bp_fg_bottom.setVisibility(View.GONE);
+                    cancel();
                 }
+                cancel();
             }
 
             @Override
@@ -126,11 +129,15 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
 
     private void transferDataToWeb(String json) {
         if (bp_fg_web != null) {
-            String info ="76";
-            Log.i("==================+++", info);
-            bp_fg_web.loadUrl("javascript:show(" + info + ")");   //web网页中已添加了function show(json)方法
-            bp_fg_top.setVisibility(View.VISIBLE);
-            cancel();
+            if (boReport.getBo() != null) {
+                String info = boReport.getBo() + "";
+                Log.d("wyy-----", info);
+                bp_fg_web.loadUrl("javascript:show(" + info + ")");   //web网页中已添加了function show(json)方法
+                bp_fg_top.setVisibility(View.VISIBLE);
+            } else {
+                health_ry_empty.setVisibility(View.VISIBLE);
+                bp_fg_web.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
@@ -162,6 +169,7 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
+
     protected WebChromeClient chromeClient = new WebChromeClient() {
         // js交互提示
         public boolean onJsAlert(WebView view, String url, String message, android.webkit.JsResult result) {
@@ -170,7 +178,11 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
     };
 
     private void saveInfo(BoReport boReport) {
-        bp_fg_suggest.setText(boReport.getHealthSuggest());
+        if (boReport.getHealthSuggest() != null) {
+            bp_fg_suggest.setText(boReport.getHealthSuggest());
+        } else {
+            bp_fg_suggest.setText("当前无健康建议，请根据获取数据咨询相关医生");
+        }
     }
 
     @Override
@@ -188,6 +200,7 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.bp_fg_tend:
                 Intent intent_tend = new Intent(getActivity(), TendActivity.class);
+                intent_tend.putExtra("type",4);
                 startActivity(intent_tend);
                 break;
         }

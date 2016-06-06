@@ -28,6 +28,7 @@ import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.enjoyor.healthhouse.utils.OtherUtils;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -56,8 +57,6 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     EditText notes_et;
     @Bind(R.id.notes_photo)
     ImageView notes_photo;
-    //    @Bind(R.id.notes_camera)
-//    ImageView notes_camera;
     @Bind(R.id.notes_luyin)
     ImageView notes_luyin;
     @Bind(R.id.gridview)
@@ -72,7 +71,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     private int mColumnWidth;
     private static final int PICK_PHOTO = 1;
     private List<String> mResults;
-    ArrayList<String> result = new ArrayList<>();
+    ArrayList<String> result = new ArrayList<>();//照片集合
     List<String> _result;
     List<String> notes = new ArrayList<>();
 
@@ -91,7 +90,6 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
         ButterKnife.bind(this);
-
         initView();
         initEvent();
     }
@@ -99,7 +97,6 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     private void initEvent() {
         notes_photo.setOnClickListener(this);
         re_back.setOnClickListener(this);
-//        notes_camera.setOnClickListener(this);
         notes_luyin.setOnClickListener(this);
         notes_commit.setOnClickListener(this);
 
@@ -117,7 +114,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         mLocClient.registerLocationListener(myListener);// 注册监听函数：
         LocationClientOption option = new LocationClientOption();
         option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
-        option.setScanSpan(1000);// 设置发起定位请求的间隔时间为5000ms
+        option.setScanSpan(1000*60*60);// 设置发起定位请求的间隔时间为5000ms
         option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
         option.setNeedDeviceDirect(true);// 返回的定位结果包含手机机头的方向
         mLocClient.setLocOption(option);
@@ -128,16 +125,17 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
      * 定位sdk监听函数
      */
     public class MyLocationListenner implements BDLocationListener {
-
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             if (bdLocation == null) {
                 return;
             }
-            if (bdLocation.getStreetNumber()!=null){
-                notes_address.setText(bdLocation.getStreet() + bdLocation.getStreetNumber()+"号");
-            }else {
-                notes_address.setText(bdLocation.getStreet() + bdLocation.getStreetNumber());
+            String street = bdLocation.getStreet();
+            notes_address.setText(street);
+            if (!StringUtils.isEmpty(bdLocation.getStreetNumber())) {
+                notes_address.setText(street + bdLocation.getStreetNumber() + "号");
+            } else {
+                notes_address.setText(street + bdLocation.getStreetNumber());
             }
             lng = bdLocation.getLongitude();
             lat = bdLocation.getLatitude();
@@ -150,7 +148,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         switch (key) {
             case R.id.img_right:
                 if (BaseDate.getSessionId(this) != null) {
-                    Intent intent = new Intent(NotesActivity.this,HealthFileActivity.class);
+                    Intent intent = new Intent(NotesActivity.this, HealthFileActivity.class);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(NotesActivity.this, LoginActivity.class);
@@ -238,6 +236,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
             if (requestCode == PICK_PHOTO) {
 //            List<String> _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
+                result.clear();
                 result.addAll(_result);
                 if (resultCode == RESULT_OK) {
                     File mFile = null;

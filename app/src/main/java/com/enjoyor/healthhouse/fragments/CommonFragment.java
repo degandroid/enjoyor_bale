@@ -95,7 +95,7 @@ public class CommonFragment extends BaseFragment {
                 String title = list.get(position).getTitle();
                 Log.d("wyy====", i + "");
                 intent_com.putExtra("id", i);
-                intent_com.putExtra("title",title);
+//                intent_com.putExtra("title",title);
                 CommonFragment.this.startActivity(intent_com);
             }
         });

@@ -3,10 +3,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/bp_fg_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:id="@+id/bp_fg_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorGreenYellow"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/bp_fg_his"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="历史"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="18dp"
+                android:layout_toLeftOf="@+id/bp_fg_his"
+                android:src="@mipmap/history" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bp_fg_tend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1px"
+            android:layout_weight="1"
+            android:background="@color/colorGreenYellow"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/bp_fg_trend"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="1px"
+                android:gravity="center"
+                android:text="趋势"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="18dp"
+                android:layout_toLeftOf="@+id/bp_fg_trend"
+                android:src="@mipmap/history" />
+        </RelativeLayout>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
+        android:layout_above="@+id/bp_fg_bottom"
         android:background="@color/white">
 
         <RelativeLayout
@@ -275,63 +336,5 @@
 
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true">
 
-        <RelativeLayout
-            android:id="@+id/bp_fg_history"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/colorGreenYellow"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/bp_fg_his"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="历史"
-                android:textColor="@color/white" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="18dp"
-                android:layout_toLeftOf="@+id/bp_fg_his"
-                android:src="@mipmap/history" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/bp_fg_tend"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="1px"
-            android:layout_weight="1"
-            android:background="@color/colorGreenYellow"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/bp_fg_trend"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="1px"
-                android:gravity="center"
-                android:text="趋势"
-                android:textColor="@color/white" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="18dp"
-                android:layout_toLeftOf="@+id/bp_fg_trend"
-                android:src="@mipmap/history" />
-        </RelativeLayout>
-    </LinearLayout>
 </RelativeLayout>

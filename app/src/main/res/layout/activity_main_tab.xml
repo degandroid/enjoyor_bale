@@ -1,165 +1,189 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorBackgroud"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:id="@+id/ll_content"
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
 
         </LinearLayout>
+
         <FrameLayout
-            android:layout_width="match_parent"
             android:id="@+id/main_tab"
-            android:layout_gravity="bottom"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom"
 
-                android:layout_height="50dp">
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:background="@color/color_line"
-                    android:layout_height="1px" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="2dp"
-                android:background="@color/color_tabbar"
-                android:orientation="horizontal">
+                    android:layout_height="1px"
+                    android:background="@color/color_line" />
 
                 <LinearLayout
-                    android:id="@+id/main_tab1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="bottom|center_horizontal"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:id="@+id/iv_tab1"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp" />
-                    <TextView
-                        android:id="@+id/tv_tab1"
-                        android:layout_width="wrap_content"
-                        android:text="@string/tab_shoye"
-                        android:textColor="@drawable/bl_sel_tab"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/main_tab2"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="bottom|center_horizontal"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:id="@+id/iv_tab2"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp" />
-                    <TextView
-                        android:id="@+id/tv_tab2"
-                        android:layout_width="wrap_content"
-                        android:text="@string/tab_shequ"
-                        android:textColor="@drawable/bl_sel_tab"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_height="match_parent">
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/main_tab4"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="bottom|center_horizontal"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:id="@+id/iv_tab4"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp" />
-                    <TextView
-                        android:id="@+id/tv_tab4"
-                        android:layout_width="wrap_content"
-                        android:text="@string/tab_fuwu"
-                        android:textColor="@drawable/bl_sel_tab"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/main_tab5"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="bottom|center_horizontal"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:id="@+id/iv_tab5"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp" />
-                    <TextView
-                        android:id="@+id/tv_tab5"
-                        android:layout_width="wrap_content"
-                        android:text="@string/tab_personal"
-                        android:textColor="@drawable/bl_sel_tab"
-                        android:layout_height="wrap_content" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_tabbar"
+                    android:orientation="horizontal"
+                    android:paddingBottom="2dp">
+
+                    <LinearLayout
+                        android:id="@+id/main_tab1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="bottom|center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_tab1"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <TextView
+                            android:id="@+id/tv_tab1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tab_shoye"
+                            android:textColor="@drawable/bl_sel_tab" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/main_tab2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="bottom|center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_tab2"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <TextView
+                            android:id="@+id/tv_tab2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tab_shequ"
+                            android:textColor="@drawable/bl_sel_tab" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/main_tab4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="bottom|center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_tab4"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <TextView
+                            android:id="@+id/tv_tab4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tab_fuwu"
+                            android:textColor="@drawable/bl_sel_tab" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/main_tab5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="bottom|center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_tab5"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <TextView
+                            android:id="@+id/tv_tab5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tab_personal"
+                            android:textColor="@drawable/bl_sel_tab" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-</LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="#00ffffff"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <LinearLayout
                     android:id="@+id/main_tab3"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingBottom="2dp"
-                    android:orientation="vertical"
                     android:gravity="bottom|center_horizontal"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical"
+                    android:paddingBottom="2dp">
+
                     <ImageView
                         android:id="@+id/iv_tab3"
                         android:layout_width="40dp"
-                        android:adjustViewBounds="true"
-                        android:layout_height="40dp" />
+                        android:layout_height="40dp"
+                        android:adjustViewBounds="true" />
+
                     <TextView
                         android:id="@+id/tv_tab3"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/tab_health"
-                        android:textColor="@drawable/bl_sel_tab"
-                        android:layout_height="wrap_content" />
+                        android:textColor="@drawable/bl_sel_tab" />
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
             </LinearLayout>
         </FrameLayout>
 

@@ -22,7 +22,7 @@ public class InfoClassSelect {
     private int id;
     private String interval;
     private String modifyTime;
-    private Object pageViews;
+    private String pageViews;
     private String title;
     /**
      * article : null
@@ -65,11 +65,11 @@ public class InfoClassSelect {
         this.modifyTime = modifyTime;
     }
 
-    public Object getPageViews() {
+    public String getPageViews() {
         return pageViews;
     }
 
-    public void setPageViews(Object pageViews) {
+    public void setPageViews(String pageViews) {
         this.pageViews = pageViews;
     }
 

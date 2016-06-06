@@ -15,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,8 @@ public class BPFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.button)
     Button button;
     BpRecord bpRecord;
+    @Bind(R.id.bp_fg_bottom)
+    LinearLayout bp_fg_bottom;
 
     @Nullable
     @Override
@@ -130,9 +133,8 @@ public class BPFragment extends BaseFragment implements View.OnClickListener {
                     drawpicture(json);
                 } else {
                     health_ry_empty.setVisibility(View.VISIBLE);
-//                    bp_fg_top.setVisibility(View.VISIBLE);
-//                    saveInfo(bpRecord);
-//                    drawpicture(json);
+                    bp_fg_bottom.setVisibility(View.GONE);
+                    cancel();
                 }
             }
 
@@ -154,13 +156,15 @@ public class BPFragment extends BaseFragment implements View.OnClickListener {
 
     private void transferDataToWeb(String json) {
         if (bp_fg_web != null) {
-            String info = "103" + "," + "60" + "," + "0.5";
-            Log.i("==================+++", info);
-            bp_fg_web.loadUrl("javascript:show(" + info + ")");   //web网页中已添加了function show(json)方法
-            bp_fg_top.setVisibility(View.VISIBLE);
-            cancel();
+            if (bpRecord != null) {
+                String info = bpRecord.getDiastolicPressure() + "," + bpRecord.getSystolicPressure() + "," + "0.5";
+                bp_fg_web.loadUrl("javascript:show(" + info + ")");   //web网页中已添加了function show(json)方法
+                bp_fg_top.setVisibility(View.VISIBLE);
+                cancel();
+            }
         }
     }
+
     private void saveInfo(BpRecord bpRecord) {
         bp_fg_suggest.setText(bpRecord.getHealthSuggest());
     }
@@ -176,6 +180,7 @@ public class BPFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.bp_fg_tend:
                 Intent intent_bp = new Intent(getActivity(), TendActivity.class);
+                intent_bp.putExtra("type",1);
                 startActivity(intent_bp);
                 break;
             case R.id.button:

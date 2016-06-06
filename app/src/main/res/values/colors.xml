@@ -11,13 +11,13 @@
     <color name="colorBlack">#000000</color>
     <color name="Grey">#BEBEBE</color>
     <color name="LightGray">#D3D3D3</color>
-
+    <color name="green">#99B850</color>
     <color name="textcolor_largetittle">#4c4c4c</color>
     <color name="textcolot_welcome">#4d4d4d</color>
 
     <color name="textcolor_smallittle">#666666</color>
     <color name="textcolor_body">#999999</color>
-<color name="form">#aed35c</color>
+    <color name="form">#aed35c</color>
     <color name="form_xiaoshou">#7fd8ef</color>
     <color name="form_standard">#7bd9b2</color>
     <color name="form_chaozhong">#f2c86d</color>

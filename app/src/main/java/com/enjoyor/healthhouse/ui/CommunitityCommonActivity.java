@@ -19,6 +19,7 @@ import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -46,7 +47,7 @@ public class CommunitityCommonActivity extends BaseActivity {
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
     TextView navigation_name;
-    String title;
+//    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +57,9 @@ public class CommunitityCommonActivity extends BaseActivity {
         progress();
         WebSettings settings = com_ac_layout_webview.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-//        navigation_name.setVisibility(View.INVISIBLE);
+        navigation_name.setVisibility(View.INVISIBLE);
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 11);
-        title = intent.getStringExtra("title");
-        navigation_name.setText(title);
-//        articles/{id}.do
         initData();
         re_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,9 +92,12 @@ public class CommunitityCommonActivity extends BaseActivity {
     private void saveInfo(ArtitleDetail artitleDetail) {
         com_ac_layout_title.setText(artitleDetail.getTitle());
         com_ac_layout_time.setText(artitleDetail.getModifyTime());
-        com_ac_layout_num.setText("阅读量   " + artitleDetail.getPageViews() + "");
+        if (!StringUtils.isEmpty(artitleDetail.getPageViews())) {
+            com_ac_layout_num.setText("阅读量   " + artitleDetail.getPageViews() + "");
+        } else {
+            com_ac_layout_num.setText("阅读量:   0");
+        }
         setWebView(artitleDetail.getContent());
-//        com_ac_layout_webview.setText(artitleDetail.getContent());
     }
 
     private void setWebView(String content) {

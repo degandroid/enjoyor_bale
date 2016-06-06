@@ -13,6 +13,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,8 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.button)
     Button button;
     BiReport biReport;
+    @Bind(R.id.bp_fg_bottom)
+    LinearLayout bp_fg_bottom;
 
     @Nullable
     @Override
@@ -75,12 +78,15 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
         webSettings.setSaveFormData(false);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSupportZoom(false);
-        String url = "http://115.28.37.145/Content/statichtml/bloodSugar.html";
+        String url = "http://115.28.37.145/Content/statichtml/sugarAss.html";
         bp_fg_web.loadUrl(url);
         bp_fg_web.addJavascriptInterface(new JsInterface(getActivity()), "AndroidWebView");
         bp_fg_web.setWebChromeClient(new WebChromeClient());
-        String _json_xuetang = JSON.toJSONString(biReport.getBeanList());
-        bp_fg_web.loadUrl("javascript:show_sugar(" + _json_xuetang + ")");
+        if (biReport.getBeanList().size() > 0) {
+            String _json_xuetang = biReport.getBeanList().get(0).getBloodSugar() + "," + biReport.getBeanList().get(0).getBloodSugarType();
+            bp_fg_web.loadUrl("javascript:show(" + _json_xuetang + ")");
+        }
+        cancel();
     }
 
     private void initEvent() {
@@ -104,6 +110,8 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
                     initWebview();
                 } else {
                     health_ry_empty.setVisibility(View.VISIBLE);
+                    bp_fg_bottom.setVisibility(View.GONE);
+                    cancel();
                 }
             }
 
@@ -133,6 +141,7 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.bp_fg_tend:
                 Intent intent_tend = new Intent(getActivity(), TendActivity.class);
+                intent_tend.putExtra("type", 2);
                 startActivity(intent_tend);
                 break;
         }

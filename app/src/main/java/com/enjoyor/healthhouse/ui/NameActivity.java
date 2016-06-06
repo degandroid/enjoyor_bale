@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
+import com.enjoyor.healthhouse.bean.UserInfo;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.url.UrlInterface;
@@ -116,6 +117,9 @@ public class NameActivity extends BaseActivity implements View.OnClickListener {
                         setResult(100, intent);
                         intent.putExtra("name", name_et.getText().toString().trim());
                         Toast.makeText(NameActivity.this, "" + apiMessage.Msg, Toast.LENGTH_LONG).show();
+                        UserInfo userInfo = MyApplication.getInstance().getDBHelper().getUser();
+                        userInfo.setUserName(name_et.getText().toString().trim());
+                        MyApplication.getInstance().getDBHelper().saveUser(userInfo);
                         finish();
                     } else {
                         Toast.makeText(NameActivity.this, "姓名修改失败", Toast.LENGTH_LONG).show();

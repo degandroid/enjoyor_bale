@@ -7,17 +7,19 @@ public class UrlInterface {
     public static String RELEASE_URL = "http://www.cnbale.com:9008/healthstationserver/";
 
     public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
-    //    public static String TEXT_URL = "http://192.168.66.37:8080/bale/";
+    public static String BasePath = "http://115.28.37.145:9008/healthstationserver";
+//        public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
+//        public static String TEXT_URL = "http://192.168.66.37:8080/bale/";
     //    用户注册接口
     public static String Regist_URL = TEXT_URL + "account/appregister.action";
     //发送验证码接口
     public static String SendMsg_URL = TEXT_URL + "msg/send.action";
     //修改密码的接口
-    public static String ModifyPwd_URL = TEXT_URL + "account/resetpwd.action";
+    public static String ModifyPwd_URL = TEXT_URL + "account/apprestpwd.action";
     //获取体检地点接口
     public static String PhysicallAddr_URL = TEXT_URL + "base/dis/machine/list.do";
     //    所有的文件路径主路径为
-    public static String FILE_URL = "http://115.28.37.145:9008/healthstationserver/";
+    public static String FILE_URL = "http://115.28.37.145:9008/healthstationserver";
     //附近监测点接口
     public static String NearAddress_URL = TEXT_URL + "base/dis/machine/list.do";
     //上传文件接口
@@ -53,4 +55,8 @@ public class UrlInterface {
     public static String InfoClassSelect_URL = TEXT_URL + "articles/.do";
     //用户上传头像接口
     public static String UpLogo_URL = TEXT_URL + "doupload/saveheadimg.do";
+    //    个人资料修改密码
+    public static String InfoModifyPwd_URL = TEXT_URL + "account/resetpwd.action";
+    //健康趋势接口
+    public static String TendInfo_URL = TEXT_URL + "app/tendency.do";
 }

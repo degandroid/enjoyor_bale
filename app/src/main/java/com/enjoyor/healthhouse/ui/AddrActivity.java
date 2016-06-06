@@ -12,6 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.net.ApiMessage;
@@ -42,13 +47,36 @@ public class AddrActivity extends BaseActivity implements View.OnClickListener {
     EditText addr_et;
     @Bind(R.id.addr_tv)
     TextView addr_tv;
+    @Bind(R.id.addr_detail)
+    TextView addr_detail;
     int account;
+    MyLocationListenner myListener;
+
+    //定位
+    LocationClient mLocClient;
+    //    public MyLocationListenner myListener = new MyLocationListenner();
+    private MyLocationConfiguration.LocationMode mCurrentMode;// 定位模式
+    boolean isFirstLoc = true;// 是否首次定位
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addr_ac_layout);
         ButterKnife.bind(this);
+        if (isFirstLoc) {
+            myListener = new MyLocationListenner();
+            isFirstLoc = false;
+        }
+        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;// 设置定位模式为普通
+        mLocClient = new LocationClient(this);
+        mLocClient.registerLocationListener(myListener);// 注册监听函数：
+        LocationClientOption option = new LocationClientOption();
+        option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
+        option.setScanSpan(1000);// 设置发起定位请求的间隔时间为5000ms
+        option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
+        option.setNeedDeviceDirect(true);// 返回的定位结果包含手机机头的方向
+        mLocClient.setLocOption(option);
+        mLocClient.start();
         initView();
     }
 
@@ -96,7 +124,7 @@ public class AddrActivity extends BaseActivity implements View.OnClickListener {
                         public void onSuccess(int i, Header[] headers, byte[] bytes) {
                             String json = new String(bytes);
                             ApiMessage apiMessage = ApiMessage.FromJson(json);
-                            if (apiMessage.Code==1001){
+                            if (apiMessage.Code == 1001) {
                                 Toast.makeText(AddrActivity.this, "" + apiMessage.Msg, Toast.LENGTH_LONG).show();
                                 Intent intent = getIntent();
                                 intent.putExtra("addr", addr_et.getText().toString().trim());
@@ -117,6 +145,20 @@ public class AddrActivity extends BaseActivity implements View.OnClickListener {
                 }
 
                 break;
+        }
+    }
+
+    /**
+     * 定位sdk监听函数
+     */
+    public class MyLocationListenner implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation bdLocation) {
+            if (bdLocation == null) {
+                return;
+            } else {
+                addr_detail.setText(bdLocation.getProvince() + bdLocation.getCity() + bdLocation.getDistrict());
+            }
         }
     }
 }

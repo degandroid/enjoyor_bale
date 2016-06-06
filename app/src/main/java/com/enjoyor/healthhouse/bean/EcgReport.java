@@ -43,7 +43,7 @@ public class EcgReport {
 
     public static class RecordEcgEntity {
         private String createTime;
-        private int ecg;
+        private Integer ecg;
         private String ecgData;
         private int id;
         private int ngain;
@@ -59,11 +59,11 @@ public class EcgReport {
             this.createTime = createTime;
         }
 
-        public int getEcg() {
+        public Integer getEcg() {
             return ecg;
         }
 
-        public void setEcg(int ecg) {
+        public void setEcg(Integer ecg) {
             this.ecg = ecg;
         }
 

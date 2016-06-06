@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,10 +115,10 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
 
     private void initTab() {
         communtity_group.removeAllViews();
-        communtity_group.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, 110));
+        communtity_group.setLayoutParams(new RelativeLayout.LayoutParams(MATCH_PARENT, 110));
         for (int i = 0; i < listInfo.size(); i++) {
             Log.d("wyy-------", listInfo.size() + "");
-            LayoutInflater inflater = getActivity().getLayoutInflater();
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
             View view = inflater.inflate(R.layout.communtity_tab, null);
             view.setLayoutParams(new LinearLayout.LayoutParams(0, MATCH_PARENT, 1));
             TextView textView = (TextView) view.findViewById(R.id.text);

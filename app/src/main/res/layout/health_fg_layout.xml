@@ -18,12 +18,12 @@
             android:id="@+id/health_full_tab1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="10px"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
+                android:layout_marginTop="5dp"
                 android:id="@+id/health_full_bp_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,12 +43,12 @@
             android:id="@+id/health_full_tab2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="10px"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
+                android:layout_marginTop="5dp"
                 android:id="@+id/health_full_bs_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,16 +68,16 @@
             android:id="@+id/health_full_tab3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="10px"
             android:layout_weight="1.5"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
+                android:layout_marginTop="5dp"
                 android:id="@+id/health_full_bi_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/bc" />
+                android:src="@mipmap/bc_body" />
 
             <TextView
                 android:id="@+id/health_full_bi_tv"
@@ -93,12 +93,12 @@
             android:id="@+id/health_full_tab4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="10px"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
+                android:layout_marginTop="5dp"
                 android:id="@+id/health_full_bo_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,12 +118,12 @@
             android:id="@+id/health_full_tab5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="10px"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
+                android:layout_marginTop="5dp"
                 android:id="@+id/health_full_ecg_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,365 +149,391 @@
 
     </LinearLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/health_ry_full"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_line"
-        android:visibility="gone">
-
-        <RelativeLayout
-            android:id="@+id/health_full_cord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:background="@color/colorWhite"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/health_full_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="14dp"
-                android:src="@mipmap/abnormal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/health_full_img"
-                android:text="异常项目" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_below="@+id/health_full_img"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
-                android:background="@color/color_line">
-
-            </View>
-        </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp">
 
         <LinearLayout
-            android:id="@+id/health_full1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/health_full_cord"
-            android:background="@color/colorWhite"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/health_full_record"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="18dp"
-                android:text="当前体检正常" />
-
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:id="@+id/health_full_scr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="18dp"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:id="@+id/health_full_ununsual_bp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="26dp"
-                        android:background="@drawable/healthrecord_bg"
-                        android:drawableLeft="@mipmap/bp_ab"
-                        android:gravity="center"
-                        android:paddingLeft="2.5dp"
-                        android:paddingRight="2.5dp"
-                        android:text="血压异常"
-                        android:textColor="@color/healthrecord_bg"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/health_full_ununsual_bt"
-                        android:layout_width="86dp"
-                        android:layout_height="26dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/healthrecord_bg"
-                        android:drawableLeft="@mipmap/bs_ab"
-                        android:gravity="center"
-                        android:text="血糖异常"
-                        android:textColor="@color/healthrecord_bg"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/health_full_ununsual_bo"
-                        android:layout_width="86dp"
-                        android:layout_height="26dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/healthrecord_bg"
-                        android:drawableLeft="@mipmap/bi_ab"
-                        android:gravity="center"
-                        android:text="血氧异常"
-                        android:textColor="@color/healthrecord_bg"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/health_full_ununsual_ecg"
-                        android:layout_width="86dp"
-                        android:layout_height="26dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/healthrecord_bg"
-                        android:drawableLeft="@mipmap/ecg_ab"
-                        android:gravity="center"
-                        android:text="心电异常"
-                        android:textColor="@color/healthrecord_bg"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/health_full_ununsual_bi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="26dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/healthrecord_bg"
-                        android:drawableLeft="@mipmap/bc_ab"
-                        android:gravity="center"
-                        android:text="人体成分异常异常"
-                        android:textColor="@color/healthrecord_bg"
-                        android:visibility="gone" />
-
-                </LinearLayout>
-            </HorizontalScrollView>
-
-        </LinearLayout>
-
-        <!--.......-->
-        <RelativeLayout
-            android:id="@+id/health_fullhealth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/health_full1"
-            android:layout_marginTop="11dp"
-            android:background="@color/colorWhite"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/health_full2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="14dp"
-                android:src="@mipmap/proposal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/health_full2"
-                android:text="健康评估" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_below="@+id/health_full2"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
-                android:background="@color/color_line">
-
-            </View>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/health_full_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/health_fullhealth"
-            android:background="@color/colorWhite">
-
-            <TextView
-                android:id="@+id/health_full_evalute"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="18dp"
-                android:text="" />
-        </LinearLayout>
-
-        <!-- -->
-        <RelativeLayout
-            android:id="@+id/health_fullhealth6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/health_full_1"
-            android:layout_marginTop="11dp"
-            android:background="@color/colorWhite"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/health_full9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="14dp"
-                android:src="@mipmap/assess" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/health_full9"
-                android:text="健康建议" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_below="@+id/health_full9"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
-                android:background="@color/color_line">
-
-            </View>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/health_fullhealth6"
-            android:background="@color/white">
-
-            <LinearLayout
-                android:id="@+id/health_full12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/health_full11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:src="@mipmap/eat" />
-
-                <TextView
-                    android:id="@+id/health_full_eat_sug"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="14dp"
-                    android:text="" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/health_full13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/health_full12"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/health_full14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:src="@mipmap/sports" />
-
-                <TextView
-                    android:id="@+id/health_full_sport_sug"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="14dp"
-                    android:text="" />
-            </LinearLayout>
-
-        </RelativeLayout>
-    </RelativeLayout>
-    <!--没有数据时的界面-->
-    <RelativeLayout
-        android:id="@+id/health_ry_empty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/health_empty_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:src="@mipmap/error" />
-
-        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignLeft="@id/health_empty_error"
-            android:layout_alignRight="@id/health_empty_error"
-            android:layout_below="@id/health_empty_error"
-            android:layout_marginTop="15dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/health_empty"
+            <RelativeLayout
+                android:id="@+id/health_ry_full"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="您还没有体检报告\n无法进行健康评估"
-                android:textColor="@color/colorPrimary"
-                android:textSize="19dp" />
+                android:background="@color/color_line">
 
-            <ImageView
-                android:id="@+id/health_empty_img"
-                android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/health_full_cord"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/health_full_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="14dp"
+                        android:src="@mipmap/abnormal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/health_full_img"
+                        android:text="异常项目" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_below="@+id/health_full_img"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginRight="18dp"
+                        android:background="@color/color_line">
+
+                    </View>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/health_full1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/health_full_cord"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/health_full_record"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="18dp"
+                        android:text="" />
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:id="@+id/health_full_scr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="10dp"
+                            android:paddingLeft="18dp"
+                            android:paddingRight="18dp"
+                            android:paddingTop="5dp">
+
+                            <TextView
+                                android:id="@+id/health_full_ununsual_bp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="26dp"
+                                android:background="@drawable/healthrecord_bg"
+                                android:drawableLeft="@mipmap/bp_ab"
+                                android:gravity="center"
+                                android:paddingLeft="2.5dp"
+                                android:paddingRight="2.5dp"
+                                android:text="血压异常"
+                                android:textColor="@color/healthrecord_bg"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/health_full_ununsual_bt"
+                                android:layout_width="86dp"
+                                android:layout_height="26dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/healthrecord_bg"
+                                android:drawableLeft="@mipmap/bs_ab"
+                                android:gravity="center"
+                                android:text="血糖异常"
+                                android:textColor="@color/healthrecord_bg"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/health_full_ununsual_bo"
+                                android:layout_width="86dp"
+                                android:layout_height="26dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/healthrecord_bg"
+                                android:drawableLeft="@mipmap/bi_ab"
+                                android:gravity="center"
+                                android:text="血氧异常"
+                                android:textColor="@color/healthrecord_bg"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/health_full_ununsual_ecg"
+                                android:layout_width="86dp"
+                                android:layout_height="26dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/healthrecord_bg"
+                                android:drawableLeft="@mipmap/ecg_ab"
+                                android:gravity="center"
+                                android:text="心电异常"
+                                android:textColor="@color/healthrecord_bg"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/health_full_ununsual_bi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="26dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/healthrecord_bg"
+                                android:drawableLeft="@mipmap/bc_ab"
+                                android:gravity="center"
+                                android:text="人体成分异常异常"
+                                android:textColor="@color/healthrecord_bg"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <!--.......-->
+                <RelativeLayout
+                    android:id="@+id/health_fullhealth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/health_full1"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/health_full2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="14dp"
+                        android:src="@mipmap/proposal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/health_full2"
+                        android:text="健康评估" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_below="@+id/health_full2"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginRight="18dp"
+                        android:background="@color/color_line">
+
+                    </View>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/health_full_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/health_fullhealth"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:id="@+id/health_full_evalute"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="18dp"
+                        android:text="" />
+                </LinearLayout>
+
+                <!-- -->
+                <RelativeLayout
+                    android:id="@+id/health_fullhealth6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/health_full_1"
+                    android:layout_marginTop="11dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/health_full9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="14dp"
+                        android:src="@mipmap/assess" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/health_full9"
+                        android:text="健康建议" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_below="@+id/health_full9"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginRight="18dp"
+                        android:background="@color/color_line">
+
+                    </View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/health_fullhealth6"
+                    android:background="@color/white">
+
+                    <LinearLayout
+                        android:id="@+id/health_full12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/health_full11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="14dp"
+                            android:src="@mipmap/eat" />
+
+                        <TextView
+                            android:id="@+id/health_full_eat_sug"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/line4"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_below="@+id/health_full12"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginRight="18dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/color_line"></View>
+
+                    <LinearLayout
+                        android:id="@+id/health_full13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/line4"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/health_full14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="14dp"
+                            android:src="@mipmap/sports" />
+
+                        <TextView
+                            android:id="@+id/health_full_sport_sug"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            android:text="" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--没有数据时的界面-->
+            <RelativeLayout
+                android:id="@+id/health_ry_empty"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/health_empty"
-                android:layout_marginTop="20dp"
-                android:src="@mipmap/line" />
+                android:background="@color/colorWhite"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/health_empty_go"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/health_empty_img"
-                android:layout_marginTop="20dp"
-                android:text="前往健康体检一体机体检"
-                android:textColor="@color/colorPrimary"
-                android:textSize="19dp" />
+                <ImageView
+                    android:id="@+id/health_empty_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:src="@mipmap/error" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/health_empty_go"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/health_btn"
-                android:drawablePadding="15dp"
-                android:drawableRight="@mipmap/arrow_health"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="查看体检机监测点"
-                android:textColor="@color/colorGreenYellow"
-                android:textSize="19dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@id/health_empty_error"
+                    android:layout_alignRight="@id/health_empty_error"
+                    android:layout_below="@id/health_empty_error"
+                    android:layout_marginTop="15dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/button"
-                android:layout_marginEnd="18dp"
-                android:layout_marginRight="18dp"
-                android:layout_marginTop="28dp"
-                android:src="@mipmap/person" />
+                    <TextView
+                        android:id="@+id/health_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="您还没有体检报告\n无法进行健康评估"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="19dp" />
 
-        </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/health_empty_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/health_empty"
+                        android:layout_marginTop="20dp"
+                        android:src="@mipmap/line" />
 
-    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/health_empty_go"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/health_empty_img"
+                        android:layout_marginTop="20dp"
+                        android:text="前往健康体检一体机体检"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="19dp" />
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/health_empty_go"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/health_btn"
+                        android:drawablePadding="15dp"
+                        android:drawableRight="@mipmap/arrow_health"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="查看体检机监测点"
+                        android:textColor="@color/colorGreenYellow"
+                        android:textSize="19dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignTop="@+id/button"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginRight="18dp"
+                        android:layout_marginTop="28dp"
+                        android:src="@mipmap/person" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
 </LinearLayout>

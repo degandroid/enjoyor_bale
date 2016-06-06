@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140px"
+        android:layout_height="80dp"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -14,12 +14,12 @@
 
             <ImageView
                 android:id="@+id/physicall_item_img"
-                android:layout_width="100px"
-                android:layout_height="100px"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:scaleType="centerCrop"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
-                android:layout_marginRight="30px"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="24px"
+                android:layout_marginTop="12dp"
                 android:layout_toRightOf="@id/physicall_item_img"
                 android:text="杭州市西湖区三墩镇西园八路二号银江软件园门口"
                 android:textColor="@color/textcolot_welcome" />
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@id/physicall_addr"
-                android:layout_marginBottom="14px"
+                android:layout_marginBottom="10dp"
                 android:layout_toRightOf="@id/physicall_item_img"
                 android:src="@mipmap/weizhi" />
 
@@ -48,8 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@id/physicall_addr"
-                android:layout_marginBottom="14px"
-                android:layout_marginLeft="10px"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/physicall_img_addr"
                 android:gravity="center"
                 android:text="200米"
@@ -57,11 +57,11 @@
 
             <TextView
                 android:id="@+id/gotophysicall"
-                android:layout_width="140px"
-                android:layout_height="50px"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottom="14px"
+                android:layout_marginBottom="10dp"
                 android:background="@mipmap/qu_tijian"
                 android:gravity="center"
                 android:text="去体检"

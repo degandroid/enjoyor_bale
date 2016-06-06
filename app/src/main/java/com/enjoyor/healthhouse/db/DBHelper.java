@@ -23,6 +23,7 @@ public class DBHelper {
 
 
     public boolean saveUser(UserInfo user) {
+//        clearUser();
         try {
             Dao<UserInfo, Integer> dao = mDBHelper.getDao(UserInfo.class);
             dao.createOrUpdate(user);
@@ -35,6 +36,7 @@ public class DBHelper {
     }
 
     public UserInfo getUser() {
+
         try {
             Dao<UserInfo, Integer> dao = mDBHelper.getDao(UserInfo.class);
             UserInfo user = dao.queryForId(1);

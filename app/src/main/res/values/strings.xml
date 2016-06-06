@@ -35,4 +35,7 @@
     <string name="commit">确定</string>
     <string name="commit_num">确定(%1$d/%2$d)</string>
 
+    <!-- shasresdk-->
+    <string name="share">share</string>
+
 </resources>

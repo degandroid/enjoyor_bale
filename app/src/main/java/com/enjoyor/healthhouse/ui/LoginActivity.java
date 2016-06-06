@@ -156,7 +156,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     UserInfo user = JsonHelper.getJson(apiMessage.Data, UserInfo.class);
                     if (saveUser(user)) {
                         Log.i("zxw", "用户信息已保存");
-
                     }
                     if (isFromBpInputActivity) {
                         finish();

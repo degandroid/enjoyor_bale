@@ -3,6 +3,7 @@ package com.enjoyor.healthhouse.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,23 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/5/3.
  */
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
-    // 定位相关
+    //
     LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
     private MyLocationConfiguration.LocationMode mCurrentMode;// 定位模式
     boolean isFirstLoc = true;// 是否首次定位
     private static HomeFragment mineFragment;
+
+    public interface onChangeListener {
+        void onChange();
+    }
+
+    private onChangeListener listener;
+
+    public void setChangeListener(onChangeListener listener) {
+        this.listener = listener;
+
+    }
 
     public static HomeFragment getInstance(int info) {
         mineFragment = new HomeFragment();
@@ -69,6 +81,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.navigation_back)
     ImageView navigation_back;
     RelativeLayout re_physicall_location;
+    private RelativeLayout more_info;//更多资讯
     private LinearLayout ll_roundicon1;
     private LinearLayout ll_roundicon2;
     @Bind(R.id.lv_information)
@@ -79,7 +92,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     //经纬度
     double latitude;
     double longitude;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,7 +115,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         navigation_back.setVisibility(View.INVISIBLE);
         headView = LayoutInflater.from(getActivity()).inflate(R.layout.head_homefragment, null);
         re_physicall_location = (RelativeLayout) headView.findViewById(R.id.re_physicall_location);
+        more_info = (RelativeLayout) headView.findViewById(R.id.more_info);
         re_physicall_location.setOnClickListener(this);
+        more_info.setOnClickListener(this);
         initRoundIcon();
         lv_information.addHeaderView(headView);
         initArticle();
@@ -128,9 +142,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         lv_information.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), CommunitityCommonActivity.class);
-                intent.putExtra("id",article.get(position-1).getId());
-                startActivity(intent);
+                if (article.size() != 0) {
+                    Intent intent = new Intent(getActivity(), CommunitityCommonActivity.class);
+                    intent.putExtra("id", article.get(position - 1).getId());
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -150,6 +166,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             longitude = bdLocation.getLongitude();
         }
     }
+
     private void initArticle() {
         RequestParams params = new RequestParams();
         AsyncHttpUtil.get(UrlInterface.TEXT_URL + ARTICLES_URL, params, new AsyncHttpResponseHandler() {
@@ -168,6 +185,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
+
     public class InformationAdapter extends BaseAdapter {
 
         @Override
@@ -199,8 +217,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             holder.tv_date.setText(article.get(position).getInterval());
             holder.tv_readnumber.setText("阅读量  " + article.get(position).getPageViews());
 //            holder.tv_comment.setText("comment");
-            if(article.get(position).getImages().size()>0){
-                Glide.with(getActivity()).load(UrlInterface.TEXT_URL+article.get(position).getImages().get(0).getPath()).into(holder.iv_infopic);
+            if (article.get(position).getImages().size() > 0) {
+                Glide.with(getActivity()).load(UrlInterface.TEXT_URL + article.get(position).getImages().get(0).getPath()).into(holder.iv_infopic);
             }
 
             return convertView;
@@ -278,6 +296,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent_addr.putExtra("latitude", latitude);
                 intent_addr.putExtra("longitude", longitude);
                 startActivity(intent_addr);
+                break;
+            case R.id.more_info:
+                if(listener != null){
+                    listener.onChange();
+                }
+                Log.d("wyy---",listener.toString());
+//                Intent intent_more = new Intent(getActivity(), MoreInfoActivity.class);
+//                startActivity(intent_more);
                 break;
         }
     }

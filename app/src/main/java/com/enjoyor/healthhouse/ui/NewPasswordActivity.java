@@ -78,9 +78,9 @@ public class NewPasswordActivity extends BaseActivity implements View.OnClickLis
      */
     private void modify() {
         RequestParams params = new RequestParams();
-        params.add("phone", String.valueOf(phonenumber));
+        params.add("phone", phonenumber);
         params.add("newpwd", et_newpassword.getText().toString().trim());
-        params.add("mcode", String.valueOf(yanzhengma));
+        params.add("mcode", yanzhengma);
         AsyncHttpUtil.post(UrlInterface.ModifyPwd_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {

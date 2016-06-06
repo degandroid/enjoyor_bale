@@ -143,7 +143,7 @@ public class PhsicallLocation {
         private String addressName;
         private String compName;
         private int companyId;
-        private Object distance;
+        private Integer distance;
         private String macAddress;
         private String machineAddress;
         private String machineCode;
@@ -185,11 +185,11 @@ public class PhsicallLocation {
             this.companyId = companyId;
         }
 
-        public Object getDistance() {
+        public Integer getDistance() {
             return distance;
         }
 
-        public void setDistance(Object distance) {
+        public void setDistance(Integer distance) {
             this.distance = distance;
         }
 
