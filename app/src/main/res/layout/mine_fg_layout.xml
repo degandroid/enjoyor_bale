@@ -20,12 +20,12 @@
             android:textSize="@dimen/textsize_largetittle" />
 
         <ImageView
-            android:background="@drawable/redious"
             android:id="@+id/mine_fg_logo"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:scaleType="centerCrop"
             android:layout_centerInParent="true"
+            android:background="@drawable/redious"
+            android:scaleType="centerCrop"
             android:src="@mipmap/bale" />
 
         <LinearLayout
@@ -88,35 +88,20 @@
 
                     <ImageView
                         android:id="@+id/mine_fg_xx_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="18dp"
-                        android:paddingRight="18dp"
-                        android:paddingTop="10dp"
+                        style="@style/MineFg_img"
                         android:src="@mipmap/xiaoxi" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        style="@style/MineFg_tv"
                         android:layout_toRightOf="@+id/mine_fg_xx_img"
                         android:text="我的消息" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
+                        style="@style/MineFg_img_arrow"
                         android:src="@mipmap/xiangyou" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginLeft="18dp"
-                    android:background="@color/color_line"></View>
+                <View style="@style/Mine_line"></View>
 
                 <RelativeLayout
                     android:id="@+id/mine_fg_book"
@@ -125,35 +110,20 @@
 
                     <ImageView
                         android:id="@+id/mine_fg_zl_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="18dp"
-                        android:paddingRight="18dp"
-                        android:paddingTop="10dp"
+                        style="@style/MineFg_img"
                         android:src="@mipmap/ziliao" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        style="@style/MineFg_tv"
                         android:layout_toRightOf="@+id/mine_fg_zl_img"
                         android:text="我的资料" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
+                        style="@style/MineFg_img_arrow"
                         android:src="@mipmap/xiangyou" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginLeft="18dp"
-                    android:background="@color/color_line"></View>
+                <View style="@style/Mine_line"></View>
 
                 <RelativeLayout
                     android:id="@+id/mine_fg_phone"
@@ -162,35 +132,20 @@
 
                     <ImageView
                         android:id="@+id/mine_fg_sj_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="18dp"
-                        android:paddingRight="18dp"
-                        android:paddingTop="10dp"
+                        style="@style/MineFg_img"
                         android:src="@mipmap/shouji" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        style="@style/MineFg_tv"
                         android:layout_toRightOf="@+id/mine_fg_sj_img"
                         android:text="我的手机" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
+                        style="@style/MineFg_img_arrow"
                         android:src="@mipmap/xiangyou" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginLeft="18dp"
-                    android:background="@color/color_line"></View>
+                <View style="@style/Mine_line"></View>
 
                 <RelativeLayout
                     android:id="@+id/mine_fg_pwd"
@@ -199,27 +154,16 @@
 
                     <ImageView
                         android:id="@+id/mine_fg_mm_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="18dp"
-                        android:paddingRight="18dp"
-                        android:paddingTop="10dp"
+                        style="@style/MineFg_img"
                         android:src="@mipmap/suo" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        style="@style/MineFg_tv"
                         android:layout_toRightOf="@+id/mine_fg_mm_img"
                         android:text="修改密码" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
+                        style="@style/MineFg_img_arrow"
                         android:src="@mipmap/xiangyou" />
                 </RelativeLayout>
             </LinearLayout>
@@ -238,27 +182,16 @@
 
                     <ImageView
                         android:id="@+id/mine_fg_sz_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="18dp"
-                        android:paddingRight="18dp"
-                        android:paddingTop="10dp"
+                        style="@style/MineFg_img"
                         android:src="@mipmap/shezhi" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        style="@style/MineFg_tv"
                         android:layout_toRightOf="@+id/mine_fg_sz_img"
                         android:text="设置" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
+                        style="@style/MineFg_img_arrow"
                         android:src="@mipmap/xiangyou" />
                 </RelativeLayout>
             </LinearLayout>
@@ -277,35 +210,20 @@
 
                     <ImageView
                         android:id="@+id/mine_fg_tj_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="18dp"
-                        android:paddingRight="18dp"
-                        android:paddingTop="10dp"
+                        style="@style/MineFg_img"
                         android:src="@mipmap/tuijian" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        style="@style/MineFg_tv"
                         android:layout_toRightOf="@+id/mine_fg_tj_img"
                         android:text="推荐给好友" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
+                        style="@style/MineFg_img_arrow"
                         android:src="@mipmap/xiangyou" />
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginLeft="18dp"
-                    android:background="@color/color_line"></View>
+                <View style="@style/Mine_line"></View>
 
                 <RelativeLayout
                     android:id="@+id/mine_fg_suggest"
@@ -314,32 +232,19 @@
 
                     <ImageView
                         android:id="@+id/mine_fg_yj_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="18dp"
-                        android:paddingRight="18dp"
-                        android:paddingTop="10dp"
+                        style="@style/MineFg_img"
                         android:src="@mipmap/yijian" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        style="@style/MineFg_tv"
                         android:layout_toRightOf="@+id/mine_fg_yj_img"
                         android:text="意见反馈" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="18dp"
+                        style="@style/MineFg_img_arrow"
                         android:src="@mipmap/xiangyou" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-
-
     </ScrollView>
 </LinearLayout>

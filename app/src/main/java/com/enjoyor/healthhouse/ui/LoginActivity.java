@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,13 +28,21 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 
+import java.util.HashMap;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.sharesdk.alipay.share.Alipay;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * Created by Administrator on 2016/5/9.
  */
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener {
     @Bind(R.id.navigation_name)
     TextView navigation_name;
     @Bind(R.id.navigation_back)
@@ -51,7 +60,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     TextView tv_forget_password;
     @Bind(R.id.tv_login_quick)
     TextView tv_login_quick;
-
+    @Bind(R.id.login_ipay)
+    LinearLayout login_ipay;
+    @Bind(R.id.login_qq)
+    LinearLayout login_qq;
+    @Bind(R.id.login_wx)
+    LinearLayout login_wx;
 
     private String phoneNumber;
     private String password;
@@ -89,6 +103,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         tv_forget_password.setOnClickListener(this);
         tv_login_quick.setOnClickListener(this);
         navigation_back.setOnClickListener(this);
+        login_ipay.setOnClickListener(this);
+        login_qq.setOnClickListener(this);
+        login_wx.setOnClickListener(this);
     }
 
     @Override
@@ -115,6 +132,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.tv_login_quick:
                 Intent intent_quick = new Intent(LoginActivity.this, RegistActivity.class);
                 startActivity(intent_quick);
+                break;
+            case R.id.login_ipay://支付宝第三方登录
+                Platform ipay = ShareSDK.getPlatform(Alipay.NAME);
+                ipay.SSOSetting(false);
+                ipay.setPlatformActionListener(this);
+                ipay.authorize();
+                break;
+            case R.id.login_qq://qq第三方登录
+                Platform qq = ShareSDK.getPlatform(QQ.NAME);
+                qq.SSOSetting(false);
+                qq.setPlatformActionListener(this);
+                qq.authorize();
+                break;
+            case R.id.login_wx://微信第三方登录
+                Platform wx = ShareSDK.getPlatform(Wechat.NAME);
+                wx.SSOSetting(false);
+                wx.setPlatformActionListener(this);
+                wx.authorize();
                 break;
         }
     }
@@ -200,5 +235,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             return MyApplication.getInstance().getDBHelper().saveUser(user);
         }
         return false;
+    }
+
+    @Override
+    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        Toast.makeText(LoginActivity.this, "" + i, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void onError(Platform platform, int i, Throwable throwable) {
+
+    }
+
+    @Override
+    public void onCancel(Platform platform, int i) {
+
     }
 }

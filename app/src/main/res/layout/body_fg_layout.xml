@@ -3,18 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ScrollView style="@style/Body_com">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <RelativeLayout style="@style/Body_comm">
 
             <RelativeLayout
                 android:id="@+id/ecg_persion"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                style="@style/Body_com">
 
 
                 <RelativeLayout
@@ -25,82 +20,65 @@
 
                     <ImageView
                         android:id="@+id/ecg_fg_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:src="@mipmap/bc" />
 
                     <TextView
                         android:id="@+id/ecg_fg_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:layout_toRightOf="@id/ecg_fg_img"
                         android:text="当前人体成分" />
                 </RelativeLayout>
 
                 <View
                     android:id="@+id/ecg_fg_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_below="@id/ecg_fg_befour"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@color/color_line"></View>
+                    style="@style/Body_view"
+                    android:layout_below="@id/ecg_fg_befour"></View>
 
                 <RelativeLayout
                     android:id="@+id/vvvvvvvvv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Body_comm"
                     android:layout_below="@+id/ecg_fg_line">
 
                     <LinearLayout
+                        style="@style/Body_com"
                         android:layout_marginBottom="@dimen/layout_distance_15dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:background="@color/white">
 
                         <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            style="@style/Body_comm"
                             android:layout_marginTop="20dp">
 
                             <ImageView
                                 android:id="@+id/imageView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_centerHorizontal="true"
+                                style="@style/Body"
                                 android:src="@mipmap/man" />
 
                             <LinearLayout
                                 android:id="@+id/linearLayout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/Body_commo"
                                 android:layout_alignTop="@+id/imageView"
                                 android:layout_toLeftOf="@+id/imageView"
                                 android:layout_toStartOf="@+id/imageView"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:layout_marginLeft="4dp"
+                                    android:background="@color/zuobi"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
                                     android:text="左臂"
-                                    android:textColor="@color/white" />
+                                    android:textColor="@color/black" />
 
                                 <TextView
                                     android:id="@+id/left_zuobi_zhifang"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:text="脂肪量" />
 
                                 <TextView
                                     android:id="@+id/left_zuobi_jirou"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentStart="true"
                                     android:layout_below="@+id/linearLayout"
@@ -110,30 +88,29 @@
 
                             <LinearLayout
                                 android:id="@+id/linearLayout3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/Body_commo"
                                 android:layout_alignTop="@+id/imageView"
                                 android:layout_toEndOf="@+id/imageView"
                                 android:layout_toRightOf="@+id/imageView"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:layout_marginLeft="4dp"
+                                    android:background="@color/zuobi"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
                                     android:text="右臂"
-                                    android:textColor="@color/white" />
+                                    android:textColor="@color/black" />
 
                                 <TextView
                                     android:id="@+id/right_youbi_zhifang"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:text="脂肪量" />
 
                                 <TextView
                                     android:id="@+id/right_youbi_jirou"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentStart="true"
                                     android:layout_below="@+id/linearLayout"
@@ -143,29 +120,30 @@
 
                             <LinearLayout
                                 android:id="@+id/linearLayout2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/Body_commo"
                                 android:layout_alignBottom="@+id/imageView"
                                 android:layout_alignLeft="@+id/linearLayout"
                                 android:layout_alignStart="@+id/linearLayout"
+                                android:gravity="center"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
+                                    android:background="@color/zuobi"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
                                     android:text="左腿（含臀）"
-                                    android:textColor="@color/white" />
+                                    android:textColor="@color/black" />
 
                                 <TextView
                                     android:id="@+id/left_zuotui_zhifang"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
+                                    android:gravity="center"
                                     android:text="脂肪量" />
 
                                 <TextView
                                     android:id="@+id/left_zuotui_jirou"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentStart="true"
                                     android:layout_below="@+id/linearLayout"
@@ -174,29 +152,29 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/Body_commo"
                                 android:layout_alignTop="@+id/linearLayout2"
                                 android:layout_toEndOf="@+id/imageView"
                                 android:layout_toRightOf="@+id/imageView"
+                                android:gravity="center"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="右腿（含臀）"
-                                    android:textColor="@color/white" />
+                                    style="@style/Body_commo"
+                                    android:background="@color/zuobi"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:text="右腿"
+                                    android:textColor="@color/black" />
 
                                 <TextView
                                     android:id="@+id/right_youtui_zhifang"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:text="脂肪量" />
 
                                 <TextView
                                     android:id="@+id/right_youtui_jirou"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:layout_alignParentLeft="true"
                                     android:layout_alignParentStart="true"
                                     android:layout_below="@+id/linearLayout"
@@ -206,25 +184,25 @@
 
                             <TextView
                                 android:id="@+id/textView"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true"
                                 android:layout_below="@+id/imageView"
+                                android:layout_centerHorizontal="true"
+                                android:background="@color/zuobi"
                                 android:gravity="center"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
                                 android:text="躯干" />
 
                             <LinearLayout
+                                style="@style/Body_comm"
+                                android:layout_below="@+id/textView"
                                 android:layout_marginBottom="@dimen/layout_distance_15dp"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/textView">
+                                android:gravity="center">
 
                                 <TextView
                                     android:id="@+id/qugan_jirou"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:layout_below="@+id/textView"
                                     android:layout_toEndOf="@+id/linearLayout"
                                     android:layout_toRightOf="@+id/linearLayout"
@@ -232,10 +210,8 @@
 
                                 <TextView
                                     android:id="@+id/qugan_zhifang"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/Body_commo"
                                     android:layout_below="@+id/textView"
-
                                     android:layout_toRightOf="@id/qugan_jirou"
                                     android:text="脂肪量6.6Kg" />
 
@@ -249,8 +225,7 @@
 
             <RelativeLayout
                 android:id="@+id/body_feipang"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/Body_com"
                 android:layout_below="@id/ecg_persion"
                 android:layout_marginTop="10dp">
 
@@ -262,18 +237,12 @@
 
                     <ImageView
                         android:id="@+id/body_feipang_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:src="@mipmap/fat" />
 
                     <TextView
                         android:id="@+id/body_feipang_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:layout_toRightOf="@id/body_feipang_img"
                         android:text="肥胖分析" />
 
@@ -281,17 +250,12 @@
 
                 <View
                     android:id="@+id/ecg_fg_line1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_below="@id/body_feipang_"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@color/color_line"></View>
+                    style="@style/Body_view"
+                    android:layout_below="@id/body_feipang_"></View>
 
                 <LinearLayout
                     android:id="@+id/body_feipang_web"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Body_comm"
                     android:layout_below="@id/ecg_fg_line1"
                     android:orientation="vertical">
 
@@ -304,35 +268,22 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text=""
-                            android:textColor="@color/white" />
+                            style="@style/Body_tv"
+                            android:text="" />
 
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="结果"
-                            android:textColor="@color/white" />
+                            style="@style/Body_tv"
+                            android:text="结果" />
 
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="参考范围"
-                            android:textColor="@color/white" />
+                            style="@style/Body_tv"
+                            android:text="参考范围" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/layout1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/Body_comm"
                         android:layout_marginLeft="16px"
                         android:layout_marginRight="16px"
                         android:orientation="vertical">
@@ -340,60 +291,46 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/Body_comm"
                         android:layout_marginLeft="16px"
                         android:layout_marginRight="16px"
                         android:layout_marginTop="3dp">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            style="@style/Body_comm"
                             android:layout_marginTop="2dp"
                             android:background="@drawable/button_stroke_orange"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tv_healthyname"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                style="@style/Body_tv1"
                                 android:layout_weight="1"
                                 android:background="@drawable/button_solide_blue"
-                                android:gravity="center"
-                                android:padding="5dp"
                                 android:text="内脂肪等级"
                                 android:textColor="@color/white" />
 
                             <TextView
                                 android:id="@+id/healthvalue"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                style="@style/Body_tv1"
                                 android:layout_weight="1"
                                 android:background="@drawable/button_stroke_orange"
-                                android:gravity="center"
-                                android:padding="5dp"
                                 android:text=""
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_healthyinfo"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                style="@style/Body_tv1"
                                 android:layout_weight="1.2"
-                                android:gravity="center"
-                                android:padding="5dp"
                                 android:text="正常范围1-9" />
                         </LinearLayout>
                     </LinearLayout>
-
-
                 </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/body_type_"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/Body_com"
                 android:layout_below="@+id/body_feipang"
                 android:layout_marginTop="10dp">
 
@@ -405,18 +342,12 @@
 
                     <ImageView
                         android:id="@+id/body_type_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:src="@mipmap/shape" />
 
                     <TextView
                         android:id="@+id/body_type_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:layout_toRightOf="@id/body_type_img"
                         android:text="体型评估" />
 
@@ -425,23 +356,17 @@
 
                 <View
                     android:id="@+id/ecg_fg_line2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_below="@id/body_type"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
+                    style="@style/Body_view"
                     android:background="@color/color_line"></View>
 
                 <LinearLayout
                     android:id="@+id/body_type_web"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Body_comm"
                     android:layout_below="@id/ecg_fg_line2"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        style="@style/Body_com"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -471,9 +396,7 @@
                                     android:layout_width="1dp"
                                     android:layout_height="match_parent"
                                     android:layout_alignParentRight="true"
-                                    android:background="@color/form">
-
-                                </View>
+                                    android:background="@color/form"></View>
 
                                 <View
                                     android:layout_width="match_parent"
@@ -484,16 +407,12 @@
                                 </View>
 
                                 <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    style="@style/Body_com"
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
+                                        style="@style/Body_tv2"
                                         android:background="@color/form"
-                                        android:gravity="center"
                                         android:text="理想体重"
                                         android:textColor="@color/white" />
 
@@ -507,10 +426,7 @@
 
                                     <TextView
                                         android:id="@+id/bca_tizhong_result"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:gravity="center"
+                                        style="@style/Body_tv2"
                                         android:text="" />
 
 
@@ -552,16 +468,12 @@
                                 </View>
 
                                 <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    style="@style/Body_com"
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
+                                        style="@style/Body_tv2"
                                         android:background="@color/form"
-                                        android:gravity="center"
                                         android:text="体重调节"
                                         android:textColor="@color/white" />
 
@@ -575,12 +487,8 @@
 
                                     <TextView
                                         android:id="@+id/bca_result"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:gravity="center"
+                                        style="@style/Body_tv2"
                                         android:text="" />
-
 
                                 </LinearLayout>
 
@@ -620,16 +528,12 @@
                                 </View>
 
                                 <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    style="@style/Body_com"
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
+                                        style="@style/Body_tv2"
                                         android:background="@color/form"
-                                        android:gravity="center"
                                         android:text="脂肪调节"
                                         android:textColor="@color/white" />
 
@@ -643,13 +547,8 @@
 
                                     <TextView
                                         android:id="@+id/bca_zhifang_result"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:gravity="center"
+                                        style="@style/Body_tv2"
                                         android:text="" />
-
-
                                 </LinearLayout>
 
                             </RelativeLayout>
@@ -688,16 +587,12 @@
                                 </View>
 
                                 <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    style="@style/Body_com"
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
+                                        style="@style/Body_tv2"
                                         android:background="@color/form"
-                                        android:gravity="center"
                                         android:text="肌肉调节"
                                         android:textColor="@color/white" />
 
@@ -705,18 +600,12 @@
                                         android:layout_width="1dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="0.0075"
-                                        android:background="@color/form">
-
-                                    </View>
+                                        android:background="@color/form"></View>
 
                                     <TextView
                                         android:id="@+id/bca_jirou_result"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:gravity="center"
+                                        style="@style/Body_tv2"
                                         android:text="" />
-
 
                                 </LinearLayout>
 
@@ -745,9 +634,7 @@
                                 android:layout_width="1dp"
                                 android:layout_height="match_parent"
                                 android:layout_alignParentRight="true"
-                                android:background="@color/form_blue">
-
-                            </View>
+                                android:background="@color/form_blue"></View>
 
                             <View
                                 android:layout_width="match_parent"
@@ -756,8 +643,7 @@
                                 android:background="@color/form_blue"></View>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                style="@style/Body_com"
                                 android:orientation="vertical">
 
                                 <LinearLayout
@@ -767,8 +653,7 @@
                                     android:background="@color/form_blue">
 
                                     <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        style="@style/Body_com"
                                         android:gravity="center"
                                         android:text="体型评估" />
                                 </LinearLayout>
@@ -780,8 +665,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        style="@style/Body_com"
                                         android:layout_marginLeft="15dp"
                                         android:gravity="center_vertical"
                                         android:text="您的体型为:" />
@@ -795,8 +679,7 @@
 
                                     <TextView
                                         android:id="@+id/bca_pinggu_result"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        style="@style/Body_com"
                                         android:gravity="center"
                                         android:text="" />
                                 </LinearLayout>
@@ -824,18 +707,12 @@
 
                     <ImageView
                         android:id="@+id/body_tizhi_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:src="@mipmap/body" />
 
                     <TextView
                         android:id="@+id/body_tizhi_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:layout_toRightOf="@id/body_tizhi_img"
                         android:text="体脂率标准范围" />
 
@@ -844,12 +721,8 @@
 
                 <View
                     android:id="@+id/ecg_fg_line3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_below="@id/body_tizhi"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@color/color_line"></View>
+                    style="@style/Body_view"
+                    android:layout_below="@id/body_tizhi"></View>
 
                 <LinearLayout
                     android:id="@+id/body_tizhi_web"
@@ -903,19 +776,12 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    style="@style/Body_tv3"
                                     android:background="@color/form_xiaoshou"
-                                    android:gravity="center"
-                                    android:text="消瘦"
-                                    android:textColor="@color/white" />
+                                    android:text="消瘦" />
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="2"
-                                    android:gravity="center"
+                                    style="@style/Body_tv4"
                                     android:text="5-11%" />
                             </LinearLayout>
 
@@ -960,19 +826,12 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    style="@style/Body_tv3"
                                     android:background="@color/form_standard"
-                                    android:gravity="center"
-                                    android:text="标准"
-                                    android:textColor="@color/white" />
+                                    android:text="标准" />
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="2"
-                                    android:gravity="center"
+                                    style="@style/Body_tv4"
                                     android:text="5-11%" />
                             </LinearLayout>
 
@@ -1017,19 +876,13 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+
+                                    style="@style/Body_tv3"
                                     android:background="@color/form_chaozhong"
-                                    android:gravity="center"
-                                    android:text="超重"
-                                    android:textColor="@color/white" />
+                                    android:text="超重" />
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="2"
-                                    android:gravity="center"
+                                    style="@style/Body_tv4"
                                     android:text="5-11%" />
                             </LinearLayout>
 
@@ -1074,20 +927,12 @@
                                 android:orientation="vertical">
 
                                 <TextView
-
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    style="@style/Body_tv3"
                                     android:background="@color/form_feipang"
-                                    android:gravity="center"
-                                    android:text="肥胖"
-                                    android:textColor="@color/white" />
+                                    android:text="肥胖" />
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="2"
-                                    android:gravity="center"
+                                    style="@style/Body_tv4"
                                     android:text="5-11%" />
                             </LinearLayout>
 
@@ -1102,8 +947,7 @@
 
             <RelativeLayout
                 android:id="@+id/body_consist_"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/Body_com"
                 android:layout_below="@+id/body_tizhi_"
                 android:layout_marginTop="10dp">
 
@@ -1115,18 +959,12 @@
 
                     <ImageView
                         android:id="@+id/body_consist_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:src="@mipmap/form" />
 
                     <TextView
                         android:id="@+id/body_consist_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:layout_toRightOf="@id/body_consist_img"
                         android:text="身体组成分析" />
 
@@ -1134,24 +972,18 @@
 
                 <View
                     android:id="@+id/ecg_fg_line4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_below="@id/body_consist"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@color/color_line"></View>
+                    style="@style/Body_view"
+                    android:layout_below="@id/body_consist"></View>
 
                 <LinearLayout
                     android:id="@+id/body_consist_web"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Body_comm"
                     android:layout_below="@id/ecg_fg_line4"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/layout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/Body_comm"
                         android:layout_marginLeft="16px"
                         android:layout_marginRight="16px"
                         android:orientation="vertical">
@@ -1168,11 +1000,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            style="@style/Body_tv2"
                             android:background="@color/form_xiaoshou"
-                            android:gravity="center"
                             android:padding="2dp"
                             android:singleLine="true"
                             android:text="基础代谢（kcal）"
@@ -1180,33 +1009,25 @@
 
                         <TextView
                             android:id="@+id/healthvalue1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            style="@style/Body_tv2"
                             android:background="@drawable/button_stroke_orange"
-                            android:gravity="center"
                             android:padding="2dp"
                             android:text=""
                             android:textColor="@color/black" />
 
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            style="@style/Body_tv2"
                             android:background="@drawable/button_stroke_orange"
-                            android:gravity="center"
                             android:padding="2dp"
                             android:text="参考值：1594" />
                     </LinearLayout>
-
 
                 </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/body_bo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/Body_com"
                 android:layout_below="@+id/body_consist_"
                 android:layout_marginTop="10dp">
 
@@ -1218,18 +1039,12 @@
 
                     <ImageView
                         android:id="@+id/body_bo__img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:src="@mipmap/year" />
 
                     <TextView
                         android:id="@+id/body_bo_t_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:layout_toRightOf="@id/body_bo__img"
                         android:text="全年体脂肪率曲线图" />
 
@@ -1238,17 +1053,12 @@
 
                 <View
                     android:id="@+id/ecg_fg_line5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_below="@id/body_bo_"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@color/color_line"></View>
+                    style="@style/Body_view"
+                    android:layout_below="@id/body_bo_"></View>
 
                 <WebView
                     android:id="@+id/body_bo__web"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Body_comm"
                     android:layout_below="@id/ecg_fg_line5">
 
                 </WebView>
@@ -1256,8 +1066,7 @@
 
             <RelativeLayout
                 android:id="@+id/body_suggest"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/Body_com"
                 android:layout_below="@+id/body_bo"
                 android:layout_marginTop="10dp">
 
@@ -1269,49 +1078,33 @@
 
                     <ImageView
                         android:id="@+id/body_suggest__img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:src="@mipmap/assess_report" />
 
                     <TextView
                         android:id="@+id/body_suggest__title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="18dp"
+                        style="@style/Body_fg"
                         android:layout_toRightOf="@id/body_suggest__img"
                         android:text="健康建议" />
                 </RelativeLayout>
 
                 <View
                     android:id="@+id/ecg_fg_line6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_below="@id/body_suggest_"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@color/color_line"></View>
+                    style="@style/Body_view"
+                    android:layout_below="@id/body_suggest_"></View>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    style="@style/Body_com"
                     android:layout_below="@+id/ecg_fg_line6"
                     android:background="@color/colorWhite"
                     android:padding="18dp">
 
                     <TextView
                         android:id="@+id/bp_fg_suggest"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/Body_comm"
                         android:text="" />
                 </LinearLayout>
             </RelativeLayout>
-
         </RelativeLayout>
-
-
     </ScrollView>
-
 </LinearLayout>

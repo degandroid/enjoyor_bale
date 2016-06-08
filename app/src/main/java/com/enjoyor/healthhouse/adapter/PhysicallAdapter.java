@@ -42,16 +42,5 @@ public class PhysicallAdapter extends CommAdapter<PhsicallLocation.MachineModels
                 holder.setText(R.id.physicall_kilo, models.getDistance() + "米");
             }
         }
-//        holder.getView(R.id.gotophysicall).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent_map = new Intent(context, MapActivity.class);
-//                intent_map.putExtra("latitude", models.getMachineLat()+"");
-//                intent_map.putExtra("longitude", models.getMachineLong()+"");
-//                Log.d("wyy---", models.getMachineLat());
-//                Log.d("wyy===",models.getMachineLong());
-//                context.startActivity(intent_map);
-//            }
-//        });
     }
 }

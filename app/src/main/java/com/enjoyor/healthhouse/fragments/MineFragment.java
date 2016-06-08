@@ -30,6 +30,7 @@ import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.BasePath;
 import com.enjoyor.healthhouse.bean.UserInfo;
+import com.enjoyor.healthhouse.bean._FakeX509TrustManager;
 import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
@@ -52,10 +53,13 @@ import org.apache.http.Header;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
@@ -64,7 +68,8 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  * Created by Administrator on 2016/5/3.
  * 个人中心
  */
-public class MineFragment extends BaseFragment implements View.OnClickListener {
+public class MineFragment extends BaseFragment implements View.OnClickListener, PlatformActionListener {
+    _FakeX509TrustManager fakeX509TrustManager;
     View view;
     @Bind(R.id.mine_fg_logo)
     ImageView mine_fg_logo;
@@ -102,6 +107,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        fakeX509TrustManager.allowAllSSL();
         view = inflater.inflate(R.layout.mine_fg_layout, null);
         ButterKnife.bind(this, view);
         LayoutInflater inflater1 = getActivity().getLayoutInflater();
@@ -206,11 +212,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void oneKeyShare() {
-        ShareSDK.initSDK(getActivity());
+        fakeX509TrustManager.allowAllSSL();
+//        ShareSDK.initSDK(getActivity());
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
-        oks.disableSSOWhenAuthorize();
-
+//        oks.disableSSOWhenAuthorize();
+//        oks.
         // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
         //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
@@ -229,8 +236,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         oks.setSite(getString(R.string.app_name));
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl("http://sharesdk.cn");
-
-// 启动分享GUI
+        // 启动分享GUI
+        oks.setCallback(this);
         oks.show(getActivity());
     }
 
@@ -412,6 +419,21 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         intent.putExtra("return-data", true);
         // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT
         startActivityForResult(intent, PHOTO_REQUEST_CUT);
+    }
+
+    @Override
+    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        Log.d("wyy----------complete", platform.getDb().getUserId());
+    }
+
+    @Override
+    public void onError(Platform platform, int i, Throwable throwable) {
+        Log.d("wyy----------error---", throwable.toString());
+    }
+
+    @Override
+    public void onCancel(Platform platform, int i) {
+
     }
 }
 

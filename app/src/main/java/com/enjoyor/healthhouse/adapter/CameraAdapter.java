@@ -2,6 +2,8 @@ package com.enjoyor.healthhouse.adapter;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -26,15 +28,24 @@ public class CameraAdapter extends CommAdapter<String> {
 
     @Override
     public void convert(ViewHolder holder, String s) {
-        if (s!=null){
-            Log.d("wyy+++++++",s);
+
+        if (s != null) {
+            Log.d("wyy+++++++", s);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
             ImageView img = holder.getView(R.id.imageView);
-//        ImageView img = (ImageView) holder.getmConvertView().getId();
+            ImageView img1 = holder.getView(R.id.imageView1);
             img.setLayoutParams(params);
+            img1.setLayoutParams(params);
+            if (s.equals("tag")){
+                Log.d("wyy+++++++", "--------------");
+                img1.setVisibility(View.VISIBLE);
+                img.setVisibility(View.GONE);
+                img1.setImageResource(R.mipmap.zanting);
+            }else {
+                img.setVisibility(View.VISIBLE);
+                img1.setVisibility(View.GONE);
             ImageLoader.getInstance().display(s, img, width, height);
-//        holder.setImageURL(R.id.)
-        }
+        }}
 
     }
 }

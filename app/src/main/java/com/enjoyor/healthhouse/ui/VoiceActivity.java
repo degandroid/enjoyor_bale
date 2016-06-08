@@ -106,6 +106,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        voice_time.setText("00:00:00");
                         sendMsg();
                         voice_cha.setVisibility(View.GONE);
                         voice_dui.setVisibility(View.GONE);
@@ -349,6 +350,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
 
     private void sendMsg() {
         //倒记时
+        reSet();
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * Created by YuanYuan on 2016/3/28.
@@ -110,8 +111,8 @@ public class ViewHolder {
      */
     public ViewHolder setImageURL(int viewId, String url) {
         ImageView view = getView(viewId);
-//        ImageLoader.getInstance().displayImage(url, view);
-        Glide.with(context).load(url).into(view);
+        ImageLoader.getInstance().displayImage(url, view);
+//        Glide.with(context).load(url).into(view);
         return this;
     }
 }

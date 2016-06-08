@@ -23,8 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
+import com.enjoyor.healthhouse.bean._FakeX509TrustManager;
 import com.enjoyor.healthhouse.common.BaseDate;
-import com.enjoyor.healthhouse.receive.JudgeNetIsConnectedReceiver;
 import com.enjoyor.healthhouse.utils.AppManagerUtil;
 import com.enjoyor.healthhouse.utils.ScreenUtil;
 import com.enjoyor.healthhouse.utils.ToastUtil;
@@ -33,6 +33,7 @@ import com.enjoyor.healthhouse.utils.ToastUtil;
  * Created by YuanYuan on 2016/4/25.
  */
 public class BaseActivity extends AppCompatActivity {
+    _FakeX509TrustManager fakeX509TrustManager;
     private View rootView;
     //进度框
     protected Dialog mDialog;
@@ -50,6 +51,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppManagerUtil.addActivity(BaseActivity.this);
 //        this.judgeNetIsConnectedReceiver = new JudgeNetIsConnectedReceiver();
+        fakeX509TrustManager.allowAllSSL();
     }
 
     @Override

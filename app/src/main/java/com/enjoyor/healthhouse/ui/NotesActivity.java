@@ -1,6 +1,7 @@
 package com.enjoyor.healthhouse.ui;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -114,12 +115,14 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         mLocClient.registerLocationListener(myListener);// 注册监听函数：
         LocationClientOption option = new LocationClientOption();
         option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
-        option.setScanSpan(1000*60*60);// 设置发起定位请求的间隔时间为5000ms
+        option.setScanSpan(1000 * 60 * 60);// 设置发起定位请求的间隔时间为5000ms
         option.setIsNeedAddress(true);// 返回的定位结果包含地址信息
         option.setNeedDeviceDirect(true);// 返回的定位结果包含手机机头的方向
         mLocClient.setLocOption(option);
         mLocClient.start();
     }
+
+    String street = "";
 
     /**
      * 定位sdk监听函数
@@ -130,12 +133,14 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             if (bdLocation == null) {
                 return;
             }
-            String street = bdLocation.getStreet();
-            notes_address.setText(street);
-            if (!StringUtils.isEmpty(bdLocation.getStreetNumber())) {
+            if (bdLocation.getStreet() != null) {
+                street = bdLocation.getStreet();
+                notes_address.setText(street);
+            }
+            if (bdLocation.getStreetNumber() != null) {
                 notes_address.setText(street + bdLocation.getStreetNumber() + "号");
             } else {
-                notes_address.setText(street + bdLocation.getStreetNumber());
+                notes_address.setText(street);
             }
             lng = bdLocation.getLongitude();
             lat = bdLocation.getLatitude();
@@ -203,6 +208,32 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
 
                         }
                     });
+                    RequestParams param1 = new RequestParams();
+                    try {
+                        param1.put("file", mFile);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    param1.add("type", 0 + "");
+                    param1.add("origin", "ANDROIDAPP");
+                    AsyncHttpUtil.post(UrlInterface.UpDateFile_URL, param1, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            String json = new String(bytes);
+//                            Log.d("wyy==============", json);
+                            ApiMessage apimessage = ApiMessage.FromJson(json);
+                            if (apimessage.Code == 1001) {
+                                List<PhotoId> photoid = JsonHelper.getArrayJson(apimessage.Data, PhotoId.class);
+                                notes.add(photoid.get(0).getId() + "");
+                                Log.d("wyy==============", "===============================");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                        }
+                    });
+//                    Log.d("wyy-----------", s);
                 }
 
                 break;
@@ -222,6 +253,8 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         startActivityForResult(intent, PICK_PHOTO);
     }
 
+    File mFile = null;
+
     /**
      * 接受回传过来的数据
      *
@@ -233,58 +266,62 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
+//            _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
             if (requestCode == PICK_PHOTO) {
+                _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
 //            List<String> _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
                 result.clear();
                 result.addAll(_result);
                 if (resultCode == RESULT_OK) {
-                    File mFile = null;
+//                    File mFile = null;
 //                    notes = new ArrayList<>();
                     for (String s : result) {
                         Log.d("wyy==============", s);
                         mFile = new File(s);
-                        RequestParams param = new RequestParams();
-                        try {
-                            param.put("file", mFile);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        param.add("type", 0 + "");
-                        param.add("origin", "ANDROIDAPP");
-                        AsyncHttpUtil.post(UrlInterface.UpDateFile_URL, param, new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                                String json = new String(bytes);
-//                            Log.d("wyy==============", json);
-                                ApiMessage apimessage = ApiMessage.FromJson(json);
-                                if (apimessage.Code == 1001) {
-                                    List<PhotoId> photoid = JsonHelper.getArrayJson(apimessage.Data, PhotoId.class);
-                                    notes.add(photoid.get(0).getId() + "");
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                            }
-                        });
-//                    Log.d("wyy-----------", s);
+//                        RequestParams param = new RequestParams();
+//                        try {
+//                            param.put("file", mFile);
+//                        } catch (FileNotFoundException e) {
+//                            e.printStackTrace();
+//                        }
+//                        param.add("type", 0 + "");
+//                        param.add("origin", "ANDROIDAPP");
+//                        AsyncHttpUtil.post(UrlInterface.UpDateFile_URL, param, new AsyncHttpResponseHandler() {
+//                            @Override
+//                            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+//                                String json = new String(bytes);
+////                            Log.d("wyy==============", json);
+//                                ApiMessage apimessage = ApiMessage.FromJson(json);
+//                                if (apimessage.Code == 1001) {
+//                                    List<PhotoId> photoid = JsonHelper.getArrayJson(apimessage.Data, PhotoId.class);
+//                                    notes.add(photoid.get(0).getId() + "");
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+//                            }
+//                        });
+////                    Log.d("wyy-----------", s);
                     }
-
 //                showResult(result);
                 }
             } else if (requestCode == 110) {
                 if (count == 0) {
                     if (data != null) {
                         id = data.getIntExtra("id", 1);
-                        result.add("/storage/sdcard0/5683100481.jpg");
+                        result.add("tag");
                         ++count;
                     }
                 } else {
+                    result.remove("tag");
+                    result.add("tag");
+                    id = data.getIntExtra("id", 1);
                 }
             }
             showResult(result);
         }
+        Log.d("---------------", notes.size() + "");
     }
 
     private void showResult(ArrayList<String> result) {
@@ -298,7 +335,6 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             cameraAdapter = new CameraAdapter(this, mResults, R.layout.camera_item, mColumnWidth, mColumnWidth);
             notes_grid.setAdapter(cameraAdapter);
         } else {
-//            cameraAdapter.setPathList(mResults);
             cameraAdapter.notifyDataSetChanged();
         }
     }

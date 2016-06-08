@@ -138,6 +138,22 @@ public class BodyFragment extends BaseFragment {
             return super.onJsAlert(view, url, message, result);
         }
     };
+    private void drawpicture(final String json) {
+        new Handler().postDelayed(new Runnable() {//异步传本地数据给网页
+            @Override
+            public void run() {
+                transferDataToWeb(json);
+            }
+        }, 1000);
+    }
+
+    private void transferDataToWeb(String json) {
+        if (body_bo__web != null) {
+            String info = StringUtils.centerString(json, "fatyear");
+            Log.i("==================+++", info);
+            body_bo__web.loadUrl("javascript:show_fate('" + info + "')");   //web网页中已添加了function show(json)方法
+        }
+    }
 
     private void initView() {
         RequestParams params = new RequestParams();
@@ -163,32 +179,7 @@ public class BodyFragment extends BaseFragment {
         });
     }
 
-    private void drawpicture(final String json) {
-        new Handler().postDelayed(new Runnable() {//异步传本地数据给网页
-            @Override
-            public void run() {
-                transferDataToWeb(json);
-            }
-        }, 1000);
-    }
-
-    private void transferDataToWeb(String json) {
-        if (body_bo__web != null) {
-            String info = StringUtils.centerString(json, "fatyear");
-            Log.i("==================+++", info);
-            body_bo__web.loadUrl("javascript:show_fate('" + info + "')");   //web网页中已添加了function show(json)方法
-        }
-    }
-
     private void getInfo(BCAFragmentbean bcaFragmentbean) {
-//        RecordFat recordFat = bcaFragmentbean.getRecordFatEntity();
-//        if (recordFat != null) {
-//            ArrayList<String > arr=new ArrayList<String>();
-//            arr.add(recordFat.getFatRate());
-//            arr.add(recordFat.getFat());
-//            arr.add(recordFat.getMuscle());
-//            arr.add(recordFat.getWaterRate());
-//            arr.add(recordFat.getViscera());
         if (bcaFragmentbean != null) {
             healthvalue1.setText(bcaFragmentbean.getBasicMetaBolismBest() + "");
             bp_fg_suggest.setText(bcaFragmentbean.getHealthSuggest() + "");
@@ -224,8 +215,6 @@ public class BodyFragment extends BaseFragment {
             } else {
                 bca_pinggu_result.setText("");
             }
-
-
             //bca_pinggu_result.setText(rf.getResult());
         }
         RecordBMI rm = bcaFragmentbean.getRecordBMI();

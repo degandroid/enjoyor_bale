@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.enjoyor.healthhouse.R;
-import com.enjoyor.healthhouse.custom.CircleBitmapDisplayer;
 import com.enjoyor.healthhouse.db.DBHelper;
 import com.enjoyor.healthhouse.utils.AppManagerUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -15,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import cn.sharesdk.framework.ShareSDK;
+
 
 /**
  * Created by YuanYuan on 2016/4/25.
@@ -33,9 +33,11 @@ public class MyApplication extends Application {
         instance = this;
         context = this.getApplicationContext();
         AppManagerUtil.getAppManager();
+        ShareSDK.initSDK(context);
         options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.bale)
-                .showImageOnFail(R.mipmap.bale)
+                .showImageOnLoading(R.mipmap.bale)
+                .showImageForEmptyUri(R.mipmap.jiazaishibai)
+                .showImageOnFail(R.mipmap.jiazaishibai)
                 .cacheInMemory(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .displayer(new RoundedBitmapDisplayer(20))
