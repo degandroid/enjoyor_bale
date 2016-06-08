@@ -2,6 +2,7 @@ package com.enjoyor.healthhouse.ui;
 
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -75,6 +76,12 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
     private String select_edit = "";
 
 
+    private TextView tv_zice;
+    private TextView tv_tijian;
+    private TextView tv_suishouji;
+    private TextView tv_all;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,7 +150,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                     HealthFileInfo healthFileInfo = JsonHelper.getJson(apiMessage.Data, HealthFileInfo.class);
                     List<HealthFileInfo.HealthFileList> _list = healthFileInfo.getRecordList();
 //                    healthFileList.clear();
-                    if (_list != null&&_list.size()>0) {
+                    if (_list != null && _list.size() > 0) {
                         healthFileList.addAll(_list);
                         if (healthFileList.size() > 0) {
                             initListView();
@@ -152,9 +159,9 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                         }
                     }
                 } else {
-                    if(healthFileList.size()>0){
+                    if (healthFileList.size() > 0) {
                         xlv_healthfile.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         xlv_healthfile.setVisibility(View.GONE);
                     }
                 }
@@ -162,9 +169,9 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                if(healthFileList.size()>0){
+                if (healthFileList.size() > 0) {
                     xlv_healthfile.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     xlv_healthfile.setVisibility(View.GONE);
                 }
             }
@@ -204,12 +211,54 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
         pw.setOutsideTouchable(true);
         pw.showAsDropDown(tv_select);
 
-        TextView tv_zice = (TextView) popView.findViewById(R.id.tv_zice);
-        TextView tv_tijian = (TextView) popView.findViewById(R.id.tv_tijian);
-        TextView tv_suishouji = (TextView) popView.findViewById(R.id.tv_suishouji);
+        tv_zice = (TextView) popView.findViewById(R.id.tv_zice);
+        tv_tijian = (TextView) popView.findViewById(R.id.tv_tijian);
+        tv_suishouji = (TextView) popView.findViewById(R.id.tv_suishouji);
+        tv_all = (TextView) popView.findViewById(R.id.tv_all);
         tv_zice.setOnClickListener(this);
         tv_tijian.setOnClickListener(this);
         tv_suishouji.setOnClickListener(this);
+        tv_all.setOnClickListener(this);
+        setDefault();
+        getDefaultColor();
+    }
+
+    private void getDefaultColor(){
+        if(select_type == TYPE_ZICE){
+            tv_zice.setTextColor(getResources().getColor(R.color.colorGreenYellow));
+            Drawable img_off = getResources().getDrawable(R.mipmap.bl_icon_small_zijian);
+            img_off.setBounds(0, 0, img_off.getMinimumWidth(), img_off.getMinimumHeight());
+            tv_zice.setCompoundDrawables(img_off, null, null, null);
+        }else if(select_type == TYPE_TIJIAN){
+            tv_tijian.setTextColor(getResources().getColor(R.color.form_feipang));
+            Drawable img_off = getResources().getDrawable(R.mipmap.bl_icon_small_dingwei);
+            img_off.setBounds(0, 0, img_off.getMinimumWidth(), img_off.getMinimumHeight());
+            tv_tijian.setCompoundDrawables(img_off, null, null, null);
+        }else if(select_type == TYPE_SUISHOUJI){
+            tv_suishouji.setTextColor(getResources().getColor(R.color.color_normal));
+            Drawable img_off = getResources().getDrawable(R.mipmap.bl_icon_small_xiangji);
+            img_off.setBounds(0, 0, img_off.getMinimumWidth(), img_off.getMinimumHeight());
+            tv_suishouji.setCompoundDrawables(img_off, null, null, null);
+        }else{
+            setDefault();
+        }
+    }
+
+    private void setDefault() {
+        tv_zice.setTextColor(getResources().getColor(R.color.textcolor_body));
+        Drawable img_off = getResources().getDrawable(R.mipmap.bl_icon_zijian);
+        img_off.setBounds(0, 0, img_off.getMinimumWidth(), img_off.getMinimumHeight());
+        tv_zice.setCompoundDrawables(img_off, null, null, null);
+
+        tv_tijian.setTextColor(getResources().getColor(R.color.textcolor_body));
+        Drawable img_off2 = getResources().getDrawable(R.mipmap.bl_icon_gray_dingwei);
+        img_off2.setBounds(0, 0, img_off2.getMinimumWidth(), img_off2.getMinimumHeight());
+        tv_tijian.setCompoundDrawables(img_off2, null, null, null);
+
+        tv_suishouji.setTextColor(getResources().getColor(R.color.textcolor_body));
+        Drawable img_off3 = getResources().getDrawable(R.mipmap.bl_icon_xiangji);
+        img_off3.setBounds(0, 0, img_off3.getMinimumWidth(), img_off3.getMinimumHeight());
+        tv_suishouji.setCompoundDrawables(img_off3, null, null, null);
     }
 
     @Override
@@ -220,7 +269,20 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 finish();
                 break;
             case R.id.tv_select:
+
                 selectType();
+
+                break;
+            case R.id.tv_all:
+                healthFileList.clear();
+                if (pw != null && pw.isShowing()) {
+                    pw.dismiss();
+                }
+                select_type = TYPE_ALL;
+                TextView tv0 = (TextView) v;
+                tv_select.setText(tv0.getText());
+                count = 1;
+                getDate(count, select_edit, select_type);
                 break;
             case R.id.tv_zice:
                 healthFileList.clear();

@@ -41,34 +41,9 @@
 
             android:horizontalSpacing="3dp"
             android:listSelector="#00000000"
-            android:numColumns="1"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="3dp"></com.enjoyor.healthhouse.ui.NoScrollGridView>
-
-        <com.enjoyor.healthhouse.ui.NoScrollGridView
-            android:id="@+id/ngv_oneline_twopic"
-            android:padding="@dimen/layout_distance"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:horizontalSpacing="3dp"
-            android:listSelector="#00000000"
-            android:numColumns="2"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="3dp"></com.enjoyor.healthhouse.ui.NoScrollGridView>
-
-        <com.enjoyor.healthhouse.ui.NoScrollGridView
-            android:id="@+id/ngv_moreline"
-            android:padding="@dimen/layout_distance"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:horizontalSpacing="3dp"
-            android:listSelector="#00000000"
             android:numColumns="3"
             android:stretchMode="columnWidth"
             android:verticalSpacing="3dp"></com.enjoyor.healthhouse.ui.NoScrollGridView>
-
         <TextView
             android:id="@+id/tv_content"
             android:padding="@dimen/layout_distance"

@@ -163,6 +163,10 @@
         <activity
             android:name=".ui.MyRecordActivity"
             android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".ui.ImagePagerActivity"
+            android:screenOrientation="portrait"></activity>
         <!--我的随随手记-->
         <activity
             android:name=".ui.MyNotesActivity"

@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ public class NoteInfo {
     private String content;
     private String createtime;
     private String images;
-    private List<String> imgs;
+    private ArrayList<String> imgs;
     private String lat;
     private String lng;
     private int voice;
@@ -38,11 +39,11 @@ public class NoteInfo {
         this.images = images;
     }
 
-    public List<String> getImgs() {
+    public ArrayList<String> getImgs() {
         return imgs;
     }
 
-    public void setImgs(List<String> imgs) {
+    public void setImgs(ArrayList<String> imgs) {
         this.imgs = imgs;
     }
 

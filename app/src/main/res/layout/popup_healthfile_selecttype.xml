@@ -15,12 +15,28 @@
         android:orientation="vertical"
         >
         <TextView
+            android:id="@+id/tv_all"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:drawablePadding="5dp"
+            android:layout_height="wrap_content"
+            android:text="全部"
+            android:textColor="@color/textcolor_body"
+            android:drawableLeft="@mipmap/bl_icon_quanbu"
+            android:padding="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:background="@color/color_line"
+            android:layout_height="1px" />
+        <TextView
             android:id="@+id/tv_zice"
             android:clickable="true"
             android:layout_width="match_parent"
             android:drawablePadding="5dp"
             android:layout_height="wrap_content"
             android:text="自测"
+            android:textColor="@color/textcolor_body"
             android:drawableLeft="@mipmap/bl_icon_zijian"
             android:padding="15dp"
             />
@@ -34,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="体检"
+            android:textColor="@color/textcolor_body"
             android:drawablePadding="5dp"
             android:drawableLeft="@mipmap/bl_icon_gray_dingwei"
             android:padding="15dp"
@@ -48,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="随手记"
+            android:textColor="@color/textcolor_body"
             android:drawablePadding="5dp"
             android:drawableLeft="@mipmap/bl_icon_xiangji"
             android:padding="15dp"
