@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.HealthFileInfo;
@@ -58,7 +59,8 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
     XListView xlv_healthfile;
     @Bind(R.id.ll_display)
     LinearLayout ll_display;
-
+    @Bind(R.id.iv_userhead)
+    ImageView iv_userhead;
     private List<HealthFileInfo.HealthFileList> healthFileList = new ArrayList<>();
 
     private int count = 1;
@@ -93,6 +95,11 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
         } else {
             tv_username.setText(MyApplication.getInstance().getDBHelper().getUser().getLoginName());
         }
+        if (!StringUtils.isBlank(MyApplication.getInstance().getDBHelper().getUser().getHeadImg())) {
+//            ImageLoader.getInstance().displayImage(MyApplication.getInstance().getDBHelper().getUser().getHeadImg(),iv_userhead,MyApplication.options);
+            Glide.with(HealthFileActivity.this).load(UrlInterface.FILE_URL + "/" + MyApplication.getInstance().getDBHelper().getUser().getHeadImg()).into(iv_userhead);
+        }
+
         getDate(count, select_edit, select_type);
     }
 
@@ -121,7 +128,6 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 select_edit = s.toString();
                 count = 1;
                 getDate(count, select_edit, select_type);
-
             }
         });
     }
@@ -223,23 +229,23 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
         getDefaultColor();
     }
 
-    private void getDefaultColor(){
-        if(select_type == TYPE_ZICE){
+    private void getDefaultColor() {
+        if (select_type == TYPE_ZICE) {
             tv_zice.setTextColor(getResources().getColor(R.color.colorGreenYellow));
             Drawable img_off = getResources().getDrawable(R.mipmap.bl_icon_small_zijian);
             img_off.setBounds(0, 0, img_off.getMinimumWidth(), img_off.getMinimumHeight());
             tv_zice.setCompoundDrawables(img_off, null, null, null);
-        }else if(select_type == TYPE_TIJIAN){
+        } else if (select_type == TYPE_TIJIAN) {
             tv_tijian.setTextColor(getResources().getColor(R.color.form_feipang));
             Drawable img_off = getResources().getDrawable(R.mipmap.bl_icon_small_dingwei);
             img_off.setBounds(0, 0, img_off.getMinimumWidth(), img_off.getMinimumHeight());
             tv_tijian.setCompoundDrawables(img_off, null, null, null);
-        }else if(select_type == TYPE_SUISHOUJI){
+        } else if (select_type == TYPE_SUISHOUJI) {
             tv_suishouji.setTextColor(getResources().getColor(R.color.color_normal));
             Drawable img_off = getResources().getDrawable(R.mipmap.bl_icon_small_xiangji);
             img_off.setBounds(0, 0, img_off.getMinimumWidth(), img_off.getMinimumHeight());
             tv_suishouji.setCompoundDrawables(img_off, null, null, null);
-        }else{
+        } else {
             setDefault();
         }
     }
@@ -365,8 +371,8 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 holder.ll_bg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(HealthFileActivity.this,MyRecordActivity.class);
-                        intent.putExtra("recordId",healthFileList.get(position).getRecordId());
+                        Intent intent = new Intent(HealthFileActivity.this, MyRecordActivity.class);
+                        intent.putExtra("recordId", healthFileList.get(position).getRecordId());
                         startActivity(intent);
                     }
                 });
@@ -380,8 +386,8 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(HealthFileActivity.this, MySelfCheckActivity.class);
-                        intent.putExtra("recordId",healthFileList.get(position).getRecordId());
-                        intent.putExtra("recordTime",healthFileList.get(position).getRecordTime());
+                        intent.putExtra("recordId", healthFileList.get(position).getRecordId());
+                        intent.putExtra("recordTime", healthFileList.get(position).getRecordTime());
                         startActivity(intent);
                     }
                 });
@@ -394,7 +400,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(HealthFileActivity.this, MyNotesActivity.class);
-                        intent.putExtra("recordId",healthFileList.get(position).getRecordId());
+                        intent.putExtra("recordId", healthFileList.get(position).getRecordId());
                         startActivity(intent);
                     }
                 });

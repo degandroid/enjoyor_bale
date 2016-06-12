@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -515,12 +514,15 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 calculation(_strng, _strng_second);
                 break;
             case R.id.re_tosearch:
-                WindowManager wm = this.getWindowManager();
-                int width = wm.getDefaultDisplay().getWidth();
-                objectAnimator.ofFloat(ll_head, "alpha", 0).setDuration(1000).start();
-                objectAnimator.ofFloat(ll_listinfo, "translationY", -ll_listinfo.getHeight()).setDuration(1000).start();
-                objectAnimator.ofFloat(ll_search, "alpha", 10).setDuration(1000).start();
-                objectAnimator.ofFloat(re_tosearch, "translationX", -width).setDuration(1000).start();
+                Intent intent_torearch = new Intent(ItemServiceActivity.this,RearchActivity.class);
+                startActivity(intent_torearch);
+
+//                WindowManager wm = this.getWindowManager();
+//                int width = wm.getDefaultDisplay().getWidth();
+//                objectAnimator.ofFloat(ll_head, "alpha", 0).setDuration(1000).start();
+//                objectAnimator.ofFloat(ll_listinfo, "translationY", -ll_listinfo.getHeight()).setDuration(1000).start();
+//                objectAnimator.ofFloat(ll_search, "alpha", 10).setDuration(1000).start();
+//                objectAnimator.ofFloat(re_tosearch, "translationX", -width).setDuration(1000).start();
             case R.id.et_search:
 //                re_tosearch.setVisibility(View.GONE);
 //                et_search.setAlpha(100);

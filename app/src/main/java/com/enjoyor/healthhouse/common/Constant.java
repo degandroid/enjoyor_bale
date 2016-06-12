@@ -8,6 +8,8 @@ public class Constant {
     public static Long accountId;
     public static final String SP_TOKEN = "SP_TOKEN";
 
+    public static final String VALUE_VOICE = "VALUE_VOICE";
+
     public static final int FROM_XUEYA = 11;
     public static final int FROM_SHENGAO = 12;
     public static final int FROM_XUETANG = 13;

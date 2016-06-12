@@ -1,7 +1,6 @@
 package com.enjoyor.healthhouse.bean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/6/2.
@@ -14,6 +13,19 @@ public class NoteInfo {
     private String lat;
     private String lng;
     private int voice;
+
+    @Override
+    public String toString() {
+        return "NoteInfo{" +
+                "content='" + content + '\'' +
+                ", createtime='" + createtime + '\'' +
+                ", images='" + images + '\'' +
+                ", imgs=" + imgs.toString() +
+                ", lat='" + lat + '\'' +
+                ", lng='" + lng + '\'' +
+                ", voice=" + voice +
+                '}';
+    }
 
     public String getContent() {
         return content;

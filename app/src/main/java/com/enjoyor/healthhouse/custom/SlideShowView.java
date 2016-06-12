@@ -1,6 +1,7 @@
 package com.enjoyor.healthhouse.custom;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -26,10 +28,9 @@ import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import org.apache.http.Header;
 
@@ -50,8 +51,8 @@ import java.util.concurrent.TimeUnit;
 public class SlideShowView extends FrameLayout {
     private String BANNER_URL = "display/index/banner.do";
     // 使用universal-image-loader插件读取网络图片，需要工程导入universal-image-loader-1.8.6-with-sources.jar
-    private ImageLoader imageLoader = ImageLoader.getInstance();
-
+//    private ImageLoader imageLoader = ImageLoader.getInstance();
+    public static DisplayImageOptions options;
     //轮播图图片数量
     private final static int IMAGE_COUNT = 5;
     //自动轮播的时间间隔
@@ -144,6 +145,9 @@ public class SlideShowView extends FrameLayout {
         for (int i = 0; i < imageUrls.size(); i++) {
             ImageView view =  new ImageView(context);
             view.setTag(imageUrls.get(i));
+
+            Log.i("pict",imageUrls.get(i)+"\n");
+
             if(i==0)//给一个默认图
                 view.setBackgroundResource(R.mipmap.bl_banner1);
             view.setScaleType(ScaleType.FIT_XY);
@@ -186,9 +190,10 @@ public class SlideShowView extends FrameLayout {
         public Object instantiateItem(View container, int position) {
             ImageView imageView = imageViewsList.get(position);
 
-            imageLoader.displayImage(imageView.getTag() + "", imageView);
-
-            ((ViewPager)container).addView(imageViewsList.get(position));
+//            imageLoader.displayImage(imageView.getTag() + "", imageView, MyApplication.options);
+            ImageLoader.getInstance().displayImage(imageView.getTag() + "",imageView,options);
+//            Glide.with(context).load(imageView.getTag()+"").into(imageView);
+                    ((ViewPager) container).addView(imageViewsList.get(position));
             return imageViewsList.get(position);
         }
 
@@ -353,24 +358,33 @@ public class SlideShowView extends FrameLayout {
         }
     }
 
-    /**
-     * ImageLoader 图片组件初始化
-     *
-     * @param context
-     */
+//    /**
+//     * ImageLoader 图片组件初始化
+//     *
+//     * @param context
+//     */
     public static void initImageLoader(Context context) {
-        // This configuration tuning is custom. You can tune every option, you
-        // may tune some of them,
-        // or you can create default configuration by
-        // ImageLoaderConfiguration.createDefault(this);
-        // method.
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context).threadPriority(Thread.NORM_PRIORITY - 2).denyCacheImageMultipleSizesInMemory().discCacheFileNameGenerator(new Md5FileNameGenerator()).tasksProcessingOrder(QueueProcessingType.LIFO).writeDebugLogs() // Remove
-                // for
-                // release
-                // app
-                .build();
+//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+//                .threadPriority(Thread.NORM_PRIORITY - 2)
+//                .denyCacheImageMultipleSizesInMemory()
+//                .discCacheFileNameGenerator(new Md5FileNameGenerator())
+//                .tasksProcessingOrder(QueueProcessingType.LIFO)
+//                .writeDebugLogs()
+//                .build();
         // Initialize ImageLoader with configuration.
-        ImageLoader.getInstance().init(config);
+
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.mipmap.bl_banner1)
+                .showImageForEmptyUri(R.mipmap.bl_banner1)
+                .showImageOnFail(R.mipmap.bl_banner1)
+                .cacheInMemory(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+//                .displayer(new RoundedBitmapDisplayer(20))
+                .build();
+        //imageloader配置参数
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration
+                .createDefault(context);
+        ImageLoader.getInstance().init(configuration);
     }
     private void initNetBanner() {
         RequestParams params = new RequestParams();
@@ -383,7 +397,7 @@ public class SlideShowView extends FrameLayout {
                     List<Banner> banners = JsonHelper.getArrayJson(apiMessage.Data, Banner.class);
 //                    banner_list = new ArrayList<ImageView>();
                     for (int j = 0; j < banners.size(); j++) {
-                        String picUrl = UrlInterface.FILE_URL + banners.get(j).getFilePath();
+                        String picUrl = UrlInterface.FILE_URL +"/"+ banners.get(j).getFilePath();
                         imageUrls.add(picUrl);
                     }
                     initUI(context);

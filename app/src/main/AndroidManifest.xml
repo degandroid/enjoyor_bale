@@ -176,6 +176,10 @@
         <activity
             android:name=".ui.MySelfCheckActivity"
             android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".ui.RearchActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"

@@ -65,7 +65,7 @@ public class ListItemAdapter extends BaseAdapter {
 		NoteInfo itemEntity = items.get(position);
 		holder.tv_title.setText(itemEntity.getCreatetime());
 		holder.tv_content.setText(itemEntity.getContent());
-		final int voice = itemEntity.getVoice();
+		MusicVoice = itemEntity.getVoice();
 		final ArrayList<String> imageUrls = itemEntity.getImgs();
 
 		if (imageUrls == null || imageUrls.size() == 0) { // 没有图片资源就隐藏GridView
@@ -74,12 +74,6 @@ public class ListItemAdapter extends BaseAdapter {
 			holder.gridview.setAdapter(new NoScrollGridAdapter(mContext, imageUrls));
 		}
 		// 点击回帖九宫格，查看大图
-		if(voice>1){
-			MusicVoice = voice;
-//			imageUrls.add(null);
-		}else{
-			MusicVoice = 0;
-		}
 		holder.gridview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

@@ -106,6 +106,7 @@
                 android:id="@+id/iv_userhead"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:scaleType="fitXY"
                 android:layout_alignParentLeft="true"
                 android:src="@mipmap/touxiang" />
 

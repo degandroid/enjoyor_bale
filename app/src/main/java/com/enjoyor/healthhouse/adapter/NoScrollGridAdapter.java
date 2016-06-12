@@ -2,12 +2,14 @@ package com.enjoyor.healthhouse.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.enjoyor.healthhouse.R;
+import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -49,12 +51,17 @@ public class NoScrollGridAdapter extends BaseAdapter {
 		View view = View.inflate(ctx, R.layout.item_gridview, null);
 		ImageView imageView = (ImageView) view.findViewById(R.id.iv_image);
 		DisplayImageOptions options = new DisplayImageOptions.Builder()//
-				.showImageForEmptyUri(R.mipmap.bale)
+				.showImageForEmptyUri(R.mipmap.bl_logo)
 				.cacheInMemory(true)//
 				.cacheOnDisk(true)//
 				.bitmapConfig(Bitmap.Config.RGB_565)//
 				.build();
-		ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL+"/"+imageUrls.get(position), imageView,options);
+				Log.i("get", imageUrls.toString());
+		if(imageUrls.get(position).equals(Constant.VALUE_VOICE)){
+			imageView.setImageResource(R.mipmap.bl_logo);
+		}else{
+			ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL+"/"+imageUrls.get(position), imageView,options);
+		}
 		return view;
 	}
 

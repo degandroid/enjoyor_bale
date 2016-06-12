@@ -1,6 +1,7 @@
 package com.enjoyor.healthhouse.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.adapter.ListItemAdapter;
 import com.enjoyor.healthhouse.bean.NoteInfo;
+import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
@@ -33,6 +35,7 @@ public class MyNotesActivity extends BaseActivity {
      * Item数据实体集合
      */
     private ArrayList<NoteInfo> noteInfo_list = new ArrayList<>();
+    private ArrayList<String> image_list;
     /**
      * ListView对象
      */
@@ -76,14 +79,38 @@ public class MyNotesActivity extends BaseActivity {
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     List<NoteInfo> _list = JsonHelper.getArrayJson(apiMessage.Data, NoteInfo.class);
-
+                    noteInfo_list.clear();
                     if (!ListUtils.isEmpty(_list)) {
-                        noteInfo_list.clear();
-                        noteInfo_list.addAll(_list);
-                        if (!ListUtils.isEmpty(noteInfo_list)) {
-                            listview.setAdapter(new ListItemAdapter(MyNotesActivity.this, noteInfo_list));
-                        }
+                        for(int j = 0;j<_list.size();j++){
+                            NoteInfo noteInfo = new NoteInfo();
+                            NoteInfo _noteInfo = _list.get(j);
 
+                            noteInfo.setContent(_noteInfo.getContent());
+                            noteInfo.setCreatetime(_noteInfo.getCreatetime());
+                            noteInfo.setVoice(_noteInfo.getVoice());
+
+                            image_list = new ArrayList<>();
+                            if(!ListUtils.isEmpty(_noteInfo.getImgs())){
+                                image_list.addAll(_noteInfo.getImgs());
+                                if(_noteInfo.getVoice()>1){
+                                    image_list.add(Constant.VALUE_VOICE);
+                                }
+                            }else{
+                                if(_noteInfo.getVoice()>1){
+                                    image_list.add(Constant.VALUE_VOICE);
+                                }
+                            }
+
+
+                            noteInfo.setImgs(image_list);
+                            noteInfo_list.add(noteInfo);
+                        }
+                    }
+                    if (!ListUtils.isEmpty(noteInfo_list)) {
+                        for(int k=0;k<noteInfo_list.size();k++){
+                            Log.i("k",noteInfo_list.get(k).toString());
+                        }
+                        listview.setAdapter(new ListItemAdapter(MyNotesActivity.this, noteInfo_list));
                     }
                 }
             }

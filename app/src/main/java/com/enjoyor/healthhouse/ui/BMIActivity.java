@@ -2,6 +2,7 @@ package com.enjoyor.healthhouse.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -243,6 +244,7 @@ public class BMIActivity extends BaseActivity implements View.OnClickListener {
 
     public void sendInfoToJs() {
         String date = JSON.toJSONString(bmi_list);
+        Log.i("date",date);
         webView.loadUrl("javascript:show_BMI('" + date + "')");
     }
 

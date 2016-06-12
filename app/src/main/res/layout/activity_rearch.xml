@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/layout_distance"
+        android:paddingRight="@dimen/layout_distance"
+        >
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <EditText
+                android:id="@+id/et_search"
+                android:paddingLeft="@dimen/layout_distance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackgroud"
+                android:drawableLeft="@mipmap/bl_icon_sousuo"
+                android:hint="搜索" />
+            <LinearLayout
+                android:id="@+id/ll_clean"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="right|center_vertical"
+                android:padding="@dimen/layout_distance"
+                android:gravity="center"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/iv_clean"
+                    android:layout_width="wrap_content"
+
+                    android:src="@mipmap/shanchu"
+
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </FrameLayout>
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:paddingLeft="@dimen/layout_distance"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="取消" />
+    </LinearLayout>
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+    <com.enjoyor.healthhouse.custom.XListView
+        android:id="@+id/xlv_food"
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp">
+
+    </com.enjoyor.healthhouse.custom.XListView>
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
