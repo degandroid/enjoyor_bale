@@ -24,7 +24,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
     TextView navigation_name;
-//    @Bind(R.id.setting_ac_help)
+    //    @Bind(R.id.setting_ac_help)
 //    RelativeLayout setting_ac_help;
 //    @Bind(R.id.setting_ac_secret)
 //    RelativeLayout setting_ac_secret;
@@ -52,6 +52,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         re_back.setOnClickListener(this);
         setting_exit.setOnClickListener(this);
         setting_ac_version.setOnClickListener(this);
+        setting_ac_about.setOnClickListener(this);
+        setting_ac_speak.setOnClickListener(this);
     }
 
     private void initView() {
@@ -76,6 +78,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.setting_ac_version:
                 Intent intent_version = new Intent(SettingActivity.this, VersionActivity.class);
                 startActivity(intent_version);
+                break;
+            case R.id.setting_ac_about:
+                Intent intent_about = new Intent(this, AboutOursActivity.class);
+                startActivity(intent_about);
+                break;
+            case R.id.setting_ac_speak:
+                Intent intent_agreement = new Intent(this, AgreeMentActivity.class);
+                startActivity(intent_agreement);
                 break;
         }
     }

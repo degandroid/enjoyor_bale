@@ -1,11 +1,15 @@
 package com.enjoyor.healthhouse.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -66,6 +70,8 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     TextView notes_address;
     @Bind(R.id.notes_commit)
     TextView notes_commit;
+    @Bind(R.id.notes_top)
+    RelativeLayout notes_top;
     //    选择照片
     private ArrayList<Uri> url = new ArrayList<>();
     CameraAdapter cameraAdapter;
@@ -75,7 +81,8 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     ArrayList<String> result = new ArrayList<>();//照片集合
     List<String> _result;
     List<String> notes = new ArrayList<>();
-
+    public static List<String> list;
+    String[] imageUriArray;
     int count = 0;
     int id;
     // 定位相关
@@ -93,6 +100,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         ButterKnife.bind(this);
         initView();
         initEvent();
+        list = result;
     }
 
     private void initEvent() {
@@ -100,6 +108,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         re_back.setOnClickListener(this);
         notes_luyin.setOnClickListener(this);
         notes_commit.setOnClickListener(this);
+        notes_top.setOnClickListener(this);
 
     }
 
@@ -233,9 +242,13 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                         }
                     });
-//                    Log.d("wyy-----------", s);
                 }
-
+                break;
+            case R.id.notes_top:
+                notes_et.setFocusable(true);
+                //打开软键盘
+                InputMethodManager imm = (InputMethodManager) NotesActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
         }
     }
@@ -266,45 +279,15 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-//            _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
             if (requestCode == PICK_PHOTO) {
                 _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
-//            List<String> _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
                 result.clear();
                 result.addAll(_result);
                 if (resultCode == RESULT_OK) {
-//                    File mFile = null;
-//                    notes = new ArrayList<>();
                     for (String s : result) {
                         Log.d("wyy==============", s);
                         mFile = new File(s);
-//                        RequestParams param = new RequestParams();
-//                        try {
-//                            param.put("file", mFile);
-//                        } catch (FileNotFoundException e) {
-//                            e.printStackTrace();
-//                        }
-//                        param.add("type", 0 + "");
-//                        param.add("origin", "ANDROIDAPP");
-//                        AsyncHttpUtil.post(UrlInterface.UpDateFile_URL, param, new AsyncHttpResponseHandler() {
-//                            @Override
-//                            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-//                                String json = new String(bytes);
-////                            Log.d("wyy==============", json);
-//                                ApiMessage apimessage = ApiMessage.FromJson(json);
-//                                if (apimessage.Code == 1001) {
-//                                    List<PhotoId> photoid = JsonHelper.getArrayJson(apimessage.Data, PhotoId.class);
-//                                    notes.add(photoid.get(0).getId() + "");
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-//                            }
-//                        });
-////                    Log.d("wyy-----------", s);
                     }
-//                showResult(result);
                 }
             } else if (requestCode == 110) {
                 if (count == 0) {
@@ -325,6 +308,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void showResult(ArrayList<String> result) {
+        Log.d("--------result-------", result.get(0));
         if (mResults == null) {
             mResults = new ArrayList<String>();
         }
@@ -332,7 +316,9 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         mResults.addAll(result);
 
         if (cameraAdapter == null) {
-            cameraAdapter = new CameraAdapter(this, mResults, R.layout.camera_item, mColumnWidth, mColumnWidth);
+            imageUriArray = (String[]) mResults
+                    .toArray(new String[mResults.size()]);
+            cameraAdapter = new CameraAdapter(this, (ArrayList<String>) mResults,mColumnWidth, mColumnWidth);
             notes_grid.setAdapter(cameraAdapter);
         } else {
             cameraAdapter.notifyDataSetChanged();

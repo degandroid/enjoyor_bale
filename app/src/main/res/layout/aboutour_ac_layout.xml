@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/navigationbar_layout"></include>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/about_view"
+                android:layout_width="100dp"
+                android:layout_height="1px"
+                android:layout_marginLeft="33dp"
+                android:layout_marginTop="@dimen/layout_distance_15dp"
+                android:background="@color/colorGreenYellow">
+
+            </View>
+
+            <RelativeLayout
+                android:id="@+id/about_contents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/about_view"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="10dp">
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="1px"
+                    android:background="@color/colorGreenYellow"></View>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="100dp"
+                    android:background="@color/colorGreenYellow"></View>
+
+                <TextView
+                    android:id="@+id/about_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/layout_distance_15dp"
+                    android:text="        芭乐个人健康云服务平台（以下简称芭乐），采用物联网，移动互联网，云计算和大数据分析技术，将设备采集到的什么体征健康数据传输到云端，并同步到PHR，通过大数据智能精准推送服务，并建立个人就医通道，实现一站式健康服务" />
+
+                <View
+                    android:id="@+id/about_top"
+                    android:layout_width="100dp"
+                    android:layout_height="1px"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/about_content"
+                    android:background="@color/colorGreenYellow"></View>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="100dp"
+                    android:layout_above="@+id/about_top"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/colorGreenYellow"></View>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/about_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/about_contents"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/two_code" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/about_code"
+                android:gravity="center"
+                android:text="关注芭乐健康公众号" />
+
+            <RelativeLayout
+                android:layout_marginBottom="15dp"
+                android:id="@+id/about_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:text="官方网址:www.cnbale.com" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/about_bottom"
+                android:layout_marginBottom="@dimen/layout_distance_15dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/about_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/bale" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/about_img"
+                    android:text="把握现在\n乐在健康"
+                    android:textColor="@color/colorGreenYellow" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+</LinearLayout>

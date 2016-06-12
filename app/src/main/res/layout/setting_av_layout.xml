@@ -160,7 +160,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/mine_fg_mm_img"
                 android:layout_marginLeft="18dp"
-                android:text="声明" />
+                android:text="服务与声明" />
 
             <ImageView
                 android:layout_width="wrap_content"

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/img"
             android:layout_marginTop="50px"
-            android:textSize="36px"
+            android:textSize="18dp"
             android:gravity="center"
             android:text="@string/welcome_middle"
             android:textColor="@color/textcolot_welcome" />
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="75px"
+            android:layout_marginBottom="38dp"
             android:gravity="center"
             android:text="@string/welcome_lable"
             android:textColor="@color/textcolor_body"
@@ -51,15 +51,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="30px"
-            android:layout_marginTop="30px"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="@string/welcome_bottom"
             android:textColor="@color/textcolor_body"
             android:textSize="@dimen/textsize_largetittle">
-
         </TextView>
     </RelativeLayout>
-
-
 </LinearLayout>

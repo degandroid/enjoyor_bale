@@ -53,6 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.ImageViewActivity"></activity>
         <!--程序首页-->
         <activity
             android:name=".ui.MainTabActivity"
@@ -199,24 +200,28 @@
         <!--微信分享回调 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- 支付宝分享回调 -->
         <activity
             android:name=".apshare.ShareEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"/>
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
-            android:theme="@style/IMTheme.Transparent"
             android:name=".ui.SpaceImageDetailActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/IMTheme.Transparent">
 
         </activity>
+        <!--关于我们界面-->
+        <activity android:name=".ui.AboutOursActivity"></activity>
+        <!--服务与声明页面-->
+        <activity android:name=".ui.AgreeMentActivity"></activity>
         <!--注册自定义广播-->
         <!--<receiver android:name=".receive.MyReceiver">-->
         <!--<intent-filter>-->
