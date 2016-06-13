@@ -11,14 +11,12 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.bean.Banner;
@@ -146,7 +144,7 @@ public class SlideShowView extends FrameLayout {
             ImageView view =  new ImageView(context);
             view.setTag(imageUrls.get(i));
 
-            Log.i("pict",imageUrls.get(i)+"\n");
+//            Log.i("pict",imageUrls.get(i)+"\n");
 
             if(i==0)//给一个默认图
                 view.setBackgroundResource(R.mipmap.bl_banner1);
@@ -155,7 +153,7 @@ public class SlideShowView extends FrameLayout {
             imageViewsList.get(i).setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "aaaaa", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, "aaaaa", Toast.LENGTH_LONG).show();
                 }
             });
             ImageView dotView =  new ImageView(context);

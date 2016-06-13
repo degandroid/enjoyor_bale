@@ -45,13 +45,20 @@ public class MyNotesActivity extends BaseActivity {
     TextView navigation_name;
     @Bind(R.id.re_back)
     RelativeLayout re_back;
+    private String address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mynote);
         ButterKnife.bind(this);
+        if(getIntent().hasExtra("address")){
+            address = getIntent().getStringExtra("address");
+        }
+
         initHead();
+
         if (getIntent().hasExtra("recordId")) {
             Long recordId = getIntent().getLongExtra("recordId", 0L);
             getDate(recordId);
@@ -110,7 +117,7 @@ public class MyNotesActivity extends BaseActivity {
                         for(int k=0;k<noteInfo_list.size();k++){
                             Log.i("k",noteInfo_list.get(k).toString());
                         }
-                        listview.setAdapter(new ListItemAdapter(MyNotesActivity.this, noteInfo_list));
+                        listview.setAdapter(new ListItemAdapter(MyNotesActivity.this, noteInfo_list,address));
                     }
                 }
             }

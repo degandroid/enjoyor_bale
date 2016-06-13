@@ -27,10 +27,12 @@ public class ListItemAdapter extends BaseAdapter {
 	private int MusicVoice;
 	private Context mContext;
 	private ArrayList<NoteInfo> items;
+	private String address;
 
-	public ListItemAdapter(Context ctx, ArrayList<NoteInfo> items) {
+	public ListItemAdapter(Context ctx, ArrayList<NoteInfo> items,String address) {
 		this.mContext = ctx;
 		this.items = items;
+		this.address = address;
 	}
 
 	@Override
@@ -57,6 +59,7 @@ public class ListItemAdapter extends BaseAdapter {
 
 			holder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
 			holder.tv_content = (TextView) convertView.findViewById(R.id.tv_content);
+			holder.tv_where = (TextView) convertView.findViewById(R.id.tv_where);
 			holder.gridview = (NoScrollGridView) convertView.findViewById(R.id.gridview);
 			convertView.setTag(holder);
 		} else {
@@ -65,6 +68,8 @@ public class ListItemAdapter extends BaseAdapter {
 		NoteInfo itemEntity = items.get(position);
 		holder.tv_title.setText(itemEntity.getCreatetime());
 		holder.tv_content.setText(itemEntity.getContent());
+		holder.tv_where.setText(address);
+
 		MusicVoice = itemEntity.getVoice();
 		final ArrayList<String> imageUrls = itemEntity.getImgs();
 
@@ -110,6 +115,7 @@ public class ListItemAdapter extends BaseAdapter {
 	class ViewHolder {
 		private TextView tv_title;
 		private TextView tv_content;
+		private TextView tv_where;
 		private NoScrollGridView gridview;
 	}
 }

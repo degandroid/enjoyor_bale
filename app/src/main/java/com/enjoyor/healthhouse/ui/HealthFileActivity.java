@@ -83,12 +83,16 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
     private TextView tv_suishouji;
     private TextView tv_all;
 
+    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_healthfile);
         ButterKnife.bind(this);
+        if(getIntent().hasExtra("address")){
+            address = getIntent().getStringExtra("address");
+        }
         initHead();
         if (StringUtils.isBlank(MyApplication.getInstance().getDBHelper().getUser().getUserName())) {
             tv_username.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
@@ -395,11 +399,12 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 holder.iv_circle.setImageResource(R.mipmap.bl_icon_lanyuan);
                 holder.ll_bg.setBackgroundResource(R.mipmap.bl_bg_suishouji);
                 holder.iv_display.setImageResource(R.mipmap.bl_icon_sel_xiangji);
-                holder.tv_info.setText(healthFileList.get(position).getAddressName());
+                holder.tv_info.setText(address);
                 holder.ll_bg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(HealthFileActivity.this, MyNotesActivity.class);
+                        intent.putExtra("address",address);
                         intent.putExtra("recordId", healthFileList.get(position).getRecordId());
                         startActivity(intent);
                     }
