@@ -29,10 +29,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SDKInitializer.initialize(getApplicationContext());
         instance = this;
         context = this.getApplicationContext();
         AppManagerUtil.getAppManager();
+        SDKInitializer.initialize(context);
         ShareSDK.initSDK(context);
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.mipmap.bale)

@@ -92,7 +92,9 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     boolean isFirstLoc = true;// 是否首次定位
     double lng;
     double lat;
-
+    String address;
+    String street = "";
+    String streetNumber = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +133,6 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         mLocClient.start();
     }
 
-    String street = "";
 
     /**
      * 定位sdk监听函数
@@ -141,16 +142,18 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         public void onReceiveLocation(BDLocation bdLocation) {
             if (bdLocation == null) {
                 return;
-            }
-            if (bdLocation.getStreet() != null) {
-                street = bdLocation.getStreet();
-                notes_address.setText(street);
-            }
-            if (bdLocation.getStreetNumber() != null) {
-                notes_address.setText(street + bdLocation.getStreetNumber() + "号");
             } else {
-                notes_address.setText(street);
+                if (bdLocation.getStreet() != null) {
+                    street = bdLocation.getStreet();
+                }
+                if (!StringUtils.isEmpty(bdLocation.getStreetNumber() + "")) {
+                    streetNumber = bdLocation.getStreetNumber() + "号";
+                } else {
+                    streetNumber = "";
+                }
             }
+            address = street + streetNumber;
+            notes_address.setText(address);
             lng = bdLocation.getLongitude();
             lat = bdLocation.getLatitude();
         }
@@ -163,6 +166,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             case R.id.img_right:
                 if (BaseDate.getSessionId(this) != null) {
                     Intent intent = new Intent(NotesActivity.this, HealthFileActivity.class);
+                    intent.putExtra("address",address);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(NotesActivity.this, LoginActivity.class);
@@ -318,7 +322,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         if (cameraAdapter == null) {
             imageUriArray = (String[]) mResults
                     .toArray(new String[mResults.size()]);
-            cameraAdapter = new CameraAdapter(this, (ArrayList<String>) mResults,mColumnWidth, mColumnWidth);
+            cameraAdapter = new CameraAdapter(this, (ArrayList<String>) mResults, mColumnWidth, mColumnWidth);
             notes_grid.setAdapter(cameraAdapter);
         } else {
             cameraAdapter.notifyDataSetChanged();

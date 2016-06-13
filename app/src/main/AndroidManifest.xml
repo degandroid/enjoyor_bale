@@ -194,7 +194,13 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <!--<intent-filter>-->
+                <!--<data android:scheme="tencent1105455482" />-->
+                <!--<action android:name="android.intent.action.VIEW" />-->
 
+                <!--<category android:name="android.intent.category.BROWSABLE" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
             <!-- 调用新浪原生SDK，需要注册的回调activity -->
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
@@ -232,10 +238,12 @@
         <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>-->
         <!--</intent-filter>-->
         <!--</receiver>-->
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote"></service>
+
         <activity android:name=".ui.PhysicallocationActivity"></activity>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->

@@ -48,4 +48,8 @@
     <color name="color_feipang_six">#fd6a3e</color>
     <color name="color_feipang_seven">#fe4f1a</color>
     <color name="zuobi">#e4ffcb</color>
+
+    <color name="back">#EEEEEE</color>
+    <color name="me_bu">#4DAADD</color>
+    <color name="grey">#808080</color>
 </resources>

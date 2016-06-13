@@ -35,7 +35,6 @@
                 android:orientation="vertical">
 
 
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -255,13 +254,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@mipmap/bl_icon_alipay" />
+                        android:src="@mipmap/sino" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="支付宝" />
+                        android:text="新浪微博" />
                 </LinearLayout>
 
 
