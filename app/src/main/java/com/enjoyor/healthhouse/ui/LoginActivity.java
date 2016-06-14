@@ -2,6 +2,9 @@ package com.enjoyor.healthhouse.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +15,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
+import com.enjoyor.healthhouse.bean.ThirdLoginInfo;
 import com.enjoyor.healthhouse.bean.UserInfo;
 import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.net.ApiMessage;
@@ -25,6 +30,7 @@ import com.enjoyor.healthhouse.utils.MatcherUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.mob.tools.utils.UIHandler;
 
 import org.apache.http.Header;
 
@@ -36,13 +42,17 @@ import cn.sharesdk.alipay.share.Alipay;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.tencent.qq.QQClientNotExistException;
 import cn.sharesdk.wechat.friends.Wechat;
+import cn.sharesdk.wechat.utils.WXWebpageObject;
+import cn.sharesdk.wechat.utils.WechatClientNotExistException;
 
 /**
  * Created by Administrator on 2016/5/9.
  */
-public class LoginActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener, Handler.Callback {
     @Bind(R.id.navigation_name)
     TextView navigation_name;
     @Bind(R.id.navigation_back)
@@ -134,22 +144,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 startActivity(intent_quick);
                 break;
             case R.id.login_ipay://支付宝第三方登录
-                Platform ipay = ShareSDK.getPlatform(Alipay.NAME);
-                ipay.SSOSetting(false);
-                ipay.setPlatformActionListener(this);
-                ipay.authorize();
+                Platform sino = ShareSDK.getPlatform(this, SinaWeibo.NAME);
+                sino.SSOSetting(false);
+                sino.setPlatformActionListener(this);
+                sino.authorize();
                 break;
             case R.id.login_qq://qq第三方登录
-                Platform qq = ShareSDK.getPlatform(QQ.NAME);
+                Platform qq = ShareSDK.getPlatform(this, QQ.NAME);
                 qq.SSOSetting(false);
                 qq.setPlatformActionListener(this);
                 qq.authorize();
                 break;
             case R.id.login_wx://微信第三方登录
-                Platform wx = ShareSDK.getPlatform(Wechat.NAME);
-                wx.SSOSetting(false);
-                wx.setPlatformActionListener(this);
-                wx.authorize();
+                Platform wechat = ShareSDK.getPlatform(this, Wechat.NAME);
+                wechat.showUser(null);
+                wechat.SSOSetting(false);
+                wechat.setPlatformActionListener(this);
+//                wechat.authorize();
+                if (!wechat.isValid()) {
+                    wechat.authorize();
+                }
                 break;
         }
     }
@@ -213,7 +227,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             et_password.requestFocus();
                         }
                     });
-//                    Toast.makeText(LoginActivity.this, "用户名或者密码错误，请重新输入", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -226,9 +239,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private boolean saveUser(UserInfo user) {
         if (user != null) {
-//            UserInfo user2 = new UserInfo();
             user.setId(1);
-//            user2.setLoginName("ABCD");
             user.setPhoneNumber(phoneNumber);
             user.setUserLoginPwd(password);
             BaseDate.setSessionId(LoginActivity.this, user.getAccountId());
@@ -239,16 +250,109 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-        Toast.makeText(LoginActivity.this, "" + i, Toast.LENGTH_LONG);
+        Message msg = new Message();
+        msg.what = 2;
+        msg.arg1 = 1;
+        msg.arg2 = i;
+        msg.obj = platform;
+        UIHandler.sendMessage(msg, this);
     }
 
     @Override
     public void onError(Platform platform, int i, Throwable throwable) {
-
+        Log.d("wyy------throwable----", throwable.toString());
+        Message msg = new Message();
+        msg.what = 1;
+        msg.arg1 = i;
+        msg.obj = throwable;
+        UIHandler.sendMessage(msg, this);
     }
 
     @Override
     public void onCancel(Platform platform, int i) {
+        Log.d("wyy------i----", i + "");
+        Message msg = new Message();
+        msg.what = 0;
+        UIHandler.sendMessage(msg, this);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    /**
+     * 分享接受消息
+     */
+    @Override
+    public boolean handleMessage(Message msg) {
+        int what = msg.what;
+        switch (what) {
+            case 0:
+                Toast.makeText(LoginActivity.this, "分享已取消", Toast.LENGTH_LONG).show();
+                break;
+            case 1:
+                String failtext;
+                if (msg.obj instanceof WechatClientNotExistException
+                        || msg.obj instanceof QQClientNotExistException
+                        || msg.obj instanceof WechatClientNotExistException) {
+                    failtext = "版本过低或未安装客户端";
+                } else if (msg.obj instanceof java.lang.Throwable
+                        && msg.obj.toString() != null
+                        && msg.obj.toString().contains(
+                        "prevent duplicate publication")) {
+                    failtext = "请稍后发送";
+                } else if (msg.obj.toString().contains("error")) {
+                    failtext = "分享失败";
+                } else {
+                    failtext = "分享失败";
+                }
+                break;
+            case 2:
+                progress();
+                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
+                String json = JSON.toJSONString(((Platform) msg.obj).getDb());
+                ((Platform) msg.obj).removeAccount(true);
+                Log.d("wyy------jn----", json);
+                if (json != null) {
+                    final RequestParams params = new RequestParams();
+                    params.add("json", json);
+                    AsyncHttpUtil.post(UrlInterface.Login_Third_URL, params, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            String json1 = new String(bytes);
+                            final ApiMessage apiMessage = ApiMessage.FromJson(json1);
+                            if (apiMessage.Code == 1001) {
+                                ThirdLoginInfo thirdLoginInfo = JsonHelper.getJson(apiMessage.Data, ThirdLoginInfo.class);
+                                if (thirdLoginInfo.getUserInfo().getUserId() == null) {
+                                    Intent intent_third = new Intent(LoginActivity.this, BindActivity.class);
+                                    intent_third.putExtra("accountid", thirdLoginInfo.getUserInfo().getAccountId());
+                                    startActivity(intent_third);
+                                } else {
+                                    BaseDate.setSessionId(LoginActivity.this, thirdLoginInfo.getUserInfo().getAccountId());
+                                    if (StringUtils.isEmpty(thirdLoginInfo.getUserInfo().getHeadImg())) {
+                                        String path = thirdLoginInfo.getPlatUser().getUserIcon();
+                                        thirdLoginInfo.getUserInfo().setHeadImg(path);
+                                    }
+                                    MyApplication.getInstance().getDBHelper().saveUser(thirdLoginInfo.getUserInfo());
+                                    Intent intent_success = new Intent(LoginActivity.this, MainTabActivity.class);
+                                    Log.d("wyy--database-", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
+                                    startActivity(intent_success);
+                                }
+                            }
+                            Log.d("wyy------json1----", json1);
+                        }
+
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+                        }
+                    });
+                    cancel();
+                }
+
+                break;
+        }
+        return false;
     }
 }

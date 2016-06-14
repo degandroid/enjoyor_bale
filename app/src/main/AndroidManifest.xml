@@ -38,13 +38,13 @@
         android:icon="@mipmap/bale"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="575e23dde0f55a414a000a76"
-            android:value="UMENG_APPKEY" >
-        </meta-data>
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}" />
+        <!--<meta-data-->
+        <!--android:name="575e23dde0f55a414a000a76"-->
+        <!--android:value="UMENG_APPKEY" >-->
+        <!--</meta-data>-->
+        <!--<meta-data-->
+        <!--android:name="UMENG_CHANNEL"-->
+        <!--android:value="${UMENG_CHANNEL_VALUE}" />-->
 
 
         <meta-data
@@ -204,11 +204,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <!--<intent-filter>-->
-                <!--<data android:scheme="tencent1105455482" />-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
+            <!--<data android:scheme="tencent1105455482" />-->
+            <!--<action android:name="android.intent.action.VIEW" />-->
 
-                <!--<category android:name="android.intent.category.BROWSABLE" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--<category android:name="android.intent.category.BROWSABLE" />-->
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
             <!--</intent-filter>-->
             <!-- 调用新浪原生SDK，需要注册的回调activity -->
             <intent-filter>
@@ -241,6 +241,8 @@
         <activity android:name=".ui.AboutOursActivity"></activity>
         <!--服务与声明页面-->
         <activity android:name=".ui.AgreeMentActivity"></activity>
+        <!--第三方登录绑定手机界面-->
+        <activity android:name=".ui.BindActivity"></activity>
         <!--注册自定义广播-->
         <!--<receiver android:name=".receive.MyReceiver">-->
         <!--<intent-filter>-->

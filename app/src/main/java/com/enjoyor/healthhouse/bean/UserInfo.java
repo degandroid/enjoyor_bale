@@ -11,9 +11,9 @@ public class UserInfo {
     @DatabaseField(id = true)
     int id;
     @DatabaseField
-    long accountId;//APP账户ID
+    Long accountId;//APP账户ID
     @DatabaseField
-    long userId;//系统健康用户ID， 如果此项为空值时，该用户没有绑定身份证相关信息，可以让用户完善信息
+    Long userId;//系统健康用户ID， 如果此项为空值时，该用户没有绑定身份证相关信息，可以让用户完善信息
     @DatabaseField
     String loginName;//系统登录名称
     @DatabaseField
@@ -78,19 +78,19 @@ public class UserInfo {
         this.id = id;
     }
 
-    public long getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(long accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

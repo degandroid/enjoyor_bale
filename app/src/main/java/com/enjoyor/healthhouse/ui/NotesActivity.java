@@ -95,6 +95,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     String address;
     String street = "";
     String streetNumber = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,7 +167,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             case R.id.img_right:
                 if (BaseDate.getSessionId(this) != null) {
                     Intent intent = new Intent(NotesActivity.this, HealthFileActivity.class);
-                    intent.putExtra("address",address);
+                    intent.putExtra("address", address);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(NotesActivity.this, LoginActivity.class);
@@ -186,66 +187,46 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.notes_commit://点击提交按钮事件事件
                 if (isLogin(this)) {
-                    RequestParams params = new RequestParams();
-                    params.add("user", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
-                    params.add("content", notes_et.getText().toString().trim());
-                    params.add("lng", lng + "");
-                    params.add("lat", lat + "");
-                    params.add("voice", id + "");
-//                params.add("images",n.get(0));
-                    if (notes.size() != 0) {
-                        for (String s : notes) {
-                            params.add("images", s);
-                        }
-                    }
-                    AsyncHttpUtil.post(UrlInterface.Notes_URL, params, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                            if (bytes != null) {
-                                String json = new String(bytes);
-//                        Log.d("wyy----888888----", json);
-                                ApiMessage api = ApiMessage.FromJson(json);
-                                if (api.Data.equals(true + "")) {
-                                    Toast.makeText(NotesActivity.this, "文件上传成功", Toast.LENGTH_LONG).show();
-                                    finish();
-                                } else {
-                                    Toast.makeText(NotesActivity.this, "文件上传失败", Toast.LENGTH_LONG).show();
+                    if (notes_et.getText().toString().trim().length() != 0 || !mFile.isEmpty()) {
+                        if (mFile != null && !mFile.isEmpty()) {
+                            Log.d("wyy-----json---", mFile.toString());
+                            RequestParams param1 = new RequestParams();
+                            for (int i = 0; i < mFile.size(); i++) {
+                                try {
+                                    param1.put("file" + i, mFile.get(i));
+                                } catch (FileNotFoundException e) {
+                                    e.printStackTrace();
                                 }
-                            } else {
-
                             }
-                        }
+                            param1.add("type", 0 + "");
+                            param1.add("origin", "ANDROIDAPP");
+                            AsyncHttpUtil.post(UrlInterface.UpDateFile_URL, param1, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                                    String json = new String(bytes);
+                                    Log.d("wyy-----json1---", json);
+                                    ApiMessage apimessage = ApiMessage.FromJson(json);
+                                    if (apimessage.Code == 1001) {
+                                        List<PhotoId> photoid = JsonHelper.getArrayJson(apimessage.Data, PhotoId.class);
+                                        if (photoid != null && !photoid.isEmpty()) {
+                                            for (PhotoId bean : photoid) {
+                                                notes.add(bean.getId() + "");
+                                            }
+                                        }
+                                        savenotes();
+                                    }
+                                }
 
-                        @Override
-                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
+                                @Override
+                                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                                }
+                            });
+                        } else {
+                            savenotes();
                         }
-                    });
-                    RequestParams param1 = new RequestParams();
-                    try {
-                        param1.put("file", mFile);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                    } else {
+                        Toast.makeText(NotesActivity.this, "请输入您的健康记录或者上传您的健康图片", Toast.LENGTH_LONG).show();
                     }
-                    param1.add("type", 0 + "");
-                    param1.add("origin", "ANDROIDAPP");
-                    AsyncHttpUtil.post(UrlInterface.UpDateFile_URL, param1, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                            String json = new String(bytes);
-//                            Log.d("wyy==============", json);
-                            ApiMessage apimessage = ApiMessage.FromJson(json);
-                            if (apimessage.Code == 1001) {
-                                List<PhotoId> photoid = JsonHelper.getArrayJson(apimessage.Data, PhotoId.class);
-                                notes.add(photoid.get(0).getId() + "");
-                                Log.d("wyy==============", "===============================");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        }
-                    });
                 }
                 break;
             case R.id.notes_top:
@@ -255,6 +236,44 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                 imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
         }
+    }
+
+    private void savenotes() {
+        RequestParams params = new RequestParams();
+        params.add("user", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
+        params.add("content", notes_et.getText().toString().trim());
+        params.add("lng", lng + "");
+        params.add("lat", lat + "");
+        params.add("voice", id + "");
+        if (notes.size() != 0) {
+            String img = "";
+            for (String s : notes) {
+                img += s + ",";
+            }
+            params.add("images", img.substring(0, img.length() - 1));
+            Log.d("wyy-----img---", img);
+        }
+        AsyncHttpUtil.post(UrlInterface.Notes_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                if (bytes != null) {
+                    String json = new String(bytes);
+                    ApiMessage api = ApiMessage.FromJson(json);
+                    if (api.Data.equals(true + "")) {
+                        Toast.makeText(NotesActivity.this, "文件上传成功", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        Toast.makeText(NotesActivity.this, "文件上传失败", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+            }
+        });
     }
 
     /**
@@ -270,7 +289,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         startActivityForResult(intent, PICK_PHOTO);
     }
 
-    File mFile = null;
+    List<File> mFile = new ArrayList<>();
 
     /**
      * 接受回传过来的数据
@@ -290,7 +309,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                 if (resultCode == RESULT_OK) {
                     for (String s : result) {
                         Log.d("wyy==============", s);
-                        mFile = new File(s);
+                        mFile.add(new File(s));
                     }
                 }
             } else if (requestCode == 110) {

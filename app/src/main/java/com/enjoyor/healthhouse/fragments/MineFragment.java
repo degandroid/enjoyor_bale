@@ -11,9 +11,12 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,7 @@ import com.enjoyor.healthhouse.bean.BasePath;
 import com.enjoyor.healthhouse.bean.UserInfo;
 import com.enjoyor.healthhouse.bean._FakeX509TrustManager;
 import com.enjoyor.healthhouse.common.BaseDate;
+import com.enjoyor.healthhouse.custom.SharePopupWindow;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
@@ -103,6 +107,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private static final String PHOTO_FILE_NAME = "temp_photo.jpg";
     private File tempFile;
     String path;
+    SharePopupWindow popupWindow = null;
 
     @Nullable
     @Override
@@ -117,8 +122,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         cancle = (Button) view1.findViewById(R.id.cancle);
         if (BaseDate.getSessionId(getActivity()) != null) {
             Log.d("wyy====logo===", MyApplication.getInstance().getDBHelper().getUser().getHeadImg());
-            ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL
-                    + MyApplication.getInstance().getDBHelper().getUser().getHeadImg(), mine_fg_logo, MyApplication.options);
+            String path = MyApplication.getInstance().getDBHelper().getUser().getHeadImg();
+            if (path != null && !path.startsWith("http://") && !path.startsWith("https://")) {
+                path = UrlInterface.FILE_URL + path;
+            }
+            ImageLoader.getInstance().displayImage(path, mine_fg_logo, MyApplication.options);
             Log.d("wyy---path---====", MyApplication.getInstance().getDBHelper().getUser().getHeadImg());
             mine_fg_login.setVisibility(View.GONE);
             mine_fg_regist.setVisibility(View.GONE);
@@ -127,14 +135,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         initEvent();
         return view;
     }
-
-//    @Override
-//    public void onResume() {
-//        ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL
-//                + MyApplication.getInstance().getDBHelper().getUser().getHeadImg(), mine_fg_logo, MyApplication.options);
-//        mine_fg_name.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
-//        super.onResume();
-//    }
 
     private void initEvent() {
         mine_fg_logo.setOnClickListener(this);
@@ -321,13 +321,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
         } else if (requestCode == PHOTO_REQUEST_CAREMA) {
             // 从相机返回的数据
-            if (hasSdcard()) {
-                crop(Uri.fromFile(tempFile));
-                Log.d("wyy------tempfile", tempFile.toString());
-                savePicture(tempFile, 2);
+            if (data != null) {
+                if (hasSdcard()) {
+                    crop(Uri.fromFile(tempFile));
+                    Log.d("wyy------tempfile", tempFile.toString());
+                    savePicture(tempFile, 2);
 //                Log.d("wyy---crop(Uri.fromFile(tempFile));-", Uri.fromFile(tempFile).toString());
+                } else {
+                    Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
+                }
             } else {
-                Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
+
             }
 
         } else if (requestCode == PHOTO_REQUEST_CUT) {
@@ -345,7 +349,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             }
 
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -435,4 +438,5 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 }
+
 

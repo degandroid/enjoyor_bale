@@ -7,8 +7,8 @@ public class UrlInterface {
     public static String RELEASE_URL = "http://www.cnbale.com:9008/healthstationserver/";
 
     public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
-    public static String BasePath = "http://115.28.37.145:9008/healthstationserver";
-//        public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
+//    public static String BasePath = "http://192.168.8/healthstationserver";
+    //        public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
 //        public static String TEXT_URL = "http://192.168.66.37:8080/bale/";
     //    用户注册接口
     public static String Regist_URL = TEXT_URL + "account/appregister.action";
@@ -59,4 +59,10 @@ public class UrlInterface {
     public static String InfoModifyPwd_URL = TEXT_URL + "account/resetpwd.action";
     //健康趋势接口
     public static String TendInfo_URL = TEXT_URL + "app/tendency.do";
+    //第三方登录接口
+    public static String Login_Third_URL = TEXT_URL + "plat/login.action";
+    //获取第三方登录信息接口
+    public static String Get_Thhird_LoginInfo_URL = TEXT_URL + "plat/info.do";
+    //绑定第三方登录手机
+    public static String Bind_Phone_URL = TEXT_URL + "plat/bind.action";
 }

@@ -25,6 +25,7 @@ public class DBHelper {
     public boolean saveUser(UserInfo user) {
 //        clearUser();
         try {
+            user.setId(1);
             Dao<UserInfo, Integer> dao = mDBHelper.getDao(UserInfo.class);
             dao.createOrUpdate(user);
             Log.i("sql", "DBHelper--->>---saveUser success");
@@ -92,7 +93,6 @@ public class DBHelper {
     }
 
 
-
     public boolean saveBMI(BMI bmi) {
         try {
             Dao<BMI, Integer> dao = mDBHelper.getDao(BMI.class);
@@ -124,7 +124,7 @@ public class DBHelper {
     public boolean clearBMI() {
         try {
             Dao<BMI, Integer> dao = mDBHelper.getDao(BMI.class);
-                dao.delete(getBMI());
+            dao.delete(getBMI());
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
