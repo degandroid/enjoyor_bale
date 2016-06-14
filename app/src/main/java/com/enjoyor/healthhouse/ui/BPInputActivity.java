@@ -330,7 +330,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 tv_display.getPaint().setAntiAlias(true);//抗锯齿
                 tv_display_more.setVisibility(View.VISIBLE);
                 tv_display_more.setText("空腹血糖标准范围（4.4-7.0mmol/L）" + "\n非空腹血糖标准范围（4.4-10.0mmol/L）");
-                initFirstView(2, 14, 1, "6.0");
+                initFirstView(2, 15, 1, "6.0");
                 break;
             case Constant.FROM_XUEYANG:
                 navigation_name.setText("血氧录入");
@@ -460,10 +460,10 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         } else if (1 == span) {
-            for (float i = from; i <= to; i += span) {
+            for (float i = (float)from; i <= (float)to-1; i += span) {
                 list.add(i + "");
                 for (float j = 0.1f; j < 1.0f; j += 0.1) {
-                    DecimalFormat fnum = new DecimalFormat("##0.0");
+                    DecimalFormat fnum = new DecimalFormat("0.0");
                     String s = fnum.format(i + j);
                     list.add(s);
                 }
@@ -477,8 +477,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onChanged(RulerWheel wheel, String oldValue, String newValue) {
-
-                int a = (int)Float.parseFloat(newValue);
+                float a = Float.parseFloat(newValue);
                 if(a<=to&&a>=from){
                     bpinput_bp_tv.setText(newValue);
                 }

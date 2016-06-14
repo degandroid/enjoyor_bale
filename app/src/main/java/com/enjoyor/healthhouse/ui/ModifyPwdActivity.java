@@ -3,7 +3,8 @@ package com.enjoyor.healthhouse.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,15 +18,11 @@ import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.url.UrlInterface;
-import com.enjoyor.healthhouse.utils.ScreenUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,6 +32,9 @@ import butterknife.ButterKnife;
  * 个人中心修改密码页面
  */
 public class ModifyPwdActivity extends BaseActivity implements View.OnClickListener {
+    @Bind(R.id.container)
+    CoordinatorLayout container;
+
     @Bind(R.id.re_back)
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
@@ -73,7 +73,10 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
         int key = v.getId();
         switch (key) {
             case R.id.modify_save:
-                modifycommit();
+                if(isCorrert()){
+                    modifycommit();
+                }
+
                 break;
             case R.id.re_back:
                 finish();
@@ -81,11 +84,34 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    private boolean isCorrert(){
+        String oldPwd= modifypwd_et_access.getText().toString().trim();
+        String newPwd = modify_pwd.getText().toString().trim();
+        String againPwd = modify_again_pwd.getText().toString().trim();
+
+        if(StringUtils.isBlank(oldPwd)){
+            Snackbar.make(container, "原密码不能为空", Snackbar.LENGTH_SHORT).show();
+            modifypwd_et_access.requestFocus();
+            return false;
+        }else if(StringUtils.isBlank(newPwd)){
+            Snackbar.make(container, "新密码不能为空", Snackbar.LENGTH_SHORT).show();
+            modify_pwd.requestFocus();
+            return false;
+        }else if(StringUtils.isBlank(againPwd)){
+            Snackbar.make(container, "请确认新密码", Snackbar.LENGTH_SHORT).show();
+            modify_again_pwd.requestFocus();
+            return false;
+        }else if(!newPwd.equals(againPwd)){
+            Snackbar.make(container, "请确认新密码", Snackbar.LENGTH_SHORT).show();
+            modify_again_pwd.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
     //保存修改密码的方法
     private void modifycommit() {
-        if (!StringUtils.isBlank(modifypwd_et_access.getText().toString().trim())) {
-            if (!StringUtils.isBlank(modify_pwd.getText().toString().trim()) && !StringUtils.isBlank(modify_again_pwd.getText().toString().trim())) {
-                RequestParams params = new RequestParams();
+         RequestParams params = new RequestParams();
                 params.add("id", "" + MyApplication.getInstance().getDBHelper().getUser().getAccountId());
                 params.add("name", "" + MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
                 params.add("oldpwd", "" + modifypwd_et_access.getText().toString().trim());
@@ -105,18 +131,11 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
                             Toast.makeText(ModifyPwdActivity.this, "" + apiMessage.Msg, Toast.LENGTH_LONG).show();
                         }
                     }
-
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
 
                     }
                 });
 
-            } else {
-                Toast.makeText(ModifyPwdActivity.this, "请输入新密码", Toast.LENGTH_LONG).show();
-            }
-        } else {
-            Toast.makeText(ModifyPwdActivity.this, "原密码不能为空", Toast.LENGTH_LONG).show();
-        }
     }
 }
