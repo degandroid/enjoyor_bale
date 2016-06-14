@@ -2,6 +2,8 @@ package com.enjoyor.healthhouse.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,9 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/5/9.
  */
 public class NewPasswordActivity extends BaseActivity implements View.OnClickListener {
+    @Bind(R.id.container)
+    CoordinatorLayout container;
+
     @Bind(R.id.navigation_name)
     TextView navigation_name;
     @Bind(R.id.re_back)
@@ -107,18 +112,18 @@ public class NewPasswordActivity extends BaseActivity implements View.OnClickLis
         String newPwd = et_newpassword.getText().toString().trim();
         String newAgainPwd = et_again_newpassword.getText().toString().trim();
         if (StringUtils.isBlank(newPwd)) {
-            Toast.makeText(NewPasswordActivity.this, "新密码不能为空", Toast.LENGTH_LONG).show();
+            Snackbar.make(container, "新密码不能为空", Snackbar.LENGTH_SHORT).show();
             et_newpassword.requestFocus();
             return false;
-        } else if (StringUtils.isBlank(newAgainPwd)) {
-            Toast.makeText(NewPasswordActivity.this, "两次密码输入不匹配", Toast.LENGTH_LONG).show();
+        }else if (StringUtils.isBlank(newAgainPwd)) {
+            Snackbar.make(container, "请确认密码", Snackbar.LENGTH_SHORT).show();
+            et_again_newpassword.requestFocus();
+            return false;
+        }else if(!newPwd.equals(newAgainPwd)){
+            Snackbar.make(container, "两次密码输入不匹配", Snackbar.LENGTH_SHORT).show();
             et_again_newpassword.requestFocus();
             return false;
         }
-        if (newPwd.equals(newAgainPwd)) {
-            return true;
-        } else
-            Toast.makeText(NewPasswordActivity.this, "两次密码输入不匹配", Toast.LENGTH_LONG).show();
-        return false;
+        return true;
     }
 }

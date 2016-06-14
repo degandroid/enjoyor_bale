@@ -92,7 +92,7 @@
                     android:id="@+id/tv_down_result"
                     android:layout_width="wrap_content"
                     android:text=""
-                    android:gravity="right"
+                    android:layout_centerInParent="true"
                     android:layout_height="wrap_content" />
                     <ImageView
                         android:id="@+id/iv_down_info"
@@ -160,7 +160,7 @@
                         android:id="@+id/tv_up_result_two"
                         android:layout_width="wrap_content"
                         android:text=""
-                        android:gravity="right"
+                        android:layout_centerInParent="true"
                         android:layout_height="wrap_content" />
                     <ImageView
                         android:id="@+id/iv_up_info_two"
@@ -205,7 +205,7 @@
                         android:id="@+id/tv_down_result_two"
                         android:layout_width="wrap_content"
                         android:text=""
-                        android:gravity="right"
+                        android:layout_centerInParent="true"
                         android:layout_height="wrap_content" />
                     <ImageView
                         android:id="@+id/iv_down_info_two"
@@ -273,7 +273,7 @@
                         android:id="@+id/tv_up_result_three"
                         android:layout_width="wrap_content"
                         android:text=""
-                        android:gravity="right"
+                        android:layout_centerInParent="true"
                         android:layout_height="wrap_content" />
                     <ImageView
                         android:id="@+id/iv_up_info_three"
@@ -318,7 +318,7 @@
                         android:id="@+id/tv_down_result_three"
                         android:layout_width="wrap_content"
                         android:text=""
-                        android:gravity="right"
+                        android:layout_centerInParent="true"
                         android:layout_height="wrap_content" />
                     <ImageView
                         android:id="@+id/iv_down_info_three"
@@ -380,7 +380,7 @@
                     android:id="@+id/tv_result"
                     android:layout_width="wrap_content"
                     android:text=""
-                    android:gravity="right"
+                    android:layout_centerInParent="true"
                     android:layout_height="wrap_content" />
                 <ImageView
                     android:id="@+id/iv_info"

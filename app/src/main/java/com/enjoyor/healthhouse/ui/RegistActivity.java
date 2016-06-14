@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,6 +36,9 @@ import butterknife.ButterKnife;
  * Created by YuanYuan on 2016/5/9.
  */
 public class RegistActivity extends BaseActivity implements View.OnClickListener {
+
+    @Bind(R.id.container)
+    CoordinatorLayout container;
 
     @Bind(R.id.navigation_back)
     ImageView navigation_back;
@@ -113,18 +117,21 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.regist_yanzheng:
                 if (StringUtils.isBlank(registphonenumber.getText().toString())) {
-                    Toast.makeText(RegistActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
+                    Snackbar.make(container, "手机号码不能为空", Snackbar.LENGTH_SHORT).show();
                     registphonenumber.requestFocus();
-                } else if(!MatcherUtil.isMobileNumber(registphonenumber.getText().toString())){
-                    Toast.makeText(RegistActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
+                } else if (!MatcherUtil.isMobileNumber(registphonenumber.getText().toString())) {
+                    Snackbar.make(container, "请输入正确的手机号", Snackbar.LENGTH_SHORT).show();
                     registphonenumber.requestFocus();
-                }else {
+                } else {
                     sendMsg();
                     sendMsgtoPhone();
                 }
                 break;
             case R.id.regist:
-                regist();
+                if (isRight()) {
+                    regist();
+                }
+
                 break;
             case R.id.regist_phone_delete:
                 registphonenumber.setText("");
@@ -158,56 +165,74 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         });
     }
 
+    private boolean isRight() {
+        String phonenumber = registphonenumber.getText().toString().trim();
+        String password = regist_password.getText().toString().trim();
+        String yanzheng = regist_tv_yanzheng.getText().toString().trim();
+
+        if (StringUtils.isBlank(phonenumber)) {
+            Snackbar.make(container, "手机号不能为空", Snackbar.LENGTH_SHORT).show();
+            registphonenumber.requestFocus();
+            return false;
+        } else if (!MatcherUtil.isMobileNumber(phonenumber)) {
+            Snackbar.make(container, "手机号不正确", Snackbar.LENGTH_SHORT).show();
+            registphonenumber.requestFocus();
+            return false;
+        } else if (StringUtils.isBlank(password)) {
+            Snackbar.make(container, "密码不能为空", Snackbar.LENGTH_SHORT).show();
+            regist_password.requestFocus();
+            return false;
+        } else if (StringUtils.isBlank(yanzheng)) {
+            Snackbar.make(container, "请输入验证码", Snackbar.LENGTH_SHORT).show();
+            regist_tv_yanzheng.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
 
     //用户注册方法
     private void regist() {
-        if (!TextUtils.isEmpty(registphonenumber.getText().toString()) && !TextUtils.isEmpty(regist_password.getText().toString())
-                && !TextUtils.isEmpty(regist_tv_yanzheng.getText().toString())) {
-            if (regist_choice.isChecked()) {
-                RequestParams params = new RequestParams();
-                params.add("origin", String.valueOf("AndroidApp"));
-                params.add("userLoginName", String.valueOf(registphonenumber.getText().toString()));
-                params.add("userLoginPwd", String.valueOf(regist_password.getText().toString()));
-                params.add("userLoginType", String.valueOf(Integer.valueOf(2)));
-                params.add("mcode", String.valueOf(regist_tv_yanzheng.getText().toString()));
-                AsyncHttpUtil.post(UrlInterface.Regist_URL, params, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                        String json = new String(bytes);
-                        ApiMessage apiMessage = ApiMessage.FromJson(json);
-                        if (apiMessage.Code == 1001) {
-
-                            Toast.makeText(RegistActivity.this, "注册成功", Toast.LENGTH_LONG).show();
-                        } else {
-                            if (!TextUtils.isEmpty(registphonenumber.getText().toString()) && !TextUtils.isEmpty(regist_password.getText().toString()) && !TextUtils.isEmpty(regist_tv_yanzheng.getText().toString())) {
-                                dialog(RegistActivity.this, "该用户已注册，请直接登录", "取消", "登录", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        finish();
-                                    }
-                                }, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
-                                        startActivity(intent);
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(RegistActivity.this, "请输入用户名或密码", Toast.LENGTH_LONG).show();
+        if (regist_choice.isChecked()) {
+            RequestParams params = new RequestParams();
+            params.add("origin", String.valueOf("AndroidApp"));
+            params.add("userLoginName", String.valueOf(registphonenumber.getText().toString()));
+            params.add("userLoginPwd", String.valueOf(regist_password.getText().toString()));
+            params.add("userLoginType", String.valueOf(Integer.valueOf(2)));
+            params.add("mcode", String.valueOf(regist_tv_yanzheng.getText().toString()));
+            AsyncHttpUtil.post(UrlInterface.Regist_URL, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    String json = new String(bytes);
+                    ApiMessage apiMessage = ApiMessage.FromJson(json);
+                    if (apiMessage.Code == 1001) {
+                        Toast.makeText(RegistActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                    } else if (apiMessage.Code == 1002) {
+                        dialog(RegistActivity.this, "该用户已注册，请直接登录", "取消", "登录", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                finish();
                             }
-
-//                            Toast.makeText(RegistActivity.this, "" + apiMessage.Msg, Toast.LENGTH_LONG).show();
-                        }
+                        }, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }else{
+                        Snackbar.make(container, "验证码错误", Snackbar.LENGTH_SHORT).show();
+                        regist_tv_yanzheng.requestFocus();
                     }
+                }
 
-                    @Override
-                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
 
-                    }
-                });
-            } else Toast.makeText(RegistActivity.this, "请同意芭乐健康软件许可协议", Toast.LENGTH_LONG).show();
-
-        } else Toast.makeText(RegistActivity.this, "用户名，密码或验证码不能为空", Toast.LENGTH_LONG).show();
+                }
+            });
+        } else Toast.makeText(RegistActivity.this, "请同意芭乐健康软件许可协议", Toast.LENGTH_LONG).show();
 
     }
 

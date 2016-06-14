@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -283,12 +282,12 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 systolicPressure = down;
             }
         }
-        Log.i("zxw", "userId：" + userId + "\n" + "times：" + times + "\n" + "hours：" + hours
-                        + "\n" + "systolicPressure：" + systolicPressure + "\n" + "diastolicPressure：" + diastolicPressure
-                        + "\n" + "height：" + height + "\n" + "weight：" + weight + "\n" + "bloodSugar：" + bloodSugar
-                        + "\n" + "type：" + type + "\n" + "bo：" + bo + "\n" + "waistLine：" + waistLine
-                        + "\n" + "temperature：" + temperature + "\n" + "ecg：" + ecg
-        );
+//        Log.i("zxw", "userId：" + userId + "\n" + "times：" + times + "\n" + "hours：" + hours
+//                        + "\n" + "systolicPressure：" + systolicPressure + "\n" + "diastolicPressure：" + diastolicPressure
+//                        + "\n" + "height：" + height + "\n" + "weight：" + weight + "\n" + "bloodSugar：" + bloodSugar
+//                        + "\n" + "type：" + type + "\n" + "bo：" + bo + "\n" + "waistLine：" + waistLine
+//                        + "\n" + "temperature：" + temperature + "\n" + "ecg：" + ecg
+//        );
         return true;
     }
 
@@ -843,11 +842,13 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         wv_day.setData(getStartData(3));
 
         long date = DateUtil.getDaysAfter(0);
+//        String string_year = DateUtil.longToDateString(date, "yyyy");
+//        int year = Integer.parseInt(string_year);
         String string_mouth = DateUtil.longToDateString(date, "MM");
         int mouth = Integer.parseInt(string_mouth);
         String string_day = DateUtil.longToDateString(date, "dd");
         int day = Integer.parseInt(string_day);
-        wv_year.setDefault(2);
+        wv_year.setDefault(9);
         wv_mouth.setDefault(mouth-1);
         wv_day.setDefault(day-1);
         wv_year.setOnSelectListener(new WheelView.OnSelectListener() {
@@ -904,7 +905,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             case 1:
                 date = DateUtil.getDaysAfter(0);
                 String str_year = DateUtil.longToDateString(date, "yyyy");
-                int year = Integer.parseInt(str_year) - 2;
+                int year = Integer.parseInt(str_year) - 9;
                 for (int i = 0; i < 10; i++) {
                     list.add((year + i) + "");
                 }

@@ -59,8 +59,12 @@ public class NameActivity extends BaseActivity implements View.OnClickListener {
 
     private void initView() {
         navigation_name.setText("姓名");
+        if(!StringUtils.isBlank(MyApplication.getInstance().getDBHelper().getUser().getUserName())){
+            name_et.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
+        }else{
+            name_et.setHint("请输入姓名");
+        }
         tv_right.setText("保存");
-        name_et.setHint("请输入姓名");
         tv_right.setVisibility(View.VISIBLE);
         name_et.addTextChangedListener(new TextWatcher() {
             @Override
@@ -120,6 +124,7 @@ public class NameActivity extends BaseActivity implements View.OnClickListener {
                         UserInfo userInfo = MyApplication.getInstance().getDBHelper().getUser();
                         userInfo.setUserName(name_et.getText().toString().trim());
                         MyApplication.getInstance().getDBHelper().saveUser(userInfo);
+                        MyApplication.setUserName(name_et.getText().toString().trim());
                         finish();
                     } else {
                         Toast.makeText(NameActivity.this, "姓名修改失败", Toast.LENGTH_LONG).show();

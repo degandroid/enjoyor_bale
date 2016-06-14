@@ -312,6 +312,7 @@ android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:gravity="center"
+                        android:inputType="numberDecimal"
                         android:background="@mipmap/bl_bg_shuru"
                         android:hint="" />
                 </LinearLayout>
@@ -357,6 +358,7 @@ android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:gravity="center"
+                        android:inputType="numberDecimal"
                         android:background="@mipmap/bl_bg_shuru"
                         android:hint="" />
                 </LinearLayout>

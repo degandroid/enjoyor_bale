@@ -26,6 +26,16 @@ public class MyApplication extends Application {
     public static boolean refrash = false;
     public static DisplayImageOptions options;
 
+    public static String userName;
+
+    public static String getUserName() {
+        return userName;
+    }
+
+    public static void setUserName(String userName) {
+        MyApplication.userName = userName;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

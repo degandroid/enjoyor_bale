@@ -23,9 +23,9 @@ public class NoScrollGridAdapter extends BaseAdapter {
 	/** 图片Url集合 */
 	private ArrayList<String> imageUrls;
 
-	public NoScrollGridAdapter(Context ctx, ArrayList<String> urls) {
+	public NoScrollGridAdapter(Context ctx, ArrayList<String> imageUrls) {
 		this.ctx = ctx;
-		this.imageUrls = urls;
+		this.imageUrls = imageUrls;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class NoScrollGridAdapter extends BaseAdapter {
 				.build();
 				Log.i("get", imageUrls.toString());
 		if(imageUrls.get(position).equals(Constant.VALUE_VOICE)){
-			imageView.setImageResource(R.mipmap.bl_logo);
+			imageView.setImageResource(R.mipmap.zanting);
 		}else{
 			ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL+"/"+imageUrls.get(position), imageView,options);
 		}

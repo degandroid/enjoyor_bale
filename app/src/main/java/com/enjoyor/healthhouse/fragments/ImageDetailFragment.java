@@ -123,7 +123,7 @@ public class ImageDetailFragment extends Fragment {
 
 		Log.i("mImageUrl",mImageUrl);
 		if(mImageUrl.equals( UrlInterface.FILE_URL+"/"+Constant.VALUE_VOICE)){
-			mImageView.setImageResource(R.mipmap.bl_logo);
+			mImageView.setImageResource(R.mipmap.zanting);
 			if(voice>1){
 				getVoicePath(voice);
 			}

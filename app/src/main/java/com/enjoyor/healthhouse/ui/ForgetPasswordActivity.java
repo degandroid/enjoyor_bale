@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.net.ApiMessage;
@@ -32,6 +33,9 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/5/9.
  */
 public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener {
+    @Bind(R.id.container)
+    CoordinatorLayout container;
+
     @Bind(R.id.navigation_name)
     TextView navigation_name;
     @Bind(R.id.re_back)
@@ -46,7 +50,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     @Bind(R.id.bt_commit)
     Button bt_commit;
 
-    private int count = 60;//30秒倒计时
+    private int count = 60;//60秒倒计时
     private Handler handler;
     private String phoneNumber;
     private String password;
@@ -100,10 +104,10 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.tv_code:
                 if (StringUtils.isBlank(et_phonenumber.getText().toString())) {
-                    Toast.makeText(ForgetPasswordActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
+                    Snackbar.make(container, "手机号码不能为空", Snackbar.LENGTH_SHORT).show();
                     et_phonenumber.requestFocus();
                 }else if(!MatcherUtil.isMobileNumber(et_phonenumber.getText().toString())){
-                    Toast.makeText(ForgetPasswordActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
+                    Snackbar.make(container, "请输入真确的手机号", Snackbar.LENGTH_SHORT).show();
                     et_phonenumber.requestFocus();
                 } else {
                     sendingAutoCode();
@@ -152,7 +156,8 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                     intent.putExtra("phone", et_phonenumber.getText().toString().trim());
                     startActivity(intent);
                 } else {
-                    Toast.makeText(ForgetPasswordActivity.this, "验证码输入错误错误", Toast.LENGTH_LONG).show();
+                    Snackbar.make(container, "验证码输入错误错误", Snackbar.LENGTH_SHORT).show();
+                    et_password.setText("");
                     et_password.requestFocus();
                 }
             }
@@ -167,15 +172,15 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         phoneNumber = et_phonenumber.getText().toString().trim();
         password = et_password.getText().toString().trim();
         if (StringUtils.isBlank(phoneNumber)) {
-            Toast.makeText(ForgetPasswordActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
+            Snackbar.make(container, "手机号码不能为空", Snackbar.LENGTH_SHORT).show();
             et_phonenumber.requestFocus();
             return false;
         }else if(!MatcherUtil.isMobileNumber(phoneNumber)){
-            Toast.makeText(ForgetPasswordActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
+            Snackbar.make(container, "请输入真确的手机号", Snackbar.LENGTH_SHORT).show();
             et_phonenumber.requestFocus();
             return false;
         } else if (StringUtils.isBlank(password)) {
-            Toast.makeText(ForgetPasswordActivity.this, "验证码不能为空", Toast.LENGTH_LONG).show();
+            Snackbar.make(container, "验证码不能为空", Snackbar.LENGTH_SHORT).show();
             et_password.requestFocus();
             return false;
         }

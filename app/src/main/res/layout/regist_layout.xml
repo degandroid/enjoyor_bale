@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,13 +12,6 @@
         android:orientation="vertical">
 
         <include layout="@layout/navigationbar_layout"></include>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/colorBlack">
-
-        </View>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:inputType="number"
                     android:layout_toRightOf="@+id/regist_phone"
                     android:background="@null"
                     android:hint="请输入手机号"
@@ -166,6 +162,7 @@
                     android:layout_marginLeft="10sp"
                     android:background="@null"
                     android:hint="请输入验证码"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:textSize="@dimen/textsize_largetittle" />
 
@@ -252,4 +249,12 @@
             android:text="《芭乐软件服务协议》"
             android:textColor="@color/colorAccent" />
     </LinearLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+
+    </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

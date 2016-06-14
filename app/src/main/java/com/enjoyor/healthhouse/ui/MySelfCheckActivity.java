@@ -40,7 +40,8 @@ public class MySelfCheckActivity extends BaseActivity {
     TextView navigation_name;
     private Context context;
 
-    @Bind(R.id.tv_ab_text)TextView tv_ab_text;
+    @Bind(R.id.tv_ab_text)
+    TextView tv_ab_text;
     @Bind(R.id.ll_shengao)
     LinearLayout ll_shengao;
     @Bind(R.id.ll_tizhong)
@@ -81,7 +82,7 @@ public class MySelfCheckActivity extends BaseActivity {
         if (getIntent().hasExtra("recordId")) {
             getDate(getIntent().getLongExtra("recordId", 0l));
         }
-        if(getIntent().hasExtra("recordTime")){
+        if (getIntent().hasExtra("recordTime")) {
 
             tv_ab_text.setText(getIntent().getStringExtra("recordTime"));
         }
@@ -111,17 +112,18 @@ public class MySelfCheckActivity extends BaseActivity {
             tv_result.setText(mBOS.getBo() + "");
             tv_range.setText(Constant.BO_BEST_MIN + "-" + Constant.BO_BEST_MAX);
 
-            if(mBOS.getBo()<Constant.BO_BEST_MIN){
+            if (mBOS.getBo() < Constant.BO_BEST_MIN) {
                 iv_info.setVisibility(View.VISIBLE);
                 iv_info.setImageResource(R.mipmap.bl_icon_lan);
             }
 
-            if(mBOS.getBo()>Constant.BO_BEST_MAX){
+            if (mBOS.getBo() > Constant.BO_BEST_MAX) {
                 iv_info.setVisibility(View.VISIBLE);
                 iv_info.setImageResource(R.mipmap.bl_icon_hong);
             }
             ll_xueyang.addView(view);
         }
+
         for (int i = 0; i < bps.size(); i++) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_myrecord_xueya, null);
             MyZijianInfo.BPS mBPS = bps.get(i);
@@ -139,88 +141,91 @@ public class MySelfCheckActivity extends BaseActivity {
             tv_time.setText(mBPS.getCheckTime() + "");
             tv_up_name.setText("舒张压");
             tv_up_result.setText(mBPS.getDiastolicPressure() + "");
-            tv_up_range.setText(Constant.diastolicPressure_BEST_MIN + "-" + Constant.diastolicPressure_BEST_MIN);
+            tv_up_range.setText(Constant.diastolicPressure_BEST_MIN + "-" + Constant.diastolicPressure_BEST_MAX);
 
             tv_down_name.setText("收缩压");
             tv_down_result.setText(mBPS.getSystolicPressure() + "");
             tv_down_range.setText(Constant.systolicPressure_BEST_MIN + "-" + Constant.systolicPressure_BEST_MAX);
 
-            if(mBPS.getDiastolicPressure()<Constant.diastolicPressure_BEST_MIN){
+            if (mBPS.getDiastolicPressure() < Constant.diastolicPressure_BEST_MIN) {
                 iv_up_info.setVisibility(View.VISIBLE);
                 iv_up_info.setImageResource(R.mipmap.bl_icon_lan);
             }
-            if(mBPS.getDiastolicPressure()>Constant.diastolicPressure_BEST_MAX){
+            if (mBPS.getDiastolicPressure() > Constant.diastolicPressure_BEST_MAX) {
                 iv_up_info.setImageResource(R.mipmap.bl_icon_hong);
                 iv_up_info.setVisibility(View.VISIBLE);
             }
-            if(mBPS.getSystolicPressure()<Constant.systolicPressure_BEST_MIN){
+            if (mBPS.getSystolicPressure() < Constant.systolicPressure_BEST_MIN) {
                 iv_down_info.setVisibility(View.VISIBLE);
                 iv_down_info.setImageResource(R.mipmap.bl_icon_lan);
             }
-            if(mBPS.getSystolicPressure()>Constant.systolicPressure_BEST_MAX){
+            if (mBPS.getSystolicPressure() > Constant.systolicPressure_BEST_MAX) {
                 iv_down_info.setImageResource(R.mipmap.bl_icon_hong);
                 iv_down_info.setVisibility(View.VISIBLE);
             }
             ll_xueya.addView(view);
         }
+
+        /*-----------------------------------------血糖-----------------------------------------*/
+
+
+        View view_xuetang = LayoutInflater.from(context).inflate(R.layout.item_myrecord_xuetang, ll_xuetang);
+        TextView tv_up_result_xuetang = (TextView) view_xuetang.findViewById(R.id.tv_up_result);
+        ImageView iv_up_info_xuetang = (ImageView) view_xuetang.findViewById(R.id.iv_up_info);
+        iv_up_info_xuetang.setVisibility(View.GONE);
+        TextView tv_up_result_two_xuetang = (TextView) view_xuetang.findViewById(R.id.tv_up_result_two);
+        ImageView iv_up_info_two_xuetang = (ImageView) view_xuetang.findViewById(R.id.iv_up_info_two);
+        iv_up_info_two_xuetang.setVisibility(View.GONE);
+        TextView tv_up_result_three_xuetang = (TextView) view_xuetang.findViewById(R.id.tv_up_result_three);
+        ImageView iv_up_info_three_xuetang = (ImageView) view_xuetang.findViewById(R.id.iv_up_info_three);
+        iv_up_info_three_xuetang.setVisibility(View.GONE);
+        TextView tv_down_result_xuetang = (TextView) view_xuetang.findViewById(R.id.tv_down_result);
+        ImageView iv_down_info_xuetang = (ImageView) view_xuetang.findViewById(R.id.iv_down_info);
+        iv_down_info_xuetang.setVisibility(View.GONE);
+        TextView tv_down_result_two_xuetang = (TextView) view_xuetang.findViewById(R.id.tv_down_result_two);
+        ImageView iv_down_info_two_xuetang = (ImageView) view_xuetang.findViewById(R.id.iv_down_info_two);
+        iv_down_info_two_xuetang.setVisibility(View.GONE);
+        TextView tv_down_result_three_xuetang = (TextView) view_xuetang.findViewById(R.id.tv_down_result_three);
+        ImageView iv_down_info_three_xuetang = (ImageView) view_xuetang.findViewById(R.id.iv_down_info_three);
+        iv_down_info_three_xuetang.setVisibility(View.GONE);
+        TextView tv_result_xuetang = (TextView) view_xuetang.findViewById(R.id.tv_result);
+        ImageView iv_info_xuetang = (ImageView) view_xuetang.findViewById(R.id.iv_info);
+        iv_info_xuetang.setVisibility(View.GONE);
         for (int i = 0; i < bses.size(); i++) {
             MyZijianInfo.BSES mBSES = bses.get(i);
-            View view = LayoutInflater.from(context).inflate(R.layout.item_myrecord_xuetang, null);
-            TextView tv_up_result = (TextView) view.findViewById(R.id.tv_up_result);
-            ImageView iv_up_info = (ImageView) view.findViewById(R.id.iv_up_info);
-            iv_up_info.setVisibility(View.GONE);
-            TextView tv_up_result_two = (TextView) view.findViewById(R.id.tv_up_result_two);
-            ImageView iv_up_info_two = (ImageView) view.findViewById(R.id.iv_up_info_two);
-            iv_up_info_two.setVisibility(View.GONE);
-            TextView tv_up_result_three = (TextView) view.findViewById(R.id.tv_up_result_three);
-            ImageView iv_up_info_three = (ImageView) view.findViewById(R.id.iv_up_info_three);
-            iv_up_info_three.setVisibility(View.GONE);
-            TextView tv_down_result = (TextView) view.findViewById(R.id.tv_down_result);
-            ImageView iv_down_info = (ImageView) view.findViewById(R.id.iv_down_info);
-            iv_down_info.setVisibility(View.GONE);
-            TextView tv_down_result_two = (TextView) view.findViewById(R.id.tv_down_result_two);
-            ImageView iv_down_info_two = (ImageView) view.findViewById(R.id.iv_down_info_two);
-            iv_down_info_two.setVisibility(View.GONE);
-            TextView tv_down_result_three = (TextView) view.findViewById(R.id.tv_down_result_three);
-            ImageView iv_down_info_three = (ImageView) view.findViewById(R.id.iv_down_info_three);
-            iv_down_info_three.setVisibility(View.GONE);
-            TextView tv_result = (TextView) view.findViewById(R.id.tv_result);
-            ImageView iv_info = (ImageView) view.findViewById(R.id.iv_info);
-            iv_info.setVisibility(View.GONE);
             int type = mBSES.getBloodSugarType();
-            switch (type){
+            switch (type) {
                 case Constant.TYPE_KONGFU:
-                    tv_up_result.setText(mBSES.getBloodSugar()+"");
-                    setXTivInfo(mBSES,type,iv_up_info);
+                    tv_up_result_xuetang.setText(mBSES.getBloodSugar() + "");
+                    setXTivInfo(mBSES, type, iv_up_info_xuetang);
                     break;
                 case Constant.TYPE_ZAOCANHOU:
-                    tv_up_result_two.setText(mBSES.getBloodSugar()+"");
-                    setXTivInfo(mBSES, type, iv_up_info_two);
+                    tv_up_result_two_xuetang.setText(mBSES.getBloodSugar() + "");
+                    setXTivInfo(mBSES, type, iv_up_info_two_xuetang);
                     break;
                 case Constant.TYPE_WUCANQIAN:
-                    tv_up_result_three.setText(mBSES.getBloodSugar()+"");
-                    setXTivInfo(mBSES, type, iv_up_info_three);
+                    tv_up_result_three_xuetang.setText(mBSES.getBloodSugar() + "");
+                    setXTivInfo(mBSES, type, iv_up_info_three_xuetang);
                     break;
                 case Constant.TYPE_WUCANHOU:
-                    tv_down_result.setText(mBSES.getBloodSugar()+"");
-                    setXTivInfo(mBSES, type, iv_down_info);
+                    tv_down_result_xuetang.setText(mBSES.getBloodSugar() + "");
+                    setXTivInfo(mBSES, type, iv_down_info_xuetang);
                     break;
                 case Constant.TYPE_WANCANQIAN:
-                    tv_down_result_two.setText(mBSES.getBloodSugar()+"");
-                    setXTivInfo(mBSES, type, iv_down_info_two);
+                    tv_down_result_two_xuetang.setText(mBSES.getBloodSugar() + "");
+                    setXTivInfo(mBSES, type, iv_down_info_two_xuetang);
                     break;
                 case Constant.TYPE_WANCANHOU:
-                    tv_down_result_three.setText(mBSES.getBloodSugar()+"");
-                    setXTivInfo(mBSES, type, iv_down_info_three);
+                    tv_down_result_three_xuetang.setText(mBSES.getBloodSugar() + "");
+                    setXTivInfo(mBSES, type, iv_down_info_three_xuetang);
                     break;
                 case Constant.TYPE_SHUIQIAN:
-                    tv_result.setText(mBSES.getBloodSugar()+"");
-                    setXTivInfo(mBSES, type, iv_info);
+                    tv_result_xuetang.setText(mBSES.getBloodSugar() + "");
+                    setXTivInfo(mBSES, type, iv_info_xuetang);
                     break;
             }
-
-            ll_xuetang.addView(view);
         }
+
         for (int i = 0; i < ecgs.size(); i++) {
             MyZijianInfo.ECGS mECGS = ecgs.get(i);
             View view = LayoutInflater.from(context).inflate(R.layout.item_myrecord_shengao, null);
@@ -232,12 +237,12 @@ public class MySelfCheckActivity extends BaseActivity {
             tv_name.setText(ecgs.get(i).getCheckTime() + "");
             tv_result.setText(ecgs.get(i).getEcg() + "");
             tv_range.setText(Constant.ECG_BEST_MIN + "-" + Constant.ECG_BEST_MAX);
-            if(mECGS.getEcg()<Constant.ECG_BEST_MIN){
+            if (mECGS.getEcg() < Constant.ECG_BEST_MIN) {
                 iv_info.setVisibility(View.VISIBLE);
                 iv_info.setImageResource(R.mipmap.bl_icon_lan);
             }
 
-            if(mECGS.getEcg()>Constant.ECG_BEST_MAX){
+            if (mECGS.getEcg() > Constant.ECG_BEST_MAX) {
                 iv_info.setVisibility(View.VISIBLE);
                 iv_info.setImageResource(R.mipmap.bl_icon_hong);
             }
@@ -268,12 +273,12 @@ public class MySelfCheckActivity extends BaseActivity {
             tv_name.setText(temperatures.get(i).getCheckTime() + "");
             tv_result.setText(temperatures.get(i).getTemperature() + "");
             tv_range.setText(Constant.temperature_BEST_MIN + "-" + Constant.temperature_BEST_MAX);
-            if(mTEMPERATURES.getTemperature()<Constant.temperature_BEST_MIN){
+            if (mTEMPERATURES.getTemperature() < Constant.temperature_BEST_MIN) {
                 iv_info.setVisibility(View.VISIBLE);
                 iv_info.setImageResource(R.mipmap.bl_icon_lan);
             }
 
-            if(mTEMPERATURES.getTemperature()>Constant.temperature_BEST_MAX){
+            if (mTEMPERATURES.getTemperature() > Constant.temperature_BEST_MAX) {
                 iv_info.setVisibility(View.VISIBLE);
                 iv_info.setImageResource(R.mipmap.bl_icon_hong);
             }
@@ -306,12 +311,12 @@ public class MySelfCheckActivity extends BaseActivity {
         }
     }
 
-    private void setXTivInfo(MyZijianInfo.BSES mBSES,int type,ImageView view) {
-        if(mBSES.getBloodSugar()<Constant.getBloodSugarMin(type)){
+    private void setXTivInfo(MyZijianInfo.BSES mBSES, int type, ImageView view) {
+        if (mBSES.getBloodSugar() < Constant.getBloodSugarMin(type)) {
             view.setVisibility(View.VISIBLE);
             view.setImageResource(R.mipmap.bl_icon_lan);
         }
-        if(mBSES.getBloodSugar()>Constant.getBloodSugarMax(type)){
+        if (mBSES.getBloodSugar() > Constant.getBloodSugarMax(type)) {
             view.setImageResource(R.mipmap.bl_icon_hong);
             view.setVisibility(View.VISIBLE);
         }
@@ -340,7 +345,7 @@ public class MySelfCheckActivity extends BaseActivity {
                     List<MyZijianInfo.BSES> _bses = info.getBses();
                     if (!ListUtils.isEmpty(_bses)) {
                         bses.addAll(_bses);
-                        Log.i("base",bses.size()+"");
+                        Log.i("base", bses.size() + "");
                     }
 
                     List<MyZijianInfo.ECGS> _ecgs = info.getEcgs();

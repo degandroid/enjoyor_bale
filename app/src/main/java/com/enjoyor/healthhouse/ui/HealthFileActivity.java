@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.HealthFileInfo;
+import com.enjoyor.healthhouse.bean.UserInfo;
 import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.custom.XListView;
 import com.enjoyor.healthhouse.net.ApiMessage;
@@ -84,25 +85,31 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
     private TextView tv_all;
 
     private String address;
+    private UserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_healthfile);
         ButterKnife.bind(this);
-        if(getIntent().hasExtra("address")){
+
+        userInfo = MyApplication.getInstance().getDBHelper().getUser();
+        if (getIntent().hasExtra("address")) {
             address = getIntent().getStringExtra("address");
         }
         initHead();
-        if (StringUtils.isBlank(MyApplication.getInstance().getDBHelper().getUser().getUserName())) {
-            tv_username.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
-        } else {
-            tv_username.setText(MyApplication.getInstance().getDBHelper().getUser().getLoginName());
+
+        if (userInfo != null) {
+            if (!StringUtils.isBlank(userInfo.getUserName())) {
+                tv_username.setText(userInfo.getUserName());
+            } else {
+                tv_username.setText(userInfo.getLoginName());
+            }
+            if (!StringUtils.isBlank(userInfo.getHeadImg())) {
+                Glide.with(HealthFileActivity.this).load(UrlInterface.FILE_URL + "/" + userInfo.getHeadImg()).into(iv_userhead);
+            }
         }
-        if (!StringUtils.isBlank(MyApplication.getInstance().getDBHelper().getUser().getHeadImg())) {
-//            ImageLoader.getInstance().displayImage(MyApplication.getInstance().getDBHelper().getUser().getHeadImg(),iv_userhead,MyApplication.options);
-            Glide.with(HealthFileActivity.this).load(UrlInterface.FILE_URL + "/" + MyApplication.getInstance().getDBHelper().getUser().getHeadImg()).into(iv_userhead);
-        }
+
 
         getDate(count, select_edit, select_type);
     }
@@ -137,8 +144,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
     }
 
     private void getDate(int count, String compName, String type) {
-        long _userId = MyApplication.getInstance().getDBHelper().getUser().getUserId();
-        if (!StringUtils.isBlank(_userId + "")) {
+        if (!StringUtils.isBlank(userInfo.getUserId() + "")) {
             userId = MyApplication.getInstance().getDBHelper().getUser().getUserId() + "";
         }
         RequestParams params = new RequestParams();
@@ -404,7 +410,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(HealthFileActivity.this, MyNotesActivity.class);
-                        intent.putExtra("address",address);
+                        intent.putExtra("address", address);
                         intent.putExtra("recordId", healthFileList.get(position).getRecordId());
                         startActivity(intent);
                     }

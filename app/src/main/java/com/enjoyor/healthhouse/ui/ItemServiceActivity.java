@@ -539,11 +539,11 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
             case R.id.bt_jisuan:
                 if (getNumber() == 1) {
                     float a = Float.parseFloat(kaluli);
-                    DecimalFormat df = new DecimalFormat("###.000");
+                    DecimalFormat df = new DecimalFormat("0.000");
                     et_jiaoer.setText(df.format(a * 4.184));
                 } else if (getNumber() == 2) {
                     float a = Float.parseFloat(jiaoer);
-                    DecimalFormat df = new DecimalFormat("###.000");
+                    DecimalFormat df = new DecimalFormat("0.000");
                     et_kaluli.setText(df.format(a / 4.184));
                 }
                 break;

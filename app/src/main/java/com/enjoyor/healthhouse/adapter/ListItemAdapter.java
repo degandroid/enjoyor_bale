@@ -2,6 +2,7 @@ package com.enjoyor.healthhouse.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -76,6 +77,8 @@ public class ListItemAdapter extends BaseAdapter {
 		if (imageUrls == null || imageUrls.size() == 0) { // 没有图片资源就隐藏GridView
 			holder.gridview.setVisibility(View.GONE);
 		} else {
+			holder.gridview.setVisibility(View.VISIBLE);
+			Log.i("gridview",imageUrls.toString());
 			holder.gridview.setAdapter(new NoScrollGridAdapter(mContext, imageUrls));
 		}
 		// 点击回帖九宫格，查看大图
