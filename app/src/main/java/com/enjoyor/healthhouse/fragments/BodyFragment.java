@@ -138,6 +138,7 @@ public class BodyFragment extends BaseFragment {
             return super.onJsAlert(view, url, message, result);
         }
     };
+
     private void drawpicture(final String json) {
         new Handler().postDelayed(new Runnable() {//异步传本地数据给网页
             @Override
@@ -162,30 +163,33 @@ public class BodyFragment extends BaseFragment {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
+                Log.d("json-----body------", json);
                 drawpicture(json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     BCAFragmentbean bcaFragmentbean = JsonHelper.getJson(apiMessage.Data, BCAFragmentbean.class);
                     cancel();
-                    initView(bcaFragmentbean);
-                    getInfo(bcaFragmentbean);
+                    if (bcaFragmentbean != null) {
+                        initView(bcaFragmentbean);
+                        getInfo(bcaFragmentbean);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
+                Log.d("wyy-----throwable-----", throwable.toString());
             }
         });
     }
 
+    //当前人体成分
     private void getInfo(BCAFragmentbean bcaFragmentbean) {
         if (bcaFragmentbean != null) {
             healthvalue1.setText(bcaFragmentbean.getBasicMetaBolismBest() + "");
             bp_fg_suggest.setText(bcaFragmentbean.getHealthSuggest() + "");
         }
-
-        RecordFat rf = bcaFragmentbean.getRecordFat();
+        RecordFat rf = bcaFragmentbean.getRecordFat();//人体成分分析
         if (rf != null) {
             left_zuobi_jirou.setText("脂肪量" + rf.getLeftArmFat() + "KG");
             left_zuobi_jirou.setText("肌肉量" + rf.getLeftArmMuscle() + "KG");
@@ -200,22 +204,24 @@ public class BodyFragment extends BaseFragment {
             bca_result.setText(rf.getWeightAdjust() + "");
             bca_zhifang_result.setText(rf.getFatAdjust() + "");
             bca_jirou_result.setText(rf.getMuscleAdjust() + "");
-            if (Integer.parseInt(rf.getResult()) == 0) {
-                bca_pinggu_result.setText("急瘦");
-            } else if (Integer.parseInt(rf.getResult()) == 1) {
-                bca_pinggu_result.setText("偏瘦");
-            } else if (Integer.parseInt(rf.getResult()) == 2) {
-                bca_pinggu_result.setText("标准");
-            } else if (Integer.parseInt(rf.getResult()) == 3) {
-                bca_pinggu_result.setText("超重");
-            } else if (Integer.parseInt(rf.getResult()) == 4) {
-                bca_pinggu_result.setText("肥胖");
-            } else if (Integer.parseInt(rf.getResult()) == 5) {
-                bca_pinggu_result.setText("急胖");
-            } else {
-                bca_pinggu_result.setText("");
+            if (!StringUtils.isEmpty(rf.getResult())) {
+                if (Integer.parseInt(rf.getResult()) == 0) {
+                    bca_pinggu_result.setText("急瘦");
+                } else if (Integer.parseInt(rf.getResult()) == 1) {
+                    bca_pinggu_result.setText("偏瘦");
+                } else if (Integer.parseInt(rf.getResult()) == 2) {
+                    bca_pinggu_result.setText("标准");
+                } else if (Integer.parseInt(rf.getResult()) == 3) {
+                    bca_pinggu_result.setText("超重");
+                } else if (Integer.parseInt(rf.getResult()) == 4) {
+                    bca_pinggu_result.setText("肥胖");
+                } else if (Integer.parseInt(rf.getResult()) == 5) {
+                    bca_pinggu_result.setText("急胖");
+                } else {
+                    bca_pinggu_result.setText("");
+                }
+                //bca_pinggu_result.setText(rf.getResult());
             }
-            //bca_pinggu_result.setText(rf.getResult());
         }
         RecordBMI rm = bcaFragmentbean.getRecordBMI();
         if (rm != null) {
@@ -226,7 +232,7 @@ public class BodyFragment extends BaseFragment {
 
     private void initView(BCAFragmentbean bcaFragmentbean) {
 
-        for (int i = 0; i < healthKey.length; i++) {
+        for (int i = 0; i < healthKey.length; i++) {//肥胖分析
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_one_layout, null);
             TextView tv_healthyname = (TextView) view.findViewById(R.id.tv_healthyname);
             tv_healthyname.setTextColor(getResources().getColor(R.color.white));
@@ -273,9 +279,9 @@ public class BodyFragment extends BaseFragment {
     }
 
     public ArrayList<String> setData(BCAFragmentbean bcaFragmentbean, int a) {
-        if (bcaFragmentbean == null) {
-            return null;
-        }
+//        if (bcaFragmentbean == null) {
+//            return null;
+//        }
 //        BCAFragmentbean.DataEntity.RecordFatEntity recordFat = bcaFragmentbean.getData().getRecordFat();
         RecordFat recordFat = bcaFragmentbean.getRecordFat();
         if (recordFat != null) {

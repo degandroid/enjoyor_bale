@@ -241,16 +241,6 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                 Log.d("wyy-----json----", throwable.toString());
             }
         });
-//        if (stringcom == null) {
-//            health_full_eat_sug.setText("暂无饮食建议");
-//        } else {
-//            health_full_eat_sug.setText(stringcom.toString());
-//        }
-//        if (stringrec == null) {
-//            health_full_sport_sug.setText("暂无运动建议");
-//        } else {
-//            health_full_sport_sug.setText(stringrec.toString());
-//        }
     }
 
     /**

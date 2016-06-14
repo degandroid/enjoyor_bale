@@ -58,8 +58,8 @@
                                 android:id="@+id/linearLayout"
                                 style="@style/Body_commo"
                                 android:layout_alignTop="@+id/imageView"
-                                android:layout_toLeftOf="@+id/imageView"
-                                android:layout_toStartOf="@+id/imageView"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="30dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -89,9 +89,9 @@
                             <LinearLayout
                                 android:id="@+id/linearLayout3"
                                 style="@style/Body_commo"
-                                android:layout_alignTop="@+id/imageView"
-                                android:layout_toEndOf="@+id/imageView"
-                                android:layout_toRightOf="@+id/imageView"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="50dp"
+                                android:layout_marginTop="25dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -153,9 +153,9 @@
 
                             <LinearLayout
                                 style="@style/Body_commo"
+                                android:layout_alignParentRight="true"
                                 android:layout_alignTop="@+id/linearLayout2"
-                                android:layout_toEndOf="@+id/imageView"
-                                android:layout_toRightOf="@+id/imageView"
+                                android:layout_marginRight="45dp"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
@@ -206,14 +206,14 @@
                                     android:layout_below="@+id/textView"
                                     android:layout_toEndOf="@+id/linearLayout"
                                     android:layout_toRightOf="@+id/linearLayout"
-                                    android:text="肌肉量27.8Kg" />
+                                    android:text="肌肉量" />
 
                                 <TextView
                                     android:id="@+id/qugan_zhifang"
                                     style="@style/Body_commo"
                                     android:layout_below="@+id/textView"
                                     android:layout_toRightOf="@id/qugan_jirou"
-                                    android:text="脂肪量6.6Kg" />
+                                    android:text="脂肪量" />
 
                             </LinearLayout>
 
