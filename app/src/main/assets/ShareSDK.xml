@@ -58,11 +58,12 @@
     <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
-    <SinaWeibo AppKey="1306882157" AppSecret="e57119768d038db758b2a5fdf3fca032" Enable="true" Id="6"
-        RedirectUrl="http://www.bailingju.com" ShareByAppClient="false" SortId="6" />
+    <SinaWeibo AppKey="2501389853" AppSecret="e4d79a7066fc46892ad165c6935d1767" Enable="true" Id="6"
+        RedirectUrl="http://www.bailingju.com/content/statichtml/aboutus.html"
+        ShareByAppClient="false" SortId="6" />
 
-    <TencentWeibo AppKey="1105455482" AppSecret="30lmbwr4lyr619js" Enable="false"
-        Id="7" RedirectUri="http://sharesdk.cn" SortId="7" />
+    <TencentWeibo AppKey="1105455482" AppSecret="30lmbwr4lyr619js" Enable="false" Id="7"
+        RedirectUri="http://sharesdk.cn" SortId="7" />
 
     <QZone AppId="1105455482" AppKey="30lmbwr4lyr619js" Enable="true" Id="5" SortId="5" />
 
@@ -78,7 +79,7 @@
 		审核的应用也可以执行分享，但是仅限于分享文字和图片，不能分享其他类型，
 		默认值为false。此外，微信收藏不支持此字段。
 	-->
-    <Wechat AppId="wxe61b218e01b19a4a" AppSecret="4aa1e827e770023c85be6da5050fc95a"
+    <Wechat AppId="wxe61b218e01b19a4a" AppSecret="2bc29ee3e7322e25193777dd8c68ee53"
         BypassApproval="false" Enable="true" Id="2" SortId="2" />
 
     <WechatMoments AppId="wxe61b218e01b19a4a" AppSecret="4aa1e827e770023c85be6da5050fc95a"

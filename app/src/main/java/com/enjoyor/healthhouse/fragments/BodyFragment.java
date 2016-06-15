@@ -91,7 +91,7 @@ public class BodyFragment extends BaseFragment {
     TextView bp_fg_suggest;
     @Bind(R.id.body_bo__web)
     WebView body_bo__web;
-    private String url = "http://115.29.15.59/Content/statichtml/oxygen.html";
+    private String url = "http://www.bailingju.com/Content/statichtml/oxygen.html";
 
     @Nullable
     @Override
@@ -152,7 +152,7 @@ public class BodyFragment extends BaseFragment {
         if (body_bo__web != null) {
             String info = StringUtils.centerString(json, "fatyear");
             Log.i("==================+++", info);
-            body_bo__web.loadUrl("javascript:show_fate('" + info + "')");   //web网页中已添加了function show(json)方法
+            body_bo__web.loadUrl("javascript:show_fate_white('" + info + "')");   //web网页中已添加了function show(json)方法
         }
     }
 

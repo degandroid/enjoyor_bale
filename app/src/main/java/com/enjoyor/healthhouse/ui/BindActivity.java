@@ -56,6 +56,7 @@ public class BindActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bind_ac_layout);
+//        setImmerseLayout(findViewById(R.id.navigation));
         ButterKnife.bind(this);
         initCode();
         initView();
@@ -140,7 +141,7 @@ public class BindActivity extends BaseActivity implements View.OnClickListener {
     //获取第三方绑定用户信息
     private void accessInfo() {
         RequestParams params = new RequestParams();
-        params.add("accId", accId +"");
+        params.add("accId", accId + "");
         AsyncHttpUtil.get(UrlInterface.Get_Thhird_LoginInfo_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {

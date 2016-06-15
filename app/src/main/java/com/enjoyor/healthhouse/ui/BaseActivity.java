@@ -15,10 +15,14 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,17 +44,13 @@ public class BaseActivity extends AppCompatActivity {
     // 屏幕方向
     private int mOrientation;
     private static long trigleCancel;
-
     private Dialog dialog = null;
 
-//    //声明判断网络是否连接成功的接受者对象
-//    private JudgeNetIsConnectedReceiver judgeNetIsConnectedReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppManagerUtil.addActivity(BaseActivity.this);
-//        this.judgeNetIsConnectedReceiver = new JudgeNetIsConnectedReceiver();
         fakeX509TrustManager.allowAllSSL();
     }
 
@@ -59,16 +59,12 @@ public class BaseActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onResume();
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-//        this.registerReceiver(judgeNetIsConnectedReceiver, intentFilter);
     }
 
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
-//        if (this.judgeNetIsConnectedReceiver != null) {
-//            this.unregisterReceiver(judgeNetIsConnectedReceiver);
-//        }
     }
 
     /**
@@ -269,7 +265,8 @@ public class BaseActivity extends AppCompatActivity {
     public void setTitleBar(TextView view, int id) {
         view.setText(id);
     }
-    public void dialog(Context context,String body){
+
+    public void dialog(Context context, String body) {
         dialog = new AlertDialog.Builder(context).create();
         dialog.show();
         dialog.getWindow().setContentView(R.layout.dialog_custom);
@@ -278,7 +275,8 @@ public class BaseActivity extends AppCompatActivity {
         LinearLayout ll_button = (LinearLayout) dialog.findViewById(R.id.ll_button);
         ll_button.setVisibility(View.GONE);
     }
-    public void dialog(Context context,String body,String left_info,String right_info,View.OnClickListener left,View.OnClickListener right){
+
+    public void dialog(Context context, String body, String left_info, String right_info, View.OnClickListener left, View.OnClickListener right) {
         dialog = new AlertDialog.Builder(context).create();
         dialog.show();
         dialog.getWindow().setContentView(R.layout.dialog_custom);
@@ -292,14 +290,13 @@ public class BaseActivity extends AppCompatActivity {
         tv_right.setOnClickListener(right);
         tv_right.setText(right_info);
     }
-    public void disappear(){
+
+    public void disappear() {
         dialog.cancel();
     }
 
-    public boolean isLogin(Context context)
-    {
-        if(BaseDate.getSessionId(context)==null)
-        {
+    public boolean isLogin(Context context) {
+        if (BaseDate.getSessionId(context) == null) {
             dialog(context, "亲,您还未登录，是否立即登录", "取消", "确定", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -308,12 +305,36 @@ public class BaseActivity extends AppCompatActivity {
             }, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(BaseActivity.this,LoginActivity.class);
+                    Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
             });
             return false;
         }
         return true;
+    }
+
+    //动态加载数据对话框的方法
+    public static Dialog createLoadingDialog(Context context, String msg) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
+        LinearLayout layout = (LinearLayout) v.findViewById(R.id.dialog_view);// 加载布局
+        // main.xml中的ImageView
+        ImageView spaceshipImage = (ImageView) v.findViewById(R.id.img);
+        TextView tipTextView = (TextView) v.findViewById(R.id.tipTextView);// 提示文字
+        // 加载动画
+        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(
+                context, R.anim.loading_animation);
+        // 使用ImageView显示动画
+        spaceshipImage.startAnimation(hyperspaceJumpAnimation);
+        tipTextView.setText(msg);// 设置加载信息
+
+        Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);// 创建自定义样式dialog
+
+        loadingDialog.setCancelable(true);// 不可以用“返回键”取消
+        loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT));// 设置布局
+        return loadingDialog;
     }
 }

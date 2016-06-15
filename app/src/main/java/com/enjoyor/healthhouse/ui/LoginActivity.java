@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,7 +55,6 @@ import cn.sharesdk.wechat.utils.WechatClientNotExistException;
 public class LoginActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener, Handler.Callback {
     @Bind(R.id.container)
     CoordinatorLayout container;
-
     @Bind(R.id.navigation_name)
     TextView navigation_name;
     @Bind(R.id.navigation_back)
@@ -87,6 +87,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public static final String FROM_BPINPU_HISTORY = "FROM_BPINPU_HISTORY";
     public static final String FROM_SUISHOUJI = "FROM_SUISHOUJI";
     private boolean isFromBpInputActivity = false;
+    Dialog dialog;
+    Dialog dialog_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_login);
         setImmerseLayout(findViewById(R.id.navigation));
         ButterKnife.bind(this);
+        dialog = createLoadingDialog(LoginActivity.this, "正在跳转...");
+        dialog_login = createLoadingDialog(LoginActivity.this, "正在登陆...");
         if (getIntent().hasExtra(FROM_BPINPUTACTIVITY)) {
             isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPUTACTIVITY, false);
         }
@@ -132,6 +136,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             case R.id.bt_login:
                 if (isCorrect()) {
+                    dialog_login.show();
                     initData();
                 }
                 break;
@@ -186,7 +191,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             Snackbar.make(container, "密码不能为空", Snackbar.LENGTH_SHORT).show();
             et_password.requestFocus();
             return false;
-        }else if(!MatcherUtil.isPWD(password)){
+        } else if (!MatcherUtil.isPWD(password)) {
             Snackbar.make(container, "请输入6-12位密码", Snackbar.LENGTH_SHORT).show();
             et_password.requestFocus();
             return false;
@@ -196,7 +201,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
 
     private void initData() {
-
         RequestParams params = new RequestParams();
         params.add("origin", String.valueOf("AndroidApp"));
         params.add("userLoginName", phoneNumber);
@@ -218,6 +222,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         AppManagerUtil.getAppManager().finishAllActivity();
                         Intent intent = new Intent(LoginActivity.this, MainTabActivity.class);
                         startActivity(intent);
+                        dialog_login.dismiss();
                     }
                 } else {
                     dialog(LoginActivity.this, "用户名或者密码错误", "取消", "重新输入", new View.OnClickListener() {
@@ -233,6 +238,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             et_password.requestFocus();
                         }
                     });
+                    dialog_login.dismiss();
                 }
             }
 
@@ -292,10 +298,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      */
     @Override
     public boolean handleMessage(Message msg) {
+        dialog.show();
         int what = msg.what;
         switch (what) {
             case 0:
                 Toast.makeText(LoginActivity.this, "分享已取消", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
                 break;
             case 1:
                 String failtext;
@@ -313,9 +321,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 } else {
                     failtext = "分享失败";
                 }
+                dialog.dismiss();
                 break;
             case 2:
-                progress();
                 Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
                 String json = JSON.toJSONString(((Platform) msg.obj).getDb());
                 ((Platform) msg.obj).removeAccount(true);
@@ -334,6 +342,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                     Intent intent_third = new Intent(LoginActivity.this, BindActivity.class);
                                     intent_third.putExtra("accountid", thirdLoginInfo.getUserInfo().getAccountId());
                                     startActivity(intent_third);
+                                    dialog.dismiss();
                                 } else {
                                     BaseDate.setSessionId(LoginActivity.this, thirdLoginInfo.getUserInfo().getAccountId());
                                     if (StringUtils.isEmpty(thirdLoginInfo.getUserInfo().getHeadImg())) {
@@ -344,6 +353,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                     Intent intent_success = new Intent(LoginActivity.this, MainTabActivity.class);
                                     Log.d("wyy--database-", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
                                     startActivity(intent_success);
+                                    dialog.dismiss();
                                 }
                             }
                             Log.d("wyy------json1----", json1);
@@ -354,7 +364,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                         }
                     });
-                    cancel();
                 }
 
                 break;

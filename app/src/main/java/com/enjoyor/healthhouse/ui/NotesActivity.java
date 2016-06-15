@@ -98,12 +98,13 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     String address;
     String street = "";
     String streetNumber = "";
-
+Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
         ButterKnife.bind(this);
+        dialog = createLoadingDialog(NotesActivity.this,"正在上传随手记，请耐心等待...");
         initView();
         initEvent();
         list = result;
@@ -190,8 +191,8 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.notes_commit://点击提交按钮事件事件
                 if (isLogin(this)) {
-                    progress();
                     if (notes_et.getText().toString().trim().length() != 0 || !mFile.isEmpty()) {
+                        dialog.show();
                         if (mFile != null && !mFile.isEmpty()) {
                             Log.d("wyy-----json---", mFile.toString());
                             RequestParams param1 = new RequestParams();
@@ -220,7 +221,6 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                                         savenotes();
                                     }
                                 }
-
                                 @Override
                                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                                 }
@@ -265,7 +265,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                     ApiMessage api = ApiMessage.FromJson(json);
                     if (api.Data.equals(true + "")) {
                         Toast.makeText(NotesActivity.this, "文件上传成功", Toast.LENGTH_LONG).show();
-                        cancel();
+                        dialog.dismiss();
                         finish();
                     } else {
                         Toast.makeText(NotesActivity.this, "文件上传失败", Toast.LENGTH_LONG).show();

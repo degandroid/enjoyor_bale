@@ -13,6 +13,7 @@ import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.utils.AppManagerUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,7 +25,6 @@ import butterknife.ButterKnife;
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.container)
     CoordinatorLayout container;
-
     @Bind(R.id.re_back)
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
@@ -59,6 +59,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         setting_ac_version.setOnClickListener(this);
         setting_ac_about.setOnClickListener(this);
         setting_ac_speak.setOnClickListener(this);
+        setting_ac_cach.setOnClickListener(this);
     }
 
     private void initView() {
@@ -73,14 +74,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.setting_exit:
-                if(BaseDate.getSessionId(SettingActivity.this)!=null){
+                if (BaseDate.getSessionId(SettingActivity.this) != null) {
                     if (MyApplication.getInstance().getDBHelper().clearUser()) {
                         Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }
                     AppManagerUtil.getAppManager().finishAllActivity();
-                }else{
+                } else {
                     Snackbar.make(container, "您还未登陆，请先登陆", Snackbar.LENGTH_SHORT).show();
                 }
                 break;
@@ -95,6 +96,11 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.setting_ac_speak:
                 Intent intent_agreement = new Intent(this, AgreeMentActivity.class);
                 startActivity(intent_agreement);
+                break;
+            case R.id.setting_ac_cach:
+                ImageLoader.getInstance().clearDiskCache();
+                ImageLoader.getInstance().clearMemoryCache();
+                Snackbar.make(container, "缓存清理干净了哦！手机棒棒哒！", Snackbar.LENGTH_SHORT).show();
                 break;
         }
     }

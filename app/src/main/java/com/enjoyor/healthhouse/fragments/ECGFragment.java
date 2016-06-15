@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -185,6 +184,8 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
         switch (key) {
             case R.id.button:
                 Intent intent_go = new Intent(getActivity(), PhysicallocationActivity.class);
+//                intent_go.putExtra("latitude", latitude);
+//                intent_go.putExtra("longitude", longitude);
                 startActivity(intent_go);
                 break;
             case R.id.bp_fg_history:
