@@ -354,7 +354,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
 
     private void selectDisplay(int which) {
         if (1 == which) {
-            bt_list.setBackgroundResource(R.mipmap.bl_bg_selected);
+            bt_list.setBackgroundResource(R.drawable.bl_bg_left_select);
             bt_list.setTextColor(getResources().getColor(R.color.colorWhite));
             bt_curve.setTextColor(getResources().getColor(R.color.textcolor_body));
             bt_curve.setBackgroundResource(R.drawable.white_null);
@@ -368,7 +368,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                 ll_history_shengao.setVisibility(View.VISIBLE);
             }
         } else {
-            bt_curve.setBackgroundResource(R.mipmap.bl_bg_selected);
+            bt_curve.setBackgroundResource(R.drawable.bl_bg_right_select);
             bt_curve.setTextColor(getResources().getColor(R.color.colorWhite));
             bt_list.setTextColor(getResources().getColor(R.color.textcolor_body));
             bt_list.setBackgroundResource(R.drawable.white_null);

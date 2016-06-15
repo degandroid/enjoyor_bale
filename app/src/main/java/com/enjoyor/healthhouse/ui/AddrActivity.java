@@ -2,6 +2,8 @@ package com.enjoyor.healthhouse.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,6 +37,9 @@ import butterknife.ButterKnife;
  * Created by YuanYuan on 2016/5/25.
  */
 public class AddrActivity extends BaseActivity implements View.OnClickListener {
+    @Bind(R.id.container)
+    CoordinatorLayout container;
+
     @Bind(R.id.re_back)
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
@@ -97,7 +102,7 @@ public class AddrActivity extends BaseActivity implements View.OnClickListener {
                 Log.d("wyy---onTextChanged", s.length() + "");
                 addr_tv.setText(s.length() + "/50");
                 if (s.length() > 50) {
-                    Toast.makeText(AddrActivity.this, "输入字符长度超过限制", Toast.LENGTH_LONG).show();
+                    Snackbar.make(container, "输入字符长度超过限制", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
@@ -140,8 +145,9 @@ public class AddrActivity extends BaseActivity implements View.OnClickListener {
                     });
 
                 } else {
-                    Toast.makeText(AddrActivity.this, "地址不能为空", Toast.LENGTH_LONG).show();
-                    addr_et.setError("地址不能为空");
+//                    Toast.makeText(AddrActivity.this, "地址不能为空", Toast.LENGTH_LONG).show();
+//                    addr_et.setError("地址不能为空");
+                    Snackbar.make(container, "地址不能为空", Snackbar.LENGTH_SHORT).show();
                 }
 
                 break;

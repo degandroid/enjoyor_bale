@@ -15,6 +15,7 @@ import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.MatcherUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -115,8 +116,16 @@ public class NewPasswordActivity extends BaseActivity implements View.OnClickLis
             Snackbar.make(container, "新密码不能为空", Snackbar.LENGTH_SHORT).show();
             et_newpassword.requestFocus();
             return false;
+        }else if(MatcherUtil.isPWD(newPwd)){
+            Snackbar.make(container, "请输入6-12位的密码", Snackbar.LENGTH_SHORT).show();
+            et_newpassword.requestFocus();
+            return false;
         }else if (StringUtils.isBlank(newAgainPwd)) {
             Snackbar.make(container, "请确认密码", Snackbar.LENGTH_SHORT).show();
+            et_again_newpassword.requestFocus();
+            return false;
+        }else if(MatcherUtil.isPWD(newAgainPwd)){
+            Snackbar.make(container, "请输入6-12位的密码", Snackbar.LENGTH_SHORT).show();
             et_again_newpassword.requestFocus();
             return false;
         }else if(!newPwd.equals(newAgainPwd)){

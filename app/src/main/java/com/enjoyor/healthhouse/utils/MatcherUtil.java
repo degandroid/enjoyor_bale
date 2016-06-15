@@ -218,4 +218,14 @@ public class MatcherUtil {
 		hashtable.put("91", "国外");
 		return hashtable;
 	}
+
+
+	public static boolean isPWD(String pwd){
+		if(pwd.length()<6){
+			return false;
+		}else if(pwd.length()>12){
+			return false;
+		}
+		return true;
+	}
 }

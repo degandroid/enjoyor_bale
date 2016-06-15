@@ -5,7 +5,15 @@
     android:orientation="vertical">
 
     <include layout="@layout/navigationbar_layout"></include>
-
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -182,4 +190,6 @@
         android:layout_marginTop="70px"
         android:background="@color/colorGreenYellow"
         android:text="退出登录" />
+    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

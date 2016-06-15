@@ -49,7 +49,7 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        progress();
+
         View view = inflater.inflate(R.layout.communtity_fg_layout, null);
         ButterKnife.bind(this, view);
         initData();//获取资讯文章分类
@@ -66,10 +66,13 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
         cancel();
     }
 
+
     private void initDefaultFragment() {
         TextView textView = (TextView) communtity_group.getChildAt(0).findViewById(R.id.text);
         ImageView imageView = (ImageView) communtity_group.getChildAt(0).findViewById(R.id.img);
-        textView.setTextColor(getResources().getColor(R.color.colorGreenYellow));
+        if(isAdded()){
+            textView.setTextColor(getResources().getColor(R.color.colorGreenYellow));
+        }
         imageView.setVisibility(View.VISIBLE);
         communtity_viewpager.setCurrentItem(0);
     }
@@ -146,12 +149,14 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
                     List<InfoClass> _list = JsonHelper.getArrayJson(apimessage.Data, InfoClass.class);
                     listInfo.addAll(_list);
                     if (listInfo.size() > 0) {
-                        initTab();
-                        defaultGroup();
-                        addFragment();
-                        initViewPager();
-                        initDefaultFragment();
-                        initClick();
+                        if(isAdded()){
+                            initTab();
+                            defaultGroup();
+                            addFragment();
+                            initViewPager();
+                            initDefaultFragment();
+                            initClick();
+                        }
                         cancel();
                     } else {
                         Toast.makeText(getActivity(), "暂无更多数据", Toast.LENGTH_LONG).show();

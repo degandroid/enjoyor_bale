@@ -3,7 +3,8 @@ package com.enjoyor.healthhouse.ui;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
+import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.url.UrlInterface;
@@ -34,6 +36,9 @@ import butterknife.ButterKnife;
  * 个人中心我的手机页面
  */
 public class MyPhoneActivity extends BaseActivity implements View.OnClickListener {
+    @Bind(R.id.container)
+    CoordinatorLayout container;
+
     @Bind(R.id.myphone_et_num)
     EditText myphone_et_num;
     @Bind(R.id.myphone_accesnum)
@@ -107,23 +112,54 @@ public class MyPhoneActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.myphone_accesnum:
-                sendMsg();
-                sendMsgtoPhone();
+                if(BaseDate.getSessionId(MyPhoneActivity.this)!=null){
+                    sendMsg();
+                    sendMsgtoPhone();
+                }else{
+                    Snackbar.make(container, "原手机号不存在", Snackbar.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.myphone_acces:
                 sendNewMsg();
                 sendMsgtoNewPhone();
                 break;
             case R.id.myphone_save:
-                savePhone();
+                if(isCorrert()){
+                    savePhone();
+                }
+
                 break;
         }
     }
 
+    private boolean isCorrert(){
+        String oldDode = myphone_et_num.getText().toString().trim();
+        String phone = myphone_et_newphone.getText().toString().trim();
+        String newDode = myphone_et_againnum.getText().toString().trim();
+
+        if(StringUtils.isBlank(oldDode)){
+            Snackbar.make(container, "原手机验证码不能为空", Snackbar.LENGTH_SHORT).show();
+            myphone_et_num.requestFocus();
+            return false;
+        }else if(StringUtils.isBlank(phone)){
+            Snackbar.make(container, "手机号不能为空", Snackbar.LENGTH_SHORT).show();
+            myphone_et_newphone.requestFocus();
+            return false;
+        }else if(!MatcherUtil.isMobileNumber(phone)){
+            Snackbar.make(container, "请输入正确的手机号", Snackbar.LENGTH_SHORT).show();
+            myphone_et_newphone.requestFocus();
+            return false;
+        }else if(StringUtils.isBlank(newDode)){
+            Snackbar.make(container, "新手机验证码不能为空", Snackbar.LENGTH_SHORT).show();
+            myphone_et_againnum.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
     private void savePhone() {
-        if (!StringUtils.isBlank(myphone_et_num.getText().toString().trim())) {
-            if (!StringUtils.isBlank(myphone_et_newphone.getText().toString().trim()) && MatcherUtil.isMobileNumber(myphone_et_newphone.getText().toString().trim())) {
-                if (!StringUtils.isBlank(myphone_et_againnum.getText().toString().trim())) {
+
                     RequestParams params2 = new RequestParams();
                     params2.add("oldphone", "" + MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber());
                     params2.add("newphone", "" + myphone_et_newphone.getText().toString().trim());
@@ -148,16 +184,7 @@ public class MyPhoneActivity extends BaseActivity implements View.OnClickListene
 
                         }
                     });
-                } else {
-                    Toast.makeText(MyPhoneActivity.this, "新手机验证码不能为空，请重新输入", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                Toast.makeText(MyPhoneActivity.this, "您说的手机号码不正确。请重新输入", Toast.LENGTH_LONG).show();
-            }
 
-        } else {
-            Toast.makeText(MyPhoneActivity.this, "请输入原手机验证码", Toast.LENGTH_LONG).show();
-        }
     }
 
     private void sendMsgtoNewPhone() {

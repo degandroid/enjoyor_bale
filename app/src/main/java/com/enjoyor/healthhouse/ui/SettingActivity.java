@@ -2,7 +2,8 @@ package com.enjoyor.healthhouse.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
+import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.utils.AppManagerUtil;
 
 import butterknife.Bind;
@@ -20,6 +22,9 @@ import butterknife.ButterKnife;
  * 个人中心设置页面
  */
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
+    @Bind(R.id.container)
+    CoordinatorLayout container;
+
     @Bind(R.id.re_back)
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
@@ -68,12 +73,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.setting_exit:
-                if (MyApplication.getInstance().getDBHelper().clearUser()) {
-                    Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                if(BaseDate.getSessionId(SettingActivity.this)!=null){
+                    if (MyApplication.getInstance().getDBHelper().clearUser()) {
+                        Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    AppManagerUtil.getAppManager().finishAllActivity();
+                }else{
+                    Snackbar.make(container, "您还未登陆，请先登陆", Snackbar.LENGTH_SHORT).show();
                 }
-                AppManagerUtil.getAppManager().finishAllActivity();
                 break;
             case R.id.setting_ac_version:
                 Intent intent_version = new Intent(SettingActivity.this, VersionActivity.class);

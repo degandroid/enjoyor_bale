@@ -31,7 +31,7 @@ public class RecordUtils {
 
         _list.add(new ItemMyRecord("血糖", info.getBloodSugar(), Constant.getBloodSugarMin(info.getBloodSugarType()), Constant.getBloodSugarMax(info.getBloodSugarType())));
                 _list.add(new ItemMyRecord("尿酸（umol/L）", info.getUs(), 0.2d, 0.42d));
-        _list.add(new ItemMyRecord("总胆固醇（mmol/L）",info.getChol(),0d,0.52d));
+        _list.add(new ItemMyRecord("总胆固醇（mmol/L）",info.getChol(),0d,5.2d));
 
         _list.add(new ItemMyRecord("体温（℃）",info.getTemperature(),36d,37d));
         _list.add(new ItemMyRecord("心率（ci/分钟）",info.getEcg(),60d,100d));

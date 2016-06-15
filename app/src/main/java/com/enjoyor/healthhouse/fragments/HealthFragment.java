@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.HealthRecord;
 import com.enjoyor.healthhouse.bean.HealthSuggest;
-import com.enjoyor.healthhouse.bean.UserInfo;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
@@ -114,18 +112,22 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        progress();
+
         View view = inflater.inflate(R.layout.health_fg_layout, null);
         ButterKnife.bind(this, view);
+        re_back.setOnClickListener(this);
+        button.setOnClickListener(this);
+
         main_tab = (FrameLayout) getActivity().findViewById(R.id.main_tab);
         re_back.setVisibility(View.INVISIBLE);
         navigation_name.setText("健康评估");
         img_right.setVisibility(View.VISIBLE);
         initText();
         initImageTab();
-        initEvent();
+
         if (isLogin(getActivity())) {
             isData();
+            initEvent();
         }
         return view;
     }
@@ -157,6 +159,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
      * 用户登录之后判断是否有数据，根据是否有数据加载布局
      */
     private void isData() {
+        progress();
         RequestParams params = new RequestParams();
         params.add("userId", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
         AsyncHttpUtil.get(UrlInterface.AccessHealInfo_URL, params, new AsyncHttpResponseHandler() {
@@ -183,7 +186,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
+                cancel();
             }
         });
     }
@@ -277,14 +280,13 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
 
 
     private void initEvent() {
-        re_back.setOnClickListener(this);
-        button.setOnClickListener(this);
+
         health_full_tab1.setOnClickListener(this);
         health_full_tab2.setOnClickListener(this);
         health_full_tab3.setOnClickListener(this);
         health_full_tab4.setOnClickListener(this);
         health_full_tab5.setOnClickListener(this);
-        img_right.setOnClickListener(this);
+        img_right.setOnClickListener(this);//历史
     }
 
 

@@ -182,6 +182,10 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             Snackbar.make(container, "密码不能为空", Snackbar.LENGTH_SHORT).show();
             regist_password.requestFocus();
             return false;
+        }else if (MatcherUtil.isPWD(password)) {
+            Snackbar.make(container, "请输入6-12位的密码", Snackbar.LENGTH_SHORT).show();
+            regist_password.requestFocus();
+            return false;
         } else if (StringUtils.isBlank(yanzheng)) {
             Snackbar.make(container, "请输入验证码", Snackbar.LENGTH_SHORT).show();
             regist_tv_yanzheng.requestFocus();

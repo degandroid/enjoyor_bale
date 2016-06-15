@@ -109,13 +109,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         camera = (Button) view1.findViewById(R.id.camera);
         cancle = (Button) view1.findViewById(R.id.cancle);
         if (BaseDate.getSessionId(getActivity()) != null) {
-            Log.d("wyy====logo===", MyApplication.getInstance().getDBHelper().getUser().getHeadImg());
             String path = MyApplication.getInstance().getDBHelper().getUser().getHeadImg();
             if (path != null && !path.startsWith("http://") && !path.startsWith("https://")) {
                 path = UrlInterface.FILE_URL + path;
             }
             ImageLoader.getInstance().displayImage(path, mine_fg_logo, MyApplication.options);
-            Log.d("wyy---path---====", MyApplication.getInstance().getDBHelper().getUser().getHeadImg());
             mine_fg_login.setVisibility(View.GONE);
             mine_fg_regist.setVisibility(View.GONE);
             mine_fg_name.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());

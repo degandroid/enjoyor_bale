@@ -17,9 +17,9 @@
         <Button
             android:id="@+id/bt_list"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@mipmap/bl_bg_selected"
+            android:background="@drawable/bl_bg_left_select"
             android:gravity="center"
             android:text="列表"
             android:textColor="@color/colorWhite" />
@@ -27,7 +27,7 @@
         <Button
             android:id="@+id/bt_curve"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/white_null"
             android:gravity="center"

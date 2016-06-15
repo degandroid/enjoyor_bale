@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,7 +39,6 @@ import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.sharesdk.alipay.share.Alipay;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -46,13 +46,15 @@ import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.tencent.qq.QQClientNotExistException;
 import cn.sharesdk.wechat.friends.Wechat;
-import cn.sharesdk.wechat.utils.WXWebpageObject;
 import cn.sharesdk.wechat.utils.WechatClientNotExistException;
 
 /**
  * Created by Administrator on 2016/5/9.
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener, Handler.Callback {
+    @Bind(R.id.container)
+    CoordinatorLayout container;
+
     @Bind(R.id.navigation_name)
     TextView navigation_name;
     @Bind(R.id.navigation_back)
@@ -173,15 +175,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         password = et_password.getText().toString().trim();
 
         if (StringUtils.isBlank(phoneNumber)) {
-            Toast.makeText(LoginActivity.this, "手机号码不能为空", Toast.LENGTH_LONG).show();
+            Snackbar.make(container, "手机号码不能为空", Snackbar.LENGTH_SHORT).show();
             et_phonenumber.requestFocus();
             return false;
         } else if (!MatcherUtil.isMobileNumber(phoneNumber)) {
-            Toast.makeText(LoginActivity.this, "请输入真确的手机号", Toast.LENGTH_LONG).show();
+            Snackbar.make(container, "请输入正确的手机号", Snackbar.LENGTH_SHORT).show();
             et_phonenumber.requestFocus();
             return false;
         } else if (StringUtils.isBlank(password)) {
-            Toast.makeText(LoginActivity.this, "密码不能为空", Toast.LENGTH_LONG).show();
+            Snackbar.make(container, "密码不能为空", Snackbar.LENGTH_SHORT).show();
+            et_password.requestFocus();
+            return false;
+        }else if(!MatcherUtil.isPWD(password)){
+            Snackbar.make(container, "请输入6-12位密码", Snackbar.LENGTH_SHORT).show();
             et_password.requestFocus();
             return false;
         }

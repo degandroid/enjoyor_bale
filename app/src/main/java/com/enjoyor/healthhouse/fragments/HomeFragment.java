@@ -121,7 +121,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         initRoundIcon();
         lv_information.addHeaderView(headView);
         initArticle();
-        initListView();
+
         return view;
     }
 
@@ -176,7 +176,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     List<Article> _list = JsonHelper.getArrayJson(apiMessage.Data, Article.class);
+                    article.clear();
                     article.addAll(_list);
+                    initListView();
                 }
             }
 

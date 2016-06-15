@@ -6,12 +6,16 @@
     android:orientation="vertical">
 
     <include layout="@layout/navigationbar_layout"></include>
-
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@color/white">
 
         <RelativeLayout
@@ -180,16 +184,11 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginTop="60dp"
+                android:layout_marginBottom="50dp"
                 android:background="@color/colorGreenYellow"
                 android:text="保存" />
 
         </RelativeLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
