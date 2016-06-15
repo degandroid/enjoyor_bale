@@ -3,6 +3,7 @@ package com.enjoyor.healthhouse.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -150,15 +151,6 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        String name =data_name_tv.getText().toString().trim();
-        if(StringUtils.isBlank(name)){
-            name = "";
-        }
-        setResult(VALUE_USERNAME, getIntent().putExtra("username", name));
-    }
 
     @Override
     protected void onDestroy() {
@@ -190,6 +182,21 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
             case 400:
                 name_addr_tv.setText(data.getStringExtra("addr"));
                 break;
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            String name =data_name_tv.getText().toString().trim();
+            if(StringUtils.isBlank(name)){
+                name = "";
+            }
+            setResult(VALUE_USERNAME, getIntent().putExtra("username", name));
+            finish();
+            return false;
+        }else {
+            return super.onKeyDown(keyCode, event);
         }
     }
 }
