@@ -348,7 +348,7 @@ android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/iv_image"
-                    android:text="时间端"
+                    android:text="时间段"
                     android:textSize="@dimen/textsize_smalltittle" />
 
                 <ImageView

@@ -288,7 +288,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         RequestParams params_xueya = new RequestParams();
         params_xueya.add("userId", userId);
         params_xueya.add("pageMethod", "2");
-        params_xueya.add("pageNum", _count + "");
+        params_xueya.add("pageNum", 1 + "");
         params_xueya.add("pageCount", (6*_count)+"");
         switch (fromWhere) {
             case Constant.FROM_XUEYA:
@@ -391,7 +391,6 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                     HistoryInfoModel historyInfoModel = JsonHelper.getJson(apiMessage.Data, HistoryInfoModel.class);
                     historyInfoLists.clear();
                     switch (fromWhere) {
-
                         case Constant.FROM_XUEYA:
                             List<HistoryInfoList> _list_xueya = historyInfoModel.getBplist();
                             _json_xueya = JSON.toJSONString(_list_xueya);

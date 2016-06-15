@@ -14,6 +14,7 @@ import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -52,6 +53,8 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.name_addr_tv)
     TextView name_addr_tv;
 
+
+    public static int VALUE_USERNAME = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +139,12 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
                 startActivityForResult(intent_addr, 400);
                 break;
             case R.id.re_back:
+                String name =data_name_tv.getText().toString().trim();
+                if(StringUtils.isBlank(name)){
+                    name = "";
+                }
+//                Intent intent = new Intent();
+                setResult(VALUE_USERNAME, getIntent().putExtra("username",name));
                 finish();
                 break;
         }

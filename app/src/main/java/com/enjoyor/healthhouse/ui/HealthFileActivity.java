@@ -105,12 +105,14 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
             } else {
                 tv_username.setText(userInfo.getLoginName());
             }
-            if (!StringUtils.isBlank(userInfo.getHeadImg())) {
-                Glide.with(HealthFileActivity.this).load(UrlInterface.FILE_URL + "/" + userInfo.getHeadImg()).into(iv_userhead);
             }
-        }
-
-
+            if (!StringUtils.isBlank(userInfo.getHeadImg())) {
+                String path = MyApplication.getInstance().getDBHelper().getUser().getHeadImg();
+                if (path != null && !path.startsWith("http://") && !path.startsWith("https://")) {
+                    path = UrlInterface.FILE_URL + path;
+                }
+                Glide.with(HealthFileActivity.this).load(path).into(iv_userhead);
+            }
         getDate(count, select_edit, select_type);
     }
 

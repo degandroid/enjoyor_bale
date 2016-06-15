@@ -369,50 +369,50 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             tv_right.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(BaseDate.getSessionId(BPInputActivity.this)!=null){
-                    switch (fromWhere) {
-                        case Constant.FROM_XUEYA:
-                            Intent intent_xueya = new Intent(context, HistoryActivity.class);
-                            intent_xueya.putExtra("fromWhere", Constant.FROM_XUEYA);
-                            startActivity(intent_xueya);
-                            break;
-                        case Constant.FROM_SHENGAO:
-                            Intent intent_shengao = new Intent(context, HistoryActivity.class);
-                            intent_shengao.putExtra("fromWhere", Constant.FROM_SHENGAO);
-                            startActivity(intent_shengao);
-                            break;
-                        case Constant.FROM_XUETANG:
-                            Intent intent_xuetang = new Intent(context, HistoryActivity.class);
-                            intent_xuetang.putExtra("fromWhere", Constant.FROM_XUETANG);
-                            startActivity(intent_xuetang);
-                            break;
-                        case Constant.FROM_XUEYANG:
-                            Intent intent_xueyang = new Intent(context, HistoryActivity.class);
-                            intent_xueyang.putExtra("fromWhere", Constant.FROM_XUEYANG);
-                            startActivity(intent_xueyang);
-                            break;
-                        case Constant.FROM_YAOWEI:
-                            Intent intent_yaowei = new Intent(context, HistoryActivity.class);
-                            intent_yaowei.putExtra("fromWhere", Constant.FROM_YAOWEI);
-                            startActivity(intent_yaowei);
-                            break;
-                        case Constant.FROM_TIZHONG:
-                            Intent intent_tizhong = new Intent(context, HistoryActivity.class);
-                            intent_tizhong.putExtra("fromWhere", Constant.FROM_TIZHONG);
-                            startActivity(intent_tizhong);
-                            break;
-                        case Constant.FROM_TIWEN:
-                            Intent intent_tiwen = new Intent(context, HistoryActivity.class);
-                            intent_tiwen.putExtra("fromWhere", Constant.FROM_TIWEN);
-                            startActivity(intent_tiwen);
-                            break;
-                        case Constant.FROM_XINDIAN:
-                            Intent intent_xindian = new Intent(context, HistoryActivity.class);
-                            intent_xindian.putExtra("fromWhere", Constant.FROM_XINDIAN);
-                            startActivity(intent_xindian);
-                            break;
-                    }
-                    }else{
+                    if (BaseDate.getSessionId(BPInputActivity.this) != null) {
+                        switch (fromWhere) {
+                            case Constant.FROM_XUEYA:
+                                Intent intent_xueya = new Intent(context, HistoryActivity.class);
+                                intent_xueya.putExtra("fromWhere", Constant.FROM_XUEYA);
+                                startActivity(intent_xueya);
+                                break;
+                            case Constant.FROM_SHENGAO:
+                                Intent intent_shengao = new Intent(context, HistoryActivity.class);
+                                intent_shengao.putExtra("fromWhere", Constant.FROM_SHENGAO);
+                                startActivity(intent_shengao);
+                                break;
+                            case Constant.FROM_XUETANG:
+                                Intent intent_xuetang = new Intent(context, HistoryActivity.class);
+                                intent_xuetang.putExtra("fromWhere", Constant.FROM_XUETANG);
+                                startActivity(intent_xuetang);
+                                break;
+                            case Constant.FROM_XUEYANG:
+                                Intent intent_xueyang = new Intent(context, HistoryActivity.class);
+                                intent_xueyang.putExtra("fromWhere", Constant.FROM_XUEYANG);
+                                startActivity(intent_xueyang);
+                                break;
+                            case Constant.FROM_YAOWEI:
+                                Intent intent_yaowei = new Intent(context, HistoryActivity.class);
+                                intent_yaowei.putExtra("fromWhere", Constant.FROM_YAOWEI);
+                                startActivity(intent_yaowei);
+                                break;
+                            case Constant.FROM_TIZHONG:
+                                Intent intent_tizhong = new Intent(context, HistoryActivity.class);
+                                intent_tizhong.putExtra("fromWhere", Constant.FROM_TIZHONG);
+                                startActivity(intent_tizhong);
+                                break;
+                            case Constant.FROM_TIWEN:
+                                Intent intent_tiwen = new Intent(context, HistoryActivity.class);
+                                intent_tiwen.putExtra("fromWhere", Constant.FROM_TIWEN);
+                                startActivity(intent_tiwen);
+                                break;
+                            case Constant.FROM_XINDIAN:
+                                Intent intent_xindian = new Intent(context, HistoryActivity.class);
+                                intent_xindian.putExtra("fromWhere", Constant.FROM_XINDIAN);
+                                startActivity(intent_xindian);
+                                break;
+                        }
+                    } else {
                         dialog(context, "亲,您还未登录，是否立即登录", "取消", "确定", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -489,11 +489,12 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 if (a < from) {
                     bpinput_bp_tv.setText(from+"");
                     bpinput_up.setSelectedValue(from + "");
-
                 }
-
-                changeColor(a);
-
+                if(fromWhere == Constant.FROM_XUETANG ||fromWhere == Constant.FROM_XUEYANG || fromWhere ==Constant.FROM_TIWEN){
+                    changeColor(Float.parseFloat(newValue));
+                }else{
+                    changeColor(Integer.parseInt(newValue));
+                }
             }
 
             @Override
@@ -534,7 +535,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
                 break;
             case Constant.FROM_TIWEN:
-                changeColorFunction(a, 36, 37);
+                changeColorFunction(a, 36.0f, 37.0f);
                 break;
             case Constant.FROM_XINDIAN:
                 changeColorFunction(a, 60, 100);
