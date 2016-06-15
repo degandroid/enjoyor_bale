@@ -70,6 +70,7 @@
                 android:id="@+id/et_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:layout_margin="@dimen/layout_distance"
                 android:background="@mipmap/bl_bg_sousuokuang"
                 android:gravity="center"

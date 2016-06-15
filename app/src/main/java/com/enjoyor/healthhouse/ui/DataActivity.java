@@ -151,6 +151,26 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        String name =data_name_tv.getText().toString().trim();
+        if(StringUtils.isBlank(name)){
+            name = "";
+        }
+        setResult(VALUE_USERNAME, getIntent().putExtra("username", name));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String name =data_name_tv.getText().toString().trim();
+        if(StringUtils.isBlank(name)){
+            name = "";
+        }
+        setResult(VALUE_USERNAME, getIntent().putExtra("username",name));
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {

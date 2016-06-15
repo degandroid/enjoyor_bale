@@ -21,6 +21,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:layout_marginTop="10dp">
 
             <RelativeLayout
@@ -42,6 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
+                    android:singleLine="true"
                     android:layout_marginTop="18dp"
                     android:layout_toRightOf="@id/myphone_key"
                     android:background="@null"
@@ -100,6 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dp"
+                    android:singleLine="true"
                     android:layout_marginTop="18dp"
                     android:layout_toRightOf="@id/myphone_phone"
                     android:background="@null"
@@ -138,6 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
+                    android:singleLine="true"
                     android:layout_marginTop="18dp"
                     android:layout_toRightOf="@id/myphone_key_bottom"
                     android:background="@null"
@@ -184,7 +188,7 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginTop="60dp"
-                android:layout_marginBottom="50dp"
+
                 android:background="@color/colorGreenYellow"
                 android:text="保存" />
 

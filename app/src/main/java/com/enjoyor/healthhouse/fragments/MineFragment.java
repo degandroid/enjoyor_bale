@@ -146,7 +146,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 if (isLogin(getActivity())) {
                     showDialog();
                 }
-                isLogin(getActivity());
                 break;
             case R.id.mine_fg_login://登录
                 if (BaseDate.getSessionId(getActivity()) != null) {
@@ -170,7 +169,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                     Intent intent_data = new Intent(getActivity(), DataActivity.class);
                     startActivityForResult(intent_data, DataActivity.VALUE_USERNAME);
                 }
-                isLogin(getActivity());
                 break;
             case R.id.mine_fg_phone://我的手机
                 Intent intent_phone = new Intent(getActivity(), MyPhoneActivity.class);
@@ -181,7 +179,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                     Intent intent_ped = new Intent(getActivity(), ModifyPwdActivity.class);
                     startActivity(intent_ped);
                 }
-                isLogin(getActivity());
                 break;
             case R.id.mine_fg_setting://设置
                 Intent intent_setting = new Intent(getActivity(), SettingActivity.class);
@@ -289,8 +286,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == DataActivity.VALUE_USERNAME){
-            if(data.hasExtra("username")){
-                mine_fg_name.setText(data.getStringExtra("username"));
+            if(data !=null){
+                if(data.hasExtra("username")){
+                    mine_fg_name.setText(data.getStringExtra("username"));
+                }
             }
         }else if (requestCode == PHOTO_REQUEST_GALLERY) {
             // 从相册返回的数据

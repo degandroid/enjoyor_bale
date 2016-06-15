@@ -18,12 +18,15 @@ import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.DateUtil;
 import com.enjoyor.healthhouse.utils.ListUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,8 +86,15 @@ public class MySelfCheckActivity extends BaseActivity {
             getDate(getIntent().getLongExtra("recordId", 0l));
         }
         if (getIntent().hasExtra("recordTime")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                java.util.Date dt = sdf.parse(getIntent().getStringExtra("recordTime"));
+                String date = DateUtil.dateToString(dt, "yyyy-MM-dd");
+                tv_ab_text.setText(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-            tv_ab_text.setText(getIntent().getStringExtra("recordTime"));
         }
     }
 
