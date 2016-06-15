@@ -20,7 +20,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/jianceaddress" />
 
             <TextView
                 android:id="@+id/physicall_addr"

@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.ui;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -7,6 +8,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -187,6 +190,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.notes_commit://点击提交按钮事件事件
                 if (isLogin(this)) {
+                    progress();
                     if (notes_et.getText().toString().trim().length() != 0 || !mFile.isEmpty()) {
                         if (mFile != null && !mFile.isEmpty()) {
                             Log.d("wyy-----json---", mFile.toString());
@@ -261,6 +265,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                     ApiMessage api = ApiMessage.FromJson(json);
                     if (api.Data.equals(true + "")) {
                         Toast.makeText(NotesActivity.this, "文件上传成功", Toast.LENGTH_LONG).show();
+                        cancel();
                         finish();
                     } else {
                         Toast.makeText(NotesActivity.this, "文件上传失败", Toast.LENGTH_LONG).show();

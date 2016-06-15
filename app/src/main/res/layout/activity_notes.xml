@@ -19,9 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="100px"
-            android:layout_marginLeft="30px"
-            android:layout_marginRight="30px"
-            android:layout_marginTop="60px"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
             android:background="@mipmap/tijiaokuang"
             android:gravity="center"
             android:text="提交" />
@@ -32,10 +32,10 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/notes_commit"
             android:layout_marginTop="1px"
-            android:gravity="center"
             android:background="@color/colorWhite"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:padding="30px">
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -45,11 +45,11 @@
             <TextView
                 android:id="@+id/notes_address"
                 android:layout_width="wrap_content"
-                android:gravity="end"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:drawableLeft="@mipmap/dingwei"
-                android:drawablePadding="20px"
+                android:drawablePadding="10dp"
+                android:gravity="end"
                 android:text="银江体检中心" />
         </RelativeLayout>
 
@@ -66,16 +66,16 @@
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30px"
-                android:layout_marginRight="20px"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
                 android:cacheColorHint="@android:color/transparent"
                 android:horizontalSpacing="6dip"
                 android:listSelector="@android:color/transparent"
                 android:numColumns="4"
-                android:paddingBottom="30px"
-                android:paddingTop="30px"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="3dip" />
+                android:verticalSpacing="6dip" />
 
         </RelativeLayout>
 
@@ -93,26 +93,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:maxLength="100"
                 android:hint="记录您的健康"
-                android:padding="30px" />
+                android:padding="15dp" />
 
             <ImageView
                 android:id="@+id/notes_luyin"
-                android:layout_width="60px"
-                android:layout_height="60px"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottom="30px"
-                android:layout_marginRight="30px"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp"
                 android:src="@mipmap/luyin" />
 
             <ImageView
                 android:id="@+id/notes_photo"
-                android:layout_width="60px"
-                android:layout_height="60px"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30px"
-                android:layout_marginRight="30px"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_toLeftOf="@id/notes_luyin"
                 android:src="@mipmap/tupian" />
 
@@ -120,4 +121,6 @@
 
 
     </RelativeLayout>
+
+
 </LinearLayout>

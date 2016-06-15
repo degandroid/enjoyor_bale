@@ -49,6 +49,9 @@ public class MapActivity extends BaseActivity {
             weidu = Double.parseDouble(positionLat);
             Log.i("----", jindu + "===========" + weidu);
             LatLng point = new LatLng(weidu, jindu);
+            if (StringUtils.isEmpty(address)) {
+                address = "未知检测点";
+            }
             OverlayOptions textOption = new TextOptions()
                     .bgColor(0xfffffff)
                     .fontSize(34)
