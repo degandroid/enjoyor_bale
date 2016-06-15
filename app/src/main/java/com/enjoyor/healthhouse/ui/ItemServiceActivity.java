@@ -190,7 +190,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         tv_cancel.setOnClickListener(this);
         ll_clean.setOnClickListener(this);
         bt_jisuan.setOnClickListener(this);
-        getDate(searchName, count + "");
+        getDate(searchName, count);
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -206,7 +206,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 foodList.clear();
                 count = 1;
                 searchName = s.toString();
-                getDate(searchName, 1 + "");
+                getDate(searchName,count);
 
             }
         });
@@ -247,7 +247,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onLoadMore() {
-        getDate(searchName, (count++) + "");
+        getDate(searchName, count++);
     }
 
     class FoodAdapater extends BaseAdapter {
@@ -618,12 +618,12 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-    private void getDate(final String name, String count) {
+    private void getDate(final String name, int count) {
 
         RequestParams params = new RequestParams();
         params.add("name", name);
-        params.add("pageNum", count);
-        params.add("pageCount", "10");
+        params.add("pageNum", 1+"");
+        params.add("pageCount",(10*count)+"");
 
         Log.i("searchName", name + count);
         AsyncHttpUtil.get(UrlInterface.TEXT_URL + FOOD_URL, params, new AsyncHttpResponseHandler() {

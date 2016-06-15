@@ -61,7 +61,7 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
         ButterKnife.bind(this);
         tv_cancel.setOnClickListener(this);
         ll_clean.setOnClickListener(this);
-        getDate(searchName, count + "");
+        getDate(searchName, count);
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -76,7 +76,7 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
                 foodList.clear();
                 searchName = s.toString();
                 count = 1;
-                getDate(searchName, count + "");
+                getDate(searchName, count);
             }
         });
 
@@ -88,12 +88,12 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
         xlv_food.setAdapter(new FoodAdapater());
         xlv_food.setSelection((count - 1) * 6);
     }
-    private void getDate(final String name, String count) {
+    private void getDate(final String name, int count) {
 
         RequestParams params = new RequestParams();
         params.add("name", name);
-        params.add("pageNum", count);
-        params.add("pageCount", "10");
+        params.add("pageNum", 1+"");
+        params.add("pageCount", (10*count)+"");
 
         Log.i("searchName", name + count);
         AsyncHttpUtil.get(UrlInterface.TEXT_URL + FOOD_URL, params, new AsyncHttpResponseHandler() {
@@ -104,6 +104,7 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
                 if (apiMessage.Code == 1001) {
                     Food food = JsonHelper.getJson(apiMessage.Data, Food.class);
                     List<Food.FoodList> _list = food.getList();
+                    foodList.clear();
                     foodList.addAll(_list);
                     if (foodList.size() > 0) {
                         xlv_food.setVisibility(View.VISIBLE);
@@ -197,6 +198,6 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
 
     @Override
     public void onLoadMore() {
-        getDate(searchName, (count++) + "");
+        getDate(searchName, count++);
     }
 }
