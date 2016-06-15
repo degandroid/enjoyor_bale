@@ -1,15 +1,22 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +35,7 @@ import com.enjoyor.healthhouse.bean.BasePath;
 import com.enjoyor.healthhouse.bean.UserInfo;
 import com.enjoyor.healthhouse.bean._FakeX509TrustManager;
 import com.enjoyor.healthhouse.common.BaseDate;
+import com.enjoyor.healthhouse.custom.SharePopupWindow;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
@@ -41,6 +50,7 @@ import com.enjoyor.healthhouse.ui.SuggestActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.apache.http.Header;
@@ -54,6 +64,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 
@@ -96,6 +107,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private static final String PHOTO_FILE_NAME = "temp_photo.jpg";
     private File tempFile;
     String path;
+    SharePopupWindow popupWindow = null;
 
     @Nullable
     @Override
@@ -146,6 +158,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 if (isLogin(getActivity())) {
                     showDialog();
                 }
+                isLogin(getActivity());
                 break;
             case R.id.mine_fg_login://登录
                 if (BaseDate.getSessionId(getActivity()) != null) {
@@ -169,6 +182,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                     Intent intent_data = new Intent(getActivity(), DataActivity.class);
                     startActivity(intent_data);
                 }
+                isLogin(getActivity());
                 break;
             case R.id.mine_fg_phone://我的手机
                 Intent intent_phone = new Intent(getActivity(), MyPhoneActivity.class);
@@ -179,6 +193,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                     Intent intent_ped = new Intent(getActivity(), ModifyPwdActivity.class);
                     startActivity(intent_ped);
                 }
+                isLogin(getActivity());
                 break;
             case R.id.mine_fg_setting://设置
                 Intent intent_setting = new Intent(getActivity(), SettingActivity.class);
