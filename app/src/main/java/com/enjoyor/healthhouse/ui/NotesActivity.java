@@ -98,13 +98,14 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     String address;
     String street = "";
     String streetNumber = "";
-Dialog dialog;
+    Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
         ButterKnife.bind(this);
-        dialog = createLoadingDialog(NotesActivity.this,"正在上传随手记，请耐心等待...");
+        dialog = createLoadingDialog(NotesActivity.this, "正在上传中....");
         initView();
         initEvent();
         list = result;
@@ -221,6 +222,7 @@ Dialog dialog;
                                         savenotes();
                                     }
                                 }
+
                                 @Override
                                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                                 }
@@ -264,11 +266,9 @@ Dialog dialog;
                     String json = new String(bytes);
                     ApiMessage api = ApiMessage.FromJson(json);
                     if (api.Data.equals(true + "")) {
-                        Toast.makeText(NotesActivity.this, "文件上传成功", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                         finish();
                     } else {
-                        Toast.makeText(NotesActivity.this, "文件上传失败", Toast.LENGTH_LONG).show();
                     }
                 } else {
 
@@ -311,6 +311,7 @@ Dialog dialog;
                 _result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
                 result.clear();
                 result.addAll(_result);
+                mFile.clear();
                 if (resultCode == RESULT_OK) {
                     for (String s : result) {
                         Log.d("wyy==============", s);

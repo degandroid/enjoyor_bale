@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.TendInfo;
@@ -158,9 +159,23 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
                 String json = new String(bytes);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
-                    String tend_json = apiMessage.Data;
-//                    List<TendInfo> tendInfo = JsonHelper.getArrayJson(apiMessage.Data, TendInfo.class);
-                    initInfoFrom(tend_json);
+                    TendInfo tendInfos = JsonHelper.getJson(apiMessage.Data, TendInfo.class);
+                    String jsondata= null;
+                    switch (type) {
+                        case 1:
+                            jsondata = JSON.toJSONString(tendInfos.getBptdc());
+                            break;
+                        case 2:
+                            jsondata = JSON.toJSONString(tendInfos.getBstdc());
+                            break;
+                        case 3:
+                            jsondata = JSON.toJSONString(tendInfos.getBotdc());
+                            break;
+                        case 4:
+                            jsondata = JSON.toJSONString(tendInfos.getEcgtdc());
+                            break;
+                    }
+                    initInfoFrom(jsondata);
                 } else {
                     Log.d("wyy", "数据获取失败");
                 }
@@ -178,6 +193,7 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
         if (tend_ac_web != null) {
             if (tend_json != null) {
                 String info = tend_json + "," + type + "," + time;
+                Log.d("wyy----====info----", info);
                 tend_ac_web.loadUrl("javascript:show(" + info + ")");
             }
         }

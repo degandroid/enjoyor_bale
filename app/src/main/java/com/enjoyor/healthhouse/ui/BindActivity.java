@@ -79,6 +79,7 @@ public class BindActivity extends BaseActivity implements View.OnClickListener {
     private void initEvent() {
         myphone_bindacces.setOnClickListener(this);
         myphone_bind.setOnClickListener(this);
+        re_back.setOnClickListener(this);
     }
 
     private void initView() {

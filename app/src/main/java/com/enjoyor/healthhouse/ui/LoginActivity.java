@@ -94,7 +94,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setImmerseLayout(findViewById(R.id.navigation));
+//        setImmerseLayout(findViewById(R.id.navigation));
         ButterKnife.bind(this);
         dialog = createLoadingDialog(LoginActivity.this, "正在跳转...");
         dialog_login = createLoadingDialog(LoginActivity.this, "正在登陆...");
@@ -107,7 +107,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         if (getIntent().hasExtra(FROM_SUISHOUJI)) {
             isFromBpInputActivity = getIntent().getBooleanExtra(FROM_SUISHOUJI, true);
         }
-        navigation_name.setText("登陆");
+        navigation_name.setText("登录");
         navigation_back.setVisibility(View.INVISIBLE);
         initOnClick();
     }
@@ -294,7 +294,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     /**
-     * 分享接受消息
+     * 登录接受消息
      */
     @Override
     public boolean handleMessage(Message msg) {
@@ -302,7 +302,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         int what = msg.what;
         switch (what) {
             case 0:
-                Toast.makeText(LoginActivity.this, "分享已取消", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "登录已取消", Toast.LENGTH_LONG).show();
                 dialog.dismiss();
                 break;
             case 1:
@@ -317,9 +317,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         "prevent duplicate publication")) {
                     failtext = "请稍后发送";
                 } else if (msg.obj.toString().contains("error")) {
-                    failtext = "分享失败";
+                    failtext = "登录失败";
                 } else {
-                    failtext = "分享失败";
+                    failtext = "登录失败";
                 }
                 dialog.dismiss();
                 break;

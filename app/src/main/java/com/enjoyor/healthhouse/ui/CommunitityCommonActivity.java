@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -47,14 +48,14 @@ public class CommunitityCommonActivity extends BaseActivity {
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
     TextView navigation_name;
-//    String title;
-
+Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.communtity_com_ac_layout);
+        dialog = createLoadingDialog(CommunitityCommonActivity.this,"正在加载数据....");
         ButterKnife.bind(this);
-        progress();
+        dialog.show();
         WebSettings settings = com_ac_layout_webview.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         navigation_name.setVisibility(View.INVISIBLE);
@@ -115,6 +116,6 @@ public class CommunitityCommonActivity extends BaseActivity {
             }
         });
         com_ac_layout_webview.loadDataWithBaseURL(null, content, "text/html", "utf-8", null);
-        cancel();
+      dialog.dismiss();
     }
 }

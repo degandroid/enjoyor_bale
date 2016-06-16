@@ -110,7 +110,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
                         sendMsg();
                         voice_cha.setVisibility(View.GONE);
                         voice_dui.setVisibility(View.GONE);
-                        if (RECODE_STATE != RECORD_ING) {
+                        if (RECODE_STATE != RECORD_ING) {//不在录音状态
                             scanOldFile();
                             mr = new AudioRecorder("voice");
                             RECODE_STATE = RECORD_ING;
@@ -125,7 +125,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
                         break;
                     case MotionEvent.ACTION_UP:
                         timer.cancel();
-//                        handler.getLooper().getThread().interrupt();
+                        recordThread.interrupt();
                         voice_luyin.setImageResource(R.mipmap.luyin_anniu);
                         if (RECODE_STATE == RECORD_ING) {
                             RECODE_STATE = RECODE_ED;
@@ -189,7 +189,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
         @Override
         public void run() {
             recodeTime = 0.0f;
-            while (RECODE_STATE == RECORD_ING) {
+            while (RECODE_STATE == RECORD_ING) {//正在录音状态
                 if (recodeTime >= MAX_TIME && MAX_TIME != 0) {
                     imgHandle.sendEmptyMessage(0);
                 } else {
@@ -213,7 +213,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
 
                 switch (msg.what) {
                     case 0:
-                        //录音超过15秒自动停止
+                        //录音超过60秒自动停止
                         if (RECODE_STATE == RECORD_ING) {
                             RECODE_STATE = RECODE_ED;
                             try {
@@ -244,17 +244,17 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
      * 录音时imageview随音量大小改变
      */
     private void setDialogImage() {
-        if (voiceValue < 200.0) {
+        if (voiceValue < 400.0) {
             voice_luyin.setImageResource(R.mipmap.luyin_anniu);
-        } else if (voiceValue > 200.0 && voiceValue < 800) {
+        } else if (voiceValue > 400.0 && voiceValue < 1000) {
             voice_luyin.setImageResource(R.mipmap.luyin_anniu1);
-        } else if (voiceValue > 800.0 && voiceValue < 1600) {
+        } else if (voiceValue > 1000.0 && voiceValue < 2000) {
             voice_luyin.setImageResource(R.mipmap.luyin_anniu2);
-        } else if (voiceValue > 1600.0 && voiceValue < 3200) {
+        } else if (voiceValue > 2000.0 && voiceValue < 8000) {
             voice_luyin.setImageResource(R.mipmap.luyin_anniu3);
-        } else if (voiceValue > 3200.0 && voiceValue < 10000) {
+        } else if (voiceValue > 8000.0 && voiceValue < 15000) {
             voice_luyin.setImageResource(R.mipmap.luyin_anniu4);
-        } else if (voiceValue > 10000.0) {
+        } else if (voiceValue > 15000.0) {
             voice_luyin.setImageResource(R.mipmap.luyin_anniu5);
         }
     }

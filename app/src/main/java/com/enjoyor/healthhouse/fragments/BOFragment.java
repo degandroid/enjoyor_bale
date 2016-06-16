@@ -1,6 +1,5 @@
 package com.enjoyor.healthhouse.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,17 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
@@ -93,10 +88,12 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
 //        bp_fg_title.setText("当前血氧值");
         RequestParams params = new RequestParams();
         params.add("recordId", "" + MyApplication.getInstance().getDBHelper().getHealthRecord().getRecordId());
+        Log.d("wyy------jsonbo", MyApplication.getInstance().getDBHelper().getHealthRecord().getRecordId()+"");
         AsyncHttpUtil.get(UrlInterface.BoReport_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
+                Log.d("wyy------jsonbo",json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     bp_fg_top.setVisibility(View.VISIBLE);
@@ -110,7 +107,6 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
                 }
                 cancel();
             }
-
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
 

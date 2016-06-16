@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +40,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
     @Bind(R.id.container)
     CoordinatorLayout container;
-
+    @Bind(R.id.re_back)
+    RelativeLayout re_back;
     @Bind(R.id.navigation_back)
     ImageView navigation_back;
     @Bind(R.id.navigation_name)
@@ -98,6 +100,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         regist.setOnClickListener(this);
         regist_phone_delete.setOnClickListener(this);
         regist_pwd_delete.setOnClickListener(this);
+        regist_agreement.setOnClickListener(this);
     }
 
     private void initData() {
@@ -112,7 +115,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         int key = v.getId();
         switch (key) {
-            case R.id.navigation_back:
+            case R.id.re_back:
                 finish();
                 break;
             case R.id.regist_yanzheng:
@@ -139,6 +142,9 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             case R.id.regist_pwd_delete:
                 regist_password.setText("");
                 break;
+            case R.id.regist_agreement:
+                Intent intent_ment = new Intent(RegistActivity.this, AgreeMentActivity.class);
+                startActivity(intent_ment);
         }
     }
 
@@ -182,7 +188,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             Snackbar.make(container, "密码不能为空", Snackbar.LENGTH_SHORT).show();
             regist_password.requestFocus();
             return false;
-        }else if (!MatcherUtil.isPWD(password)) {
+        } else if (!MatcherUtil.isPWD(password)) {
             Snackbar.make(container, "请输入6-12位的密码", Snackbar.LENGTH_SHORT).show();
             regist_password.requestFocus();
             return false;
@@ -212,6 +218,9 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                     ApiMessage apiMessage = ApiMessage.FromJson(json);
                     if (apiMessage.Code == 1001) {
                         Toast.makeText(RegistActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                        Intent intent_login = new Intent(RegistActivity.this, LoginActivity.class);
+                        startActivity(intent_login);
+                        finish();
                     } else if (apiMessage.Code == 1002) {
                         dialog(RegistActivity.this, "该用户已注册，请直接登录", "取消", "登录", new View.OnClickListener() {
                             @Override
@@ -225,7 +234,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                                 startActivity(intent);
                             }
                         });
-                    }else{
+                    } else {
                         Snackbar.make(container, "验证码错误", Snackbar.LENGTH_SHORT).show();
                         regist_tv_yanzheng.requestFocus();
                     }

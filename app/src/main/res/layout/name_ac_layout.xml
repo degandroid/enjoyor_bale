@@ -21,7 +21,6 @@
             android:id="@+id/name_et"
             android:padding="16dp"
             android:background="@null"
-            android:maxLength="6"
             android:singleLine="true"
             android:textColorHint="@color/textcolor_body"
             android:layout_width="match_parent"

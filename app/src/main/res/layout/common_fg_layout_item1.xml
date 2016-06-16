@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/common_fg_item_title"
                 android:padding="@dimen/layout_distance_15dp"
-                android:text="一天前"
+                android:text=""
                 android:textColor="@color/textcolor_body" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/common_fg_item_title"
                 android:padding="@dimen/layout_distance_15dp"
-                android:text="阅读量：1000"
+                android:text=""
                 android:textColor="@color/textcolor_body" />
         </RelativeLayout>
 

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:text="为什么食物有人却不健康"
+        android:text=""
         android:textColor="@color/textcolor_smallittle"
         android:textSize="@dimen/layout_distance_15dp" />
 
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="一天前"
+            android:text=""
             android:textColor="@color/textcolor_body" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:padding="15dp"
-            android:text="阅读量：1000"
+            android:text=""
             android:textColor="@color/textcolor_body" />
     </RelativeLayout>
 

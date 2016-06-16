@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -45,12 +46,14 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
     LinearLayout communtity_group;
     List<InfoClass> listInfo = new ArrayList<>();
     private ArrayList<Fragment> fragmentList;
+    Dialog dialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.communtity_fg_layout, null);
+        dialog = createLoadingDialog(getActivity(), "正在加载数据....");
+        dialog.show();
         ButterKnife.bind(this, view);
         initData();//获取资讯文章分类
         return view;
@@ -70,11 +73,12 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
     private void initDefaultFragment() {
         TextView textView = (TextView) communtity_group.getChildAt(0).findViewById(R.id.text);
         ImageView imageView = (ImageView) communtity_group.getChildAt(0).findViewById(R.id.img);
-        if(isAdded()){
+        if (isAdded()) {
             textView.setTextColor(getResources().getColor(R.color.colorGreenYellow));
         }
         imageView.setVisibility(View.VISIBLE);
         communtity_viewpager.setCurrentItem(0);
+        dialog.dismiss();
     }
 
     private void defaultGroup() {
@@ -132,11 +136,9 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
             imageView.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, 10));
             communtity_group.addView(view);
         }
-        cancel();
     }
 
     private void initData() {
-//        progress();
         RequestParams pararm = new RequestParams();
         AsyncHttpUtil.get(UrlInterface.InfoClass_URL, pararm, new AsyncHttpResponseHandler() {
             @Override
@@ -144,12 +146,11 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
                 String json = new String(bytes);
                 ApiMessage apimessage = ApiMessage.FromJson(json);
                 if (apimessage.Code == 1001) {
-                    cancel();
                     listInfo.clear();
                     List<InfoClass> _list = JsonHelper.getArrayJson(apimessage.Data, InfoClass.class);
                     listInfo.addAll(_list);
                     if (listInfo.size() > 0) {
-                        if(isAdded()){
+                        if (isAdded()) {
                             initTab();
                             defaultGroup();
                             addFragment();
@@ -160,7 +161,7 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
                         cancel();
                     } else {
                         Toast.makeText(getActivity(), "暂无更多数据", Toast.LENGTH_LONG).show();
-                        cancel();
+                       dialog.dismiss();
                     }
                 }
             }
