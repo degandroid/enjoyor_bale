@@ -150,7 +150,12 @@ public class MyRecordActivity extends BaseActivity {
 
 
                 tv_name.setText(itemMyRecord.getName());
-                tv_result.setText(itemMyRecord.getResult() + "");
+                if(itemMyRecord.getResult()!=null){
+                    tv_result.setText(itemMyRecord.getResult() + "");
+                }else{
+                    tv_result.setText("");
+                }
+
                 tv_range.setText(itemMyRecord.getMin() + "-" + itemMyRecord.getMax());
 
                 if (itemMyRecord.getMin() == -1) {

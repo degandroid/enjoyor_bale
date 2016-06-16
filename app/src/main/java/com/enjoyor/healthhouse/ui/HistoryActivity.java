@@ -33,6 +33,7 @@ import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.enjoyor.healthhouse.utils.DateUtil;
+import com.enjoyor.healthhouse.utils.ListUtils;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -394,54 +395,54 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                         case Constant.FROM_XUEYA:
                             List<HistoryInfoList> _list_xueya = historyInfoModel.getBplist();
                             _json_xueya = JSON.toJSONString(_list_xueya);
-                            Log.i("json",_json_xueya);
-                            historyInfoLists.addAll(_list_xueya);
+                            Log.i("json", _json_xueya);
+                                historyInfoLists.addAll(_list_xueya);
                             break;
                         case Constant.FROM_SHENGAO:
                             List<HistoryInfoList> _list_shengao = historyInfoModel.getBmilist();
                             _json_shengao = JSON.toJSONString(_list_shengao);
                             Log.i("_json_shengao",_json_shengao);
-                            historyInfoLists.addAll(_list_shengao);
+                                historyInfoLists.addAll(_list_shengao);
                             Log.i("_json_shengao", historyInfoLists.toString());
                             break;
                         case Constant.FROM_XUETANG:
                             List<HistoryInfoList> _list_xuetang = historyInfoModel.getBslist();
                             _json_xuetang = JSON.toJSONString(_list_xuetang);
-                            Log.i("_json_shengao",_json_xuetang);
-                            historyInfoLists.addAll(_list_xuetang);
+                            Log.i("_json_shengao", _json_xuetang);
+                                historyInfoLists.addAll(_list_xuetang);
                             break;
                         case Constant.FROM_XUEYANG:
                             List<HistoryInfoList> _list_xueyang = historyInfoModel.getBolist();
                             _json_xueyang = JSON.toJSONString(_list_xueyang);
-                            Log.i("_json_shengao",_json_xueyang);
-                            historyInfoLists.addAll(_list_xueyang);
+                            Log.i("_json_shengao", _json_xueyang);
+                                historyInfoLists.addAll(_list_xueyang);
                             break;
                         case Constant.FROM_YAOWEI:
                             List<HistoryInfoList> _list_yaowei = historyInfoModel.getWhrlist();
                             _json_yaowei = JSON.toJSONString(_list_yaowei);
-                            Log.i("_json_shengao",_json_yaowei);
-                            historyInfoLists.addAll(_list_yaowei);
+                            Log.i("_json_shengao", _json_yaowei);
+                                historyInfoLists.addAll(_list_yaowei);
                             break;
                         case Constant.FROM_TIZHONG:
                             List<HistoryInfoList> _list_tizhong = historyInfoModel.getBmilist();
                             _json_tizhong = JSON.toJSONString(_list_tizhong);
-                            Log.i("_json_shengao",_json_tizhong);
-                            historyInfoLists.addAll(_list_tizhong);
+                            Log.i("_json_shengao", _json_tizhong);
+                                historyInfoLists.addAll(_list_tizhong);
                             break;
                         case Constant.FROM_TIWEN:
                             List<HistoryInfoList> _list_tiwen = historyInfoModel.getTemperlist();
                             _json_tiwen = JSON.toJSONString(_list_tiwen);
-                            Log.i("_json_shengao",_json_tiwen);
-                            historyInfoLists.addAll(_list_tiwen);
+                            Log.i("_json_shengao", _json_tiwen);
+                                historyInfoLists.addAll(_list_tiwen);
                             break;
                         case Constant.FROM_XINDIAN:
                             List<HistoryInfoList> _list_xindian = historyInfoModel.getEcglist();
                             _json_xindian = JSON.toJSONString(_list_xindian);
-                            Log.i("_json_shengao",_json_xindian);
-                            historyInfoLists.addAll(_list_xindian);
+                            Log.i("_json_shengao", _json_xindian);
+                                historyInfoLists.addAll(_list_xindian);
                             break;
                     }
-                    if (historyInfoLists.size() > 0) {
+                    if (!ListUtils.isEmpty(historyInfoLists)) {
                         initXList();
                     }
                     page = historyInfoModel.getPage();
@@ -565,96 +566,138 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                 switch (fromWhere) {
                     case Constant.FROM_XUEYA:
                         holderThree.tv_three_one.setText(date2 + "");
-                        holderThree.tv_three_two.setText(historyInfoLists.get(position).getSystolicPressure() + "");
-                        holderThree.tv_three_three.setText(historyInfoLists.get(position).getDiastolicPressure() + "");
-                        if (historyInfoLists.get(position).getSystolicPressure() > 140) {
-                            holderThree.tv_three_two.setTextColor(getResources().getColor(R.color.color_abnormal));
+
+
+                        if(historyInfoLists.get(position).getSystolicPressure()!=null){
+                            holderThree.tv_three_two.setText(historyInfoLists.get(position).getSystolicPressure() + "");
+                            if (historyInfoLists.get(position).getSystolicPressure() > 140) {
+                                holderThree.tv_three_two.setTextColor(getResources().getColor(R.color.color_abnormal));
+                            }
+                            if (historyInfoLists.get(position).getSystolicPressure() < 90) {
+                                holderThree.tv_three_two.setTextColor(getResources().getColor(R.color.color_normal));
+                            }
+                        }else{
+                            holderThree.tv_three_two.setText("");
                         }
-                        if (historyInfoLists.get(position).getSystolicPressure() < 90) {
-                            holderThree.tv_three_two.setTextColor(getResources().getColor(R.color.color_normal));
-                        }
-                        if (historyInfoLists.get(position).getDiastolicPressure() > 90) {
-                            holderThree.tv_three_three.setTextColor(getResources().getColor(R.color.color_abnormal));
-                        }
-                        if (historyInfoLists.get(position).getDiastolicPressure() < 60) {
-                            holderThree.tv_three_three.setTextColor(getResources().getColor(R.color.color_normal));
+
+                        if(historyInfoLists.get(position).getDiastolicPressure()!=null) {
+                            holderThree.tv_three_three.setText(historyInfoLists.get(position).getDiastolicPressure() + "");
+                            if (historyInfoLists.get(position).getDiastolicPressure() > 90) {
+                                holderThree.tv_three_three.setTextColor(getResources().getColor(R.color.color_abnormal));
+                            }
+                            if (historyInfoLists.get(position).getDiastolicPressure() < 60) {
+                                holderThree.tv_three_three.setTextColor(getResources().getColor(R.color.color_normal));
+                            }
+                        }else{
+                            holderThree.tv_three_three.setText("");
                         }
                         break;
                     case Constant.FROM_SHENGAO:
 
                         holderTwo.tv_two_one.setText(date2 + "");
-                        holderTwo.tv_two_two.setText(historyInfoLists.get(position).getHeight() + "");
+                        if(historyInfoLists.get(position).getHeight()!=null){
+                            holderTwo.tv_two_two.setText(historyInfoLists.get(position).getHeight() + "");
+                        }else{
+                        holderTwo.tv_two_two.setText("");
+                    }
+
                         break;
                     case Constant.FROM_XUETANG:
                         List<HealthBsInfoList> healthBsInfoListlist = historyInfoLists.get(position).getBeanList();
                         holderEight.tv_eight_one.setText(date + "");
-                        for (HealthBsInfoList hb : healthBsInfoListlist) {
-                            switch (hb.getBloodSugarType()) {
-                                case HealthBsInfoList.TYPE_NULL:
-                                    holderEight.tv_eight_two.setText(hb.getBloodSugar() + "");
-                                    setBsColor(1, hb.getBloodSugar(), holderEight.tv_eight_two);
-                                    break;
-                                case HealthBsInfoList.TYPE_BREAKFAST:
-                                    holderEight.tv_eight_three.setText(hb.getBloodSugar() + "");
-                                    setBsColor(2, hb.getBloodSugar(), holderEight.tv_eight_three);
-                                    break;
-                                case HealthBsInfoList.TYPE_LUNCH_BEFORE:
-                                    holderEight.tv_eight_four.setText(hb.getBloodSugar() + "");
-                                    setBsColor(1, hb.getBloodSugar(), holderEight.tv_eight_four);
-                                    break;
-                                case HealthBsInfoList.TYPE_LUNCH_AFTER:
-                                    holderEight.tv_eight_five.setText(hb.getBloodSugar() + "");
-                                    setBsColor(2, hb.getBloodSugar(), holderEight.tv_eight_five);
-                                    break;
-                                case HealthBsInfoList.TYPE_DINNER_BEFOR:
-                                    holderEight.tv_eight_six.setText(hb.getBloodSugar() + "");
-                                    setBsColor(1, hb.getBloodSugar(), holderEight.tv_eight_six);
-                                    break;
-                                case HealthBsInfoList.TYPE_DINNER_AFTER:
-                                    holderEight.tv_eight_seven.setText(hb.getBloodSugar() + "");
-                                    setBsColor(2, hb.getBloodSugar(), holderEight.tv_eight_seven);
-                                    break;
-                                case HealthBsInfoList.TYPE_SLEEP:
-                                    holderEight.tv_eight_eight.setText(hb.getBloodSugar() + "");
-                                    setBsColor(2, hb.getBloodSugar(), holderEight.tv_eight_eight);
-                                    break;
+                        if(!ListUtils.isEmpty(healthBsInfoListlist)){
+                            for (HealthBsInfoList hb : healthBsInfoListlist) {
+                                switch (hb.getBloodSugarType()) {
+                                    case HealthBsInfoList.TYPE_NULL:
+                                        holderEight.tv_eight_two.setText(hb.getBloodSugar() + "");
+                                        setBsColor(1, hb.getBloodSugar(), holderEight.tv_eight_two);
+                                        break;
+                                    case HealthBsInfoList.TYPE_BREAKFAST:
+                                        holderEight.tv_eight_three.setText(hb.getBloodSugar() + "");
+                                        setBsColor(2, hb.getBloodSugar(), holderEight.tv_eight_three);
+                                        break;
+                                    case HealthBsInfoList.TYPE_LUNCH_BEFORE:
+                                        holderEight.tv_eight_four.setText(hb.getBloodSugar() + "");
+                                        setBsColor(1, hb.getBloodSugar(), holderEight.tv_eight_four);
+                                        break;
+                                    case HealthBsInfoList.TYPE_LUNCH_AFTER:
+                                        holderEight.tv_eight_five.setText(hb.getBloodSugar() + "");
+                                        setBsColor(2, hb.getBloodSugar(), holderEight.tv_eight_five);
+                                        break;
+                                    case HealthBsInfoList.TYPE_DINNER_BEFOR:
+                                        holderEight.tv_eight_six.setText(hb.getBloodSugar() + "");
+                                        setBsColor(1, hb.getBloodSugar(), holderEight.tv_eight_six);
+                                        break;
+                                    case HealthBsInfoList.TYPE_DINNER_AFTER:
+                                        holderEight.tv_eight_seven.setText(hb.getBloodSugar() + "");
+                                        setBsColor(2, hb.getBloodSugar(), holderEight.tv_eight_seven);
+                                        break;
+                                    case HealthBsInfoList.TYPE_SLEEP:
+                                        holderEight.tv_eight_eight.setText(hb.getBloodSugar() + "");
+                                        setBsColor(2, hb.getBloodSugar(), holderEight.tv_eight_eight);
+                                        break;
+                                }
                             }
                         }
+
                         break;
                     case Constant.FROM_XUEYANG:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        holderTwo.tv_two_two.setText(historyInfoLists.get(position).getBo() + "");
-                        if (historyInfoLists.get(position).getBo() < 95) {
-                            holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
-                        }
+                        if(historyInfoLists.get(position).getBo()!=null){
+                            holderTwo.tv_two_two.setText(historyInfoLists.get(position).getBo() + "");
+                            if (historyInfoLists.get(position).getBo() < 95) {
+                                holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
+                            }
+                        }else{
+                            holderTwo.tv_two_two.setText("");
+                }
                         break;
                     case Constant.FROM_YAOWEI:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        holderTwo.tv_two_two.setText(historyInfoLists.get(position).getWaistLine() + "");
+                        if(historyInfoLists.get(position).getWaistLine()!=null){
+                            holderTwo.tv_two_two.setText(historyInfoLists.get(position).getWaistLine() + "");
+                        }else{
+                            holderTwo.tv_two_two.setText("");
+                        }
+
                         break;
                     case Constant.FROM_TIZHONG:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        holderTwo.tv_two_two.setText(historyInfoLists.get(position).getWeight() + "");
+                        if(historyInfoLists.get(position).getWeight()!=null) {
+                            holderTwo.tv_two_two.setText(historyInfoLists.get(position).getWeight() + "");
+                        }else{
+                            holderTwo.tv_two_two.setText("");
+                        }
                         break;
                     case Constant.FROM_TIWEN:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        holderTwo.tv_two_two.setText(historyInfoLists.get(position).getTemperature() + "");
-                        if (Float.parseFloat(historyInfoLists.get(position).getTemperature()) > 37) {
-                            holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
+                        if(historyInfoLists.get(position).getTemperature()!=null){
+                            holderTwo.tv_two_two.setText(historyInfoLists.get(position).getTemperature() + "");
+                            if (Float.parseFloat(historyInfoLists.get(position).getTemperature()) > 37) {
+                                holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
+                            }
+                            if (Float.parseFloat(historyInfoLists.get(position).getTemperature()) < 36) {
+                                holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_normal));
+                            }
+                        }else{
+                            holderTwo.tv_two_two.setText("");
                         }
-                        if (Float.parseFloat(historyInfoLists.get(position).getTemperature()) < 36) {
-                            holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_normal));
-                        }
+
                         break;
                     case Constant.FROM_XINDIAN:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        holderTwo.tv_two_two.setText(historyInfoLists.get(position).getEcg() + "");
-                        if (historyInfoLists.get(position).getEcg() > 100) {
-                            holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
+                        if(historyInfoLists.get(position).getEcg()!=null){
+                            holderTwo.tv_two_two.setText(historyInfoLists.get(position).getEcg() + "");
+                            if (historyInfoLists.get(position).getEcg() > 100) {
+                                holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
+                            }
+                            if (historyInfoLists.get(position).getEcg() < 60) {
+                                holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_normal));
+                            }
+                        }else{
+                            holderTwo.tv_two_two.setText("");
                         }
-                        if (historyInfoLists.get(position).getEcg() < 60) {
-                            holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_normal));
-                        }
+
                         break;
                 }
             }

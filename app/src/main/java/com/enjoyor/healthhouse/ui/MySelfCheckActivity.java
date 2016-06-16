@@ -148,7 +148,7 @@ public class MySelfCheckActivity extends BaseActivity {
             TextView tv_down_range = (TextView) view.findViewById(R.id.tv_down_range);
             ImageView iv_down_info = (ImageView) view.findViewById(R.id.iv_down_info);
             iv_down_info.setVisibility(View.GONE);
-            tv_time.setText(mBPS.getCheckTime() + "");
+            tv_time.setText(mBPS.getCheckTime() + "点");
             tv_up_name.setText("舒张压");
             tv_up_result.setText(mBPS.getDiastolicPressure() + "");
             tv_up_range.setText(Constant.diastolicPressure_BEST_MIN + "-" + Constant.diastolicPressure_BEST_MAX);
