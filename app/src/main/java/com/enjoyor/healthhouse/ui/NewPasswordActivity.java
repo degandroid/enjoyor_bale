@@ -116,7 +116,7 @@ public class NewPasswordActivity extends BaseActivity implements View.OnClickLis
             Snackbar.make(container, "新密码不能为空", Snackbar.LENGTH_SHORT).show();
             et_newpassword.requestFocus();
             return false;
-        }else if(MatcherUtil.isPWD(newPwd)){
+        }else if(!MatcherUtil.isPWD(newPwd)){
             Snackbar.make(container, "请输入6-12位的密码", Snackbar.LENGTH_SHORT).show();
             et_newpassword.requestFocus();
             return false;
@@ -124,7 +124,7 @@ public class NewPasswordActivity extends BaseActivity implements View.OnClickLis
             Snackbar.make(container, "请确认密码", Snackbar.LENGTH_SHORT).show();
             et_again_newpassword.requestFocus();
             return false;
-        }else if(MatcherUtil.isPWD(newAgainPwd)){
+        }else if(!MatcherUtil.isPWD(newAgainPwd)){
             Snackbar.make(container, "请输入6-12位的密码", Snackbar.LENGTH_SHORT).show();
             et_again_newpassword.requestFocus();
             return false;

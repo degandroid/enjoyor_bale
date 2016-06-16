@@ -18,6 +18,7 @@ import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.MatcherUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -96,6 +97,10 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
         }else if(StringUtils.isBlank(newPwd)){
             Snackbar.make(container, "新密码不能为空", Snackbar.LENGTH_SHORT).show();
             modify_pwd.requestFocus();
+            return false;
+        }else if(!MatcherUtil.isPWD(newPwd)){
+            Snackbar.make(container, "请输入6-12位新密码", Snackbar.LENGTH_SHORT).show();
+            modify_again_pwd.requestFocus();
             return false;
         }else if(StringUtils.isBlank(againPwd)){
             Snackbar.make(container, "请确认新密码", Snackbar.LENGTH_SHORT).show();

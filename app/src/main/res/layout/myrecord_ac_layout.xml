@@ -8,163 +8,227 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/colorWhite"
         android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
         android:padding="@dimen/layout_distance">
 
         <LinearLayout
 
-            android:background="@mipmap/xuanzekuang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@mipmap/bl_bg_unselected"
             android:gravity="center">
+
             <FrameLayout
                 android:id="@+id/fl_normal"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:background="@mipmap/xuanzhong"
-                android:layout_gravity="center_vertical"
-                android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv_normal"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/bl_bg_left_select">
 
-                android:gravity="center"
-                android:textColor="@color/colorWhite"
-                android:text="健康数据" />
+                <TextView
+                    android:id="@+id/tv_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:gravity="center"
+                    android:text="健康数据"
+                    android:textColor="@color/colorWhite" />
             </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/fl_abnormal"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tv_abnormal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:textColor="@color/textcolor_body"
-                android:text="异常项目" />
-            <ImageView
-                android:id="@+id/iv_info"
-                android:layout_marginRight="90px"
-                android:layout_marginTop="15px"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_gravity="right"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/yichang"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_abnormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="异常项目"
+                    android:textColor="@color/textcolor_body" />
+
+                <ImageView
+                    android:id="@+id/iv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="90px"
+                    android:layout_marginTop="15px"
+                    android:src="@mipmap/yichang"
+                    android:visibility="gone" />
             </FrameLayout>
         </LinearLayout>
 
 
     </RelativeLayout>
+
     <RelativeLayout
-    android:layout_width="match_parent"
-    android:padding="@dimen/layout_distance"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/iv_hong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_distance">
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:src="@mipmap/bl_icon_hong"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_hong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bl_icon_hong" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数据偏高" />
+
+            <ImageView
+                android:id="@+id/iv_lan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/layout_distance"
+                android:src="@mipmap/bl_icon_lan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数据偏低" />
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_ab_text"
             android:layout_width="wrap_content"
-            android:text="数据偏高"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/iv_lan"
-            android:paddingLeft="@dimen/layout_distance"
-            android:layout_width="wrap_content"
-            android:src="@mipmap/bl_icon_lan"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="数据偏低"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_ab_text"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:text="暂无异常"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="暂无异常" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:padding="@dimen/layout_distance"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:padding="@dimen/layout_distance">
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="项目名称"
-            android:layout_height="wrap_content" />
+            android:text="项目名称" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_height="wrap_content"
-            >
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_result"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="结果"
                 android:paddingRight="5dp"
-                android:layout_height="wrap_content" />
+                android:text="结果" />
+
             <ImageView
                 android:id="@+id/iv_upanddown"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@mipmap/bl_icon_lan"
-                android:layout_height="wrap_content" />
+                android:visibility="gone" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_range"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="项目名称"
             android:gravity="right"
-            android:layout_height="wrap_content" />
+            android:text="项目名称" />
     </LinearLayout>
+
     <ScrollView
         android:id="@+id/sv_normal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-<LinearLayout
-    android:id="@+id/ll_shengao"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_shengao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
     </ScrollView>
+
     <ScrollView
         android:id="@+id/sv_abnormal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
         <LinearLayout
             android:id="@+id/ll_abnormal"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/lly_normal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/bl_bg_normal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_distance"
+            android:gravity="center"
+            android:text="快来芭乐健康一体机体检吧！"
+            android:textColor="@color/textcolor_body"
+            android:textSize="@dimen/textsize_smalltittle" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/lly_abnormal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/bl_bg_abnormal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_distance"
+            android:gravity="center"
+            android:text="再接再厉，保持健康哦!"
+            android:textColor="@color/textcolor_body"
+            android:textSize="@dimen/textsize_smalltittle" />
+    </LinearLayout>
 </LinearLayout>

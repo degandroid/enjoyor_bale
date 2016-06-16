@@ -28,7 +28,10 @@ import com.loopj.android.http.RequestParams;
 import com.xk.sanjay.rulberview.RulerWheel;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -212,10 +215,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                         CustomUtil.saveHealthInfo(context, ECG_URL, params_xindian,container);
                         break;
                 }
-            } else {
-                dialog(context, "时间或日期未选择");
             }
-
         }else{
             dialog(context, "亲,您还未登录，是否立即登录", "取消", "确定", new View.OnClickListener() {
                 @Override
@@ -236,21 +236,39 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     }
 
     private boolean getDate() {
-        /*判断userId是否为空*/
+        /*----------------------------判断userId是否为空----------------------------*/
         long _userId = MyApplication.getInstance().getDBHelper().getUser().getUserId();
         if (!StringUtils.isBlank(_userId + "")) {
             userId = MyApplication.getInstance().getDBHelper().getUser().getUserId() + "";
         } else {
             return false;
         }
-        /*判断日期是否为空*/
+
+        /*----------------------------判断日期是否为空----------------------------*/
         String _date = tv_date.getText().toString();
-        if (!StringUtils.isBlank(_date) && !_date.equals("请选择")) {
-            times = _date;
-        } else {
+        if(StringUtils.isBlank(_date)||_date.equals("请选择")){
+            Snackbar.make(container,"请选择日期",Snackbar.LENGTH_SHORT).show();
             return false;
+        }else{
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            Date date_time=null;
+            try {
+                date_time=sdf.parse(_date);//将String to Date类型
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            long long_time=date_time.getTime()/1000;
+            int long_now = DateUtil.getCurrentTime();
+            if(long_time>long_now){
+                Snackbar.make(container,"选择时间大于当前时间",Snackbar.LENGTH_SHORT).show();
+                return false;
+            }else{
+                times = _date;
+            }
         }
-        /*获取第一个刻度尺的值（默认）*/
+
+
+        /*----------------------------获取第一个刻度尺的值（默认）----------------------------*/
         String up = bpinput_bp_tv.getText().toString();
         if (!StringUtils.isBlank(up)) {
             diastolicPressure = up;
@@ -262,21 +280,42 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             temperature = up;
             ecg = up;
         }
-        /*判断时间端的类型*/
+
+
+        /*----------------------------判断时间端的类型----------------------------*/
         if (_type == 4) {
             type = "1";
         }else {
             type = _type + "";
         }
-        /*如果为血压时，添加第二个刻度尺以及判断时间是否为空*/
+
+
+        /*----------------------------如果为血压时，添加第二个刻度尺以及判断时间是否为空----------------------------*/
         if (fromWhere == Constant.FROM_XUEYA) {
             /*判断时间是否为空或者未选择*/
             String _times = tv_time.getText().toString();
-            if (!StringUtils.isBlank(_times) && !_times.equals("请选择")) {
-                hours = _times;
-            } else {
+            if(StringUtils.isBlank(_times) ||_times.equals("请选择")){
+                Snackbar.make(container,"请选择时间",Snackbar.LENGTH_SHORT).show();
                 return false;
+            }else{
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH");
+                Date date_time=null;
+                try {
+                    date_time=sdf.parse(_date+" "+_times);//将String to Date类型
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long long_time=date_time.getTime()/1000;
+                int long_now = DateUtil.getCurrentTime();
+                if(long_time>long_now){
+                    Snackbar.make(container,"选择时间大于当前时间",Snackbar.LENGTH_SHORT).show();
+                    return false;
+                }else{
+                    hours = _times;
+                }
             }
+
+
             String down = bpinput_bp_tv_low.getText().toString();
             if (!StringUtils.isBlank(down)) {
                 systolicPressure = down;

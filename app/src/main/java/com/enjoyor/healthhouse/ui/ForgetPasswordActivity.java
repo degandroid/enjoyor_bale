@@ -176,7 +176,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
             et_phonenumber.requestFocus();
             return false;
         }else if(!MatcherUtil.isMobileNumber(phoneNumber)){
-            Snackbar.make(container, "请输入真确的手机号", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(container, "请输入正确的手机号", Snackbar.LENGTH_SHORT).show();
             et_phonenumber.requestFocus();
             return false;
         } else if (StringUtils.isBlank(password)) {

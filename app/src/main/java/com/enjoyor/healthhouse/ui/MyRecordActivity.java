@@ -38,8 +38,10 @@ import butterknife.ButterKnife;
 
 /*我的报告*/
 public class MyRecordActivity extends BaseActivity {
-    @Bind(R.id.navigation_name)TextView navigation_name;
-    @Bind(R.id.re_back)RelativeLayout re_back;
+    @Bind(R.id.navigation_name)
+    TextView navigation_name;
+    @Bind(R.id.re_back)
+    RelativeLayout re_back;
 
     @Bind(R.id.fl_normal)
     FrameLayout fl_normal;
@@ -48,6 +50,10 @@ public class MyRecordActivity extends BaseActivity {
 
     @Bind(R.id.sv_normal)
     ScrollView sv_normal;
+    @Bind(R.id.lly_normal)
+    LinearLayout lly_normal;
+    @Bind(R.id.lly_abnormal)
+    LinearLayout lly_abnormal;
     @Bind(R.id.sv_abnormal)
     ScrollView sv_abnormal;
 
@@ -70,7 +76,10 @@ public class MyRecordActivity extends BaseActivity {
     private final int STATE_ABNORMAL = 2;
     private String RECORD_URL = "app/getrecordofinfo.do";
 
-    List<ItemMyRecord> list_ab = new ArrayList<>();
+    List<ItemMyRecord> list_abnormal = new ArrayList<>();
+    List<ItemMyRecord> list_normal = new ArrayList<>();
+
+//    private boolean tag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,12 +128,13 @@ public class MyRecordActivity extends BaseActivity {
     }
 
     private void initView(MyRecordInfo info) {
-        List<ItemMyRecord> list = RecordUtils.getRecordList(info);
-
-
-        if (!ListUtils.isEmpty(list)) {
-            for (int i = 0; i < list.size(); i++) {
-                ItemMyRecord itemMyRecord = list.get(i);
+        List<ItemMyRecord> _list = RecordUtils.getRecordList(info);
+        list_normal.clear();
+        list_normal.addAll(_list);
+        if (!ListUtils.isEmpty(list_normal)) {
+            sv_normal.setVisibility(View.VISIBLE);
+            for (int i = 0; i < list_normal.size(); i++) {
+                ItemMyRecord itemMyRecord = list_normal.get(i);
                 View view = LayoutInflater.from(context).inflate(R.layout.item_myrecord, null);
                 TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
                 TextView tv_result = (TextView) view.findViewById(R.id.tv_result);
@@ -143,35 +153,36 @@ public class MyRecordActivity extends BaseActivity {
                 tv_result.setText(itemMyRecord.getResult() + "");
                 tv_range.setText(itemMyRecord.getMin() + "-" + itemMyRecord.getMax());
 
-                if(itemMyRecord.getMin() == -1){
+                if (itemMyRecord.getMin() == -1) {
                     tv_range.setText("");
-                }else if(itemMyRecord.getMax() == -1){
-                    tv_range.setText(itemMyRecord.getMin()+"");
+                } else if (itemMyRecord.getMax() == -1) {
+                    tv_range.setText(itemMyRecord.getMin() + "");
                 }
 
                 if (itemMyRecord.getResult() != null && itemMyRecord.getMax() != -1 && itemMyRecord.getMin() != -1) {
                     if (itemMyRecord.getResult() < itemMyRecord.getMin()) {
                         iv_upanddown.setVisibility(View.VISIBLE);
                         iv_upanddown.setImageResource(R.mipmap.bl_icon_lan);
-                        list_ab.add(itemMyRecord);
+                        list_abnormal.add(itemMyRecord);
                     }
                     if (itemMyRecord.getResult() > itemMyRecord.getMax()) {
                         iv_upanddown.setVisibility(View.VISIBLE);
                         iv_upanddown.setImageResource(R.mipmap.bl_icon_hong);
-                        list_ab.add(itemMyRecord);
+                        list_abnormal.add(itemMyRecord);
                     }
                 }
                 ll_shengao.addView(view);
             }
+        }else{
+            lly_normal.setVisibility(View.VISIBLE);
         }
-
 //        List<ItemMyRecord> list_ab = RecordUtils.getAbnormalList(info);
-        if (!ListUtils.isEmpty(list_ab)) {
+        if (!ListUtils.isEmpty(list_abnormal)) {
+            sv_abnormal.setVisibility(View.VISIBLE);
             iv_info.setVisibility(View.VISIBLE);
-            tv_ab_text.setText("共" + list_ab.size() + "项异常");
-            for (int i = 0; i < list_ab.size(); i++) {
-                ItemMyRecord itemMyRecord = list_ab.get(i);
-
+            tv_ab_text.setText("共" + list_abnormal.size() + "项异常");
+            for (int i = 0; i < list_abnormal.size(); i++) {
+                ItemMyRecord itemMyRecord = list_abnormal.get(i);
                 View view = LayoutInflater.from(context).inflate(R.layout.item_myrecord, null);
                 TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
                 TextView tv_result = (TextView) view.findViewById(R.id.tv_result);
@@ -198,6 +209,7 @@ public class MyRecordActivity extends BaseActivity {
             }
         } else {
             iv_info.setVisibility(View.GONE);
+            lly_normal.setVisibility(View.VISIBLE);
             tv_ab_text.setText("暂无异常");
         }
     }
@@ -207,17 +219,38 @@ public class MyRecordActivity extends BaseActivity {
         fl_normal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sv_normal.setVisibility(View.VISIBLE);
-                sv_abnormal.setVisibility(View.GONE);
-                CheckBackground(STATE_NORMAL);
+                if(list_normal.size()>0){
+                    sv_normal.setVisibility(View.VISIBLE);
+                    sv_abnormal.setVisibility(View.GONE);
+                    lly_normal.setVisibility(View.GONE);
+                    lly_abnormal.setVisibility(View.GONE);
+                    CheckBackground(STATE_NORMAL);
+                }else{
+                    lly_normal.setVisibility(View.VISIBLE);
+                    sv_normal.setVisibility(View.GONE);
+                    sv_abnormal.setVisibility(View.GONE);
+                    lly_abnormal.setVisibility(View.GONE);
+                }
             }
         });
         fl_abnormal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sv_abnormal.setVisibility(View.VISIBLE);
-                sv_normal.setVisibility(View.GONE);
-                CheckBackground(STATE_ABNORMAL);
+//                tag = false;
+                iv_info.setVisibility(View.GONE);
+                if(list_abnormal.size()>0){
+                    sv_abnormal.setVisibility(View.VISIBLE);
+                    sv_normal.setVisibility(View.GONE);
+                    lly_normal.setVisibility(View.GONE);
+                    lly_abnormal.setVisibility(View.GONE);
+                    CheckBackground(STATE_ABNORMAL);
+                }else{
+                    lly_abnormal.setVisibility(View.VISIBLE);
+                    sv_abnormal.setVisibility(View.GONE);
+                    sv_normal.setVisibility(View.GONE);
+                    lly_normal.setVisibility(View.GONE);
+                }
+
             }
         });
     }
@@ -225,14 +258,14 @@ public class MyRecordActivity extends BaseActivity {
     private void CheckBackground(int i) {
         switch (i) {
             case STATE_NORMAL:
-                fl_normal.setBackgroundResource(R.mipmap.xuanzhong);
+                fl_normal.setBackgroundResource(R.drawable.bl_bg_left_select);
                 tv_normal.setTextColor(getResources().getColor(R.color.colorWhite));
 
                 fl_abnormal.setBackgroundResource(R.drawable.white_null);
                 tv_abnormal.setTextColor(getResources().getColor(R.color.textcolor_body));
                 break;
             case STATE_ABNORMAL:
-                fl_abnormal.setBackgroundResource(R.mipmap.xuanzhong);
+                fl_abnormal.setBackgroundResource(R.drawable.bl_bg_right_select);
                 tv_abnormal.setTextColor(getResources().getColor(R.color.colorWhite));
                 fl_normal.setBackgroundResource(R.drawable.white_null);
                 tv_normal.setTextColor(getResources().getColor(R.color.textcolor_body));

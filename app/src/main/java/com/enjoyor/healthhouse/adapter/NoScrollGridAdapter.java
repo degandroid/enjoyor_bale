@@ -50,17 +50,20 @@ public class NoScrollGridAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = View.inflate(ctx, R.layout.item_gridview, null);
 		ImageView imageView = (ImageView) view.findViewById(R.id.iv_image);
-		DisplayImageOptions options = new DisplayImageOptions.Builder()//
+		DisplayImageOptions _options = new DisplayImageOptions.Builder()//
 				.showImageForEmptyUri(R.mipmap.bl_logo)
+				.showImageOnLoading(R.mipmap.bl_logo)
 				.cacheInMemory(true)//
 				.cacheOnDisk(true)//
 				.bitmapConfig(Bitmap.Config.RGB_565)//
 				.build();
 				Log.i("get", imageUrls.toString());
 		if(imageUrls.get(position).equals(Constant.VALUE_VOICE)){
+			imageView.setPadding(5,5,5,5);
 			imageView.setImageResource(R.mipmap.zanting);
 		}else{
-			ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL+"/"+imageUrls.get(position), imageView,options);
+			imageView.setPadding(0,0,0,0);
+			ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL+"/"+imageUrls.get(position), imageView,_options);
 		}
 		return view;
 	}
