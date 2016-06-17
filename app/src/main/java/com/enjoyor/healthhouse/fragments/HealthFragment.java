@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
@@ -26,6 +28,7 @@ import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.ui.HealthFileActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -108,27 +111,33 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
     HealthRecord healthRecord;
     StringBuffer stringcom;
     StringBuffer stringrec;
+    Dialog dialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.health_fg_layout, null);
         ButterKnife.bind(this, view);
         re_back.setOnClickListener(this);
         button.setOnClickListener(this);
-
+        dialog = createLoadingDialog(getActivity(), "正在加载数据...");
         main_tab = (FrameLayout) getActivity().findViewById(R.id.main_tab);
         re_back.setVisibility(View.INVISIBLE);
         navigation_name.setText("健康评估");
         img_right.setVisibility(View.VISIBLE);
         initText();
         initImageTab();
-
         if (isLogin(getActivity())) {
             isData();
             initEvent();
         }
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_tohealth = new Intent(getActivity(), PhysicallocationActivity.class);
+                startActivity(intent_tohealth);
+            }
+        });
         return view;
     }
 
@@ -159,36 +168,41 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
      * 用户登录之后判断是否有数据，根据是否有数据加载布局
      */
     private void isData() {
-        progress();
+        dialog.show();
         RequestParams params = new RequestParams();
-        params.add("userId", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
-        AsyncHttpUtil.get(UrlInterface.AccessHealInfo_URL, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                String json = new String(bytes);
-                Log.d("wyy---", json);
-                ApiMessage apiMessage = ApiMessage.FromJson(json);
-                if (apiMessage.Code == 1001) {
-                    cancel();
-                    health_ry_empty.setVisibility(View.GONE);
-                    health_ry_full.setVisibility(View.VISIBLE);
-                    healthRecord = JsonHelper.getJson(apiMessage.Data, HealthRecord.class);
-                    if (saveHealthReport(healthRecord)) {
-                        Log.d("wyy---", "baocun");
+        if (healthRecord!=null) {
+            params.add("userId", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
+            AsyncHttpUtil.get(UrlInterface.AccessHealInfo_URL, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    String json = new String(bytes);
+                    Log.d("wyy---", json);
+                    ApiMessage apiMessage = ApiMessage.FromJson(json);
+                    if (apiMessage.Code == 1001) {
+                        dialog.dismiss();
+                        health_ry_empty.setVisibility(View.GONE);
+                        health_ry_full.setVisibility(View.VISIBLE);
+                        healthRecord = JsonHelper.getJson(apiMessage.Data, HealthRecord.class);
+                        if (saveHealthReport(healthRecord)) {
+                            Log.d("wyy---", "baocun");
+                        }
+                        initInfo(healthRecord);
+                        initHealthSug(healthRecord);
+                        dialog.dismiss();
+                    } else if (apiMessage.Code == -204) {
+                        health_ry_empty.setVisibility(View.VISIBLE);
+                        health_ry_full.setVisibility(View.GONE);
+                        dialog.dismiss();
                     }
-                    initInfo(healthRecord);
-                    initHealthSug(healthRecord);
-                } else if (apiMessage.Code == -204) {
-                    health_ry_empty.setVisibility(View.VISIBLE);
-                    health_ry_full.setVisibility(View.GONE);
                 }
-            }
 
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                cancel();
-            }
-        });
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        dialog.dismiss();
     }
 
     /**
@@ -295,59 +309,59 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
         int key = v.getId();
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        switch (key) {
-            case R.id.button://跳转体检机在哪儿的页面
-                Intent intent_tohealth = new Intent(getActivity(), PhysicallocationActivity.class);
-                startActivity(intent_tohealth);
-                break;
-            case R.id.health_full_tab1:
-                hideView();
-                navigation_name.setText("血压评估");
-                health_full_tab1.setBackgroundColor(getResources().getColor(R.color.green));
-                transaction.replace(R.id.health_lin, new BPFragment());
-                transaction.commit();
-                break;
-            case R.id.health_full_tab2:
-                hideView();
-                health_full_tab2.setBackgroundColor(getResources().getColor(R.color.green));
-                navigation_name.setText("血糖评估");
-                transaction.replace(R.id.health_lin, new BiFragment());
-                transaction.commit();
-                break;
-            case R.id.health_full_tab3:
-                hideView();
-                health_full_tab3.setBackgroundColor(getResources().getColor(R.color.green));
-                navigation_name.setText("人体成分评估");
-                transaction.replace(R.id.health_lin, new BodyFragment());
-                transaction.commit();
-                break;
-            case R.id.health_full_tab4:
-                hideView();
-                health_full_tab4.setBackgroundColor(getResources().getColor(R.color.green));
-                navigation_name.setText("血氧评估");
-                transaction.replace(R.id.health_lin, new BOFragment());
-                transaction.commit();
-                break;
-            case R.id.health_full_tab5:
-                hideView();
-                health_full_tab5.setBackgroundColor(getResources().getColor(R.color.green));
-                navigation_name.setText("心电评估");
-                transaction.replace(R.id.health_lin, new ECGFragment());
-                transaction.commit();
-                break;
-            case R.id.re_back:
-                main_tab.setVisibility(View.VISIBLE);
-                health_lin.setVisibility(View.GONE);
-                isData();
-                initImageTab();
-                initText();
-                re_back.setVisibility(View.INVISIBLE);
-                navigation_name.setText("健康评估");
-                break;
-            case R.id.img_right:
-                Intent intent_health = new Intent(getActivity(), HealthFileActivity.class);
-                startActivity(intent_health);
-                break;
+        if (healthRecord != null) {
+            switch (key) {
+                case R.id.health_full_tab1:
+                    hideView();
+                    navigation_name.setText("血压评估");
+                    health_full_tab1.setBackgroundColor(getResources().getColor(R.color.green));
+                    transaction.replace(R.id.health_lin, new BPFragment());
+                    transaction.commit();
+                    break;
+                case R.id.health_full_tab2:
+                    hideView();
+                    health_full_tab2.setBackgroundColor(getResources().getColor(R.color.green));
+                    navigation_name.setText("血糖评估");
+                    transaction.replace(R.id.health_lin, new BiFragment());
+                    transaction.commit();
+                    break;
+                case R.id.health_full_tab3:
+                    hideView();
+                    health_full_tab3.setBackgroundColor(getResources().getColor(R.color.green));
+                    navigation_name.setText("人体成分评估");
+                    transaction.replace(R.id.health_lin, new BodyFragment());
+                    transaction.commit();
+                    break;
+                case R.id.health_full_tab4:
+                    hideView();
+                    health_full_tab4.setBackgroundColor(getResources().getColor(R.color.green));
+                    navigation_name.setText("血氧评估");
+                    transaction.replace(R.id.health_lin, new BOFragment());
+                    transaction.commit();
+                    break;
+                case R.id.health_full_tab5:
+                    hideView();
+                    health_full_tab5.setBackgroundColor(getResources().getColor(R.color.green));
+                    navigation_name.setText("心电评估");
+                    transaction.replace(R.id.health_lin, new ECGFragment());
+                    transaction.commit();
+                    break;
+                case R.id.re_back:
+                    main_tab.setVisibility(View.VISIBLE);
+                    health_lin.setVisibility(View.GONE);
+                    isData();
+                    initImageTab();
+                    initText();
+                    re_back.setVisibility(View.INVISIBLE);
+                    navigation_name.setText("健康评估");
+                    break;
+                case R.id.img_right:
+                    Intent intent_health = new Intent(getActivity(), HealthFileActivity.class);
+                    startActivity(intent_health);
+                    break;
+            }
+        }else {
+            Toast.makeText(getActivity(),"您暂时没有体检记录，请去附近的体检点体检",Toast.LENGTH_LONG).show();
         }
     }
 

@@ -160,7 +160,7 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     TendInfo tendInfos = JsonHelper.getJson(apiMessage.Data, TendInfo.class);
-                    String jsondata= null;
+                    String jsondata = null;
                     switch (type) {
                         case 1:
                             jsondata = JSON.toJSONString(tendInfos.getBptdc());
@@ -207,16 +207,19 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
         switch (key) {
             case R.id.tend_ac_week:
                 time = 1;
+                tend_ac_week.setTextColor(getResources().getColor(R.color.white));
                 tend_ac_week.setBackgroundResource(R.mipmap.xuanzhong1);
                 initData(1);
                 break;
             case R.id.tend_ac_month:
                 time = 2;
+                tend_ac_month.setTextColor(getResources().getColor(R.color.white));
                 tend_ac_month.setBackgroundResource(R.mipmap.xuanzhong2);
                 initData(2);
                 break;
             case R.id.tend_ac_year:
                 time = 3;
+                tend_ac_year.setTextColor(getResources().getColor(R.color.white));
                 tend_ac_year.setBackgroundResource(R.mipmap.xuanzhong3);
                 initData(3);
                 break;

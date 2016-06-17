@@ -27,6 +27,24 @@ public class MyApplication extends Application {
     public static DisplayImageOptions options;
 
     public static String userName;
+    public static Double jindu;
+    public static Double weidu;
+
+    public static Double getJindu() {
+        return jindu;
+    }
+
+    public static void setJindu(Double jindu) {
+        MyApplication.jindu = jindu;
+    }
+
+    public static Double getWeidu() {
+        return weidu;
+    }
+
+    public static void setWeidu(Double weidu) {
+        MyApplication.weidu = weidu;
+    }
 
     public static String getUserName() {
         return userName;

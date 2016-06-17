@@ -136,60 +136,6 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 网络加载数据进度框
-     *
-     * @return
-     */
-    protected ProgressDialog progress() {
-        return progress("", "", null, false);
-    }
-
-
-    protected ProgressDialog progress(DialogInterface.OnCancelListener listener) {
-        return progress("", "", listener, true);
-    }
-
-    /**
-     * 显示进度框的方法
-     *
-     * @param
-     * @return
-     */
-    protected ProgressDialog progress(String pTitle, String pMessage,
-                                      DialogInterface.OnCancelListener pCancelClickListener, boolean outsideCancel) {
-        if (isFinishing())
-            return null;
-        ProgressDialog mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.show();
-        mProgressDialog.setCanceledOnTouchOutside(outsideCancel);
-        mProgressDialog.setCancelable(outsideCancel);
-        mProgressDialog.setContentView(View.inflate(this,
-                R.layout.dialog_process, null));
-        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable());
-        mProgressDialog.setOnCancelListener(pCancelClickListener);
-        mProgressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            public boolean onKey(DialogInterface dialog,
-                                 int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    dialog.dismiss();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-        mDialog = mProgressDialog;
-        return mProgressDialog;
-    }
-
-    /**
-     * 取消进度框的方法
-     */
-    protected void cancel() {
-        if (mDialog != null)
-            mDialog.cancel();
-    }
 
     /**
      * 双击退出程序的方法
@@ -220,13 +166,6 @@ public class BaseActivity extends AppCompatActivity {
      * 沉浸式开发方法
      */
     protected void setImmerseLayout(View view) {
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            //透明状态栏
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            //透明导航栏 一些手机如果有虚拟键盘的话,虚拟键盘就会变成透明的,挡住底部按钮点击事件所以,最后不要用
-//            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-//        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,

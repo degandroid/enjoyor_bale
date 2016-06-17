@@ -22,6 +22,7 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.bumptech.glide.Glide;
 import com.enjoyor.healthhouse.R;
+import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.Article;
 import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.net.ApiMessage;
@@ -92,6 +93,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     //经纬度
     double latitude;
     double longitude;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -161,9 +163,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             if (bdLocation == null) {
                 return;
             }
-//            Log.d("000000000=======000000", bdLocation.getAddrStr());
             latitude = bdLocation.getLatitude();
             longitude = bdLocation.getLongitude();
+            MyApplication.getInstance().setJindu(longitude);
+            MyApplication.getInstance().setWeidu(latitude);
         }
     }
 
@@ -218,7 +221,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             holder.tv_tittle.setText(article.get(position).getTitle());
             holder.tv_date.setText(article.get(position).getInterval());
             holder.tv_readnumber.setText("阅读量  " + article.get(position).getPageViews());
-//            holder.tv_comment.setText("comment");
             if (article.get(position).getImages().size() > 0) {
                 Glide.with(getActivity()).load(UrlInterface.TEXT_URL + article.get(position).getImages().get(0).getPath()).into(holder.iv_infopic);
             }
@@ -235,8 +237,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             TextView tv_date;
             @Bind(R.id.tv_readnumber)
             TextView tv_readnumber;
-//            @Bind(R.id.tv_comment)
-//            TextView tv_comment;
 
             ViewHolder(View view) {
                 ButterKnife.bind(this, view);
@@ -300,12 +300,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent_addr);
                 break;
             case R.id.more_info:
-                if(listener != null){
+                if (listener != null) {
                     listener.onChange();
                 }
-                Log.d("wyy---",listener.toString());
-//                Intent intent_more = new Intent(getActivity(), MoreInfoActivity.class);
-//                startActivity(intent_more);
                 break;
         }
     }

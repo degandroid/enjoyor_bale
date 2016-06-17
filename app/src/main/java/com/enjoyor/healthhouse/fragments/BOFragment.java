@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -63,11 +64,12 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
     BoReport boReport;
     @Bind(R.id.bp_fg_bottom)
     LinearLayout bp_fg_bottom;
-
+Dialog dialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        progress();
+        dialog = createLoadingDialog(getActivity(),"正在加载数据...");
+       dialog.show();
         view = inflater.inflate(R.layout.bp_fg_layout, null);
         ButterKnife.bind(this, view);
         bp_fg_title.setText("当前血氧值");
@@ -103,9 +105,9 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
                 } else {
                     health_ry_empty.setVisibility(View.VISIBLE);
                     bp_fg_bottom.setVisibility(View.GONE);
-                    cancel();
+                     dialog.dismiss();
                 }
-                cancel();
+                 dialog.dismiss();
             }
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {

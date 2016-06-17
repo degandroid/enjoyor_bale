@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -92,11 +93,12 @@ public class BodyFragment extends BaseFragment {
     @Bind(R.id.body_bo__web)
     WebView body_bo__web;
     private String url = "http://www.bailingju.com/Content/statichtml/oxygen.html";
-
+Dialog dialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        progress();
+        dialog = createLoadingDialog(getActivity(),"正在加载数据...");
+       dialog.show();
         view = inflater.inflate(R.layout.body_fg_layout, null);
         ButterKnife.bind(this, view);
         initWebview();
@@ -151,7 +153,6 @@ public class BodyFragment extends BaseFragment {
     private void transferDataToWeb(String json) {
         if (body_bo__web != null) {
             String info = StringUtils.centerString(json, "fatyear");
-            Log.i("==================+++", info);
             body_bo__web.loadUrl("javascript:show_fate_white('" + info + "')");   //web网页中已添加了function show(json)方法
         }
     }
@@ -168,7 +169,7 @@ public class BodyFragment extends BaseFragment {
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     BCAFragmentbean bcaFragmentbean = JsonHelper.getJson(apiMessage.Data, BCAFragmentbean.class);
-                    cancel();
+                    dialog.dismiss();
                     if (bcaFragmentbean != null) {
                         initView(bcaFragmentbean);
                         getInfo(bcaFragmentbean);

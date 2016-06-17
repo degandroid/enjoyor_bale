@@ -35,7 +35,6 @@ import butterknife.ButterKnife;
 public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.container)
     CoordinatorLayout container;
-
     @Bind(R.id.navigation_name)
     TextView navigation_name;
     @Bind(R.id.re_back)

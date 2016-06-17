@@ -4,10 +4,10 @@ package com.enjoyor.healthhouse.url;
  * Created by Administrator on 2016/5/9.
  */
 public class UrlInterface {
-//    public static String TEXT_URL = "http://ejk.bailingju.com:8099/BaleServer/";
+    public static String TEXT_URL = "http://ejk.bailingju.com:8099/BaleServer/";
 
     public static String RELEASE_URL = "http://www.cnbale.com:9008/healthstationserver/";
-    public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
+//    public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
 
 //    public static String BasePath = "http://192.168.8/healthstationserver";
     //        public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
@@ -68,4 +68,6 @@ public class UrlInterface {
     public static String Get_Thhird_LoginInfo_URL = TEXT_URL + "plat/info.do";
     //绑定第三方登录手机
     public static String Bind_Phone_URL = TEXT_URL + "plat/bind.action";
+    //浏览器调用百度地图接口
+    public static String Web_URL = "http://api.map.baidu.com/marker?";
 }

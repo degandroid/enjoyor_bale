@@ -35,6 +35,7 @@ import android.widget.ImageView.ScaleType;
 
 import java.lang.ref.WeakReference;
 
+
 import uk.co.senab.photoview.gestures.OnGestureListener;
 import uk.co.senab.photoview.gestures.VersionedGestureDetector;
 import uk.co.senab.photoview.log.LogManager;

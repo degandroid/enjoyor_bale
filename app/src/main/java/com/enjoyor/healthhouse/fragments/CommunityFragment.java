@@ -66,7 +66,6 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
             initData();
             MyApplication.refrash = false;
         }
-        cancel();
     }
 
 
@@ -158,7 +157,7 @@ public class CommunityFragment extends BaseFragment implements ViewPager.OnPageC
                             initDefaultFragment();
                             initClick();
                         }
-                        cancel();
+                      dialog.dismiss();
                     } else {
                         Toast.makeText(getActivity(), "暂无更多数据", Toast.LENGTH_LONG).show();
                        dialog.dismiss();

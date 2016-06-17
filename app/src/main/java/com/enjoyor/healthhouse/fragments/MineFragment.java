@@ -47,6 +47,7 @@ import org.apache.http.Header;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -194,9 +195,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
+    private String[] name = {"bale.png"};
+
     private void oneKeyShare() {
         fakeX509TrustManager.allowAllSSL();
-//        ShareSDK.initSDK(getActivity());
         OnekeyShare oks = new OnekeyShare();
 //        关闭sso授权
         oks.disableSSOWhenAuthorize();
@@ -207,15 +209,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
         oks.setTitleUrl("http://www.bailingju.com/content/statichtml/aboutus.html");
         // text是分享文本，所有平台都需要这个字段
-        oks.setText("我是分享文本");
+        oks.setText("芭乐个人健康服务云平台通过大数据智能精准推送，实现一站式健康服务");
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+//        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
         // url仅在微信（包括好友和朋友圈）中使用
+        oks.setImageUrl(UrlInterface.TEXT_URL + "/files/app/default/bale.png");
         oks.setUrl("http://www.bailingju.com/content/statichtml/aboutus.html");
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("我是测试评论文本");
+        oks.setComment("");
         // site是分享此内容的网站名称，仅在QQ空间使用
-        oks.setSite(getString(R.string.app_name));
+        oks.setSite("");
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl("http://www.bailingju.com/content/statichtml/aboutus.html");
         // 启动分享GUI
@@ -285,13 +288,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     //相册跟拍照回调
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == DataActivity.VALUE_USERNAME){
-            if(data !=null){
-                if(data.hasExtra("username")){
+        if (requestCode == DataActivity.VALUE_USERNAME) {
+            if (data != null) {
+                if (data.hasExtra("username")) {
                     mine_fg_name.setText(data.getStringExtra("username"));
                 }
             }
-        }else if (requestCode == PHOTO_REQUEST_GALLERY) {
+        } else if (requestCode == PHOTO_REQUEST_GALLERY) {
             // 从相册返回的数据
             if (data != null) {
                 // 得到图片的全路径

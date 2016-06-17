@@ -1,6 +1,7 @@
 package com.enjoyor.healthhouse.ui;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
@@ -129,14 +130,16 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
     private String url;
     String date;
     String date2;
+    Dialog dialog;
+
     @TargetApi(23)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         ButterKnife.bind(this);
-
-
+        dialog = createLoadingDialog(HistoryActivity.this, "正在加载数据...");
+//        dialog.show();
         context = this;
         if (getIntent().hasExtra("fromWhere")) {
             fromWhere = getIntent().getIntExtra("fromWhere", Constant.FROM_XUEYA);
@@ -290,7 +293,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         params_xueya.add("userId", userId);
         params_xueya.add("pageMethod", "2");
         params_xueya.add("pageNum", 1 + "");
-        params_xueya.add("pageCount", (6*_count)+"");
+        params_xueya.add("pageCount", (6 * _count) + "");
         switch (fromWhere) {
             case Constant.FROM_XUEYA:
                 selectHealthInfo(BP_URL, params_xueya);
@@ -396,50 +399,50 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                             List<HistoryInfoList> _list_xueya = historyInfoModel.getBplist();
                             _json_xueya = JSON.toJSONString(_list_xueya);
                             Log.i("json", _json_xueya);
-                                historyInfoLists.addAll(_list_xueya);
+                            historyInfoLists.addAll(_list_xueya);
                             break;
                         case Constant.FROM_SHENGAO:
                             List<HistoryInfoList> _list_shengao = historyInfoModel.getBmilist();
                             _json_shengao = JSON.toJSONString(_list_shengao);
-                            Log.i("_json_shengao",_json_shengao);
-                                historyInfoLists.addAll(_list_shengao);
+                            Log.i("_json_shengao", _json_shengao);
+                            historyInfoLists.addAll(_list_shengao);
                             Log.i("_json_shengao", historyInfoLists.toString());
                             break;
                         case Constant.FROM_XUETANG:
                             List<HistoryInfoList> _list_xuetang = historyInfoModel.getBslist();
                             _json_xuetang = JSON.toJSONString(_list_xuetang);
                             Log.i("_json_shengao", _json_xuetang);
-                                historyInfoLists.addAll(_list_xuetang);
+                            historyInfoLists.addAll(_list_xuetang);
                             break;
                         case Constant.FROM_XUEYANG:
                             List<HistoryInfoList> _list_xueyang = historyInfoModel.getBolist();
                             _json_xueyang = JSON.toJSONString(_list_xueyang);
                             Log.i("_json_shengao", _json_xueyang);
-                                historyInfoLists.addAll(_list_xueyang);
+                            historyInfoLists.addAll(_list_xueyang);
                             break;
                         case Constant.FROM_YAOWEI:
                             List<HistoryInfoList> _list_yaowei = historyInfoModel.getWhrlist();
                             _json_yaowei = JSON.toJSONString(_list_yaowei);
                             Log.i("_json_shengao", _json_yaowei);
-                                historyInfoLists.addAll(_list_yaowei);
+                            historyInfoLists.addAll(_list_yaowei);
                             break;
                         case Constant.FROM_TIZHONG:
                             List<HistoryInfoList> _list_tizhong = historyInfoModel.getBmilist();
                             _json_tizhong = JSON.toJSONString(_list_tizhong);
                             Log.i("_json_shengao", _json_tizhong);
-                                historyInfoLists.addAll(_list_tizhong);
+                            historyInfoLists.addAll(_list_tizhong);
                             break;
                         case Constant.FROM_TIWEN:
                             List<HistoryInfoList> _list_tiwen = historyInfoModel.getTemperlist();
                             _json_tiwen = JSON.toJSONString(_list_tiwen);
                             Log.i("_json_shengao", _json_tiwen);
-                                historyInfoLists.addAll(_list_tiwen);
+                            historyInfoLists.addAll(_list_tiwen);
                             break;
                         case Constant.FROM_XINDIAN:
                             List<HistoryInfoList> _list_xindian = historyInfoModel.getEcglist();
                             _json_xindian = JSON.toJSONString(_list_xindian);
                             Log.i("_json_shengao", _json_xindian);
-                                historyInfoLists.addAll(_list_xindian);
+                            historyInfoLists.addAll(_list_xindian);
                             break;
                     }
                     if (!ListUtils.isEmpty(historyInfoLists)) {
@@ -447,13 +450,13 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                     }
                     page = historyInfoModel.getPage();
                 } else {
-                    cancel();
+                    dialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                cancel();
+                dialog.dismiss();
             }
         });
         return true;
@@ -466,28 +469,24 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         PhysicallAdapter adapter = new PhysicallAdapter();
         physicall_lv.setAdapter(adapter);
         stops();
-        physicall_lv.setSelection((count-1) * 6);
+        physicall_lv.setSelection((count - 1) * 6);
     }
 
     @Override
     public void onRefresh() {
 
     }
+
     public void stops() {
         if (physicall_lv != null) {
             physicall_lv.stopLoadMore();
         }
     }
+
     @Override
     public void onLoadMore() {
         getDate(++count);
     }
-
-    //    public void stops() {
-//        if (physicall_lv != null) {
-//            physicall_lv.stopLoadMore();
-//        }
-//    }
     private void setBsColor(int i, String _value, TextView view) {
         float value = Float.parseFloat(_value);
         if (1 == i) {
@@ -558,8 +557,8 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
                     java.util.Date dt = sdf.parse(str);
-                    date = DateUtil.dateToString(dt,"MM/dd");
-                    date2 = DateUtil.dateToString(dt,"yyyy/MM/dd");
+                    date = DateUtil.dateToString(dt, "MM/dd");
+                    date2 = DateUtil.dateToString(dt, "yyyy/MM/dd");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -568,7 +567,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                         holderThree.tv_three_one.setText(date2 + "");
 
 
-                        if(historyInfoLists.get(position).getSystolicPressure()!=null){
+                        if (historyInfoLists.get(position).getSystolicPressure() != null) {
                             holderThree.tv_three_two.setText(historyInfoLists.get(position).getSystolicPressure() + "");
                             if (historyInfoLists.get(position).getSystolicPressure() > 140) {
                                 holderThree.tv_three_two.setTextColor(getResources().getColor(R.color.color_abnormal));
@@ -576,11 +575,11 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                             if (historyInfoLists.get(position).getSystolicPressure() < 90) {
                                 holderThree.tv_three_two.setTextColor(getResources().getColor(R.color.color_normal));
                             }
-                        }else{
+                        } else {
                             holderThree.tv_three_two.setText("");
                         }
 
-                        if(historyInfoLists.get(position).getDiastolicPressure()!=null) {
+                        if (historyInfoLists.get(position).getDiastolicPressure() != null) {
                             holderThree.tv_three_three.setText(historyInfoLists.get(position).getDiastolicPressure() + "");
                             if (historyInfoLists.get(position).getDiastolicPressure() > 90) {
                                 holderThree.tv_three_three.setTextColor(getResources().getColor(R.color.color_abnormal));
@@ -588,24 +587,24 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                             if (historyInfoLists.get(position).getDiastolicPressure() < 60) {
                                 holderThree.tv_three_three.setTextColor(getResources().getColor(R.color.color_normal));
                             }
-                        }else{
+                        } else {
                             holderThree.tv_three_three.setText("");
                         }
                         break;
                     case Constant.FROM_SHENGAO:
 
                         holderTwo.tv_two_one.setText(date2 + "");
-                        if(historyInfoLists.get(position).getHeight()!=null){
+                        if (historyInfoLists.get(position).getHeight() != null) {
                             holderTwo.tv_two_two.setText(historyInfoLists.get(position).getHeight() + "");
-                        }else{
-                        holderTwo.tv_two_two.setText("");
-                    }
+                        } else {
+                            holderTwo.tv_two_two.setText("");
+                        }
 
                         break;
                     case Constant.FROM_XUETANG:
                         List<HealthBsInfoList> healthBsInfoListlist = historyInfoLists.get(position).getBeanList();
                         holderEight.tv_eight_one.setText(date + "");
-                        if(!ListUtils.isEmpty(healthBsInfoListlist)){
+                        if (!ListUtils.isEmpty(healthBsInfoListlist)) {
                             for (HealthBsInfoList hb : healthBsInfoListlist) {
                                 switch (hb.getBloodSugarType()) {
                                     case HealthBsInfoList.TYPE_NULL:
@@ -643,35 +642,35 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                         break;
                     case Constant.FROM_XUEYANG:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        if(historyInfoLists.get(position).getBo()!=null){
+                        if (historyInfoLists.get(position).getBo() != null) {
                             holderTwo.tv_two_two.setText(historyInfoLists.get(position).getBo() + "");
                             if (historyInfoLists.get(position).getBo() < 95) {
                                 holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
                             }
-                        }else{
+                        } else {
                             holderTwo.tv_two_two.setText("");
-                }
+                        }
                         break;
                     case Constant.FROM_YAOWEI:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        if(historyInfoLists.get(position).getWaistLine()!=null){
+                        if (historyInfoLists.get(position).getWaistLine() != null) {
                             holderTwo.tv_two_two.setText(historyInfoLists.get(position).getWaistLine() + "");
-                        }else{
+                        } else {
                             holderTwo.tv_two_two.setText("");
                         }
 
                         break;
                     case Constant.FROM_TIZHONG:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        if(historyInfoLists.get(position).getWeight()!=null) {
+                        if (historyInfoLists.get(position).getWeight() != null) {
                             holderTwo.tv_two_two.setText(historyInfoLists.get(position).getWeight() + "");
-                        }else{
+                        } else {
                             holderTwo.tv_two_two.setText("");
                         }
                         break;
                     case Constant.FROM_TIWEN:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        if(historyInfoLists.get(position).getTemperature()!=null){
+                        if (historyInfoLists.get(position).getTemperature() != null) {
                             holderTwo.tv_two_two.setText(historyInfoLists.get(position).getTemperature() + "");
                             if (Float.parseFloat(historyInfoLists.get(position).getTemperature()) > 37) {
                                 holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
@@ -679,14 +678,14 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                             if (Float.parseFloat(historyInfoLists.get(position).getTemperature()) < 36) {
                                 holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_normal));
                             }
-                        }else{
+                        } else {
                             holderTwo.tv_two_two.setText("");
                         }
 
                         break;
                     case Constant.FROM_XINDIAN:
                         holderTwo.tv_two_one.setText(date2 + "");
-                        if(historyInfoLists.get(position).getEcg()!=null){
+                        if (historyInfoLists.get(position).getEcg() != null) {
                             holderTwo.tv_two_two.setText(historyInfoLists.get(position).getEcg() + "");
                             if (historyInfoLists.get(position).getEcg() > 100) {
                                 holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_abnormal));
@@ -694,7 +693,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                             if (historyInfoLists.get(position).getEcg() < 60) {
                                 holderTwo.tv_two_two.setTextColor(getResources().getColor(R.color.color_normal));
                             }
-                        }else{
+                        } else {
                             holderTwo.tv_two_two.setText("");
                         }
 

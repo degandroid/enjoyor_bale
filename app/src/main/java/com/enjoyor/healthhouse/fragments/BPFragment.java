@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
 import com.enjoyor.healthhouse.ui.TendActivity;
 import com.enjoyor.healthhouse.url.JavaScriptInterface;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -63,11 +65,13 @@ public class BPFragment extends BaseFragment implements View.OnClickListener {
     BpRecord bpRecord;
     @Bind(R.id.bp_fg_bottom)
     LinearLayout bp_fg_bottom;
+    Dialog dialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        progress();
+        dialog = createLoadingDialog(getActivity(), "正在加载数据...");
+        dialog.show();
         view = inflater.inflate(R.layout.bp_fg_layout, null);
         ButterKnife.bind(this, view);
         initView();
@@ -120,29 +124,30 @@ public class BPFragment extends BaseFragment implements View.OnClickListener {
 
     private void initView() {
         RequestParams params = new RequestParams();
-        params.add("recordId", MyApplication.getInstance().getDBHelper().getHealthRecord().getRecordId() + "");
-        AsyncHttpUtil.get(UrlInterface.BpReport_URL, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                String json = new String(bytes);
-                ApiMessage apiMessage = ApiMessage.FromJson(json);
-                if (apiMessage.Code == 1001) {
-//                    bp_fg_top.setVisibility(View.VISIBLE);
-                    bpRecord = JsonHelper.getJson(apiMessage.Data, BpRecord.class);
-                    saveInfo(bpRecord);
-                    drawpicture(json);
-                } else {
-                    health_ry_empty.setVisibility(View.VISIBLE);
-                    bp_fg_bottom.setVisibility(View.GONE);
-                    cancel();
+        if (!StringUtils.isEmpty(MyApplication.getInstance().getDBHelper().getHealthRecord().getRecordId() + "")) {
+            params.add("recordId", MyApplication.getInstance().getDBHelper().getHealthRecord().getRecordId() + "");
+            AsyncHttpUtil.get(UrlInterface.BpReport_URL, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    String json = new String(bytes);
+                    ApiMessage apiMessage = ApiMessage.FromJson(json);
+                    if (apiMessage.Code == 1001) {
+                        bpRecord = JsonHelper.getJson(apiMessage.Data, BpRecord.class);
+                        saveInfo(bpRecord);
+                        drawpicture(json);
+                    } else {
+                        health_ry_empty.setVisibility(View.VISIBLE);
+                        bp_fg_bottom.setVisibility(View.GONE);
+                        dialog.dismiss();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     private void drawpicture(final String json) {
@@ -160,7 +165,7 @@ public class BPFragment extends BaseFragment implements View.OnClickListener {
                 String info = bpRecord.getDiastolicPressure() + "," + bpRecord.getSystolicPressure() + "," + "0.5";
                 bp_fg_web.loadUrl("javascript:show(" + info + ")");   //web网页中已添加了function show(json)方法
                 bp_fg_top.setVisibility(View.VISIBLE);
-                cancel();
+                dialog.dismiss();
             }
         }
     }
@@ -180,7 +185,7 @@ public class BPFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.bp_fg_tend:
                 Intent intent_bp = new Intent(getActivity(), TendActivity.class);
-                intent_bp.putExtra("type",1);
+                intent_bp.putExtra("type", 1);
                 startActivity(intent_bp);
                 break;
             case R.id.button:

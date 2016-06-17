@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -67,12 +68,14 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
     EcgReport ecgReport;
     @Bind(R.id.bp_fg_bottom)
     LinearLayout bp_fg_bottom;
+    Dialog dialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        progress();
         view = inflater.inflate(R.layout.bp_fg_layout, null);
+        dialog = createLoadingDialog(getActivity(),"正在加载数据...");
+        dialog.show();
         ButterKnife.bind(this, view);
         initView();
         initWebview();
@@ -143,9 +146,9 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
                     health_ry_empty.setVisibility(View.VISIBLE);
 //                    bp_fg_top.setVisibility(View.VISIBLE);
                     bp_fg_bottom.setVisibility(View.GONE);
-                    cancel();
+                    dialog.dismiss();
                 }
-                cancel();
+                dialog.dismiss();
             }
 
             @Override
@@ -195,7 +198,7 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.bp_fg_tend:
                 Intent intent_tend = new Intent(getActivity(), TendActivity.class);
-                intent_tend.putExtra("type",5);
+                intent_tend.putExtra("type", 5);
                 startActivity(intent_tend);
                 break;
         }

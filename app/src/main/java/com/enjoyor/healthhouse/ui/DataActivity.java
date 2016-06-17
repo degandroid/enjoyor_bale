@@ -61,7 +61,6 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.data_ac_layout);
         ButterKnife.bind(this);
-        progress();
         initView();
         initData();
         initEvent();
@@ -77,7 +76,6 @@ public class DataActivity extends BaseActivity implements View.OnClickListener {
                 Log.d("wyy-onSuccess-", json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
-                    cancel();
                     MineData mineData = JsonHelper.getJson(apiMessage.Data, MineData.class);
                     initInfo(mineData);
                 }

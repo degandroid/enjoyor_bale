@@ -1,5 +1,6 @@
 package com.enjoyor.healthhouse.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,11 +62,13 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
     BiReport biReport;
     @Bind(R.id.bp_fg_bottom)
     LinearLayout bp_fg_bottom;
-
+Dialog dialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.bp_fg_layout, null);
+        dialog = createLoadingDialog(getActivity(),"正在加载数据...");
+        dialog.show();
         ButterKnife.bind(this, view);
         initView();
         initEvent();
@@ -86,7 +89,7 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
             String _json_xuetang = biReport.getBeanList().get(0).getBloodSugar() + "," + biReport.getBeanList().get(0).getBloodSugarType();
             bp_fg_web.loadUrl("javascript:show(" + _json_xuetang + ")");
         }
-        cancel();
+       dialog.dismiss();
     }
 
     private void initEvent() {
@@ -111,7 +114,7 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
                 } else {
                     health_ry_empty.setVisibility(View.VISIBLE);
                     bp_fg_bottom.setVisibility(View.GONE);
-                    cancel();
+                  dialog.dismiss();
                 }
             }
 
