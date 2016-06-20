@@ -28,7 +28,6 @@ import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.ui.HealthFileActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
-import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -211,11 +210,10 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
      * @param healthRecord
      */
     private void initHealthSug(HealthRecord healthRecord) {
-        String HEALTH_URL = UrlInterface.TEXT_URL;
         RequestParams param = new RequestParams();
         Log.d("wyy----", healthRecord.getRecordId() + "");
         String id = healthRecord.getRecordId() + "".trim();
-        AsyncHttpUtil.get("http://115.28.37.145:9008/healthstationserver/" + "advice/record/" + id + ".action", param, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.getRecord(id), param, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

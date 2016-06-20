@@ -51,7 +51,6 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
     XListView xlv_food;
     @Bind(R.id.ll_clean)
     LinearLayout ll_clean;
-    private String FOOD_URL = "app/food/search.do";
     private List<Food.FoodList> foodList = new ArrayList<>();
 
     @Override
@@ -96,7 +95,7 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
         params.add("pageCount", (10*count)+"");
 
         Log.i("searchName", name + count);
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + FOOD_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.FOOD_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

@@ -66,7 +66,6 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
 
     private int count = 1;
 
-    private String HEALTHFILE_URL = "/app/getrecordlist.do";
     private String userId;
 
     private PopupWindow pw;
@@ -105,14 +104,16 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
             } else {
                 tv_username.setText(userInfo.getLoginName());
             }
-        }
-        if (!StringUtils.isBlank(userInfo.getHeadImg())) {
-            String path = MyApplication.getInstance().getDBHelper().getUser().getHeadImg();
-            if (path != null && !path.startsWith("http://") && !path.startsWith("https://")) {
-                path = UrlInterface.FILE_URL + path;
+            if (!StringUtils.isBlank(userInfo.getHeadImg())) {
+                String path = MyApplication.getInstance().getDBHelper().getUser().getHeadImg();
+                if (path != null && !path.startsWith("http://") && !path.startsWith("https://")) {
+                    path = UrlInterface.FILE_URL + path;
+                }
+                Log.i("path",path);
+                Glide.with(HealthFileActivity.this).load(path).into(iv_userhead);
             }
-            Glide.with(HealthFileActivity.this).load(path).into(iv_userhead);
         }
+
         getDate(count, select_edit, select_type);
     }
 
@@ -157,7 +158,7 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
         params.add("compName", compName);
         params.add("type", type);
         Log.i("count", userId + "-----" + count + "-----" + select_edit + "-----" + select_type);
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + HEALTHFILE_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.HEALTHFILE_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 stops();

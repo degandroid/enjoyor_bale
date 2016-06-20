@@ -22,16 +22,16 @@ public class UrlInterface {
     //获取体检地点接口
     public static String PhysicallAddr_URL = TEXT_URL + "base/dis/machine/list.do";
     //    所有的文件路径主路径为
-    public static String FILE_URL = "http://115.28.37.145:9008/healthstationserver";
+    public static String FILE_URL = "http://ejk.bailingju.com:8099/BaleServer";
     //附近监测点接口
     public static String NearAddress_URL = TEXT_URL + "base/dis/machine/list.do";
     //上传文件接口
-    public static String UpDateFile_URL = TEXT_URL + "/doupload/save.do";
+    public static String UpDateFile_URL = TEXT_URL + "doupload/save.do";
     //    public static String UpDateFile_URL =  "http://192.168.66.33/doupload/save.do";
     //随手记提交接口
-    public static String Notes_URL = TEXT_URL + "/record/notes.do";
+    public static String Notes_URL = TEXT_URL + "record/notes.do";
     //获取健康评估信息的接口
-    public static String AccessHealInfo_URL = TEXT_URL + "/app/evaluate.do";
+    public static String AccessHealInfo_URL = TEXT_URL + "app/evaluate.do";
     //个人中心我的资料接口
     public static String Data_URL = TEXT_URL + "account/getaccountinfo.action";
     //验证码验证接口
@@ -70,4 +70,51 @@ public class UrlInterface {
     public static String Bind_Phone_URL = TEXT_URL + "plat/bind.action";
     //浏览器调用百度地图接口
     public static String Web_URL = "http://api.map.baidu.com/marker?";
+    //搜索书屋列表--------------卡路里换算
+    public static String FOOD_URL = TEXT_URL + "app/food/search.do";
+    //用户登录------------------登录
+    public static String LOGIN_URL = TEXT_URL + "account/applogin.action";
+    //体检报告------------------我的报告
+    public static String RECORD_URL = TEXT_URL + "app/getrecordofinfo.do";
+    //轮播图--------------------首页
+    public static String BANNER_URL = TEXT_URL + "display/index/banner.do";
+    //咨询----------------------首页
+    public static String ARTICLES_URL = TEXT_URL + "articles/app/index.do";
+    //健康文档------------------随手记
+    public static String HEALTHFILE_URL = TEXT_URL + "app/getrecordlist.do";
+
+    //八项入口的历史记录--------历史
+    public static String BP_URL = TEXT_URL+"app/bplist.do";//血压历史
+    public static String BMI_URL = TEXT_URL+"app/bmilist.do";//身高体重历史
+    public static String BS_URL = TEXT_URL+"app/bslist.do";//血糖历史
+    public static String BO_URL = TEXT_URL+"app/bolist.do";//血氧历史
+    public static String WL_URL = TEXT_URL+"app/whrlist.do";//腰围历史
+    public static String TL_URL = TEXT_URL+"app/temperlist.do";//体温历史
+    public static String ECG_URL = TEXT_URL+"app/ecglist.do";//心电历史
+
+    //八项入口录入--------------录入
+    public static String SAVE_BP_URL = TEXT_URL+"app/savebp.action";//血压
+    public static String SAVE_BMI_URL = TEXT_URL+"app/savebmi.action";//体重，身高
+    public static String SAVE_BS_URL = TEXT_URL+"app/savebs.action";//血糖
+    public static String SAVE_BO_URL = TEXT_URL+"app/savebo.action";//血氧
+    public static String SAVE_WL_URL = TEXT_URL+"app/savewaistLine.action";//腰围
+    public static String SAVE_TP_URL = TEXT_URL+"app/savetmper.action";//体温
+    public static String SAVE_ECG_URL = TEXT_URL+"app/saveecg.action";//心率
+
+    public static String getArticles(int id){
+        return TEXT_URL + "articles/" + id + ".do";
+    }
+    public static String getRecord(String id){
+        return TEXT_URL + "advice/record/" + id + ".action";
+    }
+    public static String getResources(int voice){
+        return TEXT_URL + "resources/file/" + voice + ".action";
+    }
+    public static String getNotes(Long recordId){
+        return TEXT_URL + "record/notes/" + recordId + ".action";
+    }
+    public static String getSelf(Long recordId){
+        return TEXT_URL + "record/self/" + recordId + ".action";
+}
+
 }

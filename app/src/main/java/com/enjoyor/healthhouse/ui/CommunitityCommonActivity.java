@@ -2,10 +2,7 @@ package com.enjoyor.healthhouse.ui;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -13,7 +10,6 @@ import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.bean.ArtitleDetail;
 import com.enjoyor.healthhouse.net.ApiMessage;
@@ -25,8 +21,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
-
-import java.net.URL;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -72,7 +66,7 @@ Dialog dialog;
 
     private void initData() {
         RequestParams params = new RequestParams();
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + "articles/" + id + ".do", params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.getArticles(id), params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

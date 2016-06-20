@@ -336,7 +336,7 @@ public class MySelfCheckActivity extends BaseActivity {
 
         RequestParams params = new RequestParams();
 
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + "record/self/" + recordId + ".action", params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.getSelf(recordId), params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

@@ -47,7 +47,6 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class SlideShowView extends FrameLayout {
-    private String BANNER_URL = "display/index/banner.do";
     // 使用universal-image-loader插件读取网络图片，需要工程导入universal-image-loader-1.8.6-with-sources.jar
 //    private ImageLoader imageLoader = ImageLoader.getInstance();
     public static DisplayImageOptions options;
@@ -386,7 +385,7 @@ public class SlideShowView extends FrameLayout {
     }
     private void initNetBanner() {
         RequestParams params = new RequestParams();
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + BANNER_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.BANNER_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

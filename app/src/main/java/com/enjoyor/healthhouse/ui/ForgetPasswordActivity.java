@@ -53,8 +53,6 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     private Handler handler;
     private String phoneNumber;
     private String password;
-    private String MSG_CODE = "msg/send.action";
-    private String VERIFY_CODE = "msg/verify.action";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +119,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         RequestParams params = new RequestParams();
         params.add("service", String.valueOf("mob"));
         params.add("phone", phone);
-        AsyncHttpUtil.post(UrlInterface.TEXT_URL + MSG_CODE, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.post(UrlInterface.SendMsg_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
@@ -144,7 +142,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         params.add("service", String.valueOf("mob"));
         params.add("phone", phone);
         params.add("code", code);
-        AsyncHttpUtil.post(UrlInterface.TEXT_URL + VERIFY_CODE, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.post(UrlInterface.Verify_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

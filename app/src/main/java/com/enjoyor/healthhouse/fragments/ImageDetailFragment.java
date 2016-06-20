@@ -132,8 +132,7 @@ public class ImageDetailFragment extends Fragment {
 	public void getVoicePath(final int voice) {
 		RequestParams params = new RequestParams();
 
-		String url = UrlInterface.TEXT_URL + "resources/file/" + voice + ".action";
-		AsyncHttpUtil.get(url, params, new AsyncHttpResponseHandler() {
+		AsyncHttpUtil.get(UrlInterface.getResources(voice), params, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(int i, Header[] headers, byte[] bytes) {
 				String json = new String(bytes);

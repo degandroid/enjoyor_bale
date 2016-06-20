@@ -145,7 +145,6 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
     private String searchName = "";
     private int TO_BMI = 0;
     private int TO_KALULI = 1;
-    private String FOOD_URL = "app/food/search.do";
 
     private float value;
     private String normal = "";
@@ -626,7 +625,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         params.add("pageCount",(10*count)+"");
 
         Log.i("searchName", name + count);
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + FOOD_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.FOOD_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

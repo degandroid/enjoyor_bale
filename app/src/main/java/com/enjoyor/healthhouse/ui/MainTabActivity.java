@@ -72,7 +72,6 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.ll_content)
     LinearLayout ll_content;
 
-    private String LOGIN_URL = "account/applogin.action";
     private FragmentTransaction transaction;
     HomeFragment homeFragment = null;
 
@@ -102,7 +101,7 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
         params.add("userLoginName", userInfo.getLoginName());
         params.add("userLoginPwd", userInfo.getUserLoginPwd());
         params.add("userLoginType", String.valueOf("2"));
-        AsyncHttpUtil.post(UrlInterface.TEXT_URL + LOGIN_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.post(UrlInterface.LOGIN_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

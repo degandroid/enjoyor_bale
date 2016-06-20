@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.custom.WheelView;
+import com.enjoyor.healthhouse.url.UrlInterface;
 import com.enjoyor.healthhouse.utils.CustomUtil;
 import com.enjoyor.healthhouse.utils.DateUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
@@ -121,19 +123,12 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     private String weight = "80";//体重
     private String bloodSugar = "6.0";//血糖
     private String type = "1";//类型：1:空腹，4：随机血糖，5早餐后，6午餐前，7午餐后，8晚餐前，9晚餐后，10睡前
-    private int _type = 0;
+    private int _type = 9;
     private String bo = "98.0";//血氧
     private String waistLine = "70";//腰围
     private String temperature = "36.7";//体温
     private String ecg = "80";//心率
 
-    private static String BP_URL = "app/savebp.action";//血压
-    private static String BMI_URL = "app/savebmi.action";//体重，身高
-    private static String BS_URL = "app/savebs.action";//血糖
-    private static String BO_URL = "app/savebo.action";//血氧
-    private static String WL_URL = "app/savewaistLine.action";//腰围
-    private static String TP_URL = "app/savetmper.action";//体温
-    private static String ECG_URL = "app/saveecg.action";//心率
 
     private int FIRST_RULE = 1;
     private int SECOND_RULE = 2;
@@ -162,57 +157,58 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                         params_xueya.add("hours", hours);
                         params_xueya.add("systolicPressure", systolicPressure);
                         params_xueya.add("diastolicPressure", diastolicPressure);
-                        CustomUtil.saveHealthInfo(context, BP_URL, params_xueya,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BP_URL, params_xueya,container);
                         break;
                     case Constant.FROM_SHENGAO:
                         RequestParams params_shengao = new RequestParams();
                         params_shengao.add("userId", userId);
                         params_shengao.add("times", times);
                         params_shengao.add("height", height);
-                        CustomUtil.saveHealthInfo(context, BMI_URL, params_shengao,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BMI_URL, params_shengao,container);
                         break;
                     case Constant.FROM_XUETANG:
+                        Log.i("final_stype","userId"+userId+"\n"+"times"+times+"\n"+"bloodSugar"+bloodSugar+"\n"+"type"+ type);
                         RequestParams params = new RequestParams();
                         params.add("userId", userId);
                         params.add("times", times);
                         params.add("bloodSugar", bloodSugar);
                         params.add("type", type);
-                        CustomUtil.saveHealthInfo(context, BS_URL, params,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BS_URL, params,container);
                         break;
                     case Constant.FROM_XUEYANG:
                         RequestParams params_xueyang = new RequestParams();
                         params_xueyang.add("userId", userId);
                         params_xueyang.add("times", times);
                         params_xueyang.add("bo", bo);
-                        CustomUtil.saveHealthInfo(context, BO_URL, params_xueyang,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BO_URL, params_xueyang,container);
                         break;
                     case Constant.FROM_YAOWEI:
                         RequestParams params_yaowei = new RequestParams();
                         params_yaowei.add("userId", userId);
                         params_yaowei.add("times", times);
                         params_yaowei.add("waistLine", waistLine);
-                        CustomUtil.saveHealthInfo(context, WL_URL, params_yaowei,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_WL_URL, params_yaowei,container);
                         break;
                     case Constant.FROM_TIZHONG:
                         RequestParams params_tizhong = new RequestParams();
                         params_tizhong.add("userId", userId);
                         params_tizhong.add("times", times);
                         params_tizhong.add("weight", weight);
-                        CustomUtil.saveHealthInfo(context, BMI_URL, params_tizhong,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BMI_URL, params_tizhong,container);
                         break;
                     case Constant.FROM_TIWEN:
                         RequestParams params_tiwen = new RequestParams();
                         params_tiwen.add("userId", userId);
                         params_tiwen.add("times", times);
                         params_tiwen.add("temperature", temperature);
-                        CustomUtil.saveHealthInfo(context, TP_URL, params_tiwen,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_TP_URL, params_tiwen,container);
                         break;
                     case Constant.FROM_XINDIAN:
                         RequestParams params_xindian = new RequestParams();
                         params_xindian.add("userId", userId);
                         params_xindian.add("times", times);
                         params_xindian.add("ecg", ecg);
-                        CustomUtil.saveHealthInfo(context, ECG_URL, params_xindian,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_ECG_URL, params_xindian,container);
                         break;
                 }
             }
@@ -321,6 +317,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 systolicPressure = down;
             }
         }
+
 //        Log.i("zxw", "userId：" + userId + "\n" + "times：" + times + "\n" + "hours：" + hours
 //                        + "\n" + "systolicPressure：" + systolicPressure + "\n" + "diastolicPressure：" + diastolicPressure
 //                        + "\n" + "height：" + height + "\n" + "weight：" + weight + "\n" + "bloodSugar：" + bloodSugar
@@ -806,7 +803,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void endSelect(int id, String text) {
                 str_mwhat = text;
-
+                Log.i("time_stype","------------------"+id);
                 _type = 4 + id;
             }
 
@@ -821,7 +818,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 tv_choicewhat.setText(str_mwhat);
                 if(fromWhere == Constant.FROM_XUETANG){
                     bpinput_bp_tv.setTextColor(getResources().getColor(R.color.color_normal));
-                    initFirstView(2, 14, 1, "6.0");
+//                    initFirstView(2, 14, 1, "6.0");
                 }
                 popupWindow.dismiss();
             }
@@ -967,7 +964,6 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 break;
             case 5:
                 for (int i = 0; i < mWhat.length; i++) {
-
                     list.add(mWhat[i]);
                 }
                 break;

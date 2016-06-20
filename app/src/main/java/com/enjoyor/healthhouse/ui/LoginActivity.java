@@ -82,7 +82,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private String phoneNumber;
     private String password;
 
-    private String LOGIN_URL = "account/applogin.action";
     public static final String FROM_BPINPUTACTIVITY = "FROM_BPINPUTACTIVITY";
     public static final String FROM_BPINPU_HISTORY = "FROM_BPINPU_HISTORY";
     public static final String FROM_SUISHOUJI = "FROM_SUISHOUJI";
@@ -206,7 +205,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         params.add("userLoginName", phoneNumber);
         params.add("userLoginPwd", password);
         params.add("userLoginType", String.valueOf("2"));
-        AsyncHttpUtil.post(UrlInterface.TEXT_URL + LOGIN_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.post(UrlInterface.LOGIN_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

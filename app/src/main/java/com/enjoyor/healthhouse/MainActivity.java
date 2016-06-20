@@ -18,7 +18,6 @@ import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 
 public class MainActivity extends BaseActivity {
-    private String LOGIN_URL = "account/applogin.action";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +44,7 @@ public class MainActivity extends BaseActivity {
             params.add("userLoginName", userInfo.getLoginName());
             params.add("userLoginPwd", userInfo.getUserLoginPwd());
             params.add("userLoginType", String.valueOf("2"));
-            AsyncHttpUtil.post(UrlInterface.TEXT_URL+LOGIN_URL, params, new AsyncHttpResponseHandler() {
+            AsyncHttpUtil.post(UrlInterface.LOGIN_URL, params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
                     String json = new String(bytes);

@@ -3,7 +3,6 @@ package com.enjoyor.healthhouse.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +88,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     ListView lv_information;
     private List<Article> article = new ArrayList<>();
     private View headView = null;
-    private String ARTICLES_URL = "articles/app/index.do";
     //经纬度
     double latitude;
     double longitude;
@@ -172,7 +170,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private void initArticle() {
         RequestParams params = new RequestParams();
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + ARTICLES_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.ARTICLES_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
@@ -222,7 +220,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             holder.tv_date.setText(article.get(position).getInterval());
             holder.tv_readnumber.setText("阅读量  " + article.get(position).getPageViews());
             if (article.get(position).getImages().size() > 0) {
-                Glide.with(getActivity()).load(UrlInterface.TEXT_URL + article.get(position).getImages().get(0).getPath()).into(holder.iv_infopic);
+                Glide.with(getActivity()).load(UrlInterface.FILE_URL  +"/"+article.get(position).getImages().get(0).getPath()).into(holder.iv_infopic);
             }
 
             return convertView;

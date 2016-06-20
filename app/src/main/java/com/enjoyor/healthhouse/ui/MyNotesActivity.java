@@ -78,8 +78,7 @@ public class MyNotesActivity extends BaseActivity {
     public void getDate(Long recordId) {
         RequestParams params = new RequestParams();
 
-        String url = UrlInterface.TEXT_URL + "record/notes/" + recordId + ".action";
-        AsyncHttpUtil.get(url, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.getNotes(recordId), params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

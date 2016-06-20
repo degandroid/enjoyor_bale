@@ -74,7 +74,6 @@ public class MyRecordActivity extends BaseActivity {
 
     private final int STATE_NORMAL = 1;
     private final int STATE_ABNORMAL = 2;
-    private String RECORD_URL = "app/getrecordofinfo.do";
 
     List<ItemMyRecord> list_abnormal = new ArrayList<>();
     List<ItemMyRecord> list_normal = new ArrayList<>();
@@ -109,7 +108,7 @@ public class MyRecordActivity extends BaseActivity {
 
         RequestParams params = new RequestParams();
         params.add("recordId", recordId + "");
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + RECORD_URL, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(UrlInterface.RECORD_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);

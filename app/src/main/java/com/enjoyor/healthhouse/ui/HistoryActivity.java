@@ -107,14 +107,6 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
 
     private String userId;
 
-    private String BP_URL = "app/bplist.do";//血压历史
-    private String BMI_URL = "app/bmilist.do";//身高体重历史
-    private String BS_URL = "app/bslist.do";//血糖历史
-    private String BO_URL = "app/bolist.do";//血氧历史
-    private String WL_URL = "app/whrlist.do";//腰围历史
-    private String TL_URL = "app/temperlist.do";//体温历史
-    private String ECG_URL = "app/ecglist.do";//心电历史
-
     private String _json_xueya;
     private String _json_shengao;
     private String _json_xuetang;
@@ -296,28 +288,28 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         params_xueya.add("pageCount", (6 * _count) + "");
         switch (fromWhere) {
             case Constant.FROM_XUEYA:
-                selectHealthInfo(BP_URL, params_xueya);
+                selectHealthInfo(UrlInterface.BP_URL, params_xueya);
                 break;
             case Constant.FROM_SHENGAO:
-                selectHealthInfo(BMI_URL, params_xueya);
+                selectHealthInfo(UrlInterface.BMI_URL, params_xueya);
                 break;
             case Constant.FROM_XUETANG:
-                selectHealthInfo(BS_URL, params_xueya);
+                selectHealthInfo(UrlInterface.BS_URL, params_xueya);
                 break;
             case Constant.FROM_XUEYANG:
-                selectHealthInfo(BO_URL, params_xueya);
+                selectHealthInfo(UrlInterface.BO_URL, params_xueya);
                 break;
             case Constant.FROM_YAOWEI:
-                selectHealthInfo(WL_URL, params_xueya);
+                selectHealthInfo(UrlInterface.WL_URL, params_xueya);
                 break;
             case Constant.FROM_TIZHONG:
-                selectHealthInfo(BMI_URL, params_xueya);
+                selectHealthInfo(UrlInterface.BMI_URL, params_xueya);
                 break;
             case Constant.FROM_TIWEN:
-                selectHealthInfo(TL_URL, params_xueya);
+                selectHealthInfo(UrlInterface.TL_URL, params_xueya);
                 break;
             case Constant.FROM_XINDIAN:
-                selectHealthInfo(ECG_URL, params_xueya);
+                selectHealthInfo(UrlInterface.ECG_URL, params_xueya);
                 break;
         }
 
@@ -385,7 +377,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
     }
 
     private boolean selectHealthInfo(String url, RequestParams params) {
-        AsyncHttpUtil.get(UrlInterface.TEXT_URL + url, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 stops();

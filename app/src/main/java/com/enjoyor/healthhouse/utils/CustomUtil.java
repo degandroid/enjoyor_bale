@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
-import com.enjoyor.healthhouse.url.UrlInterface;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -24,7 +23,7 @@ public class CustomUtil {
     public static Dialog dialog;
 
     public static boolean saveHealthInfo(final Context context,String url,RequestParams params,final CoordinatorLayout container) {
-        AsyncHttpUtil.post(UrlInterface.TEXT_URL + url, params, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
