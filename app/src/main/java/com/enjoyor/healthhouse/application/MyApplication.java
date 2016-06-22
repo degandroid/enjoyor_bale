@@ -25,6 +25,7 @@ public class MyApplication extends Application {
     private static Context context;
     public static boolean refrash = false;
     public static DisplayImageOptions options;
+    public static DisplayImageOptions option;
 
     public static String userName;
     public static Double jindu;
@@ -62,10 +63,20 @@ public class MyApplication extends Application {
         AppManagerUtil.getAppManager();
         SDKInitializer.initialize(context);
         ShareSDK.initSDK(context);
+        //加载图片imageloader属性
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.mipmap.bale)
                 .showImageForEmptyUri(R.mipmap.jiazaishibai)
                 .showImageOnFail(R.mipmap.jiazaishibai)
+                .cacheInMemory(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .displayer(new RoundedBitmapDisplayer(20))
+                .build();
+        //加载头像Imageloader属性
+        option = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.mipmap.bale)
+                .showImageForEmptyUri(R.mipmap.bale)
+                .showImageOnFail(R.mipmap.bale)
                 .cacheInMemory(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .displayer(new RoundedBitmapDisplayer(20))

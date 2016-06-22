@@ -375,18 +375,13 @@ android:visibility="gone"
 
         </LinearLayout>
 
-        <TextView
+        <Button
+            style="@style/Button_style"
             android:id="@+id/bpinput_save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_distance"
-            android:layout_marginRight="@dimen/layout_distance"
             android:layout_marginTop="50dp"
-            android:background="@drawable/btn_solid_greedyellow_radius"
             android:gravity="center"
             android:padding="@dimen/layout_distance"
             android:text="@string/save"
-            android:textColor="@color/colorWhite"
             android:textSize="@dimen/textsize_largetittle" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

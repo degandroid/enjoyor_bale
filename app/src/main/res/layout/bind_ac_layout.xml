@@ -110,16 +110,11 @@
         </View>
 
         <Button
+            style="@style/Button_style"
             android:id="@+id/myphone_bind"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_below="@id/myphone_line2"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
             android:layout_marginTop="60dp"
-            android:textColor="@color/white"
             android:layout_marginBottom="60dp"
-            android:background="@color/colorGreenYellow"
             android:text="绑定" />
 
     </LinearLayout>

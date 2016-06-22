@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 //        setImmerseLayout(findViewById(R.id.navigation));
         ButterKnife.bind(this);
         dialog = createLoadingDialog(LoginActivity.this, "正在跳转...");
-        dialog_login = createLoadingDialog(LoginActivity.this, "正在登陆...");
+        dialog_login = createLoadingDialog(LoginActivity.this, "正在登录...");
         if (getIntent().hasExtra(FROM_BPINPUTACTIVITY)) {
             isFromBpInputActivity = getIntent().getBooleanExtra(FROM_BPINPUTACTIVITY, false);
         }
@@ -327,6 +327,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 String json = JSON.toJSONString(((Platform) msg.obj).getDb());
                 ((Platform) msg.obj).removeAccount(true);
                 Log.d("wyy------jn----", json);
+
                 if (json != null) {
                     final RequestParams params = new RequestParams();
                     params.add("json", json);
@@ -344,6 +345,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                     dialog.dismiss();
                                 } else {
                                     BaseDate.setSessionId(LoginActivity.this, thirdLoginInfo.getUserInfo().getAccountId());
+                                    thirdLoginInfo.getUserInfo().setHeadImg("");
                                     if (StringUtils.isEmpty(thirdLoginInfo.getUserInfo().getHeadImg())) {
                                         String path = thirdLoginInfo.getPlatUser().getUserIcon();
                                         thirdLoginInfo.getUserInfo().setHeadImg(path);

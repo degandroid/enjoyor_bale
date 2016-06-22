@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,8 +39,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:paddingBottom="15sp"
                     android:layout_marginLeft="5dp"
+                    android:paddingBottom="15sp"
                     android:paddingRight="15sp"
                     android:paddingTop="20sp"
                     android:src="@mipmap/bl_icon_phone" />
@@ -51,10 +50,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:inputType="number"
                     android:layout_toRightOf="@+id/regist_phone"
                     android:background="@null"
                     android:hint="请输入手机号"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:textSize="@dimen/textsize_largetittle" />
 
@@ -96,10 +95,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:paddingBottom="15sp"
                     android:paddingRight="15sp"
                     android:paddingTop="20sp"
-                    android:layout_marginLeft="5dp"
                     android:src="@mipmap/bl_icon_lock" />
 
                 <EditText
@@ -149,10 +148,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
                     android:paddingBottom="15sp"
                     android:paddingRight="15sp"
                     android:paddingTop="20sp"
-                    android:layout_marginLeft="5dp"
                     android:src="@mipmap/bl_icon_key" />
 
                 <EditText
@@ -202,14 +201,9 @@
 
         <Button
             android:id="@+id/regist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_distance"
-            android:layout_marginRight="@dimen/layout_distance"
+            style="@style/Button_style"
             android:layout_marginTop="58px"
-            android:background="@drawable/btn_solid_greedyellow_radius"
             android:text="注册"
-            android:textColor="@color/colorWhite"
             android:textSize="@dimen/textsize_largetittle" />
 
 
@@ -229,9 +223,9 @@
             android:id="@+id/regist_choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:layout_gravity="center_vertical"
-            android:button="@drawable/checkbox_agreement" />
+            android:button="@drawable/checkbox_agreement"
+            android:checked="true" />
 
         <TextView
             android:layout_width="wrap_content"

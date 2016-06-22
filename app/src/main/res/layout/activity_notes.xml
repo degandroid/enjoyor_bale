@@ -11,17 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="1px">
-
-
         <TextView
-            android:textColor="@color/white"
             android:id="@+id/notes_commit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Button_style"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="100px"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:background="@mipmap/tijiaokuang"
             android:gravity="center"
@@ -90,16 +84,15 @@
             android:background="@color/colorWhite">
 
             <EditText
-                android:layout_marginBottom="45dp"
                 android:id="@+id/notes_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="45dp"
                 android:background="@null"
                 android:hint="记录您的健康"
                 android:padding="15dp" />
 
             <ImageView
-                android:layout_marginTop="30dp"
                 android:id="@+id/notes_luyin"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -107,16 +100,17 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginTop="30dp"
                 android:src="@mipmap/luyin" />
 
             <ImageView
-                android:layout_marginTop="30dp"
                 android:id="@+id/notes_photo"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginTop="30dp"
                 android:layout_toLeftOf="@id/notes_luyin"
                 android:src="@mipmap/tupian" />
 

@@ -114,7 +114,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             if (path != null && !path.startsWith("http://") && !path.startsWith("https://")) {
                 path = UrlInterface.FILE_URL + path;
             }
-            ImageLoader.getInstance().displayImage(path, mine_fg_logo, MyApplication.options);
+            ImageLoader.getInstance().displayImage(path, mine_fg_logo, MyApplication.option);
             mine_fg_login.setVisibility(View.GONE);
             mine_fg_regist.setVisibility(View.GONE);
             if (!StringUtils.isEmpty(MyApplication.getInstance().getDBHelper().getUser().getUserName())) {

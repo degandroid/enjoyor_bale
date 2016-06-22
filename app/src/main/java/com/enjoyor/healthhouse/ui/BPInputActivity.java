@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -58,7 +59,8 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     TextView tv_time;
     @Bind(R.id.ll_second)
     LinearLayout ll_second;//第二个刻度尺
-    @Bind(R.id.tv_second_bar)TextView tv_second_bar;
+    @Bind(R.id.tv_second_bar)
+    TextView tv_second_bar;
     @Bind(R.id.tv_date)
     TextView tv_date;
     @Bind(R.id.rl_choicedate)
@@ -96,9 +98,10 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.tv_display)
     TextView tv_display;//刻度尺数值描述
     @Bind(R.id.bpinput_save)
-    TextView bpinput_save;
+    Button bpinput_save;
 
-    @Bind(R.id.container)CoordinatorLayout container;
+    @Bind(R.id.container)
+    CoordinatorLayout container;
 
     private int fromWhere;
     private int CHOICE_DATE = 1;
@@ -132,6 +135,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
     private int FIRST_RULE = 1;
     private int SECOND_RULE = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,7 +151,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
     @OnClick(R.id.bpinput_save)
     public void onSaveClick() {
-        if (BaseDate.getSessionId(this)!=null) {
+        if (BaseDate.getSessionId(this) != null) {
             if (getDate()) {
                 switch (fromWhere) {
                     case Constant.FROM_XUEYA:
@@ -157,62 +161,62 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                         params_xueya.add("hours", hours);
                         params_xueya.add("systolicPressure", systolicPressure);
                         params_xueya.add("diastolicPressure", diastolicPressure);
-                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BP_URL, params_xueya,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BP_URL, params_xueya, container);
                         break;
                     case Constant.FROM_SHENGAO:
                         RequestParams params_shengao = new RequestParams();
                         params_shengao.add("userId", userId);
                         params_shengao.add("times", times);
                         params_shengao.add("height", height);
-                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BMI_URL, params_shengao,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BMI_URL, params_shengao, container);
                         break;
                     case Constant.FROM_XUETANG:
-                        Log.i("final_stype","userId"+userId+"\n"+"times"+times+"\n"+"bloodSugar"+bloodSugar+"\n"+"type"+ type);
+                        Log.i("final_stype", "userId" + userId + "\n" + "times" + times + "\n" + "bloodSugar" + bloodSugar + "\n" + "type" + type);
                         RequestParams params = new RequestParams();
                         params.add("userId", userId);
                         params.add("times", times);
                         params.add("bloodSugar", bloodSugar);
                         params.add("type", type);
-                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BS_URL, params,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BS_URL, params, container);
                         break;
                     case Constant.FROM_XUEYANG:
                         RequestParams params_xueyang = new RequestParams();
                         params_xueyang.add("userId", userId);
                         params_xueyang.add("times", times);
                         params_xueyang.add("bo", bo);
-                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BO_URL, params_xueyang,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BO_URL, params_xueyang, container);
                         break;
                     case Constant.FROM_YAOWEI:
                         RequestParams params_yaowei = new RequestParams();
                         params_yaowei.add("userId", userId);
                         params_yaowei.add("times", times);
                         params_yaowei.add("waistLine", waistLine);
-                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_WL_URL, params_yaowei,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_WL_URL, params_yaowei, container);
                         break;
                     case Constant.FROM_TIZHONG:
                         RequestParams params_tizhong = new RequestParams();
                         params_tizhong.add("userId", userId);
                         params_tizhong.add("times", times);
                         params_tizhong.add("weight", weight);
-                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BMI_URL, params_tizhong,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_BMI_URL, params_tizhong, container);
                         break;
                     case Constant.FROM_TIWEN:
                         RequestParams params_tiwen = new RequestParams();
                         params_tiwen.add("userId", userId);
                         params_tiwen.add("times", times);
                         params_tiwen.add("temperature", temperature);
-                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_TP_URL, params_tiwen,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_TP_URL, params_tiwen, container);
                         break;
                     case Constant.FROM_XINDIAN:
                         RequestParams params_xindian = new RequestParams();
                         params_xindian.add("userId", userId);
                         params_xindian.add("times", times);
                         params_xindian.add("ecg", ecg);
-                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_ECG_URL, params_xindian,container);
+                        CustomUtil.saveHealthInfo(context, UrlInterface.SAVE_ECG_URL, params_xindian, container);
                         break;
                 }
             }
-        }else{
+        } else {
             dialog(context, "亲,您还未登录，是否立即登录", "取消", "确定", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -242,23 +246,23 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
         /*----------------------------判断日期是否为空----------------------------*/
         String _date = tv_date.getText().toString();
-        if(StringUtils.isBlank(_date)||_date.equals("请选择")){
-            Snackbar.make(container,"请选择日期",Snackbar.LENGTH_SHORT).show();
+        if (StringUtils.isBlank(_date) || _date.equals("请选择")) {
+            Snackbar.make(container, "请选择日期", Snackbar.LENGTH_SHORT).show();
             return false;
-        }else{
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-            Date date_time=null;
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date_time = null;
             try {
-                date_time=sdf.parse(_date);//将String to Date类型
+                date_time = sdf.parse(_date);//将String to Date类型
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            long long_time=date_time.getTime()/1000;
+            long long_time = date_time.getTime() / 1000;
             int long_now = DateUtil.getCurrentTime();
-            if(long_time>long_now){
-                Snackbar.make(container,"选择时间大于当前时间",Snackbar.LENGTH_SHORT).show();
+            if (long_time > long_now) {
+                Snackbar.make(container, "选择时间大于当前时间", Snackbar.LENGTH_SHORT).show();
                 return false;
-            }else{
+            } else {
                 times = _date;
             }
         }
@@ -281,7 +285,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         /*----------------------------判断时间端的类型----------------------------*/
         if (_type == 4) {
             type = "1";
-        }else {
+        } else {
             type = _type + "";
         }
 
@@ -290,23 +294,23 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         if (fromWhere == Constant.FROM_XUEYA) {
             /*判断时间是否为空或者未选择*/
             String _times = tv_time.getText().toString();
-            if(StringUtils.isBlank(_times) ||_times.equals("请选择")){
-                Snackbar.make(container,"请选择时间",Snackbar.LENGTH_SHORT).show();
+            if (StringUtils.isBlank(_times) || _times.equals("请选择")) {
+                Snackbar.make(container, "请选择时间", Snackbar.LENGTH_SHORT).show();
                 return false;
-            }else{
-                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH");
-                Date date_time=null;
+            } else {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+                Date date_time = null;
                 try {
-                    date_time=sdf.parse(_date+" "+_times);//将String to Date类型
+                    date_time = sdf.parse(_date + " " + _times);//将String to Date类型
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                long long_time=date_time.getTime()/1000;
+                long long_time = date_time.getTime() / 1000;
                 int long_now = DateUtil.getCurrentTime();
-                if(long_time>long_now){
-                    Snackbar.make(container,"选择时间大于当前时间",Snackbar.LENGTH_SHORT).show();
+                if (long_time > long_now) {
+                    Snackbar.make(container, "选择时间大于当前时间", Snackbar.LENGTH_SHORT).show();
                     return false;
-                }else{
+                } else {
                     hours = _times;
                 }
             }
@@ -402,70 +406,70 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 break;
         }
 
-            tv_right.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (BaseDate.getSessionId(BPInputActivity.this) != null) {
-                        switch (fromWhere) {
-                            case Constant.FROM_XUEYA:
-                                Intent intent_xueya = new Intent(context, HistoryActivity.class);
-                                intent_xueya.putExtra("fromWhere", Constant.FROM_XUEYA);
-                                startActivity(intent_xueya);
-                                break;
-                            case Constant.FROM_SHENGAO:
-                                Intent intent_shengao = new Intent(context, HistoryActivity.class);
-                                intent_shengao.putExtra("fromWhere", Constant.FROM_SHENGAO);
-                                startActivity(intent_shengao);
-                                break;
-                            case Constant.FROM_XUETANG:
-                                Intent intent_xuetang = new Intent(context, HistoryActivity.class);
-                                intent_xuetang.putExtra("fromWhere", Constant.FROM_XUETANG);
-                                startActivity(intent_xuetang);
-                                break;
-                            case Constant.FROM_XUEYANG:
-                                Intent intent_xueyang = new Intent(context, HistoryActivity.class);
-                                intent_xueyang.putExtra("fromWhere", Constant.FROM_XUEYANG);
-                                startActivity(intent_xueyang);
-                                break;
-                            case Constant.FROM_YAOWEI:
-                                Intent intent_yaowei = new Intent(context, HistoryActivity.class);
-                                intent_yaowei.putExtra("fromWhere", Constant.FROM_YAOWEI);
-                                startActivity(intent_yaowei);
-                                break;
-                            case Constant.FROM_TIZHONG:
-                                Intent intent_tizhong = new Intent(context, HistoryActivity.class);
-                                intent_tizhong.putExtra("fromWhere", Constant.FROM_TIZHONG);
-                                startActivity(intent_tizhong);
-                                break;
-                            case Constant.FROM_TIWEN:
-                                Intent intent_tiwen = new Intent(context, HistoryActivity.class);
-                                intent_tiwen.putExtra("fromWhere", Constant.FROM_TIWEN);
-                                startActivity(intent_tiwen);
-                                break;
-                            case Constant.FROM_XINDIAN:
-                                Intent intent_xindian = new Intent(context, HistoryActivity.class);
-                                intent_xindian.putExtra("fromWhere", Constant.FROM_XINDIAN);
-                                startActivity(intent_xindian);
-                                break;
-                        }
-                    } else {
-                        dialog(context, "亲,您还未登录，是否立即登录", "取消", "确定", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                disappear();
-                            }
-                        }, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(BPInputActivity.this, LoginActivity.class);
-                                intent.putExtra(LoginActivity.FROM_BPINPU_HISTORY, true);
-                                startActivity(intent);
-                                disappear();
-                            }
-                        });
+        tv_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (BaseDate.getSessionId(BPInputActivity.this) != null) {
+                    switch (fromWhere) {
+                        case Constant.FROM_XUEYA:
+                            Intent intent_xueya = new Intent(context, HistoryActivity.class);
+                            intent_xueya.putExtra("fromWhere", Constant.FROM_XUEYA);
+                            startActivity(intent_xueya);
+                            break;
+                        case Constant.FROM_SHENGAO:
+                            Intent intent_shengao = new Intent(context, HistoryActivity.class);
+                            intent_shengao.putExtra("fromWhere", Constant.FROM_SHENGAO);
+                            startActivity(intent_shengao);
+                            break;
+                        case Constant.FROM_XUETANG:
+                            Intent intent_xuetang = new Intent(context, HistoryActivity.class);
+                            intent_xuetang.putExtra("fromWhere", Constant.FROM_XUETANG);
+                            startActivity(intent_xuetang);
+                            break;
+                        case Constant.FROM_XUEYANG:
+                            Intent intent_xueyang = new Intent(context, HistoryActivity.class);
+                            intent_xueyang.putExtra("fromWhere", Constant.FROM_XUEYANG);
+                            startActivity(intent_xueyang);
+                            break;
+                        case Constant.FROM_YAOWEI:
+                            Intent intent_yaowei = new Intent(context, HistoryActivity.class);
+                            intent_yaowei.putExtra("fromWhere", Constant.FROM_YAOWEI);
+                            startActivity(intent_yaowei);
+                            break;
+                        case Constant.FROM_TIZHONG:
+                            Intent intent_tizhong = new Intent(context, HistoryActivity.class);
+                            intent_tizhong.putExtra("fromWhere", Constant.FROM_TIZHONG);
+                            startActivity(intent_tizhong);
+                            break;
+                        case Constant.FROM_TIWEN:
+                            Intent intent_tiwen = new Intent(context, HistoryActivity.class);
+                            intent_tiwen.putExtra("fromWhere", Constant.FROM_TIWEN);
+                            startActivity(intent_tiwen);
+                            break;
+                        case Constant.FROM_XINDIAN:
+                            Intent intent_xindian = new Intent(context, HistoryActivity.class);
+                            intent_xindian.putExtra("fromWhere", Constant.FROM_XINDIAN);
+                            startActivity(intent_xindian);
+                            break;
                     }
+                } else {
+                    dialog(context, "亲,您还未登录，是否立即登录", "取消", "确定", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            disappear();
+                        }
+                    }, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(BPInputActivity.this, LoginActivity.class);
+                            intent.putExtra(LoginActivity.FROM_BPINPU_HISTORY, true);
+                            startActivity(intent);
+                            disappear();
+                        }
+                    });
                 }
-            });
+            }
+        });
 
 
     }
@@ -514,21 +518,21 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onChanged(RulerWheel wheel, String oldValue, String newValue) {
 
-                int a = (int)Float.parseFloat(newValue);
-                if(a<=to&&a>=from){
+                int a = (int) Float.parseFloat(newValue);
+                if (a <= to && a >= from) {
                     bpinput_bp_tv.setText(newValue);
                 }
                 if (a > to) {
-                    bpinput_bp_tv.setText(to+"");
+                    bpinput_bp_tv.setText(to + "");
                     bpinput_up.setSelectedValue(to + "");
                 }
                 if (a < from) {
-                    bpinput_bp_tv.setText(from+"");
+                    bpinput_bp_tv.setText(from + "");
                     bpinput_up.setSelectedValue(from + "");
                 }
-                if(fromWhere == Constant.FROM_XUETANG ||fromWhere == Constant.FROM_XUEYANG || fromWhere ==Constant.FROM_TIWEN){
+                if (fromWhere == Constant.FROM_XUETANG || fromWhere == Constant.FROM_XUEYANG || fromWhere == Constant.FROM_TIWEN) {
                     changeColor(Float.parseFloat(newValue));
-                }else{
+                } else {
                     changeColor(Integer.parseInt(newValue));
                 }
             }
@@ -554,9 +558,9 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
                 break;
             case Constant.FROM_XUETANG:
-                if(_type==4||_type==6||_type==8){
+                if (_type == 4 || _type == 6 || _type == 8) {
                     changeColorFunction(a, 4.4f, 7.0f);
-                }else{
+                } else {
                     changeColorFunction(a, 4.4f, 10.0f);
                 }
 
@@ -588,7 +592,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void initSecondView(final int from,final int to, int span, int value) {
+    private void initSecondView(final int from, final int to, int span, int value) {
         List<String> list = new ArrayList<>();
         for (int i = from; i <= to; i += span) {
             list.add(i + "");
@@ -612,11 +616,11 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                     bpinput_bp_tv_low.setText(newValue + "");
                     bpinput_bp_tv_low.setTextColor(getResources().getColor(R.color.color_abnormal));
                 }
-                if (a > to){
+                if (a > to) {
                     bpinput_bp_tv_low.setText(to + "");
-                    bpinput_low.setSelectedValue(to+"");
+                    bpinput_low.setSelectedValue(to + "");
                 }
-                if(a<from){
+                if (a < from) {
                     bpinput_bp_tv_low.setText(from + "");
                     bpinput_low.setSelectedValue(from + "");
                 }
@@ -642,17 +646,17 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
         switch (key) {
             case R.id.bpinput_img_up_jian:
-                updateData(FIRST_RULE,1, _strng, bpinput_bp_tv, bpinput_up);
+                updateData(FIRST_RULE, 1, _strng, bpinput_bp_tv, bpinput_up);
                 break;
             case R.id.bpinput_img_up_jia:
-                updateData(FIRST_RULE,2, _strng, bpinput_bp_tv, bpinput_up);
+                updateData(FIRST_RULE, 2, _strng, bpinput_bp_tv, bpinput_up);
                 break;
             case R.id.bpinput_img_low_jian:
-                updateData(SECOND_RULE,1, _strng_second, bpinput_bp_tv_low, bpinput_low);
+                updateData(SECOND_RULE, 1, _strng_second, bpinput_bp_tv_low, bpinput_low);
                 break;
             case R.id.bpiinput_img_up_jia:
 
-                updateData(SECOND_RULE,2, _strng_second, bpinput_bp_tv_low, bpinput_low);
+                updateData(SECOND_RULE, 2, _strng_second, bpinput_bp_tv_low, bpinput_low);
                 break;
             case R.id.rl_choicedate:
                 initPopuptWindow(v, CHOICE_DATE);
@@ -666,7 +670,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void updateData(int which,int i, String str, TextView id, RulerWheel view) {
+    private void updateData(int which, int i, String str, TextView id, RulerWheel view) {
         if (fromWhere == Constant.FROM_XUETANG || fromWhere == Constant.FROM_TIWEN || fromWhere == Constant.FROM_XUEYANG) {
             float value_float = Float.parseFloat(str);
             if (i == 1) {
@@ -676,13 +680,12 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             }
             DecimalFormat fnum = new DecimalFormat("##0.0");
             String value = fnum.format(value_float);
-            if(isFloatRight(value_float,which)){
+            if (isFloatRight(value_float, which)) {
                 id.setText(value + "");
                 view.setSelectedValue(value + "");
 
                 view.invalidate();
-            }
-            else{
+            } else {
 //                Toast.makeText(context, "超出范围", Toast.LENGTH_LONG).show();
                 Snackbar.make(container, "超出范围", Snackbar.LENGTH_LONG).show();
                 return;
@@ -694,12 +697,11 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             } else {
                 value_int++;
             }
-            if (isFloatRight(value_int,which)) {
+            if (isFloatRight(value_int, which)) {
                 id.setText(value_int + "");
                 view.setSelectedValue(value_int + "");
                 view.invalidate();
-            }
-            else{
+            } else {
 //                Toast.makeText(context,"超出范围",Toast.LENGTH_LONG).show();
                 Snackbar.make(container, "超出范围", Snackbar.LENGTH_LONG).show();
             }
@@ -707,54 +709,54 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    private boolean isFloatRight(float str,int which) {
+    private boolean isFloatRight(float str, int which) {
 
         float a = str;
-        switch (fromWhere){
+        switch (fromWhere) {
             case Constant.FROM_XUEYA:
-                if(which == FIRST_RULE){
-                    if(a<0||a>100){
+                if (which == FIRST_RULE) {
+                    if (a < 0 || a > 100) {
                         return false;
                     }
                 }
-                if(which == SECOND_RULE){
-                    if(a<0||a>200){
+                if (which == SECOND_RULE) {
+                    if (a < 0 || a > 200) {
                         return false;
                     }
                 }
                 break;
             case Constant.FROM_SHENGAO:
-                if(a<100||a>240){
+                if (a < 100 || a > 240) {
                     return false;
                 }
                 break;
             case Constant.FROM_XUETANG:
-                if(a<2||a>14.9){
+                if (a < 2 || a > 14.9) {
                     return false;
                 }
                 break;
             case Constant.FROM_XUEYANG:
-                if(a<50||a>99.9){
+                if (a < 50 || a > 99.9) {
                     return false;
                 }
                 break;
             case Constant.FROM_YAOWEI:
-                if(a<50||a>100){
+                if (a < 50 || a > 100) {
                     return false;
                 }
                 break;
             case Constant.FROM_TIZHONG:
-                if(a<30||a>150){
+                if (a < 30 || a > 150) {
                     return false;
                 }
                 break;
             case Constant.FROM_TIWEN:
-                if(a<35||a>41.9){
+                if (a < 35 || a > 41.9) {
                     return false;
                 }
                 break;
             case Constant.FROM_XINDIAN:
-                if(a<40||a>110){
+                if (a < 40 || a > 110) {
                     return false;
                 }
                 break;
@@ -803,7 +805,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void endSelect(int id, String text) {
                 str_mwhat = text;
-                Log.i("time_stype","------------------"+id);
+                Log.i("time_stype", "------------------" + id);
                 _type = 4 + id;
             }
 
@@ -816,7 +818,7 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onClick(View v) {
                 tv_choicewhat.setText(str_mwhat);
-                if(fromWhere == Constant.FROM_XUETANG){
+                if (fromWhere == Constant.FROM_XUETANG) {
                     bpinput_bp_tv.setTextColor(getResources().getColor(R.color.color_normal));
 //                    initFirstView(2, 14, 1, "6.0");
                 }
@@ -886,13 +888,14 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
         String string_day = DateUtil.longToDateString(date, "dd");
         int day = Integer.parseInt(string_day);
         wv_year.setDefault(9);
-        wv_mouth.setDefault(mouth-1);
-        wv_day.setDefault(day-1);
+        wv_mouth.setDefault(mouth - 1);
+        wv_day.setDefault(day - 1);
         wv_year.setOnSelectListener(new WheelView.OnSelectListener() {
             @Override
             public void endSelect(int id, String text) {
                 str_year = text;
             }
+
             @Override
             public void selecting(int id, String text) {
             }

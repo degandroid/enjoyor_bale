@@ -6,147 +6,144 @@
     android:orientation="vertical">
 
     <include layout="@layout/navigationbar_layout"></include>
+
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
 
-        <RelativeLayout
-            android:id="@+id/modifypwd_top"
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
-
-            <ImageView
-                android:id="@+id/modifypwd_key"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
-                android:src="@mipmap/bl_icon_key" />
-
-            <EditText
-                android:inputType="textPassword"
-                android:id="@+id/modifypwd_et_access"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/modifypwd_key"
-                android:background="@null"
-                android:hint="请输入原密码" />
-
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/modifypwd_line"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/modifypwd_top"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/color_line">
-
-        </View>
-
-        <RelativeLayout
-            android:id="@+id/modifypwd_mid"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_below="@id/modifypwd_line">
-
-            <ImageView
-                android:id="@+id/modifypwd_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
-                android:src="@mipmap/suo" />
-
-            <EditText
-                android:id="@+id/modify_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/modifypwd_phone"
-                android:background="@null"
-                android:hint="请输入新密码"
-                android:inputType="textPassword" />
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/modifypwd_line1"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/modifypwd_mid"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/color_line">
-
-        </View>
-
-        <RelativeLayout
-            android:id="@+id/modifypwd_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_below="@id/modifypwd_line1">
-
-            <ImageView
-                android:id="@+id/modifypwd_key_bottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
-                android:src="@mipmap/suo" />
-
-            <EditText
-                android:id="@+id/modify_again_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/modifypwd_key_bottom"
-                android:background="@null"
-                android:hint="请再次输入密码"
-                android:inputType="textPassword" />
-
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/modifypwd_line2"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/modifypwd_bottom"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/color_line">
-
-        </View>
-
-        <Button
-            android:id="@+id/modify_save"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:background="@color/colorGreenYellow"
-            android:text="保存"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textsize_largetittle" />
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/modifypwd_top"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+
+                <ImageView
+                    android:id="@+id/modifypwd_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"
+                    android:src="@mipmap/bl_icon_key" />
+
+                <EditText
+                    android:id="@+id/modifypwd_et_access"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toRightOf="@id/modifypwd_key"
+                    android:background="@null"
+                    android:hint="请输入原密码"
+                    android:inputType="textPassword" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/modifypwd_line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/modifypwd_top"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/color_line">
+
+            </View>
+
+            <RelativeLayout
+                android:id="@+id/modifypwd_mid"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@id/modifypwd_line">
+
+                <ImageView
+                    android:id="@+id/modifypwd_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"
+                    android:src="@mipmap/suo" />
+
+                <EditText
+                    android:id="@+id/modify_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toRightOf="@id/modifypwd_phone"
+                    android:background="@null"
+                    android:hint="请输入新密码"
+                    android:inputType="textPassword" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/modifypwd_line1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/modifypwd_mid"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/color_line">
+
+            </View>
+
+            <RelativeLayout
+                android:id="@+id/modifypwd_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@id/modifypwd_line1">
+
+                <ImageView
+                    android:id="@+id/modifypwd_key_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="25dp"
+                    android:src="@mipmap/suo" />
+
+                <EditText
+                    android:id="@+id/modify_again_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toRightOf="@id/modifypwd_key_bottom"
+                    android:background="@null"
+                    android:hint="请再次输入密码"
+                    android:inputType="textPassword" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/modifypwd_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/modifypwd_bottom"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/color_line">
+
+            </View>
+
+            <Button
+                android:id="@+id/modify_save"
+                style="@style/Button_style"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:text="保存"
+                android:textSize="@dimen/textsize_largetittle" />
+
+        </LinearLayout>
 
 
     </android.support.design.widget.CoordinatorLayout>

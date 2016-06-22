@@ -32,6 +32,7 @@ import com.enjoyor.healthhouse.utils.DateUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.apache.http.Header;
 
@@ -109,8 +110,9 @@ public class HealthFileActivity extends BaseActivity implements XListView.IXList
                 if (path != null && !path.startsWith("http://") && !path.startsWith("https://")) {
                     path = UrlInterface.FILE_URL + path;
                 }
-                Log.i("path",path);
-                Glide.with(HealthFileActivity.this).load(path).into(iv_userhead);
+                Log.i("path", path);
+//                Glide.with(HealthFileActivity.this).load(path).into(iv_userhead);
+                ImageLoader.getInstance().displayImage(path, iv_userhead, MyApplication.option);
             }
         }
 

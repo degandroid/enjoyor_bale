@@ -5,27 +5,30 @@
     android:orientation="vertical">
 
     <include layout="@layout/navigationbar_layout"></include>
+
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical">
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/setting_ac_help"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="45dp">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <!--<TextView-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/setting_ac_help"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="45dp">-->
+
+                <!--<TextView-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_centerVertical="true"-->
@@ -33,27 +36,27 @@
                 <!--android:layout_marginLeft="18dp"-->
                 <!--android:text="使用帮助" />-->
 
-            <!--<ImageView-->
+                <!--<ImageView-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_alignParentRight="true"-->
                 <!--android:layout_centerVertical="true"-->
                 <!--android:layout_marginRight="18dp"-->
                 <!--android:src="@mipmap/xiangyou" />-->
-        <!--</RelativeLayout>-->
+                <!--</RelativeLayout>-->
 
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1px"-->
-            <!--android:layout_marginLeft="18dp"-->
-            <!--android:background="@color/color_line"></View>-->
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1px"-->
+                <!--android:layout_marginLeft="18dp"-->
+                <!--android:background="@color/color_line"></View>-->
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/setting_ac_secret"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="45dp">-->
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/setting_ac_secret"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="45dp">-->
 
-            <!--<TextView-->
+                <!--<TextView-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_centerVertical="true"-->
@@ -61,135 +64,131 @@
                 <!--android:layout_marginLeft="18dp"-->
                 <!--android:text="隐私" />-->
 
-            <!--<ImageView-->
+                <!--<ImageView-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_alignParentRight="true"-->
                 <!--android:layout_centerVertical="true"-->
                 <!--android:layout_marginRight="18dp"-->
                 <!--android:src="@mipmap/xiangyou" />-->
-        <!--</RelativeLayout>-->
+                <!--</RelativeLayout>-->
 
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1px"-->
-            <!--android:layout_marginLeft="18dp"-->
-            <!--android:background="@color/color_line"></View>-->
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1px"-->
+                <!--android:layout_marginLeft="18dp"-->
+                <!--android:background="@color/color_line"></View>-->
 
-        <RelativeLayout
-            android:id="@+id/setting_ac_cach"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
+                <RelativeLayout
+                    android:id="@+id/setting_ac_cach"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="18dp"
-                android:text="清理缓存" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:text="清理缓存" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="18dp"
-                android:src="@mipmap/xiangyou" />
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="18dp"
-            android:background="@color/color_line"></View>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="18dp"
+                    android:background="@color/color_line"></View>
 
-        <RelativeLayout
-            android:id="@+id/setting_ac_about"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
+                <RelativeLayout
+                    android:id="@+id/setting_ac_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="18dp"
-                android:text="关于我们" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:text="关于我们" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="18dp"
-                android:src="@mipmap/xiangyou" />
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="18dp"
-            android:background="@color/color_line"></View>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="18dp"
+                    android:background="@color/color_line"></View>
 
-        <RelativeLayout
-            android:id="@+id/setting_ac_version"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
+                <RelativeLayout
+                    android:id="@+id/setting_ac_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="18dp"
-                android:text="版本信息" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:text="版本信息" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="18dp"
-                android:src="@mipmap/xiangyou" />
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="18dp"
-            android:background="@color/color_line"></View>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="18dp"
+                    android:background="@color/color_line"></View>
 
-        <RelativeLayout
-            android:id="@+id/setting_ac_speak"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
+                <RelativeLayout
+                    android:id="@+id/setting_ac_speak"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/mine_fg_mm_img"
-                android:layout_marginLeft="18dp"
-                android:text="服务与声明" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="18dp"
+                        android:layout_toRightOf="@+id/mine_fg_mm_img"
+                        android:text="服务与声明" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="18dp"
-                android:src="@mipmap/xiangyou" />
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="18dp"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/setting_exit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginTop="70px"
-        android:background="@color/colorGreenYellow"
-        android:text="退出登录" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/setting_exit"
+                style="@style/Button_style"
+                android:layout_marginTop="70px"
+                android:text="退出登录" />
+        </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
