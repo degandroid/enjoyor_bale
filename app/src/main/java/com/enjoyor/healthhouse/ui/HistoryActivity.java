@@ -117,6 +117,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
     private String _json_xindian;
 
     private List<HistoryInfoList> historyInfoLists = new ArrayList<>();
+    private List<HistoryInfoList> bmi_to_json = new ArrayList<>();
     private Page page;
     private int count = 1;
     private String url;
@@ -247,7 +248,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                 tv_twotittle_two.setText("体重");
                 ll_history_shengao.setVisibility(View.VISIBLE);
                 ll_nocircle.setVisibility(View.VISIBLE);
-                tv_nocircle_info.setText("男性：（身高cm-80）*70%=标准体重" + "\n" + "nv性：（身高cm-70）*60%=标准体重");
+                tv_nocircle_info.setText("男性：（身高cm-80）*70%=标准体重" + "\n" + "女性：（身高cm-70）*60%=标准体重");
                 break;
             case Constant.FROM_TIWEN:
                 navigation_name.setText("体温历史");
@@ -395,9 +396,16 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                             break;
                         case Constant.FROM_SHENGAO:
                             List<HistoryInfoList> _list_shengao = historyInfoModel.getBmilist();
-                            _json_shengao = JSON.toJSONString(_list_shengao);
+                            bmi_to_json.clear();
+
+                            for(int j=0;j<_list_shengao.size();j++){
+                                if(_list_shengao.get(j).getHeight()!=null){
+                                    bmi_to_json.add(_list_shengao.get(j));
+                                }
+                            }
+                            _json_shengao = JSON.toJSONString(bmi_to_json);
                             Log.i("_json_shengao", _json_shengao);
-                            historyInfoLists.addAll(_list_shengao);
+                            historyInfoLists.addAll(bmi_to_json);
                             Log.i("_json_shengao", historyInfoLists.toString());
                             break;
                         case Constant.FROM_XUETANG:
@@ -420,9 +428,17 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                             break;
                         case Constant.FROM_TIZHONG:
                             List<HistoryInfoList> _list_tizhong = historyInfoModel.getBmilist();
-                            _json_tizhong = JSON.toJSONString(_list_tizhong);
+
+                            bmi_to_json.clear();
+
+                            for(int j=0;j<_list_tizhong.size();j++){
+                                if(_list_tizhong.get(j).getWeight()!=null){
+                                    bmi_to_json.add(_list_tizhong.get(j));
+                                }
+                            }
+                            _json_tizhong = JSON.toJSONString(bmi_to_json);
                             Log.i("_json_shengao", _json_tizhong);
-                            historyInfoLists.addAll(_list_tizhong);
+                            historyInfoLists.addAll(bmi_to_json);
                             break;
                         case Constant.FROM_TIWEN:
                             List<HistoryInfoList> _list_tiwen = historyInfoModel.getTemperlist();

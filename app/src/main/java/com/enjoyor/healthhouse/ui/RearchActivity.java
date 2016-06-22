@@ -91,8 +91,8 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
 
         RequestParams params = new RequestParams();
         params.add("name", name);
-        params.add("pageNum", 1+"");
-        params.add("pageCount", (10*count)+"");
+        params.add("pageNum", count+"");
+        params.add("pageCount", 10+"");
 
         Log.i("searchName", name + count);
         AsyncHttpUtil.get(UrlInterface.FOOD_URL, params, new AsyncHttpResponseHandler() {
@@ -103,7 +103,7 @@ public class RearchActivity extends BaseActivity implements XListView.IXListView
                 if (apiMessage.Code == 1001) {
                     Food food = JsonHelper.getJson(apiMessage.Data, Food.class);
                     List<Food.FoodList> _list = food.getList();
-                    foodList.clear();
+//                    foodList.clear();
                     foodList.addAll(_list);
                     if (foodList.size() > 0) {
                         xlv_food.setVisibility(View.VISIBLE);

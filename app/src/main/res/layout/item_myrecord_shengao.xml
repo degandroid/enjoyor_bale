@@ -63,7 +63,9 @@
                     android:layout_weight="1"
                     android:text="name"
                     android:gravity="right"
-                    android:padding="@dimen/layout_distance"
+                    android:paddingRight="@dimen/layout_distance"
+                    android:paddingBottom="@dimen/layout_distance"
+                    android:paddingTop="@dimen/layout_distance"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout

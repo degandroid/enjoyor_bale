@@ -233,7 +233,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
 
     private void initListView() {
         xlv_food.setPullRefreshEnable(false);
-        xlv_food.setPullLoadEnable(true);
+        xlv_food.setPullLoadEnable(false);
         xlv_food.setXListViewListener(this);
         xlv_food.setAdapter(new FoodAdapater());
         xlv_food.setSelection((count - 1) * 6);
@@ -246,7 +246,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onLoadMore() {
-        getDate(searchName, count++);
+//        getDate(searchName, count++);
     }
 
     class FoodAdapater extends BaseAdapter {
@@ -570,7 +570,8 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         value = Float.parseFloat(_value);
 
         getWebView();
-        String time = DateUtil.longToDateString(DateUtil.getCurrentTime(), "yyyy-MM-dd hh:mm:ss");
+        String time = DateUtil.longToDateString(DateUtil.getCurrentTime(), "yyyy-MM-dd HH:mm:ss");
+
         BMI _bmi = new BMI();
         _bmi.setRecordTime(time);
         _bmi.setCreateTime(time);
@@ -622,7 +623,7 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
         RequestParams params = new RequestParams();
         params.add("name", name);
         params.add("pageNum", 1+"");
-        params.add("pageCount",(10*count)+"");
+        params.add("pageCount",10+"");
 
         Log.i("searchName", name + count);
         AsyncHttpUtil.get(UrlInterface.FOOD_URL, params, new AsyncHttpResponseHandler() {
@@ -633,8 +634,10 @@ public class ItemServiceActivity extends BaseActivity implements View.OnClickLis
                 if (apiMessage.Code == 1001) {
                     Food food = JsonHelper.getJson(apiMessage.Data, Food.class);
                     List<Food.FoodList> _list = food.getList();
+                    foodList.clear();
                     foodList.addAll(_list);
                     if (foodList.size() > 0) {
+                        xlv_food.setVisibility(View.VISIBLE);
                         initListView();
                     } else {
                         xlv_food.setVisibility(View.GONE);

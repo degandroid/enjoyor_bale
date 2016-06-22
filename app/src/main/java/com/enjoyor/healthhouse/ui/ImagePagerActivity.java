@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
@@ -36,6 +37,7 @@ public class ImagePagerActivity extends FragmentActivity {
 
 		if(getIntent().hasExtra(EXTRA_VOICE_ID)){
 			voice = getIntent().getIntExtra(EXTRA_VOICE_ID,0);
+			Log.i("voice",voice+"");
 		}
 
 		pagerPosition = getIntent().getIntExtra(EXTRA_IMAGE_INDEX, 0);

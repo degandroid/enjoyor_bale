@@ -66,12 +66,13 @@ public class ListItemAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		NoteInfo itemEntity = items.get(position);
+		final NoteInfo itemEntity = items.get(position);
 		holder.tv_title.setText(itemEntity.getCreatetime());
 		holder.tv_content.setText(itemEntity.getContent());
 		holder.tv_where.setText(address);
 
 		MusicVoice = itemEntity.getVoice();
+		Log.i("_MusicVoice",MusicVoice+"");
 		final ArrayList<String> imageUrls = itemEntity.getImgs();
 
 		if (imageUrls == null || imageUrls.size() == 0) { // 没有图片资源就隐藏GridView
@@ -87,7 +88,7 @@ public class ListItemAdapter extends BaseAdapter {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				imageBrower(position, imageUrls);
+				imageBrower(position, imageUrls,itemEntity.getVoice());
 			}
 		});
 		return convertView;
@@ -99,11 +100,13 @@ public class ListItemAdapter extends BaseAdapter {
 	 * @param position
 	 * @param urls2
 	 */
-	protected void imageBrower(int position, ArrayList<String> urls2) {
+	protected void imageBrower(int position, ArrayList<String> urls2,int voice) {
 		Intent intent = new Intent(mContext, ImagePagerActivity.class);
 		// 图片url,为了演示这里使用常量，一般从数据库中或网络中获取
 		intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
-		intent.putExtra(ImagePagerActivity.EXTRA_VOICE_ID, MusicVoice);
+
+		intent.putExtra(ImagePagerActivity.EXTRA_VOICE_ID, voice);
+		Log.i("MusicVoice",MusicVoice+"");
 		intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
 		mContext.startActivity(intent);
 

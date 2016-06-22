@@ -109,9 +109,9 @@ public class MySelfCheckActivity extends BaseActivity {
     }
 
     private void initView() {
+
         for (int i = 0; i < bos.size(); i++) {
             MyZijianInfo.BOS mBOS = bos.get(i);
-
             View view = LayoutInflater.from(context).inflate(R.layout.item_myrecord_shengao, null);
             TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
             TextView tv_result = (TextView) view.findViewById(R.id.tv_result);

@@ -62,7 +62,9 @@
                     android:text="4.4-7.0"
                     android:gravity="right|center_vertical"
 
-                    android:padding="@dimen/layout_distance"
+                    android:paddingRight="@dimen/layout_distance"
+                    android:paddingBottom="@dimen/layout_distance"
+                    android:paddingTop="@dimen/layout_distance"
                     android:layout_height="fill_parent" />
         </LinearLayout>
             <TextView
@@ -107,7 +109,9 @@
                     android:layout_weight="1"
                     android:text="4.4-10.0"
                     android:gravity="right|center_vertical"
-                    android:padding="@dimen/layout_distance"
+                    android:paddingRight="@dimen/layout_distance"
+                    android:paddingBottom="@dimen/layout_distance"
+                    android:paddingTop="@dimen/layout_distance"
                     android:layout_height="fill_parent" />
             </LinearLayout>
         </LinearLayout>
@@ -175,7 +179,9 @@
                     android:layout_weight="1"
                     android:text="4.4-7.0"
                     android:gravity="right|center_vertical"
-                    android:padding="@dimen/layout_distance"
+                    android:paddingRight="@dimen/layout_distance"
+                    android:paddingBottom="@dimen/layout_distance"
+                    android:paddingTop="@dimen/layout_distance"
                     android:layout_height="fill_parent" />
             </LinearLayout>
             <TextView
@@ -220,7 +226,9 @@
                     android:layout_weight="1"
                     android:text="4.4-10.0"
                     android:gravity="right|center_vertical"
-                    android:padding="@dimen/layout_distance"
+                    android:paddingRight="@dimen/layout_distance"
+                    android:paddingBottom="@dimen/layout_distance"
+                    android:paddingTop="@dimen/layout_distance"
                     android:layout_height="fill_parent" />
             </LinearLayout>
         </LinearLayout>
@@ -288,7 +296,9 @@
                     android:layout_weight="1"
                     android:text="4.4-7.0"
                     android:gravity="right|center_vertical"
-                    android:padding="@dimen/layout_distance"
+                    android:paddingRight="@dimen/layout_distance"
+                    android:paddingBottom="@dimen/layout_distance"
+                    android:paddingTop="@dimen/layout_distance"
                     android:layout_height="fill_parent" />
             </LinearLayout>
             <TextView
@@ -333,7 +343,9 @@
                     android:layout_weight="1"
                     android:text="4.4-10.0"
                     android:gravity="right|center_vertical"
-                    android:padding="@dimen/layout_distance"
+                    android:paddingRight="@dimen/layout_distance"
+                    android:paddingBottom="@dimen/layout_distance"
+                    android:paddingTop="@dimen/layout_distance"
                     android:layout_height="fill_parent" />
             </LinearLayout>
         </LinearLayout>
@@ -395,7 +407,9 @@
                     android:layout_weight="1"
                     android:text="4.4-10.0"
                     android:gravity="right|center_vertical"
-                    android:padding="@dimen/layout_distance"
+                    android:paddingRight="@dimen/layout_distance"
+                    android:paddingBottom="@dimen/layout_distance"
+                    android:paddingTop="@dimen/layout_distance"
                     android:layout_height="fill_parent" />
             </LinearLayout>
 
