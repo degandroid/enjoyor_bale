@@ -42,16 +42,18 @@ public class CommunitityCommonActivity extends BaseActivity {
     RelativeLayout re_back;
     @Bind(R.id.navigation_name)
     TextView navigation_name;
-Dialog dialog;
+    Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.communtity_com_ac_layout);
-        dialog = createLoadingDialog(CommunitityCommonActivity.this,"正在加载数据....");
+        dialog = createLoadingDialog(CommunitityCommonActivity.this, "正在加载数据....");
         ButterKnife.bind(this);
         dialog.show();
         WebSettings settings = com_ac_layout_webview.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setJavaScriptEnabled(true);
         navigation_name.setVisibility(View.INVISIBLE);
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 11);
@@ -104,12 +106,11 @@ Dialog dialog;
                 view.setVisibility(View.VISIBLE);
                 com_ac_layout_webview.getSettings().setBlockNetworkImage(false);
                 if (!com_ac_layout_webview.getSettings().getLoadsImagesAutomatically()) {
-
                     com_ac_layout_webview.getSettings().setLoadsImagesAutomatically(true);
                 }
             }
         });
         com_ac_layout_webview.loadDataWithBaseURL(null, content, "text/html", "utf-8", null);
-      dialog.dismiss();
+        dialog.dismiss();
     }
 }

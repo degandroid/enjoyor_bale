@@ -116,11 +116,11 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
                             RECODE_STATE = RECORD_ING;
                             try {
                                 mr.start();
+                                mythread();
                             } catch (IOException e) {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
-                            mythread();
                         }
                         break;
                     case MotionEvent.ACTION_UP:
@@ -153,24 +153,23 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initTime() {
-        handler = new
-                Handler() {
-                    @Override
-                    public void handleMessage(Message msg) {
-                        // TODO Auto-generated method stub
-                        super.handleMessage(msg);
-                        if (msg.what < 60) {
-                            if (msg.what < 10) {
-                                voice_time.setText("00:00:0" + msg.what);
-                            } else {
-                                voice_time.setText("00:00:" + msg.what);
-                            }
-
-                        } else {
-                            voice_time.setText("00:01:00");
-                        }
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                // TODO Auto-generated method stub
+                super.handleMessage(msg);
+                if (msg.what < 60) {
+                    if (msg.what < 10) {
+                        voice_time.setText("00:00:0" + msg.what);
+                    } else {
+                        voice_time.setText("00:00:" + msg.what);
                     }
+
+                } else {
+                    voice_time.setText("00:01:00");
                 }
+            }
+        }
 
         ;
     }
@@ -327,8 +326,6 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
-//                Log.d("wyy+++++", json);
-//                Toast.makeText(VoiceActivity.this, "录音上传成功", Toast.LENGTH_LONG).show();
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     List<Voice> voice = JsonHelper.getArrayJson(apiMessage.Data, Voice.class);

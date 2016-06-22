@@ -188,7 +188,7 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginTop="60dp"
-
+android:textColor="@color/white"
                 android:background="@color/colorGreenYellow"
                 android:text="保存" />
 

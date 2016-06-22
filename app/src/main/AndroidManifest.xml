@@ -239,6 +239,7 @@
             android:theme="@style/IMTheme.Transparent">
 
         </activity>
+        <activity android:name=".ui.ECGActivity"></activity>
         <!--关于我们界面-->
         <activity android:name=".ui.AboutOursActivity"></activity>
         <!--服务与声明页面-->

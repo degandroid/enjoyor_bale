@@ -67,7 +67,7 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initEebview() {
-        String url = "http://115.28.37.145/Content/statichtml/trend.html";
+        String url = "http://www.bailingju.com/Content/statichtml/trend.html";
         tend_ac_web.getSettings().setDefaultTextEncodingName("utf-8");
         tend_ac_web.getSettings().setJavaScriptEnabled(true);
         synCookies();//格式化写入cookie，需写在setJavaScriptEnabled之后
@@ -192,8 +192,8 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
     private void initInfoFrom(String tend_json) {
         if (tend_ac_web != null) {
             if (tend_json != null) {
-                String info = tend_json + "," + type + "," + time;
-                Log.d("wyy----====info----", info);
+                String info = JSON.toJSONString(tend_json) + "," + type + "," + time;
+//                Log.d("wyy----====info----", JSON.toJSONString(tend_json));
                 tend_ac_web.loadUrl("javascript:show(" + info + ")");
             }
         }

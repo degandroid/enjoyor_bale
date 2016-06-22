@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.enjoyor.healthhouse.R;
 import com.enjoyor.healthhouse.application.MyApplication;
@@ -24,11 +26,13 @@ import com.enjoyor.healthhouse.common.Constant;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
+import com.enjoyor.healthhouse.ui.ECGActivity;
 import com.enjoyor.healthhouse.ui.HistoryActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
 import com.enjoyor.healthhouse.ui.TendActivity;
 import com.enjoyor.healthhouse.url.JavaScriptInterface;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -74,7 +78,7 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.bp_fg_layout, null);
-        dialog = createLoadingDialog(getActivity(),"正在加载数据...");
+        dialog = createLoadingDialog(getActivity(), "正在加载数据...");
         dialog.show();
         ButterKnife.bind(this, view);
         initView();
@@ -123,8 +127,8 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
         button.setOnClickListener(this);
         bp_fg_history.setOnClickListener(this);
         bp_fg_tend.setOnClickListener(this);
+        bp_fg_ecg_tv.setOnClickListener(this);
     }
-
     private void initView() {
         bp_fg_ecg_tv.setVisibility(View.VISIBLE);
         bp_fg_ecg_go.setVisibility(View.VISIBLE);
@@ -136,6 +140,7 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
+                Log.d("wyy----json---",json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     bp_fg_top.setVisibility(View.VISIBLE);
@@ -144,7 +149,6 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
                     drawpicture(json);
                 } else {
                     health_ry_empty.setVisibility(View.VISIBLE);
-//                    bp_fg_top.setVisibility(View.VISIBLE);
                     bp_fg_bottom.setVisibility(View.GONE);
                     dialog.dismiss();
                 }
@@ -187,8 +191,6 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
         switch (key) {
             case R.id.button:
                 Intent intent_go = new Intent(getActivity(), PhysicallocationActivity.class);
-//                intent_go.putExtra("latitude", latitude);
-//                intent_go.putExtra("longitude", longitude);
                 startActivity(intent_go);
                 break;
             case R.id.bp_fg_history:
@@ -200,6 +202,16 @@ public class ECGFragment extends BaseFragment implements View.OnClickListener {
                 Intent intent_tend = new Intent(getActivity(), TendActivity.class);
                 intent_tend.putExtra("type", 5);
                 startActivity(intent_tend);
+                break;
+            case R.id.bp_fg_ecg_tv:
+                Intent intent_ecg = new Intent(getActivity(), ECGActivity.class);
+                if (!StringUtils.isEmpty(ecgReport.getRecordEcg().getEcgData())) {
+                    String info = ecgReport.getRecordEcg().getEcgData();
+                    intent_ecg.putExtra("info", info);
+                    startActivity(intent_ecg);
+                }else {
+                    Toast.makeText(getActivity(),"暂无心电数据",Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }

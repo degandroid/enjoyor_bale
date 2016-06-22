@@ -62,14 +62,18 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
     BiReport biReport;
     @Bind(R.id.bp_fg_bottom)
     LinearLayout bp_fg_bottom;
-Dialog dialog;
+    Dialog dialog;
+    @Bind(R.id.bp_fg_title)
+    TextView bp_fg_title;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.bp_fg_layout, null);
-        dialog = createLoadingDialog(getActivity(),"正在加载数据...");
+        dialog = createLoadingDialog(getActivity(), "正在加载数据...");
         dialog.show();
         ButterKnife.bind(this, view);
+        bp_fg_title.setText("当前血糖值");
         initView();
         initEvent();
         return view;
@@ -89,7 +93,7 @@ Dialog dialog;
             String _json_xuetang = biReport.getBeanList().get(0).getBloodSugar() + "," + biReport.getBeanList().get(0).getBloodSugarType();
             bp_fg_web.loadUrl("javascript:show(" + _json_xuetang + ")");
         }
-       dialog.dismiss();
+        dialog.dismiss();
     }
 
     private void initEvent() {
@@ -114,7 +118,7 @@ Dialog dialog;
                 } else {
                     health_ry_empty.setVisibility(View.VISIBLE);
                     bp_fg_bottom.setVisibility(View.GONE);
-                  dialog.dismiss();
+                    dialog.dismiss();
                 }
             }
 

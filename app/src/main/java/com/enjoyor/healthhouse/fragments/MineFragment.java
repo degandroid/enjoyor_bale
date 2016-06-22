@@ -39,6 +39,7 @@ import com.enjoyor.healthhouse.ui.RegistActivity;
 import com.enjoyor.healthhouse.ui.SettingActivity;
 import com.enjoyor.healthhouse.ui.SuggestActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -116,7 +117,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             ImageLoader.getInstance().displayImage(path, mine_fg_logo, MyApplication.options);
             mine_fg_login.setVisibility(View.GONE);
             mine_fg_regist.setVisibility(View.GONE);
-            mine_fg_name.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
+            if (!StringUtils.isEmpty(MyApplication.getInstance().getDBHelper().getUser().getUserName())) {
+                mine_fg_name.setText(MyApplication.getInstance().getDBHelper().getUser().getUserName());
+            } else {
+                if (!StringUtils.isEmpty(MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber())) {
+                    String phonenumber = MyApplication.getInstance().getDBHelper().getUser().getPhoneNumber();
+                    String maskNumber = phonenumber.substring(0, 3) + "****" + phonenumber.substring(7, phonenumber.length());
+                    mine_fg_name.setText(maskNumber);
+                }
+            }
         }
         initEvent();
         return view;
@@ -194,7 +203,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-    private String[] name = {"bale.png"};
 
     private void oneKeyShare() {
         fakeX509TrustManager.allowAllSSL();

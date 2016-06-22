@@ -4,13 +4,15 @@ package com.enjoyor.healthhouse.url;
  * Created by Administrator on 2016/5/9.
  */
 public class UrlInterface {
+    //    静态页面接口
+    public static String JS_PAGE_URL = "http://www.bailingju.com/Content/";
+    //    正式库数据接口
     public static String TEXT_URL = "http://ejk.bailingju.com:8099/BaleServer/";
 
     public static String RELEASE_URL = "http://www.cnbale.com:9008/healthstationserver/";
 //    public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
-
 //    public static String BasePath = "http://192.168.8/healthstationserver";
-    //        public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
+//        public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
 //        public static String TEXT_URL = "http://192.168.66.37:8080/bale/";
 
     //    用户注册接口
@@ -84,37 +86,44 @@ public class UrlInterface {
     public static String HEALTHFILE_URL = TEXT_URL + "app/getrecordlist.do";
 
     //八项入口的历史记录--------历史
-    public static String BP_URL = TEXT_URL+"app/bplist.do";//血压历史
-    public static String BMI_URL = TEXT_URL+"app/bmilist.do";//身高体重历史
-    public static String BS_URL = TEXT_URL+"app/bslist.do";//血糖历史
-    public static String BO_URL = TEXT_URL+"app/bolist.do";//血氧历史
-    public static String WL_URL = TEXT_URL+"app/whrlist.do";//腰围历史
-    public static String TL_URL = TEXT_URL+"app/temperlist.do";//体温历史
-    public static String ECG_URL = TEXT_URL+"app/ecglist.do";//心电历史
+    public static String BP_URL = TEXT_URL + "app/bplist.do";//血压历史
+    public static String BMI_URL = TEXT_URL + "app/bmilist.do";//身高体重历史
+    public static String BS_URL = TEXT_URL + "app/bslist.do";//血糖历史
+    public static String BO_URL = TEXT_URL + "app/bolist.do";//血氧历史
+    public static String WL_URL = TEXT_URL + "app/whrlist.do";//腰围历史
+    public static String TL_URL = TEXT_URL + "app/temperlist.do";//体温历史
+    public static String ECG_URL = TEXT_URL + "app/ecglist.do";//心电历史
 
     //八项入口录入--------------录入
-    public static String SAVE_BP_URL = TEXT_URL+"app/savebp.action";//血压
-    public static String SAVE_BMI_URL = TEXT_URL+"app/savebmi.action";//体重，身高
-    public static String SAVE_BS_URL = TEXT_URL+"app/savebs.action";//血糖
-    public static String SAVE_BO_URL = TEXT_URL+"app/savebo.action";//血氧
-    public static String SAVE_WL_URL = TEXT_URL+"app/savewaistLine.action";//腰围
-    public static String SAVE_TP_URL = TEXT_URL+"app/savetmper.action";//体温
-    public static String SAVE_ECG_URL = TEXT_URL+"app/saveecg.action";//心率
+    public static String SAVE_BP_URL = TEXT_URL + "app/savebp.action";//血压
+    public static String SAVE_BMI_URL = TEXT_URL + "app/savebmi.action";//体重，身高
+    public static String SAVE_BS_URL = TEXT_URL + "app/savebs.action";//血糖
+    public static String SAVE_BO_URL = TEXT_URL + "app/savebo.action";//血氧
+    public static String SAVE_WL_URL = TEXT_URL + "app/savewaistLine.action";//腰围
+    public static String SAVE_TP_URL = TEXT_URL + "app/savetmper.action";//体温
+    public static String SAVE_ECG_URL = TEXT_URL + "app/saveecg.action";//心率
 
-    public static String getArticles(int id){
+    public static String getArticles(int id) {
         return TEXT_URL + "articles/" + id + ".do";
     }
-    public static String getRecord(String id){
+
+    public static String getRecord(String id) {
         return TEXT_URL + "advice/record/" + id + ".action";
     }
-    public static String getResources(int voice){
+
+    public static String getResources(int voice) {
         return TEXT_URL + "resources/file/" + voice + ".action";
     }
-    public static String getNotes(Long recordId){
+
+    public static String getNotes(Long recordId) {
         return TEXT_URL + "record/notes/" + recordId + ".action";
     }
-    public static String getSelf(Long recordId){
+
+    public static String getSelf(Long recordId) {
         return TEXT_URL + "record/self/" + recordId + ".action";
-}
+    }
+
+    //    趋势列表数据接口
+    public static String Tend_Url = JS_PAGE_URL + "statichtml/trend.html";
 
 }

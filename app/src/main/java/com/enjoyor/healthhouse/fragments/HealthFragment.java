@@ -28,6 +28,7 @@ import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.ui.HealthFileActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
 import com.enjoyor.healthhouse.url.UrlInterface;
+import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -169,7 +170,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
     private void isData() {
         dialog.show();
         RequestParams params = new RequestParams();
-        if (healthRecord!=null) {
+        if (MyApplication.getInstance().getDBHelper().getUser() != null) {
             params.add("userId", MyApplication.getInstance().getDBHelper().getUser().getUserId() + "");
             AsyncHttpUtil.get(UrlInterface.AccessHealInfo_URL, params, new AsyncHttpResponseHandler() {
                 @Override
@@ -210,10 +211,11 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
      * @param healthRecord
      */
     private void initHealthSug(HealthRecord healthRecord) {
+        String HEALTH_URL = UrlInterface.TEXT_URL;
         RequestParams param = new RequestParams();
         Log.d("wyy----", healthRecord.getRecordId() + "");
         String id = healthRecord.getRecordId() + "".trim();
-        AsyncHttpUtil.get(UrlInterface.getRecord(id), param, new AsyncHttpResponseHandler() {
+        AsyncHttpUtil.get("http://115.28.37.145:9008/healthstationserver/" + "advice/record/" + id + ".action", param, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
@@ -307,6 +309,7 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
         int key = v.getId();
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+//        Log.d("wyy======",healthRecord.toString());
         if (healthRecord != null) {
             switch (key) {
                 case R.id.health_full_tab1:
@@ -358,8 +361,37 @@ public class HealthFragment extends BaseFragment implements View.OnClickListener
                     startActivity(intent_health);
                     break;
             }
-        }else {
-            Toast.makeText(getActivity(),"您暂时没有体检记录，请去附近的体检点体检",Toast.LENGTH_LONG).show();
+        } else {
+            initImageTab();
+            initText();
+            switch (key) {
+                case R.id.health_full_tab1:
+                    navigation_name.setText("血压评估");
+                    health_full_tab1.setBackgroundColor(getResources().getColor(R.color.green));
+                    break;
+                case R.id.health_full_tab2:
+                    navigation_name.setText("血糖评估");
+                    health_full_tab2.setBackgroundColor(getResources().getColor(R.color.green));
+                    break;
+                case R.id.health_full_tab3:
+                    health_full_tab3.setBackgroundColor(getResources().getColor(R.color.green));
+                    navigation_name.setText("人体成分评估");
+                    break;
+                case R.id.health_full_tab4:
+                    health_full_tab4.setBackgroundColor(getResources().getColor(R.color.green));
+                    navigation_name.setText("血氧评估");
+                    break;
+                case R.id.health_full_tab5:
+                    health_full_tab5.setBackgroundColor(getResources().getColor(R.color.green));
+                    navigation_name.setText("心电评估");
+                    break;
+                case R.id.img_right:
+                    navigation_name.setText("健康评估");
+                    break;
+            }
+            health_ry_full.setVisibility(View.GONE);
+            health_ry_empty.setVisibility(View.VISIBLE);
+            re_back.setVisibility(View.VISIBLE);
         }
     }
 
