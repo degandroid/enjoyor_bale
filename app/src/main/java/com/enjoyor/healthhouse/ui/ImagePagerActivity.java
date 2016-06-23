@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
@@ -23,23 +22,15 @@ public class ImagePagerActivity extends FragmentActivity {
 	private static final String STATE_POSITION = "STATE_POSITION";
 	public static final String EXTRA_IMAGE_INDEX = "image_index"; 
 	public static final String EXTRA_IMAGE_URLS = "image_urls";
-	public static final String EXTRA_VOICE_ID = "voice_id";
 
 	private HackyViewPager mPager;
 	private int pagerPosition;
 	private TextView indicator;
-//	private MediaPlayer player = new MediaPlayer();
-	private int voice;
+
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.image_detail_pager);
-
-		if(getIntent().hasExtra(EXTRA_VOICE_ID)){
-			voice = getIntent().getIntExtra(EXTRA_VOICE_ID,0);
-			Log.i("voice",voice+"");
-		}
-
 		pagerPosition = getIntent().getIntExtra(EXTRA_IMAGE_INDEX, 0);
 		ArrayList<String> urls = getIntent().getStringArrayListExtra(EXTRA_IMAGE_URLS);
 
@@ -97,7 +88,7 @@ public class ImagePagerActivity extends FragmentActivity {
 		@Override
 		public Fragment getItem(int position) {
 			String url = fileList.get(position);
-			return ImageDetailFragment.newInstance(UrlInterface.FILE_URL+"/"+url,voice);
+			return ImageDetailFragment.newInstance(UrlInterface.FILE_URL+"/"+url);
 		}
 
 	}

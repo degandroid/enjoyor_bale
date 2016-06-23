@@ -19,22 +19,22 @@ public class RecordUtils {
         _list.clear();
         _list.add(new ItemMyRecord("身高(cm)", info.getHeight(), -1d, -1d));
         _list.add(new ItemMyRecord("体重(kg)",info.getWeight(),-1d, -1d));
-        _list.add(new ItemMyRecord("腰围（cm）",info.getWaistLine(),-1d, -1d));
-        _list.add(new ItemMyRecord("臀围（cm）",info.getHipLine(),-1d, -1d));
-        _list.add(new ItemMyRecord("腰臀比（%）",info.getWhr(),85d,95d));
+        _list.add(new ItemMyRecord("腰围(cm)",info.getWaistLine(),-1d, -1d));
+        _list.add(new ItemMyRecord("臀围(cm)",info.getHipLine(),-1d, -1d));
+        _list.add(new ItemMyRecord("腰臀比(%)",info.getWhr(),85d,95d));
 
-        _list.add(new ItemMyRecord("舒张压（mmHg）",info.getDiastolicPressure(),60d,90d));
-        _list.add(new ItemMyRecord("收缩压（mmHg）",info.getSystolicPressure(),90d,140d));
-        _list.add(new ItemMyRecord("血氧（%）",info.getBo(),95d,99d));
-        _list.add(new ItemMyRecord("脉搏（次/分）",info.getPulse(),60d,100d));
+        _list.add(new ItemMyRecord("舒张压(mmHg)",info.getDiastolicPressure(),60d,90d));
+        _list.add(new ItemMyRecord("收缩压(mmHg)",info.getSystolicPressure(),90d,140d));
+        _list.add(new ItemMyRecord("血氧(%)",info.getBo(),95d,99d));
+        _list.add(new ItemMyRecord("脉搏(次/分)",info.getPulse(),60d,100d));
 
 
         _list.add(new ItemMyRecord("血糖", info.getBloodSugar(), Constant.getBloodSugarMin(info.getBloodSugarType()), Constant.getBloodSugarMax(info.getBloodSugarType())));
-                _list.add(new ItemMyRecord("尿酸（umol/L）", info.getUs(), 0.2d, 0.42d));
-        _list.add(new ItemMyRecord("总胆固醇（mmol/L）",info.getChol(),0d,5.2d));
+                _list.add(new ItemMyRecord("尿酸(umol/L)", info.getUs(), 0.2d, 0.42d));
+        _list.add(new ItemMyRecord("总胆固醇(mmol/L)",info.getChol(),0d,5.2d));
 
-        _list.add(new ItemMyRecord("体温（℃）",info.getTemperature(),36d,37d));
-        _list.add(new ItemMyRecord("心率（ci/分钟）",info.getEcg(),60d,100d));
+        _list.add(new ItemMyRecord("体温(℃)",info.getTemperature(),36d,37d));
+        _list.add(new ItemMyRecord("心率(次/分钟)",info.getEcg(),60d,100d));
 
         _list.add(new ItemMyRecord("脂肪量(kg)",info.getFat(),6.7d,13.5d));
         _list.add(new ItemMyRecord("非脂肪量(kg)",info.getExceptFat(),-1d,-1d));
