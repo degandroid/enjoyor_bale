@@ -434,7 +434,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onCancel(Platform platform, int i) {
-
+        Log.d("wyy----------error---", i+"");
     }
 }
 

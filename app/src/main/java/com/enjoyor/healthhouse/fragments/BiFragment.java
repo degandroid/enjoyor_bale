@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +33,7 @@ import com.enjoyor.healthhouse.net.JsonHelper;
 import com.enjoyor.healthhouse.ui.HistoryActivity;
 import com.enjoyor.healthhouse.ui.PhysicallocationActivity;
 import com.enjoyor.healthhouse.ui.TendActivity;
+import com.enjoyor.healthhouse.url.JavaScriptInterface;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -81,26 +84,69 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initWebview() {
-        WebSettings webSettings = bp_fg_web.getSettings();
-        webSettings.setSavePassword(false);
-        webSettings.setSaveFormData(false);
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setSupportZoom(false);
         String url = "http://115.28.37.145/Content/statichtml/sugarAss.html";
+        bp_fg_web.getSettings().setDefaultTextEncodingName("utf-8");
+        bp_fg_web.getSettings().setJavaScriptEnabled(true);
+//        WebSettings webSettings = bp_fg_web.getSettings();
+//        webSettings.setSavePassword(false);
+//        webSettings.setSaveFormData(false);
+//        webSettings.setSupportZoom(false);
+//        bp_fg_web.loadUrl(url);
+//        bp_fg_web.addJavascriptInterface(new JsInterface(getActivity()), "AndroidWebView");
+//        bp_fg_web.setWebChromeClient(new WebChromeClient());
+        synCookies();//格式化写入cookie，需写在setJavaScriptEnabled之后
+        bp_fg_web.setWebChromeClient(chromeClient);
+        bp_fg_web.setWebViewClient(new WebViewClient() {// 让webView内的链接在当前页打开，不调用系统浏览器
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        JavaScriptInterface javaScriptInterface = new JavaScriptInterface();
+        bp_fg_web.addJavascriptInterface(javaScriptInterface, "wyy");
         bp_fg_web.loadUrl(url);
-        bp_fg_web.addJavascriptInterface(new JsInterface(getActivity()), "AndroidWebView");
-        bp_fg_web.setWebChromeClient(new WebChromeClient());
         if (biReport.getBeanList().size() > 0) {
-//            Log.d("wyy-------",biReport.getBeanList().get(0).getBloodSugar());
-//            String _json_xuetang = biReport.getBeanList().get(0).getBloodSugar() + "," + biReport.getBeanList().get(0).getBloodSugarType();
-            String _json_xuetang = "13.9,8";
+            String _json_xuetang = biReport.getBeanList().get(0).getBloodSugar() + "," + biReport.getBeanList().get(0).getBloodSugarType();
             Log.d("wyy-------", _json_xuetang);
-//            bp_fg_web.loadUrl("javascript:show(" + _json_xuetang + "')");
-            bp_fg_web.loadUrl("javascript:show(" + _json_xuetang + ")");
-            Log.d("wyy----888888888888888888888---", "888888888888888888888");
+//            bp_fg_web.loadUrl("javascript:show(" + _json_xuetang + ")");
+            drawpicture(_json_xuetang);
         }
         dialog.dismiss();
     }
+
+    private void drawpicture(final String json_xuetang) {
+        new Handler().postDelayed(new Runnable() {//异步传本地数据给网页
+            @Override
+            public void run() {
+                transferDataToWeb(json_xuetang);
+            }
+        }, 1000);
+    }
+
+    private void transferDataToWeb(String json_xuetang) {
+        if (bp_fg_web != null) {
+            bp_fg_web.loadUrl("javascript:show(" + json_xuetang + ")");
+        }  //web网页中已添加了function show(json)方法
+    }
+
+    private void synCookies() {
+        bp_fg_web.setWebChromeClient(chromeClient);
+        bp_fg_web.setWebViewClient(new WebViewClient() {// 让webView内的链接在当前页打开，不调用系统浏览器
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+    }
+
+    protected WebChromeClient chromeClient = new WebChromeClient() {
+        // js交互提示
+        public boolean onJsAlert(WebView view, String url, String message, android.webkit.JsResult result) {
+            return super.onJsAlert(view, url, message, result);
+        }
+    };
 
     private void initEvent() {
         button.setOnClickListener(this);
@@ -115,7 +161,7 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
-                Log.d("wyy-------",json);
+                Log.d("wyy-------", json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     bp_fg_top.setVisibility(View.VISIBLE);
@@ -161,17 +207,17 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    private class JsInterface {
-        private Context mContext;
-
-        public JsInterface(Context context) {
-            this.mContext = context;
-        }
-
-        //在js中调用window.AndroidWebView.showInfoFromJs(name)，便会触发此方法。
-        @JavascriptInterface
-        public void showInfoFromJs(String name) {
-            Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private class JsInterface {
+//        private Context mContext;
+//
+//        public JsInterface(Context context) {
+//            this.mContext = context;
+//        }
+//
+//        //在js中调用window.AndroidWebView.showInfoFromJs(name)，便会触发此方法。
+//        @JavascriptInterface
+//        public void showInfoFromJs(String name) {
+//            Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }

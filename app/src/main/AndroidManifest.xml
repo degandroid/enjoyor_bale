@@ -84,10 +84,10 @@
         <activity
             android:name=".ui.RegistActivity"
             android:screenOrientation="portrait"></activity>
-        <!--不带刻度尺的入口-->
-        <activity
-            android:name=".ui.RoundIconActivity"
-            android:screenOrientation="portrait"></activity>
+        <!--&lt;!&ndash;不带刻度尺的入口&ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name=".ui.RoundIconActivity"-->
+            <!--android:screenOrientation="portrait"></activity>-->
         <!--随手记-->
         <activity
             android:name=".ui.NotesActivity"
@@ -199,7 +199,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
 
             <intent-filter>
-                <data android:scheme="tencent100371282" />
+                <data android:scheme="tencent1105455482" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.BROWSABLE" />
