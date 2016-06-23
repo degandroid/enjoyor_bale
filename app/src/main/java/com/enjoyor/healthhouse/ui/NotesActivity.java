@@ -5,17 +5,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +34,6 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.enjoyor.healthhouse.R;
-import com.enjoyor.healthhouse.adapter.CameraAdapter;
 import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.PhotoId;
 import com.enjoyor.healthhouse.common.BaseDate;
@@ -39,11 +46,13 @@ import com.enjoyor.healthhouse.utils.OtherUtils;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.apache.http.Header;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,6 +108,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
     String street = "";
     String streetNumber = "";
     Dialog dialog;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -314,7 +324,6 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                 mFile.clear();
                 if (resultCode == RESULT_OK) {
                     for (String s : result) {
-                        Log.d("wyy==============", s);
                         mFile.add(new File(s));
                     }
                 }
@@ -333,11 +342,9 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             }
             showResult(result);
         }
-        Log.d("---------------", notes.size() + "");
     }
 
     private void showResult(ArrayList<String> result) {
-        Log.d("--------result-------", result.get(0));
         if (mResults == null) {
             mResults = new ArrayList<String>();
         }
@@ -351,6 +358,245 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
             notes_grid.setAdapter(cameraAdapter);
         } else {
             cameraAdapter.notifyDataSetChanged();
+        }
+    }
+
+    //    --------------------------------------------------------------------------------------------------------
+    public class CameraAdapter extends BaseAdapter {
+        private Context mcontext;
+        private ArrayList<String> imgList;
+        LayoutInflater from;
+        private boolean playState = false;  //播放状态
+        //        private MediaPlayer mediaPlayer;
+        private boolean isPause = false;
+
+        public CameraAdapter(Context mcontext, ArrayList<String> imgList, int width, int height) {
+            this.mcontext = mcontext;
+            this.imgList = imgList;
+            this.height = height;
+            this.width = width;
+            from = LayoutInflater.from(mcontext);
+        }
+
+
+        @Override
+        public int getCount() {
+            return imgList.size() > 0 ? imgList.size() : 0;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return imgList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (imgList.get(position).equals("tag")) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 2;
+        }
+
+        String url = "file:///sdcard/my/voice.amr";
+        int duration = 0;
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            int type = getItemViewType(position);
+            ViewHolder holder = null;
+            switch (type) {
+                case 0:
+                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+                    if (convertView == null) {
+                        holder = new ViewHolder();
+                        convertView = from.inflate(R.layout.camera_item1, null);
+                        holder.imageView1 = (ImageView) convertView.findViewById(R.id.imageView1);
+                        holder.time = (TextView) convertView.findViewById(R.id.time);
+                        holder.imageView1.setLayoutParams(params);
+                        convertView.setTag(holder);
+                    } else {
+                        holder = (ViewHolder) convertView.getTag();
+                    }
+//                MediaPlayer mPlayer = new MediaPlayer();
+//                try {
+//                    mPlayer.setDataSource(url);
+//                    mPlayer.prepare();
+//                    duration = mPlayer.getDuration();
+//                    Log.d("syy----", mPlayer.getDuration() + "");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                if (duration / 1000 <= 9) {
+//                    holder.time.setText("00:00:0" + duration / 1000);
+//                } else if (duration / 1000 > 9 && duration / 1000 <= 59) {
+//                    holder.time.setText("00:00:" + duration / 1000);
+//                } else {
+//                    holder.time.setText("00:01:00");
+//                }
+                    Log.d("wyy", "123: " + holder.time.getId());
+                    holder.imageView1.setImageResource(R.mipmap.zanting);
+                    final ViewHolder finalHolder = holder;
+                    convertView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startvoice(v, finalHolder.time);
+                        }
+                    });
+                    break;
+                case 1:
+                    LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(width, height);
+                    if (convertView == null) {
+                        holder = new ViewHolder();
+                        convertView = from.inflate(R.layout.camera_item, null);
+                        holder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
+                        holder.imageView.setLayoutParams(params1);
+                        convertView.setTag(holder);
+                    } else {
+                        holder = (ViewHolder) convertView.getTag();
+                    }
+                    Log.d("wyy=====", imgList.get(position));
+                    ImageLoader.getInstance().displayImage("file://" + imgList.get(position), holder.imageView, MyApplication.options);
+                    holder.imageView.setTag(imgList.get(position));
+                    holder.imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (imgList.contains("tag")) {
+                                imgList.remove("tag");
+                            }
+                            Intent intent_large = new Intent(mcontext, ImageViewActivity.class);
+                            intent_large.putExtra(ImageViewActivity.EXTRA_IMAGE_URLS, imgList);
+                            intent_large.putExtra(ImageViewActivity.EXTRA_VOICE_ID, position);
+                            mcontext.startActivity(intent_large);
+                            imgList.add("tag");
+                        }
+                    });
+                    break;
+            }
+            return convertView;
+        }
+
+
+        int width, height;
+
+        class ViewHolder {
+            ImageView imageView, imageView1;
+            TextView time;
+        }
+
+        private Handler handler = new Handler();
+        int time = 0;
+
+        private void startvoice(final View v, final TextView textView) {
+            if (!playState) {
+                try {
+                    if (!isPause || mediaPlayer == null) {
+                        time = duration / 1000;
+                        mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setDataSource(url);
+                        mediaPlayer.prepare();
+                    }
+                    mediaPlayer.start();
+                    ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.bofangzhong);
+                    playState = true;
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        while (time > 0 && playState) {
+//                            Log.d("wyy--", "run: " + time);
+//                            handler.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    if (time <= 9) {
+//                                        textView.setText("00:00:0" + time);
+//                                    } else {
+//                                        textView.setText("00:00:" + time);
+//                                    }
+//                                    Log.d("wyy--", "runtime--: " + time);
+//                                }
+//                            });
+////                            --time;
+//                            try {
+//                                Thread.sleep(1000);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                            --time;
+//                        }
+//                    }
+//                }).start();
+                    //设置播放结束时监听
+//                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                    @Override
+//                    public void onCompletion(MediaPlayer mp) {
+//                        mediaPlayer.release();
+//                        mediaPlayer=null;
+//                        if (playState) {
+//                            playState = false;
+//                        }
+//                        isPause=false;
+//                        textView.setText(duration / 1000+"");
+//                        ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.zanting);
+//                    }
+//                });
+                } catch (IllegalArgumentException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IllegalStateException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            } else {
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    playState = !playState;
+                    mediaPlayer.pause();
+                    isPause = true;
+                    ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.zanting);
+//                if (time <= 9) {
+//                    textView.setText("00:00:0" + time);
+//                } else {
+//                    textView.setText("00:00:" + time);
+//                }
+                }
+            }
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                    if (playState) {
+                        playState = false;
+                    }
+                    isPause = false;
+//                if (duration / 1000 <= 9) {
+//                    textView.setText("00:00:0" + duration / 1000);
+//                } else {
+//                    textView.setText("00:00:" + duration / 1000);
+//                }
+                    ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.zanting);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
         }
     }
 }

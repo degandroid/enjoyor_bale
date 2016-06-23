@@ -314,7 +314,7 @@
                         android:drawableRight="@mipmap/arrow_health"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:text="查看体检机监测点"
+                        android:text="查看体检机检测点"
                         android:textColor="@color/colorGreenYellow"
                         android:textSize="19dp" />
 

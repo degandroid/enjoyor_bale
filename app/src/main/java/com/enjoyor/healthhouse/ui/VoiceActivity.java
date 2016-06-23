@@ -97,17 +97,18 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
         re_back.setOnClickListener(this);
     }
 
+
     /**
      * 录音的方法
      */
     private void initVoice() {
+        int i =0;
         voice_luyin.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         voice_time.setText("00:00:00");
-                        sendMsg();
                         voice_cha.setVisibility(View.GONE);
                         voice_dui.setVisibility(View.GONE);
                         if (RECODE_STATE != RECORD_ING) {//不在录音状态
@@ -115,6 +116,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
                             mr = new AudioRecorder("voice");
                             RECODE_STATE = RECORD_ING;
                             try {
+                                sendMsg();
                                 mr.start();
                                 mythread();
                             } catch (IOException e) {
@@ -301,8 +303,6 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.voice_dui:
                 String url = "/storage/sdcard0/my/voice.amr";
-//                Intent intent = new Intent();
-//                this.setResult(110,intent);
                 saveVoice(url);
                 break;
             case R.id.re_back:

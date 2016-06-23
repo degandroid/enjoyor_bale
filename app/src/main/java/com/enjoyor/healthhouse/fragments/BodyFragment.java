@@ -46,7 +46,7 @@ import butterknife.ButterKnife;
 public class BodyFragment extends BaseFragment {
     private View view;
     private String[] healthKey = {"体脂肪率", "体脂量", "肌肉量", "体水分率"};
-    private String[] healthValue = {"11-<22%", "7.3-<11.6", "44-<52.6", ""};
+    private String[] healthValue = {"11--22%", "7.3--11.6", "44--52.6", ""};
 
     private String[] healthKey2 = {"体脂肪量", "体水分量", "细胞外液", "骨骼量"};
     private String[] healthKey3 = {"肌肉量", "细胞外液", "蛋白质", "体脂肪量"};

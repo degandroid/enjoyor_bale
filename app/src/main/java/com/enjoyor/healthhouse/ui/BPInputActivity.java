@@ -346,8 +346,8 @@ public class BPInputActivity extends BaseActivity implements View.OnClickListene
                 rl_choicetime.setVisibility(View.VISIBLE);
                 tv_second_bar.setVisibility(View.VISIBLE);
                 navigation_name.setText("血压录入");
-                tv_numberinfo.setText("舒张压（mmol/L）");
-                tv_numberinfo_second.setText("收缩压（mmol/L）");
+                tv_numberinfo.setText("舒张压（mmHg）");
+                tv_numberinfo_second.setText("收缩压（mmHg）");
                 tv_display.setText("收缩压/舒张压  正常范围：90-140/60-90mmHg");
                 initFirstView(0, 100, 10, "70");
                 initSecondView(0, 200, 10, 120);

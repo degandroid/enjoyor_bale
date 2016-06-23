@@ -13,6 +13,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -64,15 +65,19 @@ public class BOFragment extends BaseFragment implements View.OnClickListener {
     BoReport boReport;
     @Bind(R.id.bp_fg_bottom)
     LinearLayout bp_fg_bottom;
-Dialog dialog;
+    Dialog dialog;
+    @Bind(R.id.bp_fg_img)
+    ImageView bp_fg_img;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        dialog = createLoadingDialog(getActivity(),"正在加载数据...");
-       dialog.show();
+        dialog = createLoadingDialog(getActivity(), "正在加载数据...");
+        dialog.show();
         view = inflater.inflate(R.layout.bp_fg_layout, null);
         ButterKnife.bind(this, view);
         bp_fg_title.setText("当前血氧值");
+        bp_fg_img.setImageResource(R.mipmap.bi_record);
         initView();
         initWebview();
         initEvent();
@@ -90,12 +95,12 @@ Dialog dialog;
 //        bp_fg_title.setText("当前血氧值");
         RequestParams params = new RequestParams();
         params.add("recordId", "" + MyApplication.getInstance().getDBHelper().getHealthRecord().getRecordId());
-        Log.d("wyy------jsonbo", MyApplication.getInstance().getDBHelper().getHealthRecord().getRecordId()+"");
+        Log.d("wyy------jsonbo", MyApplication.getInstance().getDBHelper().getHealthRecord().getRecordId() + "");
         AsyncHttpUtil.get(UrlInterface.BoReport_URL, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
-                Log.d("wyy------jsonbo",json);
+                Log.d("wyy------jsonbo", json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     bp_fg_top.setVisibility(View.VISIBLE);
@@ -105,10 +110,11 @@ Dialog dialog;
                 } else {
                     health_ry_empty.setVisibility(View.VISIBLE);
                     bp_fg_bottom.setVisibility(View.GONE);
-                     dialog.dismiss();
+                    dialog.dismiss();
                 }
-                 dialog.dismiss();
+                dialog.dismiss();
             }
+
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
 
@@ -198,7 +204,7 @@ Dialog dialog;
                 break;
             case R.id.bp_fg_tend:
                 Intent intent_tend = new Intent(getActivity(), TendActivity.class);
-                intent_tend.putExtra("type",4);
+                intent_tend.putExtra("type", 4);
                 startActivity(intent_tend);
                 break;
         }

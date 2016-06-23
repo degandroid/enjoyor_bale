@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:background="@mipmap/bl_banner1" />
+            android:background="@mipmap/gerenbeijing" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -70,30 +70,31 @@
                 android:id="@+id/et_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
                 android:layout_margin="@dimen/layout_distance"
                 android:background="@mipmap/bl_bg_sousuokuang"
-                android:gravity="center"
                 android:cursorVisible="false"
-                />
+                android:gravity="center"
+                android:singleLine="true" />
 
             <LinearLayout
                 android:id="@+id/ll_display"
-                android:layout_alignTop="@id/et_search"
-                android:layout_alignBottom="@id/et_search"
-                android:layout_centerInParent="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/bl_icon_sousuo" />
+                android:layout_alignBottom="@id/et_search"
+                android:layout_alignTop="@id/et_search"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/bl_icon_sousuo" />
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="搜索"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="搜索" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -107,8 +108,8 @@
                 android:id="@+id/iv_userhead"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:scaleType="fitXY"
                 android:layout_alignParentLeft="true"
+                android:scaleType="fitXY"
                 android:src="@mipmap/touxiang" />
 
             <TextView
@@ -118,9 +119,9 @@
                 android:layout_toRightOf="@id/iv_userhead"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/layout_distance"
-                android:text="喜洋洋"
+                android:text=""
                 android:textColor="@color/colorWhite"
-                android:textSize="30sp" />
+                android:textSize="18sp" />
         </RelativeLayout>
 
     </FrameLayout>

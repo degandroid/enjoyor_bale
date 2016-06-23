@@ -74,9 +74,9 @@ public class MyApplication extends Application {
                 .build();
         //加载头像Imageloader属性
         option = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.mipmap.bale)
-                .showImageForEmptyUri(R.mipmap.bale)
-                .showImageOnFail(R.mipmap.bale)
+                .showImageOnLoading(R.mipmap.touxiang)
+                .showImageForEmptyUri(R.mipmap.touxiang)
+                .showImageOnFail(R.mipmap.touxiang)
                 .cacheInMemory(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .displayer(new RoundedBitmapDisplayer(20))

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,8 +91,13 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
         bp_fg_web.addJavascriptInterface(new JsInterface(getActivity()), "AndroidWebView");
         bp_fg_web.setWebChromeClient(new WebChromeClient());
         if (biReport.getBeanList().size() > 0) {
-            String _json_xuetang = biReport.getBeanList().get(0).getBloodSugar() + "," + biReport.getBeanList().get(0).getBloodSugarType();
+//            Log.d("wyy-------",biReport.getBeanList().get(0).getBloodSugar());
+//            String _json_xuetang = biReport.getBeanList().get(0).getBloodSugar() + "," + biReport.getBeanList().get(0).getBloodSugarType();
+            String _json_xuetang = "13.9,8";
+            Log.d("wyy-------", _json_xuetang);
+//            bp_fg_web.loadUrl("javascript:show(" + _json_xuetang + "')");
             bp_fg_web.loadUrl("javascript:show(" + _json_xuetang + ")");
+            Log.d("wyy----888888888888888888888---", "888888888888888888888");
         }
         dialog.dismiss();
     }
@@ -109,6 +115,7 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String json = new String(bytes);
+                Log.d("wyy-------",json);
                 ApiMessage apiMessage = ApiMessage.FromJson(json);
                 if (apiMessage.Code == 1001) {
                     bp_fg_top.setVisibility(View.VISIBLE);
