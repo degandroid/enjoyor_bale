@@ -47,7 +47,7 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
     @Bind(R.id.voice_tv)
     TextView voice_tv;
     @Bind(R.id.voice_long)
-    TextView voice_long;
+    ImageView voice_long;
     @Bind(R.id.voice_time)
     TextView voice_time;
     @Bind(R.id.voice_luyin)
@@ -220,6 +220,8 @@ public class VoiceActivity extends BaseActivity implements View.OnClickListener 
                             try {
                                 mr.stop();
                                 voiceValue = 0.0;
+                                voice_cha.setVisibility(View.VISIBLE);
+                                voice_dui.setVisibility(View.VISIBLE);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

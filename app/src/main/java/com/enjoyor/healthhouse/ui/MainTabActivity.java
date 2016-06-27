@@ -165,6 +165,7 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
         iv_tab4.setBackgroundResource(R.mipmap.fuwu);
         iv_tab5.setBackgroundResource(R.mipmap.geren);
     }
+
     private void initDefault() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -198,7 +199,6 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
         int key = v.getId();
         FragmentManager manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
-
         switch (key) {
             case R.id.main_tab1:
                 if (homeFragment == null) {
@@ -217,31 +217,49 @@ public class MainTabActivity extends BaseActivity implements View.OnClickListene
                     });
                 }
                 selectTab(1);
+                isEnable();
+                main_tab1.setEnabled(false);
                 transaction.replace(R.id.ll_content, homeFragment);
                 break;
 
             case R.id.main_tab2:
                 selectTab(2);
+                isEnable();
+                main_tab2.setEnabled(false);
                 transaction.replace(R.id.ll_content, new CommunityFragment());
                 MyApplication.refrash = true;
                 break;
 
             case R.id.main_tab3:
                 selectTab(3);
+                isEnable();
+                main_tab3.setEnabled(false);
                 transaction.replace(R.id.ll_content, new HealthFragment());
                 break;
 
             case R.id.main_tab4:
                 selectTab(4);
+                isEnable();
+                main_tab4.setEnabled(false);
                 transaction.replace(R.id.ll_content, new ServiceFragment());
                 break;
 
             case R.id.main_tab5:
                 selectTab(5);
+                isEnable();
+                main_tab5.setEnabled(false);
                 transaction.replace(R.id.ll_content, new MineFragment());
                 break;
         }
         transaction.commit();
+    }
+
+    private void isEnable() {
+        main_tab1.setEnabled(true);
+        main_tab2.setEnabled(true);
+        main_tab3.setEnabled(true);
+        main_tab4.setEnabled(true);
+        main_tab5.setEnabled(true);
     }
 
 

@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="正常范围：90-140/60-90（mmol/L）"
+                android:text="正常范围：90-140/60-90（mmHg）"
                 android:textColor="@color/textcolor_smallittle"
                 android:textSize="@dimen/textsize_smalltittle" />
 

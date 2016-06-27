@@ -833,7 +833,7 @@
 
                                 <TextView
                                     style="@style/Body_tv4"
-                                    android:text="5-11%" />
+                                    android:text="11-22%" />
                             </LinearLayout>
 
                         </RelativeLayout>
@@ -884,7 +884,7 @@
 
                                 <TextView
                                     style="@style/Body_tv4"
-                                    android:text="5-11%" />
+                                    android:text="22-27%" />
                             </LinearLayout>
 
                         </RelativeLayout>
@@ -934,7 +934,7 @@
 
                                 <TextView
                                     style="@style/Body_tv4"
-                                    android:text="5-11%" />
+                                    android:text="27-45%" />
                             </LinearLayout>
 
                         </RelativeLayout>

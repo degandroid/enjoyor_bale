@@ -422,35 +422,33 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                         holder = new ViewHolder();
                         convertView = from.inflate(R.layout.camera_item1, null);
                         holder.imageView1 = (ImageView) convertView.findViewById(R.id.imageView1);
-                        holder.time = (TextView) convertView.findViewById(R.id.time);
+                        holder.timeTextView = (TextView) convertView.findViewById(R.id.time);
                         holder.imageView1.setLayoutParams(params);
                         convertView.setTag(holder);
                     } else {
                         holder = (ViewHolder) convertView.getTag();
                     }
-//                MediaPlayer mPlayer = new MediaPlayer();
-//                try {
-//                    mPlayer.setDataSource(url);
-//                    mPlayer.prepare();
-//                    duration = mPlayer.getDuration();
-//                    Log.d("syy----", mPlayer.getDuration() + "");
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                if (duration / 1000 <= 9) {
-//                    holder.time.setText("00:00:0" + duration / 1000);
-//                } else if (duration / 1000 > 9 && duration / 1000 <= 59) {
-//                    holder.time.setText("00:00:" + duration / 1000);
-//                } else {
-//                    holder.time.setText("00:01:00");
-//                }
-                    Log.d("wyy", "123: " + holder.time.getId());
+                    MediaPlayer mPlayer = new MediaPlayer();
+                    try {
+                        mPlayer.setDataSource(url);
+                        mPlayer.prepare();
+                        duration = mPlayer.getDuration();
+                        Log.d("syy----", mPlayer.getDuration() + "");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (duration / 1000 <= 9) {
+                        holder.timeTextView.setText("00:00:0" + duration / 1000);
+                    } else if (duration / 1000 > 9 && duration / 1000 <= 59) {
+                        holder.timeTextView.setText("00:00:" + duration / 1000);
+                    } else {
+                        holder.timeTextView.setText("00:01:00");
+                    }
                     holder.imageView1.setImageResource(R.mipmap.zanting);
-                    final ViewHolder finalHolder = holder;
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startvoice(v, finalHolder.time);
+                            startvoice(v);
                         }
                     });
                     break;
@@ -491,64 +489,71 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
 
         class ViewHolder {
             ImageView imageView, imageView1;
-            TextView time;
+            TextView timeTextView;
         }
 
         private Handler handler = new Handler();
-        int time = 0;
+        int time = 0,allTime = 0;
 
-        private void startvoice(final View v, final TextView textView) {
+        private void startvoice(final View v) {
+            final TextView textView = (TextView) v.findViewById(R.id.time);
             if (!playState) {
                 try {
                     if (!isPause || mediaPlayer == null) {
-                        time = duration / 1000;
                         mediaPlayer = new MediaPlayer();
                         mediaPlayer.setDataSource(url);
                         mediaPlayer.prepare();
+                        time = mediaPlayer.getDuration()/1000;
+                        allTime = time;
                     }
                     mediaPlayer.start();
                     ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.bofangzhong);
                     playState = true;
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        while (time > 0 && playState) {
-//                            Log.d("wyy--", "run: " + time);
-//                            handler.post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    if (time <= 9) {
-//                                        textView.setText("00:00:0" + time);
-//                                    } else {
-//                                        textView.setText("00:00:" + time);
-//                                    }
-//                                    Log.d("wyy--", "runtime--: " + time);
-//                                }
-//                            });
-////                            --time;
-//                            try {
-//                                Thread.sleep(1000);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                            --time;
-//                        }
-//                    }
-//                }).start();
-                    //设置播放结束时监听
-//                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                    @Override
-//                    public void onCompletion(MediaPlayer mp) {
-//                        mediaPlayer.release();
-//                        mediaPlayer=null;
-//                        if (playState) {
-//                            playState = false;
-//                        }
-//                        isPause=false;
-//                        textView.setText(duration / 1000+"");
-//                        ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.zanting);
-//                    }
-//                });
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.d("wyy--", "playState: "+playState);
+                            while (time > 0 && playState) {
+                                Log.d("wyy--", "run: " + time);
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Log.d("wyy--", "runtime--: " + time);
+                                        if (time <= 9) {
+                                            textView.setText("00:00:0" + time);
+                                        } else {
+                                            textView.setText("00:00:" + time);
+                                        }
+                                    }
+                                });
+                                --time;
+
+                            }
+                        }
+                    }).start();
+                    //  设置播放结束时监听
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mediaPlayer.release();
+                            mediaPlayer=null;
+                            if (playState) {
+                                playState = false;
+                            }
+                            isPause=false;
+                            if (allTime <= 9) {
+                                textView.setText("00:00:0" + allTime);
+                            } else {
+                                textView.setText("00:00:" + allTime);
+                            }
+                            ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.zanting);
+                        }
+                    });
                 } catch (IllegalArgumentException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -561,34 +566,12 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
                 }
             } else {
                 if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                    playState = !playState;
+                    playState =false;
                     mediaPlayer.pause();
                     isPause = true;
                     ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.zanting);
-//                if (time <= 9) {
-//                    textView.setText("00:00:0" + time);
-//                } else {
-//                    textView.setText("00:00:" + time);
-//                }
                 }
             }
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    mediaPlayer.release();
-                    mediaPlayer = null;
-                    if (playState) {
-                        playState = false;
-                    }
-                    isPause = false;
-//                if (duration / 1000 <= 9) {
-//                    textView.setText("00:00:0" + duration / 1000);
-//                } else {
-//                    textView.setText("00:00:" + duration / 1000);
-//                }
-                    ((ImageView) v.findViewById(R.id.imageView1)).setImageResource(R.mipmap.zanting);
-                }
-            });
         }
     }
 

@@ -93,12 +93,13 @@ public class BodyFragment extends BaseFragment {
     @Bind(R.id.body_bo__web)
     WebView body_bo__web;
     private String url = "http://www.bailingju.com/Content/statichtml/oxygen.html";
-Dialog dialog;
+    Dialog dialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        dialog = createLoadingDialog(getActivity(),"正在加载数据...");
-       dialog.show();
+        dialog = createLoadingDialog(getActivity(), "正在加载数据...");
+        dialog.show();
         view = inflater.inflate(R.layout.body_fg_layout, null);
         ButterKnife.bind(this, view);
         initWebview();
@@ -153,6 +154,7 @@ Dialog dialog;
     private void transferDataToWeb(String json) {
         if (body_bo__web != null) {
             String info = StringUtils.centerString(json, "fatyear");
+            Log.v("wyy---------info---", info);
             body_bo__web.loadUrl("javascript:show_fate_white('" + info + "')");   //web网页中已添加了function show(json)方法
         }
     }

@@ -69,6 +69,8 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
     Dialog dialog;
     @Bind(R.id.bp_fg_title)
     TextView bp_fg_title;
+    @Bind(R.id.bp_fg_img)
+    ImageView bp_fg_img;
 
     @Nullable
     @Override
@@ -78,6 +80,7 @@ public class BiFragment extends BaseFragment implements View.OnClickListener {
         dialog.show();
         ButterKnife.bind(this, view);
         bp_fg_title.setText("当前血糖值");
+        bp_fg_img.setImageResource(R.mipmap.bs_ab);
         initView();
         initEvent();
         return view;

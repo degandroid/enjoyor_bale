@@ -1,5 +1,7 @@
 package com.enjoyor.healthhouse.url;
 
+import com.enjoyor.healthhouse.utils.StringUtils;
+
 /**
  * Created by Administrator on 2016/5/9.
  */
@@ -125,5 +127,7 @@ public class UrlInterface {
 
     //    趋势列表数据接口
     public static String Tend_Url = JS_PAGE_URL + "statichtml/trend.html";
-
+public  static String Text_Version = "http://www.bailingju.com:9008/healthstationserver/";
+    //更新版本接口
+    public static String Update_Version_URL = Text_Version + "config/version/android.do";
 }

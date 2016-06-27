@@ -283,7 +283,7 @@
         android:padding="@dimen/layout_distance"
         android:background="@color/colorWhite"
         android:layout_width="match_parent"
-        android:text="血压（mmol/l）"
+        android:text="血压（mmHg）"
         android:gravity="center_vertical"
         android:drawablePadding="5dp"
         android:drawableLeft="@mipmap/bl_icon_lvbiao"

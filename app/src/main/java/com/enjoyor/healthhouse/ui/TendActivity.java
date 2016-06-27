@@ -146,10 +146,10 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
             case 2:
                 params.add("childType", type + "");
                 break;
-            case 3:
+            case 4:
                 params.add("childType", type + "");
                 break;
-            case 4:
+            case 5:
                 params.add("childType", type + "");
                 break;
         }
@@ -168,10 +168,10 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
                         case 2:
                             jsondata = JSON.toJSONString(tendInfos.getBstdc());
                             break;
-                        case 3:
+                        case 4:
                             jsondata = JSON.toJSONString(tendInfos.getBotdc());
                             break;
-                        case 4:
+                        case 5:
                             jsondata = JSON.toJSONString(tendInfos.getEcgtdc());
                             break;
                     }
@@ -193,6 +193,7 @@ public class TendActivity extends BaseActivity implements View.OnClickListener {
         if (tend_ac_web != null) {
             if (tend_json != null) {
                 String info = JSON.toJSONString(tend_json) + "," + type + "," + time;
+                Log.d("wyy----====info----", info);
 //                Log.d("wyy----====info----", JSON.toJSONString(tend_json));
                 tend_ac_web.loadUrl("javascript:show(" + info + ")");
             }

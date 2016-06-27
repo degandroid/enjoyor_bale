@@ -11,16 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <ImageView
             android:id="@+id/voice_long"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30px"
             android:layout_marginTop="30px"
-            android:background="@color/textcolot_welcome"
-            android:text="最长60秒"
-            android:textColor="@color/colorWhite" />
+            android:src="@mipmap/biaoqian" />
 
         <TextView
             android:id="@+id/voice_tv"
