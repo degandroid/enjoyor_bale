@@ -158,7 +158,7 @@ public class MyNotesActivity extends BaseActivity {
             final NoteInfo itemEntity = items.get(position);
             holder.tv_title.setText(itemEntity.getCreatetime());
             holder.tv_content.setText(itemEntity.getContent());
-            holder.tv_where.setText(address);
+            holder.tv_where.setText(itemEntity.getPosition());
             ArrayList<String> imageUrls = itemEntity.getImgs();
             ArrayList<String> imageUrls_voice = new ArrayList<>();
             if (itemEntity.getVoice() > 1) {
@@ -166,6 +166,10 @@ public class MyNotesActivity extends BaseActivity {
                     imageUrls_voice.addAll(imageUrls);
                 }
                 imageUrls_voice.add(Constant.VALUE_VOICE);
+            }else{
+                if (!ListUtils.isEmpty(imageUrls)) {
+                    imageUrls_voice.addAll(imageUrls);
+                }
             }
             if (ListUtils.isEmpty(imageUrls) && ListUtils.isEmpty(imageUrls_voice)) { // 没有图片资源就隐藏GridView
                 holder.gridview.setVisibility(View.GONE);

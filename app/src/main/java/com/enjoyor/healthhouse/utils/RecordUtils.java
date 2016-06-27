@@ -46,7 +46,7 @@ public class RecordUtils {
         _list.add(new ItemMyRecord("细胞内液(kg)",info.getFic(),-1d,-1d));
 
         _list.add(new ItemMyRecord("细胞外液(%)",info.getFoc(),-1d,-1d));
-        _list.add(new ItemMyRecord("肌肉量(%)",info.getExceptFat(),44d,52.4d));
+        _list.add(new ItemMyRecord("肌肉量(%)",info.getMuscle(),44d,52.4d));
         _list.add(new ItemMyRecord("骨骼量(%)",info.getBmc(),-1d,-1d));
         _list.add(new ItemMyRecord("肌肉率(%)",info.getMuscleRate(),-1d,-1d));
         _list.add(new ItemMyRecord("基础代谢(%)",info.getBasicMetaBolism(),1483d,-1d));

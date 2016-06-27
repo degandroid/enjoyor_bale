@@ -13,6 +13,7 @@ public class NoteInfo {
     private String lat;
     private String lng;
     private int voice;
+    private String position;
 
     @Override
     public String toString() {
@@ -25,6 +26,14 @@ public class NoteInfo {
                 ", lng='" + lng + '\'' +
                 ", voice=" + voice +
                 '}';
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getContent() {

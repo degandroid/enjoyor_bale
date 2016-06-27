@@ -3,17 +3,11 @@ package com.enjoyor.healthhouse.ui;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -261,6 +255,7 @@ public class NotesActivity extends BaseActivity implements View.OnClickListener 
         params.add("lng", lng + "");
         params.add("lat", lat + "");
         params.add("voice", id + "");
+        params.add("position", address + "");
         if (notes.size() != 0) {
             String img = "";
             for (String s : notes) {
