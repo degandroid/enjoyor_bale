@@ -10,14 +10,25 @@
         android:layout_height="200dp"
         android:background="@mipmap/gerenbeijing">
 
+        <RelativeLayout
+            android:padding="@dimen/layout_distance_15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true"
             android:text="个人中心"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_largetittle" />
+            <ImageView
+                android:id="@+id/iv_zxing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+          android:src="@mipmap/bl_icon_mine_zxing" />
+
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/mine_fg_logo"
@@ -67,18 +78,70 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:paddingBottom="50dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_doctor"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_dc_img"
+                        style="@style/MineFg_img"
+                        android:src="@mipmap/bl_icon_mine_doctor" />
+
+                    <TextView
+                        style="@style/MineFg_tv"
+                        android:layout_toRightOf="@+id/mine_fg_dc_img"
+                        android:text="我的医生" />
+
+                    <ImageView
+                        style="@style/MineFg_img_arrow"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+
+                <View style="@style/Mine_line"></View>
+
+                <RelativeLayout
+                    android:id="@+id/mine_fg_guidance"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <ImageView
+                        android:id="@+id/mine_fg_gd_img"
+                        style="@style/MineFg_img"
+                        android:src="@mipmap/bl_icon_mine_guidance" />
+
+                    <TextView
+                        style="@style/MineFg_tv"
+                        android:layout_toRightOf="@+id/mine_fg_gd_img"
+                        android:text="我的指导" />
+
+                    <ImageView
+                        style="@style/MineFg_img_arrow"
+                        android:src="@mipmap/xiangyou" />
+                </RelativeLayout>
+
+                <View style="@style/Mine_line"></View>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:orientation="vertical">
 

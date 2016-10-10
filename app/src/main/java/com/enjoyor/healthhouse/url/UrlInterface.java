@@ -1,7 +1,5 @@
 package com.enjoyor.healthhouse.url;
 
-import com.enjoyor.healthhouse.utils.StringUtils;
-
 /**
  * Created by Administrator on 2016/5/9.
  */
@@ -9,12 +7,14 @@ public class UrlInterface {
     //    静态页面接口
     public static String JS_PAGE_URL = "http://www.bailingju.com/Content/";
     //    正式库数据接口
-    public static String TEXT_URL = "http://ejk.bailingju.com:8099/BaleServer/";
+//    public static String TEXT_URL = "http://ejk.bailingju.com:8099/BaleServer/";
+
 
     public static String RELEASE_URL = "http://www.cnbale.com:9008/healthstationserver/";
-//    public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
+    public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
+
 //    public static String BasePath = "http://192.168.8/healthstationserver";
-//        public static String TEXT_URL = "http://115.28.37.145:9008/healthstationserver/";
+
 //        public static String TEXT_URL = "http://192.168.66.37:8080/bale/";
 
     //    用户注册接口

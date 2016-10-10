@@ -2,7 +2,6 @@ package com.enjoyor.healthhouse.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.enjoyor.healthhouse.R;
+import com.enjoyor.healthhouse.application.MyApplication;
 import com.enjoyor.healthhouse.bean.NoteInfo;
 import com.enjoyor.healthhouse.bean.VoiceDate;
 import com.enjoyor.healthhouse.common.Constant;
@@ -27,7 +27,6 @@ import com.enjoyor.healthhouse.utils.ListUtils;
 import com.enjoyor.healthhouse.utils.StringUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.apache.http.Header;
@@ -189,7 +188,7 @@ public class MyNotesActivity extends BaseActivity {
     }
 
     public class NoScrollGridAdapter extends BaseAdapter {
-        public DisplayImageOptions _option;
+//        public DisplayImageOptions _option;
         private int voice;
 
         /**
@@ -208,13 +207,13 @@ public class MyNotesActivity extends BaseActivity {
             this.imageUrls_voice = imageUrls_voice;
             this.voice = voice;
 
-            _option = new DisplayImageOptions.Builder()
-                    .showImageOnLoading(R.mipmap.bale)
-                    .showImageForEmptyUri(R.mipmap.jiazaishibai)
-                    .showImageOnFail(R.mipmap.jiazaishibai)
-                    .cacheInMemory(true)
-                    .bitmapConfig(Bitmap.Config.RGB_565)
-                    .build();
+//            _option = new DisplayImageOptions.Builder()
+//                    .showImageOnLoading(R.mipmap.bale)
+//                    .showImageForEmptyUri(R.mipmap.jiazaishibai)
+//                    .showImageOnFail(R.mipmap.jiazaishibai)
+//                    .cacheInMemory(true)
+//                    .bitmapConfig(Bitmap.Config.RGB_565)
+//                    .build();
         }
 
         @Override
@@ -262,7 +261,7 @@ public class MyNotesActivity extends BaseActivity {
                 });
             } else {
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL + "/" + imageUrls.get(position), imageView,_option);
+                ImageLoader.getInstance().displayImage(UrlInterface.FILE_URL + "/" + imageUrls.get(position), imageView, MyApplication.options);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

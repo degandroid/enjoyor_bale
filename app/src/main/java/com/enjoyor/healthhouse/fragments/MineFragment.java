@@ -30,9 +30,12 @@ import com.enjoyor.healthhouse.common.BaseDate;
 import com.enjoyor.healthhouse.net.ApiMessage;
 import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.net.JsonHelper;
+import com.enjoyor.healthhouse.ui.CaptureActivity;
 import com.enjoyor.healthhouse.ui.DataActivity;
 import com.enjoyor.healthhouse.ui.InfoActivity;
 import com.enjoyor.healthhouse.ui.LoginActivity;
+import com.enjoyor.healthhouse.ui.MineDoctorActivity;
+import com.enjoyor.healthhouse.ui.MineGuidanceActivity;
 import com.enjoyor.healthhouse.ui.ModifyPwdActivity;
 import com.enjoyor.healthhouse.ui.MyPhoneActivity;
 import com.enjoyor.healthhouse.ui.RegistActivity;
@@ -53,6 +56,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -71,6 +75,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     TextView mine_fg_login;
     @Bind(R.id.mine_fg_regist)
     TextView mine_fg_regist;
+
+    @Bind(R.id.mine_fg_doctor)
+    RelativeLayout mine_fg_doctor;
+    @Bind(R.id.mine_fg_guidance)
+    RelativeLayout mine_fg_guidance;
     @Bind(R.id.mine_fg_info)
     RelativeLayout mine_fg_info;
     @Bind(R.id.mine_fg_book)
@@ -131,6 +140,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         return view;
     }
 
+    @OnClick(R.id.iv_zxing)
+    public void getZxing() {
+        Intent intent = new Intent(getActivity(), CaptureActivity.class);
+        startActivity(intent);
+    }
+
     private void initEvent() {
         mine_fg_logo.setOnClickListener(this);
         mine_fg_login.setOnClickListener(this);
@@ -145,6 +160,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         picture.setOnClickListener(this);
         camera.setOnClickListener(this);
         cancle.setOnClickListener(this);
+        mine_fg_doctor.setOnClickListener(this);
+        mine_fg_guidance.setOnClickListener(this);
     }
 
     @Override
@@ -168,6 +185,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.mine_fg_regist://注册
                 Intent intent_regist = new Intent(getActivity(), RegistActivity.class);
                 startActivity(intent_regist);
+                break;
+            case R.id.mine_fg_doctor://我的医生
+                if(isLogin(getActivity())){
+                    Intent intent_minedoctor = new Intent(getActivity(), MineDoctorActivity.class);
+                    startActivity(intent_minedoctor);
+                }
+
+                break;
+            case R.id.mine_fg_guidance://我的指导
+                Intent intent_mineguidance = new Intent(getActivity(), MineGuidanceActivity.class);
+                startActivity(intent_mineguidance);
                 break;
             case R.id.mine_fg_info://我的消息
                 Intent intent_info = new Intent(getActivity(), InfoActivity.class);
@@ -434,7 +462,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onCancel(Platform platform, int i) {
-        Log.d("wyy----------error---", i+"");
+        Log.d("wyy----------error---", i + "");
     }
 }
 

@@ -22,6 +22,9 @@ import com.enjoyor.healthhouse.net.AsyncHttpUtil;
 import com.enjoyor.healthhouse.url.UrlInterface;
 import com.enjoyor.healthhouse.utils.MatcherUtil;
 import com.enjoyor.healthhouse.utils.StringUtils;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -218,6 +221,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                     ApiMessage apiMessage = ApiMessage.FromJson(json);
                     if (apiMessage.Code == 1001) {
                         Toast.makeText(RegistActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                        registerEM(registphonenumber.getText().toString(), registphonenumber.getText().toString());
                         Intent intent_login = new Intent(RegistActivity.this, LoginActivity.class);
                         startActivity(intent_login);
                         finish();
@@ -248,6 +252,44 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         } else Toast.makeText(RegistActivity.this, "请同意芭乐健康软件许可协议", Toast.LENGTH_LONG).show();
 
     }
+
+    private void registerEM(final String s, final String s1) {
+
+        //注册失败会抛出HyphenateException
+//        EMClient.getInstance().createAccount(username, pwd);//同步方法 服务器返回
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    EMClient.getInstance().createAccount(s, s1);//同步方法 测试
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(RegistActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } catch (final HyphenateException e) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            int errorCode = e.getErrorCode();
+                            if (errorCode == EMError.NETWORK_ERROR) {
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.network_anomalies), Toast.LENGTH_SHORT).show();
+                            } else if (errorCode == EMError.USER_ALREADY_EXIST) {
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.User_already_exists), Toast.LENGTH_SHORT).show();
+                            } else if (errorCode == EMError.USER_AUTHENTICATION_FAILED) {
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.registration_failed_without_permission), Toast.LENGTH_SHORT).show();
+                            } else if (errorCode == EMError.USER_ILLEGAL_ARGUMENT) {
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.illegal_user_name), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registration_failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        }).start();
+
+    }
+
 
     private void sendMsg() {
         regist_yanzheng.setEnabled(false);

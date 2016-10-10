@@ -184,10 +184,10 @@ public class MyRecordActivity extends BaseActivity {
         if (!ListUtils.isEmpty(list_abnormal)) {
             sv_abnormal.setVisibility(View.VISIBLE);
             iv_info.setVisibility(View.VISIBLE);
-            tv_ab_text.setText("共" + list_abnormal.size() + "项异常");
-            for (int i = 0; i < list_abnormal.size(); i++) {
-                ItemMyRecord itemMyRecord = list_abnormal.get(i);
-                View view = LayoutInflater.from(context).inflate(R.layout.item_myrecord, null);
+                tv_ab_text.setText("共" + list_abnormal.size() + "项异常");
+                for (int i = 0; i < list_abnormal.size(); i++) {
+                    ItemMyRecord itemMyRecord = list_abnormal.get(i);
+                    View view = LayoutInflater.from(context).inflate(R.layout.item_myrecord, null);
                 TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
                 TextView tv_result = (TextView) view.findViewById(R.id.tv_result);
                 TextView tv_range = (TextView) view.findViewById(R.id.tv_range);
